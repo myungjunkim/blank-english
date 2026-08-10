@@ -56,7 +56,31 @@
   .category-btn:hover { border-color: var(--accent); }
   .category-btn .count { color: var(--muted); font-size: .85rem; white-space: nowrap; }
 
-  /* ── ② 문제 ───────────────────────────────────── */
+  /* ── ② 문장 수 선택 ─────────────────────────────── */
+  .size-list {
+    list-style: none;
+    margin: 0 0 1.5rem;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
+    gap: .6rem;
+  }
+  .size-btn {
+    width: 100%;
+    padding: .9rem;
+    border: 1px solid var(--line);
+    border-radius: .6rem;
+    background: var(--surface);
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+  }
+  .size-btn:hover { border-color: var(--accent); }
+
+  .reset-area { margin: 0; color: var(--muted); font-size: .875rem; }
+  .btn-text.danger { color: var(--wrong); }
+
+  /* ── ③ 문제 ───────────────────────────────────── */
   .quiz-head {
     display: flex;
     justify-content: space-between;
@@ -128,7 +152,7 @@
   }
   .note { margin: 0 0 1.25rem; color: var(--muted); font-size: .875rem; }
 
-  /* ── ③ 결과 ───────────────────────────────────── */
+  /* ── ④ 결과 ───────────────────────────────────── */
   .score { margin: 0 0 .25rem; font-size: 1.5rem; font-weight: 700; }
   .score-label { margin: 0 0 1.5rem; color: var(--muted); font-size: .875rem; }
 
@@ -151,11 +175,31 @@
   <!-- ① 카테고리 선택 -->
   <section id="screen-category">
     <h1>영어회화 빈칸 채우기</h1>
-    <p class="lead">카테고리를 골라 시작하세요. 틀린 문장은 맞출 때까지 다시 나옵니다.</p>
+    <p class="lead">카테고리를 골라 시작하세요. 서로 다른 날에 첫 시도로 두 번 맞추면 완료되어 더 나오지 않습니다.</p>
     <ul id="category-list" class="category-list"></ul>
   </section>
 
-  <!-- ② 문제 -->
+  <!-- ② 문장 수 선택 -->
+  <section id="screen-size" hidden>
+    <div class="quiz-head">
+      <span id="size-title" class="progress"></span>
+      <button type="button" id="btn-size-back" class="btn-text">뒤로</button>
+    </div>
+
+    <p id="size-lead" class="lead"></p>
+    <ul id="size-list" class="size-list"></ul>
+
+    <p class="reset-area">
+      <button type="button" id="btn-reset" class="btn-text">진도 초기화</button>
+      <span id="reset-confirm" hidden>
+        정말 지울까요?
+        <button type="button" id="btn-reset-yes" class="btn-text danger">지우기</button>
+        <button type="button" id="btn-reset-no" class="btn-text">취소</button>
+      </span>
+    </p>
+  </section>
+
+  <!-- ③ 문제 -->
   <section id="screen-quiz" hidden>
     <div class="quiz-head">
       <span id="progress" class="progress"></span>
@@ -180,11 +224,12 @@
     </div>
   </section>
 
-  <!-- ③ 결과 -->
+  <!-- ④ 결과 -->
   <section id="screen-result" hidden>
     <h1>세션 완료</h1>
     <p id="score" class="score"></p>
     <p class="score-label">첫 시도에 맞춘 개수입니다. 모든 문장은 맞출 때까지 반복되므로 이 값이 실제 지표입니다.</p>
+    <p id="result-progress" class="score-label"></p>
 
     <div id="wrong-section" hidden>
       <p class="lead">한 번이라도 틀린 문장</p>
@@ -192,7 +237,7 @@
     </div>
 
     <div class="result-actions">
-      <button type="button" id="btn-retry" class="btn-primary">다시하기</button>
+      <button type="button" id="btn-retry" class="btn-primary">이어서 더 풀기</button>
       <button type="button" id="btn-home" class="btn-text">카테고리 선택으로</button>
     </div>
   </section>
@@ -216,19 +261,102 @@ const CATEGORY_NAMES = {
 
 const BLANK = "___";
 const STORAGE_KEY = "blank-fill-session";
+const PROGRESS_KEY = "blank-fill-progress";
+
+// 서로 다른 날에 첫 시도로 이만큼 맞추면 그 문장은 완료됩니다.
+const DONE_COUNT = 2;
+
+// 개수 선택 화면에 띄울 후보. 남은 문장 수보다 작은 것만 실제로 보여줍니다.
+const SIZE_OPTIONS = [5, 10, 15, 20];
 
 const el = (id) => document.getElementById(id);
 
-// 진행 중인 세션 상태. 카테고리 선택 화면에서는 null입니다.
+// 진행 중인 세션 상태. 카테고리·개수 선택 화면에서는 null입니다.
 let session = null;
 
+// 개수 선택 화면이 대상으로 삼고 있는 카테고리. 초기화 버튼도 이 값을 씁니다.
+let sizeCategory = null;
+
+/* ── 누적 진도 ───────────────────────────────────
+   세션과 별도 키에 저장합니다. 세션은 끝나면 지워지지만 진도는 남아야 합니다.
+   형태: { "travel-out-01": { c: 1, d: "2026-08-10" } }  c = 카운트, d = 카운트가 오른 날 */
+
+// 로컬 날짜를 씁니다. toISOString()은 UTC 기준이라 밤 9시 이후에 학습하면
+// 이미 다음 날로 잡혀서, 같은 날 두 번 푼 것이 완료 처리되어 버립니다.
+function todayKey() {
+  const now = new Date();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  return now.getFullYear() + "-" + month + "-" + day;
+}
+
+function loadProgress() {
+  try {
+    const data = JSON.parse(localStorage.getItem(PROGRESS_KEY));
+    if (!data || typeof data !== "object" || Array.isArray(data)) return {};
+    return data;
+  } catch (error) {
+    return {};   // 깨진 데이터는 없는 것으로 봅니다
+  }
+}
+
+function saveProgress(progress) {
+  try {
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+  } catch (error) {
+    // 저장 공간이 막혀 있어도 학습 자체는 계속되어야 하므로 넘어갑니다.
+  }
+}
+
+function isDone(progress, id) {
+  const entry = progress[id];
+  return !!entry && entry.c >= DONE_COUNT;
+}
+
+// 아직 완료되지 않은 문장만 돌려줍니다.
+function remainingSentences(categoryKey, progress) {
+  return SENTENCES.filter((s) => s.category === categoryKey && !isDone(progress, s.id));
+}
+
+// 진도를 갱신하고, 이번에 완료에 도달했으면 true를 돌려줍니다.
+// 호출은 한 세션에서 그 문장의 '첫 시도'일 때만 해야 합니다.
+function bumpProgress(id, correct) {
+  const progress = loadProgress();
+  const entry = progress[id] || { c: 0 };
+
+  if (!correct) {
+    progress[id] = { c: 0 };   // 날짜도 지워, 오늘 다시 맞추면 바로 1부터 셉니다
+    saveProgress(progress);
+    return false;
+  }
+
+  const today = todayKey();
+  if (entry.d === today) return false;   // 같은 날 두 번째부터는 오르지 않습니다
+
+  const count = Math.min((entry.c || 0) + 1, DONE_COUNT);
+  progress[id] = { c: count, d: today };
+  saveProgress(progress);
+  return count >= DONE_COUNT;
+}
+
+function resetCategoryProgress(categoryKey) {
+  const progress = loadProgress();
+  for (const sentence of SENTENCES) {
+    if (sentence.category === categoryKey) delete progress[sentence.id];
+  }
+  saveProgress(progress);
+}
+
 /* ── 카테고리 도출 ─────────────────────────────────
-   SENTENCES에서 카테고리별 문장 수를 세어, 1개 이상인 것만 반환합니다.
+   SENTENCES에서 카테고리별 문장 수와 완료 수를 세어, 1개 이상인 것만 반환합니다.
    CATEGORY_NAMES에 없는 카테고리도 누락되지 않도록 뒤에 덧붙입니다. */
-function listCategories() {
+function listCategories(progress) {
   const counts = new Map();
+  const done = new Map();
+
   for (const s of SENTENCES) {
     counts.set(s.category, (counts.get(s.category) || 0) + 1);
+    if (isDone(progress, s.id)) done.set(s.category, (done.get(s.category) || 0) + 1);
   }
 
   const ordered = Object.keys(CATEGORY_NAMES).filter((key) => counts.has(key));
@@ -237,13 +365,15 @@ function listCategories() {
   return [...ordered, ...unknown].map((key) => ({
     key: key,
     name: CATEGORY_NAMES[key] || key,
-    count: counts.get(key)
+    count: counts.get(key),
+    done: done.get(key) || 0
   }));
 }
 
 /* ── 화면 전환 ───────────────────────────────────── */
 function showScreen(name) {
   el("screen-category").hidden = name !== "category";
+  el("screen-size").hidden     = name !== "size";
   el("screen-quiz").hidden     = name !== "quiz";
   el("screen-result").hidden   = name !== "result";
 }
@@ -251,11 +381,14 @@ function showScreen(name) {
 /* ── ① 카테고리 선택 ─────────────────────────────── */
 function renderCategoryScreen() {
   session = null;
+  sizeCategory = null;
   clearSavedSession();   // 나가기·홈으로가 모두 여기로 오므로 한 곳에서 정리합니다
+
+  const progress = loadProgress();
   const list = el("category-list");
   list.textContent = "";
 
-  for (const category of listCategories()) {
+  for (const category of listCategories(progress)) {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "category-btn";
@@ -265,10 +398,10 @@ function renderCategoryScreen() {
 
     const count = document.createElement("span");
     count.className = "count";
-    count.textContent = category.count + "문장";
+    count.textContent = category.done + " / " + category.count + " 완료";
 
     button.append(name, count);
-    button.addEventListener("click", () => startSession(category.key));
+    button.addEventListener("click", () => renderSizeScreen(category.key));
 
     const item = document.createElement("li");
     item.appendChild(button);
@@ -276,6 +409,50 @@ function renderCategoryScreen() {
   }
 
   showScreen("category");
+}
+
+/* ── ② 문장 수 선택 ─────────────────────────────── */
+function hideResetConfirm() {
+  el("btn-reset").hidden = false;
+  el("reset-confirm").hidden = true;
+}
+
+function renderSizeScreen(categoryKey) {
+  session = null;
+  sizeCategory = categoryKey;
+  clearSavedSession();
+
+  const remaining = remainingSentences(categoryKey, loadProgress());
+
+  el("size-title").textContent = CATEGORY_NAMES[categoryKey] || categoryKey;
+  el("size-lead").textContent = remaining.length > 0
+    ? "남은 문장 " + remaining.length + "개. 몇 문장 풀까요?"
+    : "이 카테고리는 다 끝냈습니다. 다시 풀려면 진도를 초기화하세요.";
+
+  // 남은 문장보다 큰 선택지는 고를 수 없으므로 아예 띄우지 않고,
+  // 마지막에 '남은 전부'를 둡니다.
+  const options = SIZE_OPTIONS.filter((size) => size < remaining.length);
+  if (remaining.length > 0) options.push(remaining.length);
+
+  const list = el("size-list");
+  list.textContent = "";
+
+  for (const size of options) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "size-btn";
+    button.textContent = size === remaining.length
+      ? "남은 전부 (" + size + ")"
+      : size + "문장";
+    button.addEventListener("click", () => startSession(categoryKey, size));
+
+    const item = document.createElement("li");
+    item.appendChild(button);
+    list.appendChild(item);
+  }
+
+  hideResetConfirm();
+  showScreen("size");
 }
 
 /* ── 세션 시작 ───────────────────────────────────── */
@@ -288,16 +465,19 @@ function shuffle(items) {
   return result;
 }
 
-function startSession(categoryKey) {
-  const pool = SENTENCES.filter((s) => s.category === categoryKey);
+function startSession(categoryKey, size) {
+  // 완료된 문장은 빼고, 섞은 뒤 앞에서 필요한 만큼만 가져옵니다.
+  const picked = shuffle(remainingSentences(categoryKey, loadProgress())).slice(0, size);
+  if (picked.length === 0) return;
 
   session = {
     categoryKey: categoryKey,
-    total: pool.length,
-    queue: shuffle(pool),   // 맨 앞이 현재 문제. 틀리면 맨 뒤로 다시 들어갑니다.
+    sessionSize: picked.length,
+    queue: picked,          // 맨 앞이 현재 문제. 틀리면 맨 뒤로 다시 들어갑니다.
     solved: new Set(),      // 한 번이라도 맞춘 문장 id (진행도 분자)
     attempted: new Set(),   // 이미 채점해 본 문장 id (첫 시도 판별용)
     wrong: new Set(),       // 한 번이라도 틀린 문장 id (결과 화면 목록)
+    completed: new Set(),   // 이번 세션에서 완료에 도달한 문장 id
     firstTryCorrect: 0
   };
 
@@ -316,10 +496,12 @@ function saveSession() {
 
   const data = {
     categoryKey: session.categoryKey,
+    sessionSize: session.sessionSize,
     queue: session.queue.map((sentence) => sentence.id),
     solved: [...session.solved],
     attempted: [...session.attempted],
     wrong: [...session.wrong],
+    completed: [...session.completed],
     firstTryCorrect: session.firstTryCorrect
   };
 
@@ -347,7 +529,11 @@ function restoreSession() {
   } catch (error) {
     return false;
   }
-  if (!data || !data.categoryKey) return false;
+  // sessionSize가 없으면 세션 단위 학습 이전의 옛 저장 데이터입니다. 되살리지 않고 버립니다.
+  if (!data || !data.categoryKey || !(data.sessionSize > 0)) {
+    clearSavedSession();
+    return false;
+  }
 
   const pool = SENTENCES.filter((s) => s.category === data.categoryKey);
   const byId = new Map(pool.map((s) => [s.id, s]));
@@ -360,15 +546,19 @@ function restoreSession() {
 
   const keepKnown = (ids) => new Set((ids || []).filter((id) => byId.has(id)));
 
+  // 문장이 지워져 큐가 줄었을 수 있으므로, 세션 크기는 남은 큐보다 작아지지 않게 합니다.
+  const sessionSize = Math.max(Math.min(data.sessionSize, pool.length), queue.length);
+
   session = {
     categoryKey: data.categoryKey,
-    total: pool.length,
+    sessionSize: sessionSize,
     queue: queue,
     solved: keepKnown(data.solved),
     attempted: keepKnown(data.attempted),
     wrong: keepKnown(data.wrong),
-    // 문장이 줄어든 경우 저장된 점수가 전체 수를 넘을 수 있어 잘라냅니다.
-    firstTryCorrect: Math.min(data.firstTryCorrect || 0, pool.length)
+    completed: keepKnown(data.completed),
+    // 문장이 줄어든 경우 저장된 점수가 세션 크기를 넘을 수 있어 잘라냅니다.
+    firstTryCorrect: Math.min(data.firstTryCorrect || 0, sessionSize)
   };
 
   showScreen("quiz");
@@ -393,9 +583,9 @@ function renderSentenceInto(target, en, filled) {
   target.appendChild(document.createTextNode(parts[1]));
 }
 
-// 진행도 = 한 번이라도 맞춘 문장 수 / 카테고리 전체 문장 수
+// 진행도 = 한 번이라도 맞춘 문장 수 / 이번 세션에 뽑힌 문장 수
 function updateProgress() {
-  el("progress").textContent = session.solved.size + " / " + session.total;
+  el("progress").textContent = session.solved.size + " / " + session.sessionSize;
 }
 
 // 힌트 줄 문구를 만듭니다. 글자 수는 정답 후보들의 길이가 모두 같을 때만 붙입니다.
@@ -446,6 +636,12 @@ function check() {
   const correct = isCorrect(raw, current.accept);
   const firstAttempt = !session.attempted.has(current.id);
   session.attempted.add(current.id);
+
+  // 누적 진도는 이 세션에서의 첫 시도만 반영합니다. 틀린 뒤 다시 맞춘 것은
+  // 그 세션을 끝내기 위한 재도전일 뿐이라 진도로 치지 않습니다.
+  if (firstAttempt && bumpProgress(current.id, correct)) {
+    session.completed.add(current.id);
+  }
 
   if (correct) {
     session.solved.add(current.id);
@@ -511,7 +707,12 @@ function next() {
 /* ── ③ 결과 ─────────────────────────────────────── */
 function renderResult() {
   clearSavedSession();   // 세션이 끝났으므로 이어하기 대상이 아닙니다
-  el("score").textContent = session.firstTryCorrect + " / " + session.total;
+  el("score").textContent = session.firstTryCorrect + " / " + session.sessionSize;
+
+  const remaining = remainingSentences(session.categoryKey, loadProgress());
+  el("result-progress").textContent =
+    "이번에 완료된 문장 " + session.completed.size + "개 · " +
+    "이 카테고리에 남은 문장 " + remaining.length + "개";
 
   const wrongIds = [...session.wrong];
   el("wrong-section").hidden = wrongIds.length === 0;
@@ -548,8 +749,22 @@ el("answer-form").addEventListener("submit", (event) => {
 
 el("btn-next").addEventListener("click", next);
 el("btn-exit").addEventListener("click", renderCategoryScreen);
-el("btn-retry").addEventListener("click", () => startSession(session.categoryKey));
+el("btn-retry").addEventListener("click", () => renderSizeScreen(session.categoryKey));
 el("btn-home").addEventListener("click", renderCategoryScreen);
+
+el("btn-size-back").addEventListener("click", renderCategoryScreen);
+
+// 초기화는 실수로 누르기 쉬워 두 단계로 나눕니다.
+// 브라우저 확인창은 쓰지 않습니다. 확인창이 뜨면 자동화 검증이 멈춥니다.
+el("btn-reset").addEventListener("click", () => {
+  el("btn-reset").hidden = true;
+  el("reset-confirm").hidden = false;
+});
+el("btn-reset-no").addEventListener("click", hideResetConfirm);
+el("btn-reset-yes").addEventListener("click", () => {
+  resetCategoryProgress(sizeCategory);
+  renderSizeScreen(sizeCategory);
+});
 
 // 풀던 세션이 남아 있으면 그 문제로 바로 돌아갑니다.
 if (!restoreSession()) renderCategoryScreen();
