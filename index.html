@@ -181,7 +181,9 @@
     flex-wrap: wrap;          /* 그래도 넘치면 줄을 바꿔 가로 스크롤을 막습니다 */
     gap: 3px;
     margin: 0 .2em;
-    vertical-align: -.34em;
+    /* 칸 안 글자의 기준선을 문장 글자의 기준선에 맞춥니다.
+       칸이 비어 있어도 제로폭 공백 덕분에 기준선이 같아서 입력해도 움직이지 않습니다. */
+    vertical-align: baseline;
   }
   .blank .cell {
     width: var(--cell, .95em);
