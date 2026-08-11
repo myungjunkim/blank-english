@@ -30,9 +30,10 @@
     --ink-2:  #736858;      /* 종이 위 보조 */
     --rule:   #ded2be;      /* 종이 위 선·빈 칸 */
 
-    --signal: #ff7a1a;      /* 신호 주황 — 지금 채우는 칸, 진도, 기본 버튼 */
-    --good:   #0d7a52;
-    --miss:   #cc3326;
+    --signal:    #8ecfa0;   /* 연한 녹색 — 지금 채우는 칸, 진도, 기본 버튼 */
+    --on-signal: #0e2c1a;   /* 연녹 위 글자 */
+    --good:      #0d7a52;   /* 공개된 정답 — 같은 계열의 진한 녹색 */
+    --miss:      #cc3326;
 
     --en:   "Newsreader", Georgia, "Times New Roman", serif;
     --ko:   system-ui, -apple-system, "Segoe UI", "Malgun Gothic", sans-serif;
@@ -200,7 +201,7 @@
   .blank .cell.on {
     background: var(--signal);
     border-color: var(--signal);
-    color: #2a1300;   /* 주황 위 흰 글자는 대비가 모자라 어두운 갈색을 씁니다 */
+    color: var(--on-signal);
   }
   .blank .cell.next { border-color: var(--signal); box-shadow: inset 0 -3px 0 -1px var(--signal); }
   .blank.over .cell { background: var(--miss); border-color: var(--miss); color: #fff; }
@@ -222,7 +223,7 @@
     line-height: 1;
     transition: background-color .12s, border-color .12s, color .12s;
   }
-  .blank.open.on { background: var(--signal); border-color: var(--signal); border-style: solid; color: #2a1300; }
+  .blank.open.on { background: var(--signal); border-color: var(--signal); border-style: solid; color: var(--on-signal); }
 
   /* 정답이 공개된 상태 */
   .blank.filled {
@@ -230,7 +231,10 @@
     margin: 0;        /* 채워진 뒤에는 뒤따르는 물음표·쉼표와 붙어야 합니다 */
     font-weight: 700;
     color: var(--good);
-    border-bottom: 2px solid var(--good);
+    /* border-bottom은 줄 높이를 바꿔 채점 순간 화면이 흔들립니다. 밑줄은 text-decoration으로 긋습니다. */
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: .14em;
   }
 
   .quiz-hint {
@@ -261,18 +265,21 @@
     border: none;
     border-radius: .5rem;
     background: var(--signal);
-    color: #2a1300;
+    color: var(--on-signal);
     font-size: .9rem;
     font-weight: 700;
     white-space: nowrap;
   }
+  /* 다음 버튼은 확인 버튼이 있던 자리를 그대로 씁니다 */
+  .btn-next { width: 100%; }
   .btn-primary:disabled { background: var(--ground-2); color: var(--on-ground-2); cursor: default; }
 
   /* ── 채점 결과 ─────────────────────────────────── */
-  #feedback { margin-top: 1rem; animation: rise .18s ease-out; }
+  /* 힌트가 있던 자리를 그대로 씁니다. 위 여백을 두면 채점할 때 화면이 그만큼 더 밀립니다. */
+  #feedback { animation: rise .18s ease-out; }
   @keyframes rise { from { opacity: 0; transform: translateY(5px); } }
 
-  .verdict { margin: 0 0 .8rem; font-size: .9rem; font-weight: 700; letter-spacing: -.01em; }
+  .verdict { margin: 0 0 .45rem; font-size: .85rem; font-weight: 700; letter-spacing: -.01em; }
   .verdict.ok { color: var(--good); }
   .verdict.no { color: var(--miss); }
 
@@ -281,7 +288,7 @@
   .answer-compare .arrow { font-family: var(--mono); color: var(--ink-2); padding: 0 .5em; }
   .answer-compare .right { color: var(--good); font-weight: 700; }
 
-  .note { margin: 0 0 1.25rem; color: var(--ink-2); font-size: .85rem; }
+  .note { margin: 0; color: var(--ink-2); font-size: .85rem; }
 
   /* ── ④ 결과 ───────────────────────────────────── */
   .score {
@@ -354,6 +361,13 @@
       <p id="quiz-ko" class="quiz-ko"></p>
       <p id="quiz-en" class="quiz-en"></p>
       <p id="quiz-hint" class="quiz-hint"></p>
+
+      <!-- 채점 결과는 힌트가 있던 자리에 들어갑니다. 카드가 그대로라 화면이 크게 움직이지 않습니다. -->
+      <div id="feedback" hidden>
+        <p id="verdict" class="verdict"></p>
+        <p id="answer-compare" class="answer-compare" hidden></p>
+        <p id="note" class="note"></p>
+      </div>
     </div>
 
     <form id="answer-form" autocomplete="off">
@@ -361,12 +375,8 @@
       <button type="submit" id="btn-check" class="btn-primary" disabled>확인</button>
     </form>
 
-    <div id="feedback" class="card" hidden>
-      <p id="verdict" class="verdict"></p>
-      <p id="answer-compare" class="answer-compare" hidden></p>
-      <p id="note" class="note"></p>
-      <button type="button" id="btn-next" class="btn-primary">다음</button>
-    </div>
+    <!-- 확인 버튼과 같은 자리에 나타나, 연달아 누를 때 손이 움직이지 않습니다 -->
+    <button type="button" id="btn-next" class="btn-primary btn-next" hidden>다음</button>
   </section>
 
   <!-- ④ 결과 -->
@@ -805,6 +815,7 @@ function renderQuiz() {
   el("btn-check").disabled = true;
   el("answer-form").hidden = false;
   el("feedback").hidden = true;
+  el("btn-next").hidden = true;
 
   input.focus();
 }
@@ -882,6 +893,7 @@ function renderFeedback(sentence, userAnswer, correct) {
   el("answer-input").disabled = true;
   el("answer-form").hidden = true;
   el("feedback").hidden = false;
+  el("btn-next").hidden = false;
 
   // 다음 버튼에 포커스를 줘서, 채점된 상태에서 Enter를 누르면 다음 문제로 넘어갑니다.
   el("btn-next").focus();
