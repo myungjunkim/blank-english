@@ -2,412 +2,657 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- interactive-widget=resizes-content: 키보드가 올라오면 레이아웃 자체를 줄여
+     하단 고정 바가 키보드에 가려지지 않게 합니다. -->
+<meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content">
 <title>영어회화 빈칸 채우기</title>
-<meta name="theme-color" content="#16203a">
+<meta name="theme-color" content="#faf9f7">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="preload" href="newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-  /* 영문 전용 서브셋. unicode-range를 latin으로 한정해 한글은 시스템 폰트로 떨어집니다. */
-  @font-face {
-    font-family: "Newsreader";
-    src: url("newsreader-latin.woff2") format("woff2");
-    font-weight: 400 700;
-    font-style: normal;
-    font-display: swap;
-    unicode-range: U+0000-00FF, U+2000-206F, U+2122, U+2212;
+/* ═══════════════════════════════════════════════════════════
+   토큰 — 이 아래 모든 스타일은 변수만 참조합니다
+   ═══════════════════════════════════════════════════════════ */
+:root {
+  /* 색 — 배경 */
+  --bg:              #faf9f7;   /* 따뜻한 오프화이트. 순백은 눈부심이 큽니다 */
+  --surface:         #f2f0eb;   /* 배경보다 살짝 어둡게. 테두리 대신 명도차로 구분 */
+  --surface-raised:  #fffefc;   /* 배경보다 살짝 밝게 */
+
+  /* 색 — 글자 */
+  --text:        #1c1b19;   /* 진한 잉크. 순검정은 대비가 과합니다 */
+  --text-muted:  #6b6862;   /* 본문의 약 60% 명도 */
+  --text-faint:  #96928a;
+
+  /* 색 — 액센트 하나 */
+  --accent:       #2f5d50;
+  --accent-weak:  #e4ece9;
+  --on-accent:    #ffffff;
+
+  /* 색 — 상태 */
+  --correct:       #2e6b4f;
+  --correct-weak:  #e7efe9;
+  --incorrect:     #a1483f;
+  --incorrect-weak:#f5e9e7;
+
+  /* 색 — 선 */
+  --rule:        #ddd8cf;
+  --rule-strong: #b8b1a4;
+
+  /* 타이포 */
+  --font-serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --font-sans:  system-ui, -apple-system, "Segoe UI", "Malgun Gothic", sans-serif;
+
+  --size-13: 13px;
+  --size-15: 15px;
+  --size-17: 17px;
+  --size-21: 21px;
+  --size-27: 27px;
+  --size-34: 34px;
+
+  --lh-sentence: 1.75;
+  --lh-ui:       1.5;
+  --lh-tight:    1.3;
+
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-bold:   700;
+
+  /* 간격 — 4px 배수만 */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  20px;
+  --sp-6:  24px;
+  --sp-8:  32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+  --sp-16: 64px;
+
+  /* 형태 */
+  --radius-control: 6px;
+  --radius-surface: 12px;
+  --border-hairline: 1px;
+  --border-strong:   2px;
+  --icon:            20px;
+
+  /* 그림자 — 하단 고정 바와 모달에만 */
+  --shadow-bar:   0 -1px 0 var(--rule), 0 -8px 24px rgb(28 27 25 / 6%);
+  --shadow-modal: 0 8px 32px rgb(28 27 25 / 16%);
+
+  /* 모션 */
+  --dur:  180ms;
+  --ease: cubic-bezier(.2, .6, .3, 1);
+
+  /* 레이아웃 */
+  --measure:   62ch;   /* 문장 한 줄 최대 폭 */
+  --container: 40rem;
+  --touch:     44px;   /* 최소 터치 타겟 */
+  --bar-height: 76px;  /* 하단 고정 바가 차지하는 높이 */
+}
+
+/* 영문 전용 서브셋. unicode-range를 라틴으로 한정해 한글은 시스템 폰트로 떨어집니다.
+   font-display: optional — 폰트가 늦게 오면 그 화면은 대체 글꼴로 그리고 바꾸지 않습니다.
+   중간에 글꼴이 바뀌며 줄바꿈이 밀리는 현상(FOUT)을 없애기 위함입니다. */
+@font-face {
+  font-family: "Newsreader";
+  src: url("newsreader-latin.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: optional;
+  unicode-range: U+0000-00FF, U+2000-206F, U+2122, U+2212;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   기본
+   ═══════════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  padding: var(--sp-6) var(--sp-4) calc(var(--bar-height) + var(--sp-8));
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: var(--size-15);
+  line-height: var(--lh-ui);
+  word-break: keep-all;   /* 한글이 낱말 중간에서 잘리지 않게 */
+}
+
+#app { max-width: var(--container); margin: 0 auto; }
+
+h1, h2, h3 { margin: 0; font-weight: var(--weight-bold); line-height: var(--lh-tight); }
+p { margin: 0; }
+ul { list-style: none; margin: 0; padding: 0; }
+
+:focus-visible {
+  outline: var(--border-strong) solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-control);
+}
+
+/* 화면 낭독기 전용 */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   버튼
+   ═══════════════════════════════════════════════════════════ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  min-height: var(--touch);
+  padding: 0 var(--sp-5);
+  border: var(--border-hairline) solid transparent;
+  border-radius: var(--radius-control);
+  font: inherit;
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+  transition: background-color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease),
+              color var(--dur) var(--ease);
+}
+
+.btn-primary { background: var(--accent); color: var(--on-accent); }
+.btn-primary:hover  { background: color-mix(in srgb, var(--accent) 88%, black); }
+.btn-primary:active { background: color-mix(in srgb, var(--accent) 78%, black); }
+.btn-primary:disabled {
+  background: var(--surface);
+  color: var(--text-faint);
+  cursor: default;
+}
+
+.btn-quiet {
+  background: transparent;
+  border-color: var(--rule);
+  color: var(--text);
+}
+.btn-quiet:hover  { background: var(--surface); }
+.btn-quiet:active { border-color: var(--rule-strong); }
+
+.btn-plain {
+  background: transparent;
+  color: var(--text-muted);
+  padding: 0 var(--sp-2);
+}
+.btn-plain:hover { color: var(--text); }
+.btn-plain.is-danger { color: var(--incorrect); }
+
+.btn-block { width: 100%; }
+
+/* 처리 중 — 글자를 흐리게 두고 점 세 개를 돌립니다 */
+.btn[data-loading="true"] { pointer-events: none; }
+.btn[data-loading="true"] .btn-label { opacity: .45; }
+.btn-spinner { display: none; }
+.btn[data-loading="true"] .btn-spinner {
+  display: block;
+  width: var(--sp-4); height: var(--sp-4);
+  border: var(--border-strong) solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 640ms linear infinite;
+}
+@keyframes spin { to { transform: rotate(1turn); } }
+
+/* ═══════════════════════════════════════════════════════════
+   화면 머리
+   ═══════════════════════════════════════════════════════════ */
+.screen-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-6);
+}
+.screen-head h1 { font-size: var(--size-21); }
+.screen-head h2 { font-size: var(--size-17); }
+
+.page-intro {
+  margin-bottom: var(--sp-6);
+  color: var(--text-muted);
+  font-size: var(--size-15);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   진행 바 — 숫자와 바를 함께 보여줍니다
+   ═══════════════════════════════════════════════════════════ */
+/* span으로도 쓰이므로 display를 직접 정해 둡니다 */
+.meter-group { display: block; }
+.meter {
+  display: block;
+  height: var(--sp-1);
+  background: var(--surface);
+  border-radius: calc(var(--sp-1) / 2);
+  overflow: hidden;
+}
+.meter-fill {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  border-radius: inherit;
+  transition: width var(--dur) var(--ease);
+}
+.meter-label {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-2);
+  font-size: var(--size-13);
+  color: var(--text-muted);
+}
+.meter-label strong { color: var(--text); font-weight: var(--weight-medium); }
+
+/* ═══════════════════════════════════════════════════════════
+   ① 카테고리
+   ═══════════════════════════════════════════════════════════ */
+.category-list { display: grid; gap: var(--sp-2); }
+
+.category-btn {
+  width: 100%;
+  display: block;
+  padding: var(--sp-4);
+  border: none;
+  border-radius: var(--radius-surface);
+  background: var(--surface);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color var(--dur) var(--ease);
+}
+.category-btn:hover  { background: color-mix(in srgb, var(--surface) 70%, var(--accent-weak)); }
+.category-btn:active { background: var(--accent-weak); }
+
+.category-name {
+  display: block;
+  margin-bottom: var(--sp-3);
+  font-size: var(--size-17);
+  font-weight: var(--weight-medium);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ② 문항 수 선택
+   ═══════════════════════════════════════════════════════════ */
+.size-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-6);
+}
+.size-btn {
+  width: 100%;
+  min-height: var(--touch);
+  padding: var(--sp-4);
+  border: var(--border-hairline) solid var(--rule);
+  border-radius: var(--radius-control);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: var(--size-17);
+  cursor: pointer;
+  transition: border-color var(--dur) var(--ease), background-color var(--dur) var(--ease);
+}
+.size-btn:hover  { background: var(--surface); border-color: var(--rule-strong); }
+.size-btn:active { background: var(--accent-weak); }
+.size-btn.is-all { grid-column: 1 / -1; }
+
+/* ═══════════════════════════════════════════════════════════
+   ③ 문제
+   ═══════════════════════════════════════════════════════════ */
+.prompt-ko {
+  max-width: var(--measure);
+  margin-bottom: var(--sp-4);
+  color: var(--text-muted);
+  font-size: var(--size-15);
+}
+
+.sentence {
+  max-width: var(--measure);
+  margin-bottom: var(--sp-5);
+  font-family: var(--font-serif);
+  font-size: var(--size-21);
+  line-height: var(--lh-sentence);
+  letter-spacing: 0;
+  word-break: normal;
+}
+
+/* 빈칸 — 실제 input. 폭을 미리 확보해 입력해도 줄바꿈이 바뀌지 않습니다. */
+.blank {
+  width: var(--blank-width, 8ch);
+  padding: 0 var(--sp-1);
+  border: none;
+  border-bottom: var(--border-strong) solid var(--rule-strong);
+  border-radius: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  text-align: center;
+  vertical-align: baseline;   /* 문장 글자와 같은 줄에 앉습니다 */
+  transition: border-color var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+.blank::placeholder { color: transparent; }
+.blank:focus { outline: none; border-bottom-color: var(--accent); }
+.blank:focus-visible { outline: none; }
+
+/* 지금 입력 중인 빈칸만 액센트. 나머지는 흐린 밑줄 */
+.sentence:has(.blank:focus) .blank:not(:focus) { border-bottom-color: var(--rule); }
+
+.blank[data-state="filled"]  { border-bottom-color: var(--rule-strong); }
+.blank[data-state="correct"] {
+  color: var(--correct);
+  border-bottom-color: var(--correct);
+  font-weight: var(--weight-bold);
+}
+/* 오답은 색만으로 구분하지 않습니다. 물결 밑줄로 형태를 함께 바꿉니다. */
+.blank[data-state="incorrect"] {
+  color: var(--incorrect);
+  border-bottom: none;
+  text-decoration: underline wavy var(--incorrect);
+  text-decoration-thickness: var(--border-strong);
+  text-underline-offset: var(--sp-1);
+  font-weight: var(--weight-bold);
+}
+.blank[data-state="revealed"] {
+  color: var(--correct);
+  border-bottom-color: var(--correct);
+  font-weight: var(--weight-bold);
+}
+.blank:disabled { opacity: 1; }   /* 채점 후에도 흐려지지 않게 */
+
+.blank.is-shaking { animation: shake 200ms var(--ease) 1; }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25%      { transform: translateX(-4px); }
+  75%      { transform: translateX(4px); }
+}
+
+.hint {
+  max-width: var(--measure);
+  padding-left: var(--sp-3);
+  border-left: var(--border-strong) solid var(--rule);
+  color: var(--text-muted);
+  font-size: var(--size-15);
+}
+
+/* ── 채점 결과 ─────────────────────────────── */
+.result {
+  max-width: var(--measure);
+  margin-top: var(--sp-5);
+  padding: var(--sp-4);
+  border-radius: var(--radius-surface);
+  background: var(--surface);
+}
+.result[data-verdict="correct"]   { background: var(--correct-weak); }
+.result[data-verdict="incorrect"] { background: var(--incorrect-weak); }
+
+.result-head {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-2);
+  font-size: var(--size-15);
+  font-weight: var(--weight-bold);
+}
+.result[data-verdict="correct"]   .result-head { color: var(--correct); }
+.result[data-verdict="incorrect"] .result-head { color: var(--incorrect); }
+.result-icon { flex: none; width: var(--icon); height: var(--icon); }
+
+.result-answer {
+  margin-bottom: var(--sp-2);
+  font-family: var(--font-serif);
+  font-size: var(--size-17);
+}
+.result-answer .typed {
+  color: var(--incorrect);
+  text-decoration: line-through;
+}
+.result-answer .arrow { color: var(--text-muted); padding: 0 var(--sp-2); }
+.result-answer .right { color: var(--correct); font-weight: var(--weight-bold); }
+
+.result-note { color: var(--text-muted); font-size: var(--size-15); }
+
+/* ═══════════════════════════════════════════════════════════
+   하단 고정 바 — 한 손 엄지 범위. 유일하게 그림자를 쓰는 곳
+   ═══════════════════════════════════════════════════════════ */
+.action-bar {
+  position: fixed;
+  inset: auto 0 0 0;
+  padding: var(--sp-4);
+  background: var(--bg);
+  box-shadow: var(--shadow-bar);
+}
+.action-bar-inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  display: flex;
+  gap: var(--sp-2);
+}
+.action-bar .btn { flex: 1; }
+.action-bar .btn-quiet { flex: 0 0 auto; }
+
+/* ═══════════════════════════════════════════════════════════
+   ④ 세트 완료
+   ═══════════════════════════════════════════════════════════ */
+.score {
+  font-size: var(--size-34);
+  font-weight: var(--weight-bold);
+  line-height: var(--lh-tight);
+}
+.score-note { margin-top: var(--sp-2); color: var(--text-muted); font-size: var(--size-13); }
+
+.section-title {
+  margin: var(--sp-8) 0 var(--sp-3);
+  font-size: var(--size-15);
+  font-weight: var(--weight-bold);
+}
+
+.review-list { display: grid; gap: var(--sp-2); }
+.review-list li {
+  padding: var(--sp-4);
+  border-radius: var(--radius-surface);
+  background: var(--surface);
+}
+.review-ko { margin-bottom: var(--sp-1); color: var(--text-muted); font-size: var(--size-13); }
+.review-en { font-family: var(--font-serif); font-size: var(--size-17); word-break: normal; }
+.review-en .answer { color: var(--correct); font-weight: var(--weight-bold); }
+
+/* ═══════════════════════════════════════════════════════════
+   빈 상태 · 오류 · 로딩
+   ═══════════════════════════════════════════════════════════ */
+.notice {
+  max-width: var(--measure);
+  padding: var(--sp-6);
+  border-radius: var(--radius-surface);
+  background: var(--surface);
+}
+.notice h2 { margin-bottom: var(--sp-2); font-size: var(--size-17); }
+.notice p  { margin-bottom: var(--sp-5); color: var(--text-muted); }
+.notice p:last-child { margin-bottom: 0; }
+
+.skeleton {
+  height: var(--sp-4);
+  border-radius: var(--radius-control);
+  background: var(--surface);
+  animation: pulse 1.4s var(--ease) infinite;
+}
+.skeleton + .skeleton { margin-top: var(--sp-3); }
+.skeleton.is-short { width: 40%; }
+.skeleton.is-medium { width: 70%; }
+@keyframes pulse { 50% { opacity: .45; } }
+
+.resume-note {
+  margin-bottom: var(--sp-5);
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--radius-control);
+  background: var(--accent-weak);
+  color: var(--accent);
+  font-size: var(--size-13);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   반응형
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 360px) {
+  body { padding-left: var(--sp-3); padding-right: var(--sp-3); }
+  .sentence { font-size: var(--size-17); }
+  .size-list { grid-template-columns: 1fr 1fr; }
+}
+
+@media (min-width: 768px) {
+  body { padding-top: var(--sp-12); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
   }
-
-  :root {
-    --ground:    #16203a;   /* 깊은 잉크 남색 — 앱 바탕 */
-    --ground-2:  #24304f;   /* 바탕 위 옅은 면 */
-    --on-ground: #e7e1d5;   /* 어두운 바탕 위 글자 */
-    --on-ground-2: #96a0b8;
-
-    --paper:  #fbf6ec;      /* 따뜻한 종이 — 문장이 놓이는 면 */
-    --ink:    #171310;      /* 종이 위 본문 */
-    --ink-2:  #736858;      /* 종이 위 보조 */
-    --rule:   #ded2be;      /* 종이 위 선·빈 칸 */
-
-    --signal:    #8ecfa0;   /* 연한 녹색 — 지금 채우는 칸, 진도, 기본 버튼 */
-    --on-signal: #0e2c1a;   /* 연녹 위 글자 */
-    --good:      #0d7a52;   /* 공개된 정답 — 같은 계열의 진한 녹색 */
-    --miss:      #cc3326;
-
-    --en:   "Newsreader", Georgia, "Times New Roman", serif;
-    --ko:   system-ui, -apple-system, "Segoe UI", "Malgun Gothic", sans-serif;
-    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
-  }
-
-  *, *::before, *::after { box-sizing: border-box; }
-  [hidden] { display: none !important; }
-
-  body {
-    margin: 0;
-    padding: 1.6rem 1.1rem 4rem;
-    background: var(--ground);
-    color: var(--on-ground);
-    font-family: var(--ko);
-    line-height: 1.65;
-    -webkit-text-size-adjust: 100%;
-    word-break: keep-all;   /* 한글이 낱말 중간에서 잘리지 않게 합니다 */
-  }
-
-  /* 영어가 주인 요소는 기본 줄바꿈을 씁니다 */
-  .quiz-en, .answer-compare, .wrong-list .en { word-break: normal; }
-
-  #app { max-width: 34rem; margin: 0 auto; }
-
-  h1 { margin: 0 0 .4rem; font-size: 1.4rem; font-weight: 700; letter-spacing: -.02em; }
-  .lead { margin: 0 0 1.5rem; color: var(--on-ground-2); font-size: .85rem; }
-
-  button { cursor: pointer; font: inherit; color: inherit; }
-  :focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
-
-  /* 수치·라벨은 고정폭으로 통일합니다 */
-  .mono { font-family: var(--mono); font-size: .78rem; letter-spacing: .04em; }
-
-  /* 종이 면 — 읽고 조작하는 것은 모두 이 위에 올립니다 */
-  .card {
-    background: var(--paper);
-    color: var(--ink);
-    border-radius: .7rem;
-    padding: 1.15rem 1.15rem 1.25rem;
-  }
-
-  /* ── 진도 칸 ──────────────────────────────────────
-     문장 하나가 칸 하나입니다. 빈칸의 글자 칸과 같은 언어를 씁니다. */
-  .cells {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(9px, 1fr));
-    gap: 3px;
-    margin-top: .65rem;
-  }
-  .cells span {
-    display: block;
-    aspect-ratio: 1;
-    border-radius: 1px;
-    background: var(--rule);
-  }
-  .cells span.on { background: var(--signal); }
-
-  /* ── ① 카테고리 선택 ───────────────────────────── */
-  .category-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
-
-  .category-btn {
-    width: 100%;
-    display: block;
-    border: none;
-    text-align: left;
-    transition: transform .12s;
-  }
-  .category-btn:hover { transform: translateY(-1px); }
-  .category-btn .top {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 1rem;
-  }
-  .category-btn .name { font-size: .98rem; font-weight: 600; letter-spacing: -.01em; }
-  .category-btn .count { white-space: nowrap; color: var(--ink-2); }
-
-  /* ── ② 문장 수 선택 ─────────────────────────────── */
-  .screen-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 1rem;
-    margin-bottom: 1.15rem;
-  }
-  .screen-head .title { font-size: .98rem; font-weight: 600; }
-  .screen-head .mono { color: var(--on-ground-2); }
-
-  .size-lead { margin: 0 0 1rem; color: var(--on-ground-2); font-size: .85rem; }
-
-  .size-list {
-    list-style: none;
-    margin: 0 0 1.6rem;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr));
-    gap: .6rem;
-  }
-  .size-btn {
-    width: 100%;
-    border: none;
-    padding: 1.15rem .6rem;
-    font-family: var(--mono);
-    font-size: .88rem;
-    white-space: nowrap;
-    transition: transform .12s, color .12s;
-  }
-  .size-btn:hover { transform: translateY(-1px); color: var(--signal); }
-  /* '남은 전부'는 개수를 고르는 것과 성격이 달라 한 줄을 다 씁니다 */
-  .size-btn.all { grid-column: 1 / -1; }
-
-  .reset-area { margin: 0; color: var(--on-ground-2); font-size: .8rem; }
-
-  .btn-text {
-    border: none;
-    background: none;
-    padding: .2rem;
-    color: var(--on-ground-2);
-    font-size: .8rem;
-    text-decoration: underline;
-    text-underline-offset: .18em;
-  }
-  .btn-text:hover { color: var(--on-ground); }
-  .btn-text.danger { color: #ff8b80; }
-
-  /* ── ③ 문제 ───────────────────────────────────── */
-  .question { margin-bottom: 1rem; }
-
-  .quiz-ko { margin: 0 0 .85rem; color: var(--ink-2); font-size: .88rem; }
-
-  .quiz-en {
-    margin: 0 0 1.05rem;
-    font-family: var(--en);
-    font-size: 1.42rem;
-    font-variation-settings: "opsz" 30;
-    line-height: 1.8;
-    letter-spacing: -.005em;
-  }
-
-  /* 빈칸 — 정답 글자 수만큼 칸을 놓습니다.
-     칸 너비는 글자 수에 따라 JS가 --cell로 정합니다. 긴 답도 한 줄에 들어가게 하기 위함입니다. */
-  .blank {
-    display: inline-flex;
-    flex-wrap: wrap;          /* 그래도 넘치면 줄을 바꿔 가로 스크롤을 막습니다 */
-    gap: 3px;
-    margin: 0 .2em;
-    /* 칸 안 글자의 기준선을 문장 글자의 기준선에 맞춥니다.
-       칸이 비어 있어도 제로폭 공백 덕분에 기준선이 같아서 입력해도 움직이지 않습니다. */
-    vertical-align: baseline;
-  }
-  .blank .cell {
-    width: var(--cell, .95em);
-    height: 1.45em;
-    border: 1.5px solid var(--rule);
-    border-radius: 3px;
-    font-family: var(--mono);
-    font-size: .78em;
-    font-weight: 600;
-    line-height: 1;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color .12s, border-color .12s, color .12s;
-  }
-  /* 채워진 칸은 색으로 찹니다. 타이핑하면 문장에 색이 칠해집니다. */
-  .blank .cell.on {
-    background: var(--signal);
-    border-color: var(--signal);
-    color: var(--on-signal);
-  }
-  .blank .cell.next { border-color: var(--signal); box-shadow: inset 0 -3px 0 -1px var(--signal); }
-  .blank.over .cell { background: var(--miss); border-color: var(--miss); color: #fff; }
-
-  /* 정답 후보의 길이가 제각각이라 칸 수를 정할 수 없는 문항.
-     칸을 나누지 않은 점선 상자 하나로 두어, 길이가 정해져 있지 않다는 것을 보여줍니다. */
-  .blank.open {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 5.5em;
-    height: 1.45em;
-    padding: 0 .4em;
-    border: 1.5px dashed var(--rule);
-    border-radius: 3px;
-    font-family: var(--mono);
-    font-size: .78em;
-    font-weight: 600;
-    line-height: 1;
-    transition: background-color .12s, border-color .12s, color .12s;
-  }
-  .blank.open.on { background: var(--signal); border-color: var(--signal); border-style: solid; color: var(--on-signal); }
-
-  /* 정답이 공개된 상태 */
-  .blank.filled {
-    display: inline;
-    margin: 0;                  /* 채워진 뒤에는 뒤따르는 물음표·쉼표와 붙어야 합니다 */
-    vertical-align: baseline;   /* 칸용으로 내려둔 값을 물려받으면 정답만 줄 아래로 처집니다 */
-    font-weight: 700;
-    color: var(--good);
-    /* border-bottom은 줄 높이를 바꿔 채점 순간 화면이 흔들립니다. 밑줄은 text-decoration으로 긋습니다. */
-    text-decoration: underline;
-    text-decoration-thickness: 2px;
-    text-underline-offset: .14em;
-  }
-
-  .quiz-hint {
-    margin: 0;
-    color: var(--ink-2);
-    font-size: .85rem;
-    padding-left: .75rem;
-    border-left: 2px solid var(--rule);
-  }
-
-  #answer-form { display: flex; gap: .5rem; }
-  #answer-input {
-    flex: 1;
-    min-width: 0;
-    padding: .85rem .9rem;
-    border: 1px solid var(--ground-2);
-    border-radius: .5rem;
-    background: var(--ground-2);
-    color: var(--on-ground);
-    font-family: var(--en);
-    font-size: 1rem;
-  }
-  #answer-input::placeholder { color: var(--on-ground-2); }
-  #answer-input:focus { outline: none; border-color: var(--signal); }
-
-  .btn-primary {
-    padding: .85rem 1.25rem;
-    border: none;
-    border-radius: .5rem;
-    background: var(--signal);
-    color: var(--on-signal);
-    font-size: .9rem;
-    font-weight: 700;
-    white-space: nowrap;
-  }
-  /* 다음 버튼은 확인 버튼이 있던 자리를 그대로 씁니다 */
-  .btn-next { width: 100%; }
-  .btn-primary:disabled { background: var(--ground-2); color: var(--on-ground-2); cursor: default; }
-
-  /* ── 채점 결과 ─────────────────────────────────── */
-  /* 힌트가 있던 자리를 그대로 씁니다. 위 여백을 두면 채점할 때 화면이 그만큼 더 밀립니다. */
-  #feedback { animation: rise .18s ease-out; }
-  @keyframes rise { from { opacity: 0; transform: translateY(5px); } }
-
-  .verdict { margin: 0 0 .45rem; font-size: .85rem; font-weight: 700; letter-spacing: -.01em; }
-  .verdict.ok { color: var(--good); }
-  .verdict.no { color: var(--miss); }
-
-  .answer-compare { margin: 0 0 .9rem; font-family: var(--en); font-size: 1rem; }
-  .answer-compare .mine { color: var(--miss); text-decoration: line-through; }
-  .answer-compare .arrow { font-family: var(--mono); color: var(--ink-2); padding: 0 .5em; }
-  .answer-compare .right { color: var(--good); font-weight: 700; }
-
-  .note { margin: 0; color: var(--ink-2); font-size: .85rem; }
-
-  /* ── ④ 결과 ───────────────────────────────────── */
-  .score {
-    margin: 0 0 .3rem;
-    font-family: var(--mono);
-    font-size: 2.4rem;
-    font-weight: 700;
-    letter-spacing: -.03em;
-    color: var(--signal);
-  }
-  .score-label { margin: 0 0 .9rem; color: var(--on-ground-2); font-size: .8rem; }
-  .result-progress { margin: 0 0 1.6rem; font-size: .85rem; color: var(--on-ground); }
-
-  .wrong-lead { margin: 0 0 .7rem; color: var(--on-ground-2); font-size: .85rem; }
-  .wrong-list { list-style: none; margin: 0 0 1.6rem; padding: 0; display: grid; gap: .6rem; }
-  .wrong-list li { padding: .9rem 1rem; }
-  .wrong-list .ko { color: var(--ink-2); font-size: .82rem; margin-bottom: .15rem; }
-  .wrong-list .en { font-family: var(--en); font-size: 1rem; }
-
-  .result-actions { display: flex; flex-wrap: wrap; gap: .7rem; align-items: center; }
-
-  @media (max-width: 26rem) {
-    .quiz-en { font-size: 1.24rem; }
-    .card { padding: 1rem; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation: none !important; transition: none !important; }
-  }
+}
 </style>
 </head>
 <body>
 <main id="app">
 
-  <!-- ① 카테고리 선택 -->
-  <section id="screen-category">
-    <h1>영어회화 빈칸 채우기</h1>
-    <p class="lead">카테고리를 골라 시작하세요. 첫 시도에 맞춘 문장은 완료되어 다시 나오지 않습니다.</p>
-    <ul id="category-list" class="category-list"></ul>
+  <!-- 최초 로딩 -->
+  <section id="screen-loading" aria-busy="true">
+    <div class="screen-head"><h1>영어회화 빈칸 채우기</h1></div>
+    <p class="sr-only">문장을 불러오는 중입니다.</p>
+    <div class="skeleton is-short" aria-hidden="true"></div>
+    <div class="skeleton" aria-hidden="true"></div>
+    <div class="skeleton is-medium" aria-hidden="true"></div>
   </section>
 
-  <!-- ② 문장 수 선택 -->
+  <!-- 데이터 오류 -->
+  <section id="screen-error" hidden>
+    <div class="screen-head"><h1>영어회화 빈칸 채우기</h1></div>
+    <div class="notice">
+      <h2>문장을 불러오지 못했습니다</h2>
+      <p>연결이 끊겼거나 파일을 읽지 못했습니다. 잠시 뒤 다시 시도해 주세요.</p>
+      <button type="button" class="btn btn-primary" id="btn-retry-load">
+        <span class="btn-spinner" aria-hidden="true"></span>
+        <span class="btn-label">다시 불러오기</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ① 카테고리 -->
+  <section id="screen-category" hidden>
+    <div class="screen-head"><h1>영어회화 빈칸 채우기</h1></div>
+    <p class="page-intro">주제를 고르고 원하는 만큼 풀어 보세요. 첫 시도에 맞춘 문장은 완료되어 다시 나오지 않습니다.</p>
+    <ul id="category-list" class="category-list"></ul>
+    <div id="category-empty" class="notice" hidden>
+      <h2>아직 문장이 없습니다</h2>
+      <p>sentences.js에 문장을 추가하면 주제가 여기에 나타납니다.</p>
+    </div>
+  </section>
+
+  <!-- ② 문항 수 선택 -->
   <section id="screen-size" hidden>
     <div class="screen-head">
-      <span id="size-title" class="title"></span>
-      <button type="button" id="btn-size-back" class="btn-text">뒤로</button>
+      <h2 id="size-title"></h2>
+      <button type="button" class="btn btn-plain" id="btn-size-back">주제 목록</button>
     </div>
 
-    <p id="size-lead" class="size-lead"></p>
-    <ul id="size-list" class="size-list"></ul>
+    <div id="size-choose">
+      <p class="page-intro" id="size-intro"></p>
+      <ul id="size-list" class="size-list"></ul>
+    </div>
 
-    <p class="reset-area">
-      <button type="button" id="btn-reset" class="btn-text">진도 초기화</button>
+    <div id="size-empty" class="notice" hidden>
+      <h2>이 주제를 모두 익혔습니다</h2>
+      <p>남은 문장이 없습니다. 다른 주제를 고르거나, 이 주제를 처음부터 다시 풀 수 있습니다.</p>
+      <button type="button" class="btn btn-quiet" id="btn-empty-back">다른 주제 고르기</button>
+    </div>
+
+    <p class="page-intro" style="margin-top: var(--sp-8)">
+      <button type="button" class="btn btn-plain" id="btn-reset">이 주제 진도 초기화</button>
       <span id="reset-confirm" hidden>
-        정말 지울까요?
-        <button type="button" id="btn-reset-yes" class="btn-text danger">지우기</button>
-        <button type="button" id="btn-reset-no" class="btn-text">취소</button>
+        진도를 지울까요?
+        <button type="button" class="btn btn-plain is-danger" id="btn-reset-yes">지우기</button>
+        <button type="button" class="btn btn-plain" id="btn-reset-no">취소</button>
       </span>
     </p>
   </section>
 
   <!-- ③ 문제 -->
   <section id="screen-quiz" hidden>
-    <div class="screen-head">
-      <span id="progress" class="mono"></span>
-      <button type="button" id="btn-exit" class="btn-text">나가기</button>
+    <div class="meter-label">
+      <span id="quiz-category"></span>
+      <span><strong id="quiz-position">1</strong> / <span id="quiz-total">5</span></span>
+    </div>
+    <div class="meter" role="progressbar" id="quiz-meter" aria-valuemin="0" aria-valuenow="0" aria-valuemax="5" aria-label="세트 진행률">
+      <div class="meter-fill" id="quiz-meter-fill" style="width: 0%"></div>
     </div>
 
-    <div class="card question">
-      <p id="quiz-ko" class="quiz-ko"></p>
-      <p id="quiz-en" class="quiz-en"></p>
-      <p id="quiz-hint" class="quiz-hint"></p>
+    <p class="resume-note" id="resume-note" hidden>지난번에 풀던 자리에서 이어집니다.</p>
 
-      <!-- 채점 결과는 힌트가 있던 자리에 들어갑니다. 카드가 그대로라 화면이 크게 움직이지 않습니다. -->
-      <div id="feedback" hidden>
-        <p id="verdict" class="verdict"></p>
-        <p id="answer-compare" class="answer-compare" hidden></p>
-        <p id="note" class="note"></p>
+    <form id="quiz-form" style="margin-top: var(--sp-8)">
+      <p class="prompt-ko" id="prompt-ko"></p>
+      <p class="sentence" id="sentence"></p>
+      <p class="hint" id="hint"></p>
+
+      <div class="result" id="result" hidden>
+        <p class="result-head" id="result-head"></p>
+        <p class="result-answer" id="result-answer" hidden></p>
+        <p class="result-note" id="result-note"></p>
+      </div>
+    </form>
+
+    <p class="sr-only" id="live-region" role="status" aria-live="polite"></p>
+  </section>
+
+  <!-- ④ 세트 완료 -->
+  <section id="screen-done" hidden>
+    <div class="screen-head"><h1>한 세트 끝냈습니다</h1></div>
+
+    <p class="score"><output id="score"></output></p>
+    <p class="score-note" id="score-note"></p>
+
+    <div style="margin-top: var(--sp-6)">
+      <div class="meter-label">
+        <span id="done-category"></span>
+        <span><strong id="done-count"></strong> / <span id="done-total"></span> 완료</span>
+      </div>
+      <div class="meter" role="progressbar" id="done-meter" aria-valuemin="0" aria-valuenow="0" aria-valuemax="50" aria-label="주제 완료율">
+        <div class="meter-fill" id="done-meter-fill" style="width: 0%"></div>
       </div>
     </div>
 
-    <form id="answer-form" autocomplete="off">
-      <input id="answer-input" type="text" autocapitalize="off" spellcheck="false" aria-label="빈칸에 들어갈 단어">
-      <button type="submit" id="btn-check" class="btn-primary" disabled>확인</button>
-    </form>
-
-    <!-- 확인 버튼과 같은 자리에 나타나, 연달아 누를 때 손이 움직이지 않습니다 -->
-    <button type="button" id="btn-next" class="btn-primary btn-next" hidden>다음</button>
-  </section>
-
-  <!-- ④ 결과 -->
-  <section id="screen-result" hidden>
-    <h1>세션 완료</h1>
-    <p id="score" class="score"></p>
-    <p class="score-label">첫 시도에 맞춘 개수입니다. 모든 문장은 맞출 때까지 반복되므로 이 값이 실제 지표입니다.</p>
-    <p id="result-progress" class="result-progress"></p>
-
-    <div id="wrong-section" hidden>
-      <p class="wrong-lead">한 번이라도 틀린 문장</p>
-      <ul id="wrong-list" class="wrong-list"></ul>
-    </div>
-
-    <div class="result-actions">
-      <button type="button" id="btn-retry" class="btn-primary">이어서 더 풀기</button>
-      <button type="button" id="btn-home" class="btn-text">카테고리 선택으로</button>
+    <div id="review-section" hidden>
+      <h2 class="section-title">다시 볼 문장</h2>
+      <ul id="review-list" class="review-list"></ul>
     </div>
   </section>
 
 </main>
 
-<script src="sentences.js"></script>
+<!-- 하단 고정 바 — 화면마다 들어가는 버튼이 바뀝니다 -->
+<div class="action-bar" id="action-bar" hidden>
+  <div class="action-bar-inner" id="action-bar-inner"></div>
+</div>
+
+<script src="sentences.js" onerror="window.__loadFailed = true"></script>
 <script>
 "use strict";
 
-// 카테고리 표시 이름. 6개를 모두 정의해 두고, 화면에는 문장이 있는 것만 보여줍니다.
-// 여기 정의된 순서대로 화면에 표시됩니다.
+/* ═══════════════════════════════════════════════════════════
+   상수
+   ═══════════════════════════════════════════════════════════ */
 const CATEGORY_NAMES = {
   "daily-greeting": "인사 · 스몰토크",
   "daily-request":  "부탁 · 요청 · 허락 구하기",
@@ -418,37 +663,30 @@ const CATEGORY_NAMES = {
 };
 
 const BLANK = "___";
-
-// 빈 칸에도 항상 들어가는 제로폭 공백입니다. 칸이 비어 있으면 inline-flex의 기준선이
-// 글자가 있을 때와 달라져서, 첫 글자를 치는 순간 빈칸 전체가 아래로 튑니다.
-const EMPTY_CELL = "​";
-
 const STORAGE_KEY = "blank-fill-session";
 const PROGRESS_KEY = "blank-fill-progress";
-
-// 개수 선택 화면에 띄울 후보. 남은 문장 수보다 작은 것만 실제로 보여줍니다.
 const SIZE_OPTIONS = [5, 10, 15, 20];
+
+// 빈칸 폭. 정답이 짧아도 이만큼은 확보해서 글자 수가 드러나지 않게 합니다.
+const BLANK_MIN_CH = 8;
+const BLANK_SLACK_CH = 3;
+const BLANK_MAX_CH = 18;
 
 const el = (id) => document.getElementById(id);
 
-// 진행 중인 세션 상태. 카테고리·개수 선택 화면에서는 null입니다.
 let session = null;
-
-// 개수 선택 화면이 대상으로 삼고 있는 카테고리. 초기화 버튼도 이 값을 씁니다.
 let sizeCategory = null;
+let justResumed = false;
 
-/* ── 누적 진도 ───────────────────────────────────
-   세션과 별도 키에 저장합니다. 세션은 끝나면 지워지지만 진도는 남아야 합니다.
-   첫 시도에 맞춘 문장을 모아두고, 그 문장은 다시 출제하지 않습니다.
-   형태: { "travel-out-01": true } */
-
+/* ═══════════════════════════════════════════════════════════
+   누적 진도
+   ═══════════════════════════════════════════════════════════ */
 function loadProgress() {
   try {
     const data = JSON.parse(localStorage.getItem(PROGRESS_KEY));
     if (!data || typeof data !== "object" || Array.isArray(data)) return {};
 
     // 완료까지 두 번 맞춰야 하던 시절의 형식({ c, d })도 함께 읽습니다.
-    // 그때 한 번이라도 맞춰 c가 1 이상이던 문장은 이제 완료로 봅니다.
     const result = {};
     for (const [id, value] of Object.entries(data)) {
       const done = (value && typeof value === "object") ? value.c >= 1 : !!value;
@@ -456,7 +694,7 @@ function loadProgress() {
     }
     return result;
   } catch (error) {
-    return {};   // 깨진 데이터는 없는 것으로 봅니다
+    return {};
   }
 }
 
@@ -464,7 +702,7 @@ function saveProgress(progress) {
   try {
     localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
   } catch (error) {
-    // 저장 공간이 막혀 있어도 학습 자체는 계속되어야 하므로 넘어갑니다.
+    // 저장이 막혀 있어도 학습은 계속되어야 하므로 넘어갑니다.
   }
 }
 
@@ -472,21 +710,14 @@ function isDone(progress, id) {
   return progress[id] === true;
 }
 
-// 아직 완료되지 않은 문장만 돌려줍니다.
 function remainingSentences(categoryKey, progress) {
   return SENTENCES.filter((s) => s.category === categoryKey && !isDone(progress, s.id));
 }
 
-// 진도를 갱신하고, 이번에 완료되었으면 true를 돌려줍니다.
-// 호출은 한 세션에서 그 문장의 '첫 시도'일 때만 해야 합니다.
-// 틀린 경우에는 아무것도 하지 않습니다. 완료로 기록되지 않았으니 다음 세션에 다시 나옵니다.
-function bumpProgress(id, correct) {
-  if (!correct) return false;
-
+function markDone(id) {
   const progress = loadProgress();
   progress[id] = true;
   saveProgress(progress);
-  return true;
 }
 
 function resetCategoryProgress(categoryKey) {
@@ -497,9 +728,112 @@ function resetCategoryProgress(categoryKey) {
   saveProgress(progress);
 }
 
-/* ── 카테고리 도출 ─────────────────────────────────
-   SENTENCES에서 카테고리별 문장 수와 완료 수를 세어, 1개 이상인 것만 반환합니다.
-   CATEGORY_NAMES에 없는 카테고리도 누락되지 않도록 뒤에 덧붙입니다. */
+/* ═══════════════════════════════════════════════════════════
+   세션 저장
+   ═══════════════════════════════════════════════════════════ */
+function saveSession() {
+  if (!session) return;
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      categoryKey: session.categoryKey,
+      sessionSize: session.sessionSize,
+      queue: session.queue.map((s) => s.id),
+      attempted: [...session.attempted],
+      wrong: [...session.wrong],
+      completed: [...session.completed],
+      firstTryCorrect: session.firstTryCorrect
+    }));
+  } catch (error) {
+    // 위와 같은 이유로 넘어갑니다.
+  }
+}
+
+function clearSavedSession() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch (error) {}
+}
+
+function restoreSession() {
+  let data = null;
+  try { data = JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch (error) { return false; }
+  if (!data || !data.categoryKey || !(data.sessionSize > 0)) {
+    clearSavedSession();
+    return false;
+  }
+
+  const byId = new Map(SENTENCES.map((s) => [s.id, s]));
+  const queue = (data.queue || []).map((id) => byId.get(id)).filter(Boolean);
+  if (queue.length === 0) {
+    clearSavedSession();
+    return false;
+  }
+
+  const keepKnown = (ids) => new Set((ids || []).filter((id) => byId.has(id)));
+  const sessionSize = Math.max(data.sessionSize, queue.length);
+
+  session = {
+    categoryKey: data.categoryKey,
+    sessionSize: sessionSize,
+    queue: queue,
+    attempted: keepKnown(data.attempted),
+    wrong: keepKnown(data.wrong),
+    completed: keepKnown(data.completed),
+    firstTryCorrect: Math.min(data.firstTryCorrect || 0, sessionSize),
+    graded: null
+  };
+  justResumed = true;
+  return true;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   화면 전환
+   ═══════════════════════════════════════════════════════════ */
+const SCREENS = ["loading", "error", "category", "size", "quiz", "done"];
+
+function showScreen(name) {
+  for (const screen of SCREENS) {
+    el("screen-" + screen).hidden = screen !== name;
+  }
+}
+
+// 하단 고정 바의 버튼은 화면마다 다릅니다. 필요 없는 화면에서는 바 자체를 숨깁니다.
+function setActions(buttons) {
+  const bar = el("action-bar");
+  const inner = el("action-bar-inner");
+  inner.textContent = "";
+
+  if (!buttons || buttons.length === 0) {
+    bar.hidden = true;
+    return;
+  }
+
+  for (const spec of buttons) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "btn " + (spec.tone === "quiet" ? "btn-quiet" : "btn-primary");
+    if (spec.id) button.id = spec.id;
+
+    const spinner = document.createElement("span");
+    spinner.className = "btn-spinner";
+    spinner.setAttribute("aria-hidden", "true");
+
+    const label = document.createElement("span");
+    label.className = "btn-label";
+    label.textContent = spec.label;
+
+    button.append(spinner, label);
+    button.addEventListener("click", spec.onClick);
+    inner.appendChild(button);
+  }
+  bar.hidden = false;
+}
+
+function announce(message) {
+  el("live-region").textContent = message;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ① 카테고리
+   ═══════════════════════════════════════════════════════════ */
 function listCategories(progress) {
   const counts = new Map();
   const done = new Map();
@@ -515,56 +849,64 @@ function listCategories(progress) {
   return [...ordered, ...unknown].map((key) => ({
     key: key,
     name: CATEGORY_NAMES[key] || key,
-    count: counts.get(key),
+    total: counts.get(key),
     done: done.get(key) || 0
   }));
 }
 
-/* ── 화면 전환 ───────────────────────────────────── */
-function showScreen(name) {
-  el("screen-category").hidden = name !== "category";
-  el("screen-size").hidden     = name !== "size";
-  el("screen-quiz").hidden     = name !== "quiz";
-  el("screen-result").hidden   = name !== "result";
+function buildMeter(done, total, label) {
+  const wrap = document.createElement("span");
+  wrap.className = "meter-group";
+
+  const head = document.createElement("span");
+  head.className = "meter-label";
+  const left = document.createElement("span");
+  left.textContent = label;
+  const right = document.createElement("span");
+  const strong = document.createElement("strong");
+  strong.textContent = String(done);
+  right.append(strong, document.createTextNode(" / " + total + " 완료"));
+  head.append(left, right);
+
+  const meter = document.createElement("span");
+  meter.className = "meter";
+  meter.setAttribute("role", "progressbar");
+  meter.setAttribute("aria-valuemin", "0");
+  meter.setAttribute("aria-valuenow", String(done));
+  meter.setAttribute("aria-valuemax", String(total));
+  meter.setAttribute("aria-label", label + " 완료율");
+
+  const fill = document.createElement("span");
+  fill.className = "meter-fill";
+  fill.style.width = (total ? (done / total) * 100 : 0) + "%";
+  meter.appendChild(fill);
+
+  wrap.append(head, meter);
+  return wrap;
 }
 
-/* ── ① 카테고리 선택 ─────────────────────────────── */
 function renderCategoryScreen() {
   session = null;
   sizeCategory = null;
-  clearSavedSession();   // 나가기·홈으로가 모두 여기로 오므로 한 곳에서 정리합니다
+  justResumed = false;
+  clearSavedSession();
 
   const progress = loadProgress();
+  const categories = listCategories(progress);
+
   const list = el("category-list");
   list.textContent = "";
 
-  for (const category of listCategories(progress)) {
+  for (const category of categories) {
     const button = document.createElement("button");
     button.type = "button";
-    button.className = "card category-btn";
+    button.className = "category-btn";
 
     const name = document.createElement("span");
-    name.className = "name";
+    name.className = "category-name";
     name.textContent = category.name;
 
-    const count = document.createElement("span");
-    count.className = "count mono";
-    count.textContent = category.done + " / " + category.count + " 완료";
-
-    const top = document.createElement("span");
-    top.className = "top";
-    top.append(name, count);
-
-    // 문장 하나가 칸 하나입니다. 완료한 만큼 채워집니다.
-    const cells = document.createElement("span");
-    cells.className = "cells";
-    for (let i = 0; i < category.count; i++) {
-      const cell = document.createElement("span");
-      if (i < category.done) cell.className = "on";
-      cells.appendChild(cell);
-    }
-
-    button.append(top, cells);
+    button.append(name, buildMeter(category.done, category.total, "진도"));
     button.addEventListener("click", () => renderSizeScreen(category.key));
 
     const item = document.createElement("li");
@@ -572,10 +914,16 @@ function renderCategoryScreen() {
     list.appendChild(item);
   }
 
+  el("category-empty").hidden = categories.length > 0;
+  list.hidden = categories.length === 0;
+
+  setActions(null);
   showScreen("category");
 }
 
-/* ── ② 문장 수 선택 ─────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════
+   ② 문항 수 선택
+   ═══════════════════════════════════════════════════════════ */
 function hideResetConfirm() {
   el("btn-reset").hidden = false;
   el("reset-confirm").hidden = true;
@@ -584,41 +932,48 @@ function hideResetConfirm() {
 function renderSizeScreen(categoryKey) {
   session = null;
   sizeCategory = categoryKey;
+  justResumed = false;
   clearSavedSession();
 
   const remaining = remainingSentences(categoryKey, loadProgress());
-
   el("size-title").textContent = CATEGORY_NAMES[categoryKey] || categoryKey;
-  el("size-lead").textContent = remaining.length > 0
-    ? "남은 문장 " + remaining.length + "개. 몇 문장 풀까요?"
-    : "이 카테고리는 다 끝냈습니다. 다시 풀려면 진도를 초기화하세요.";
 
-  // 남은 문장보다 큰 선택지는 고를 수 없으므로 아예 띄우지 않고,
-  // 마지막에 '남은 전부'를 둡니다.
-  const options = SIZE_OPTIONS.filter((size) => size < remaining.length);
-  if (remaining.length > 0) options.push(remaining.length);
+  const hasRemaining = remaining.length > 0;
+  el("size-choose").hidden = !hasRemaining;
+  el("size-empty").hidden = hasRemaining;
 
-  const list = el("size-list");
-  list.textContent = "";
+  if (hasRemaining) {
+    el("size-intro").textContent = "남은 문장이 " + remaining.length + "개입니다. 몇 문장 풀까요?";
 
-  for (const size of options) {
-    const button = document.createElement("button");
-    button.type = "button";
-    const isAll = size === remaining.length;
-    button.className = isAll ? "card size-btn all" : "card size-btn";
-    button.textContent = isAll ? "남은 전부 (" + size + ")" : size + "문장";
-    button.addEventListener("click", () => startSession(categoryKey, size));
+    const list = el("size-list");
+    list.textContent = "";
 
-    const item = document.createElement("li");
-    item.appendChild(button);
-    list.appendChild(item);
+    // 남은 수보다 큰 선택지는 고를 수 없으므로 띄우지 않습니다.
+    const options = SIZE_OPTIONS.filter((size) => size < remaining.length);
+    options.push(remaining.length);
+
+    for (const size of options) {
+      const isAll = size === remaining.length;
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = isAll ? "size-btn is-all" : "size-btn";
+      button.textContent = isAll ? "남은 " + size + "문장 전부" : size + "문장";
+      button.addEventListener("click", () => startSession(categoryKey, size));
+
+      const item = document.createElement("li");
+      item.appendChild(button);
+      list.appendChild(item);
+    }
   }
 
   hideResetConfirm();
+  setActions(null);
   showScreen("size");
 }
 
-/* ── 세션 시작 ───────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════
+   세션
+   ═══════════════════════════════════════════════════════════ */
 function shuffle(items) {
   const result = items.slice();
   for (let i = result.length - 1; i > 0; i--) {
@@ -628,349 +983,366 @@ function shuffle(items) {
   return result;
 }
 
-function startSession(categoryKey, size) {
-  // 완료된 문장은 빼고, 섞은 뒤 앞에서 필요한 만큼만 가져옵니다.
-  const picked = shuffle(remainingSentences(categoryKey, loadProgress())).slice(0, size);
+function startSession(categoryKey, size, explicitPool) {
+  const pool = explicitPool || shuffle(remainingSentences(categoryKey, loadProgress()));
+  const picked = pool.slice(0, size);
   if (picked.length === 0) return;
 
   session = {
     categoryKey: categoryKey,
     sessionSize: picked.length,
-    queue: picked,          // 맨 앞이 현재 문제. 틀리면 맨 뒤로 다시 들어갑니다.
-    solved: new Set(),      // 한 번이라도 맞춘 문장 id (진행도 분자)
-    attempted: new Set(),   // 이미 채점해 본 문장 id (첫 시도 판별용)
-    wrong: new Set(),       // 한 번이라도 틀린 문장 id (결과 화면 목록)
-    completed: new Set(),   // 이번 세션에서 완료에 도달한 문장 id
-    firstTryCorrect: 0
+    queue: picked,
+    attempted: new Set(),   // 이미 채점해 본 문장 (첫 시도 판별용)
+    wrong: new Set(),       // 한 번이라도 틀린 문장
+    completed: new Set(),   // 이번 세션에서 완료된 문장
+    firstTryCorrect: 0,
+    graded: null            // 채점 결과가 떠 있는 동안의 상태
   };
 
-  // 화면을 먼저 보이게 해야 renderQuiz()의 input.focus()가 동작합니다.
-  // hidden(display:none) 상태의 요소는 포커스를 받을 수 없습니다.
-  showScreen("quiz");
+  justResumed = false;
   renderQuiz();
   saveSession();
 }
 
-/* ── 진행 상황 저장 ───────────────────────────────
-   폰에서는 앱이 쉽게 백그라운드로 밀려 내려가므로, 세션을 localStorage에 남깁니다.
-   Set은 JSON으로 직렬화되지 않아 배열로 바꿔 저장하고 복원할 때 되돌립니다. */
-function saveSession() {
-  if (!session) return;
+/* ═══════════════════════════════════════════════════════════
+   ③ 문제
+   ═══════════════════════════════════════════════════════════ */
 
-  const data = {
-    categoryKey: session.categoryKey,
-    sessionSize: session.sessionSize,
-    queue: session.queue.map((sentence) => sentence.id),
-    solved: [...session.solved],
-    attempted: [...session.attempted],
-    wrong: [...session.wrong],
-    completed: [...session.completed],
-    firstTryCorrect: session.firstTryCorrect
-  };
-
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-  } catch (error) {
-    // 저장 공간이 막혀 있어도 학습 자체는 계속되어야 하므로 넘어갑니다.
-  }
+// 정답 후보 중 가장 긴 것을 기준으로 폭을 잡습니다.
+function blankWidth(sentence) {
+  const longest = Math.max(...sentence.accept.map((a) => a.trim().length));
+  const ch = Math.min(Math.max(longest + BLANK_SLACK_CH, BLANK_MIN_CH), BLANK_MAX_CH);
+  return ch + "ch";
 }
 
-function clearSavedSession() {
-  try {
-    localStorage.removeItem(STORAGE_KEY);
-  } catch (error) {
-    // 위와 같은 이유로 넘어갑니다.
-  }
-}
-
-// 저장된 세션을 되살립니다. 되살릴 것이 없으면 false를 반환합니다.
-// 문장이 지워지거나 바뀐 경우를 대비해, 지금 데이터에 없는 id는 걸러냅니다.
-function restoreSession() {
-  let data = null;
-  try {
-    data = JSON.parse(localStorage.getItem(STORAGE_KEY));
-  } catch (error) {
-    return false;
-  }
-  // sessionSize가 없으면 세션 단위 학습 이전의 옛 저장 데이터입니다. 되살리지 않고 버립니다.
-  if (!data || !data.categoryKey || !(data.sessionSize > 0)) {
-    clearSavedSession();
-    return false;
-  }
-
-  const pool = SENTENCES.filter((s) => s.category === data.categoryKey);
-  const byId = new Map(pool.map((s) => [s.id, s]));
-
-  const queue = (data.queue || []).map((id) => byId.get(id)).filter(Boolean);
-  if (queue.length === 0) {
-    clearSavedSession();
-    return false;
-  }
-
-  const keepKnown = (ids) => new Set((ids || []).filter((id) => byId.has(id)));
-
-  // 문장이 지워져 큐가 줄었을 수 있으므로, 세션 크기는 남은 큐보다 작아지지 않게 합니다.
-  const sessionSize = Math.max(Math.min(data.sessionSize, pool.length), queue.length);
-
-  session = {
-    categoryKey: data.categoryKey,
-    sessionSize: sessionSize,
-    queue: queue,
-    solved: keepKnown(data.solved),
-    attempted: keepKnown(data.attempted),
-    wrong: keepKnown(data.wrong),
-    completed: keepKnown(data.completed),
-    // 문장이 줄어든 경우 저장된 점수가 세션 크기를 넘을 수 있어 잘라냅니다.
-    firstTryCorrect: Math.min(data.firstTryCorrect || 0, sessionSize)
-  };
-
-  showScreen("quiz");
-  renderQuiz();
-  return true;
-}
-
-/* ── ② 문제 ─────────────────────────────────────── */
-
-// 정답 후보의 길이가 모두 같으면 그 길이를, 제각각이면 null을 돌려줍니다.
-function answerLength(sentence) {
-  const lengths = new Set(sentence.accept.map((valid) => valid.trim().length));
-  return lengths.size === 1 ? [...lengths][0] : null;
-}
-
-// 영어 문장의 ___ 자리를 빈칸으로 바꿉니다.
-// filled가 주어지면 그 단어를 채운 모습으로, 아니면 글자 수만큼의 빈 칸으로 그립니다.
-function renderSentenceInto(target, sentence, filled) {
+// 문장을 그립니다. value가 주어지면 그 값을 넣고 읽기 전용으로 둡니다.
+function renderSentence(sentence, options) {
+  const target = el("sentence");
+  const config = options || {};
   target.textContent = "";
-  const parts = sentence.en.split(BLANK);
 
+  const parts = sentence.en.split(BLANK);
   target.appendChild(document.createTextNode(parts[0]));
 
-  const blank = document.createElement("span");
-  if (filled) {
-    blank.className = "blank filled";
-    blank.textContent = filled;
-  } else {
-    const length = answerLength(sentence);
-    if (length) {
-      blank.className = "blank";
-      // 답이 길수록 칸을 좁힙니다. 12글자짜리를 넓은 칸으로 두면 폰 화면을 넘칩니다.
-      blank.style.setProperty("--cell", length > 9 ? ".62em" : length > 6 ? ".78em" : ".95em");
-      for (let i = 0; i < length; i++) {
-        const cell = document.createElement("span");
-        cell.className = "cell";
-        cell.textContent = EMPTY_CELL;
-        blank.appendChild(cell);
-      }
-    } else {
-      // 답마다 길이가 달라 칸 수를 정할 수 없는 문항입니다.
-      // 끊긴 밑줄 자체가 '길이가 정해져 있지 않다'는 정보를 줍니다.
-      blank.className = "blank open";
-      blank.textContent = EMPTY_CELL;
-    }
-  }
-  target.appendChild(blank);
+  const input = document.createElement("input");
+  input.type = "text";
+  input.className = "blank";
+  input.id = "blank-1";
+  input.style.setProperty("--blank-width", blankWidth(sentence));
+  input.setAttribute("aria-label", "첫 번째 빈칸");
+  input.autocomplete = "off";
+  input.autocapitalize = "off";
+  input.spellcheck = false;
+  input.setAttribute("autocorrect", "off");
+  input.dataset.state = config.state || "empty";
 
+  if (config.value !== undefined) {
+    input.value = config.value;
+    input.readOnly = true;
+  }
+
+  target.appendChild(input);
   target.appendChild(document.createTextNode(parts[1]));
+  return input;
 }
 
-// 입력한 글자를 빈칸에 하나씩 옮겨 놓습니다.
-function syncCells(value) {
-  const blank = el("quiz-en").querySelector(".blank");
-  if (!blank) return;
+function updateMeter() {
+  const solved = session.sessionSize - session.queue.length;
+  const position = Math.min(solved + 1, session.sessionSize);
 
-  const typed = value.trim();
+  el("quiz-category").textContent = CATEGORY_NAMES[session.categoryKey] || session.categoryKey;
+  el("quiz-position").textContent = String(position);
+  el("quiz-total").textContent = String(session.sessionSize);
 
-  // 길이를 알 수 없는 문항은 칸이 없으므로 입력한 말을 그대로 흘려보냅니다.
-  if (blank.classList.contains("open")) {
-    blank.textContent = typed || EMPTY_CELL;
-    blank.classList.toggle("on", typed.length > 0);
-    return;
-  }
-
-  const cells = blank.querySelectorAll(".cell");
-  if (!cells.length) return;
-
-  const chars = [...typed];
-  cells.forEach((cell, index) => {
-    cell.textContent = chars[index] || EMPTY_CELL;
-    cell.classList.toggle("on", index < chars.length);
-    cell.classList.toggle("next", index === chars.length);
-  });
-
-  blank.classList.toggle("over", chars.length > cells.length);
-}
-
-// 진행도 = 한 번이라도 맞춘 문장 수 / 이번 세션에 뽑힌 문장 수
-function updateProgress() {
-  el("progress").textContent = session.solved.size + " / " + session.sessionSize;
+  const meter = el("quiz-meter");
+  meter.setAttribute("aria-valuenow", String(solved));
+  meter.setAttribute("aria-valuemax", String(session.sessionSize));
+  el("quiz-meter-fill").style.width = (solved / session.sessionSize) * 100 + "%";
 }
 
 function renderQuiz() {
   const current = session.queue[0];
+  session.graded = null;
 
-  updateProgress();
-  el("quiz-ko").textContent = current.ko;
-  renderSentenceInto(el("quiz-en"), current, null);
+  updateMeter();
+  el("prompt-ko").textContent = current.ko;
 
-  // 글자 수는 빈칸의 칸 개수가 보여주므로 힌트 문구에는 넣지 않습니다.
-  const hint = el("quiz-hint");
+  const hint = el("hint");
   hint.textContent = current.hint || "";
   hint.hidden = !hint.textContent;
 
-  const input = el("answer-input");
-  input.value = "";
-  input.disabled = false;
-  syncCells("");
+  el("result").hidden = true;
+  el("resume-note").hidden = !justResumed;
 
-  el("btn-check").disabled = true;
-  el("answer-form").hidden = false;
-  el("feedback").hidden = true;
-  el("btn-next").hidden = true;
+  const input = renderSentence(current);
+  input.addEventListener("input", onBlankInput);
 
-  input.focus();
+  setActions([{ id: "btn-grade", label: "채점하기", onClick: grade }]);
+  el("btn-grade").disabled = true;
+
+  showScreen("quiz");
+  input.focus({ preventScroll: true });
+  keepBlankVisible(input);
 }
 
-// 소문자 변환 + 앞뒤 공백 제거 후 정확히 일치하는지만 봅니다. 오타는 허용하지 않습니다.
+// 키보드가 올라와도 지금 쓰는 빈칸이 가려지지 않게 화면 가운데로 올립니다.
+function keepBlankVisible(input) {
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  input.scrollIntoView({ block: "center", behavior: reduce ? "auto" : "smooth" });
+}
+
+function onBlankInput(event) {
+  const input = event.target;
+  const filled = input.value.trim().length > 0;
+  input.dataset.state = filled ? "filled" : "empty";
+  const button = el("btn-grade");
+  if (button) button.disabled = !filled;
+}
+
 function isCorrect(input, accept) {
   const normalized = input.trim().toLowerCase();
   return accept.some((valid) => valid.trim().toLowerCase() === normalized);
 }
 
-function check() {
-  const current = session.queue[0];
-  const raw = el("answer-input").value;
-  if (!raw.trim()) return;   // 빈 입력은 채점하지 않습니다
+/* ── 채점 ─────────────────────────────────── */
+function grade() {
+  if (!session || session.graded) return;
 
-  const correct = isCorrect(raw, current.accept);
+  const current = session.queue[0];
+  const input = el("blank-1");
+  const typed = input.value.trim();
+  if (!typed) return;
+
+  const correct = isCorrect(typed, current.accept);
   const firstAttempt = !session.attempted.has(current.id);
   session.attempted.add(current.id);
 
-  // 누적 진도는 이 세션에서의 첫 시도만 반영합니다. 틀린 뒤 다시 맞춘 것은
-  // 그 세션을 끝내기 위한 재도전일 뿐이라 진도로 치지 않습니다.
-  if (firstAttempt && bumpProgress(current.id, correct)) {
-    session.completed.add(current.id);
+  // 첫 시도에 맞춘 문장만 완료로 기록합니다.
+  if (firstAttempt) {
+    if (correct) {
+      markDone(current.id);
+      session.completed.add(current.id);
+      session.firstTryCorrect++;
+    } else {
+      session.wrong.add(current.id);
+    }
   }
 
   if (correct) {
-    session.solved.add(current.id);
     session.queue.shift();
-    if (firstAttempt) session.firstTryCorrect++;
   } else {
-    session.wrong.add(current.id);
-    session.queue.push(session.queue.shift());   // 큐 맨 뒤로 다시 넣습니다
+    session.queue.push(session.queue.shift());   // 맞출 때까지 다시 나옵니다
   }
 
-  // 채점 직후에 저장합니다. 다음 버튼을 누른 시점에 저장하면, 앱이 그 사이에 내려갔을 때
-  // 방금 푼 문제가 안 푼 것으로 되돌아가 첫 시도 점수가 실제보다 후하게 계산됩니다.
+  session.graded = { sentence: current, typed: typed, correct: correct };
   saveSession();
-
-  renderFeedback(current, raw, correct);
+  renderResult(input);
 }
 
-function renderFeedback(sentence, userAnswer, correct) {
-  updateProgress();   // 채점 직후 바로 반영. 없으면 다음 문제로 넘어갈 때까지 값이 낡아 보입니다.
+function renderResult(input) {
+  const { sentence, typed, correct } = session.graded;
 
-  const verdict = el("verdict");
-  verdict.textContent = correct ? "정답입니다" : "오답입니다";
-  verdict.className = correct ? "verdict ok" : "verdict no";
+  input.readOnly = true;
+  input.dataset.state = correct ? "correct" : "incorrect";
+  if (!correct) {
+    input.classList.add("is-shaking");
+    input.addEventListener("animationend", () => input.classList.remove("is-shaking"), { once: true });
+  }
 
-  const compare = el("answer-compare");
+  const result = el("result");
+  result.dataset.verdict = correct ? "correct" : "incorrect";
+
+  const head = el("result-head");
+  head.textContent = "";
+  head.appendChild(verdictIcon(correct));
+  head.appendChild(document.createTextNode(correct ? "맞았습니다" : "정답은 이것입니다"));
+
+  const answer = el("result-answer");
   if (correct) {
-    compare.hidden = true;
+    answer.hidden = true;
   } else {
-    compare.textContent = "";
+    answer.textContent = "";
     const mine = document.createElement("span");
-    mine.className = "mine";
-    mine.textContent = userAnswer.trim();
+    mine.className = "typed";
+    mine.textContent = typed;
     const arrow = document.createElement("span");
     arrow.className = "arrow";
     arrow.textContent = "→";
     const right = document.createElement("span");
     right.className = "right";
-    right.textContent = sentence.accept.join(" / ");
-    compare.append(mine, arrow, right);
-    compare.hidden = false;
+    right.textContent = sentence.accept.join(" 또는 ");
+    answer.append(mine, arrow, right);
+    answer.hidden = false;
   }
 
-  // 보고 있던 빈칸을 그 자리에서 정답으로 채웁니다. 문장을 아래에 한 번 더 보여줄 필요가 없습니다.
-  renderSentenceInto(el("quiz-en"), sentence, sentence.accept[0]);
+  el("result-note").textContent = sentence.note || "";
+  el("result-note").hidden = !sentence.note;
+  result.hidden = false;
 
-  const note = el("note");
-  note.textContent = sentence.note || "";
-  note.hidden = !sentence.note;
+  el("hint").hidden = true;
+  el("resume-note").hidden = true;
 
-  el("quiz-hint").hidden = true;   // 정답이 공개된 상태라 힌트는 숨깁니다
-  el("answer-input").disabled = true;
-  el("answer-form").hidden = true;
-  el("feedback").hidden = false;
-  el("btn-next").hidden = false;
+  announce(
+    (correct ? "맞았습니다. " : "틀렸습니다. 정답은 " + sentence.accept[0] + ". ") +
+    (sentence.note || "")
+  );
 
-  // 다음 버튼에 포커스를 줘서, 채점된 상태에서 Enter를 누르면 다음 문제로 넘어갑니다.
+  const isLast = session.queue.length === 0;
+  const actions = [];
+
+  // 틀렸을 때는 빈칸에 쓴 답을 그대로 두어 무엇을 틀렸는지 보이게 하고,
+  // 문장 전체를 정답으로 읽고 싶으면 따로 누를 수 있게 합니다.
+  if (!correct) {
+    actions.push({
+      id: "btn-reveal",
+      label: "정답 보기",
+      tone: "quiet",
+      onClick: () => {
+        input.value = sentence.accept[0];
+        input.dataset.state = "revealed";
+        el("btn-reveal").disabled = true;
+        announce("빈칸에 정답 " + sentence.accept[0] + "을 넣었습니다.");
+      }
+    });
+  }
+
+  actions.push({
+    id: "btn-next",
+    label: isLast ? "결과 보기" : "다음 문제",
+    onClick: next
+  });
+
+  setActions(actions);
   el("btn-next").focus();
+}
+
+function verdictIcon(correct) {
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.setAttribute("class", "result-icon");
+  svg.setAttribute("viewBox", "0 0 20 20");
+  svg.setAttribute("aria-hidden", "true");
+  svg.setAttribute("fill", "none");
+  svg.setAttribute("stroke", "currentColor");
+  svg.setAttribute("stroke-width", "2");
+  svg.setAttribute("stroke-linecap", "round");
+  svg.setAttribute("stroke-linejoin", "round");
+
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  // 체크 표시와 느낌표. 색뿐 아니라 모양으로도 구분되게 합니다.
+  path.setAttribute("d", correct ? "M4 10.5l4 4 8-8.5" : "M10 5v6M10 14.5v.5");
+  svg.appendChild(path);
+
+  if (!correct) {
+    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circle.setAttribute("cx", "10");
+    circle.setAttribute("cy", "10");
+    circle.setAttribute("r", "8");
+    svg.appendChild(circle);
+  }
+  return svg;
 }
 
 function next() {
   if (session.queue.length === 0) {
-    renderResult();
+    renderDone();
   } else {
+    justResumed = false;
     renderQuiz();
   }
 }
 
-/* ── ③ 결과 ─────────────────────────────────────── */
-function renderResult() {
-  clearSavedSession();   // 세션이 끝났으므로 이어하기 대상이 아닙니다
-  el("score").textContent = session.firstTryCorrect + " / " + session.sessionSize;
+/* ═══════════════════════════════════════════════════════════
+   ④ 세트 완료
+   ═══════════════════════════════════════════════════════════ */
+function renderDone() {
+  clearSavedSession();
 
-  const remaining = remainingSentences(session.categoryKey, loadProgress());
-  el("result-progress").textContent =
-    "이번에 " + session.completed.size + "개 완료 · 남은 문장 " + remaining.length + "개";
+  el("score").textContent = session.firstTryCorrect + " / " + session.sessionSize;
+  el("score-note").textContent = "첫 시도에 맞춘 개수입니다. 틀린 문장은 맞출 때까지 다시 나오므로 이 값이 실제 실력에 가깝습니다.";
+
+  const progress = loadProgress();
+  const all = SENTENCES.filter((s) => s.category === session.categoryKey);
+  const done = all.filter((s) => isDone(progress, s.id)).length;
+
+  el("done-category").textContent = CATEGORY_NAMES[session.categoryKey] || session.categoryKey;
+  el("done-count").textContent = String(done);
+  el("done-total").textContent = String(all.length);
+  const meter = el("done-meter");
+  meter.setAttribute("aria-valuenow", String(done));
+  meter.setAttribute("aria-valuemax", String(all.length));
+  el("done-meter-fill").style.width = (all.length ? (done / all.length) * 100 : 0) + "%";
 
   const wrongIds = [...session.wrong];
-  el("wrong-section").hidden = wrongIds.length === 0;
+  const wrongSentences = wrongIds.map((id) => SENTENCES.find((s) => s.id === id)).filter(Boolean);
 
-  const list = el("wrong-list");
+  el("review-section").hidden = wrongSentences.length === 0;
+  const list = el("review-list");
   list.textContent = "";
-  for (const id of wrongIds) {
-    const sentence = SENTENCES.find((s) => s.id === id);
 
-    const ko = document.createElement("div");
-    ko.className = "ko";
+  for (const sentence of wrongSentences) {
+    const ko = document.createElement("p");
+    ko.className = "review-ko";
     ko.textContent = sentence.ko;
 
-    const en = document.createElement("div");
-    en.className = "en";
-    renderSentenceInto(en, sentence, sentence.accept[0]);
+    const en = document.createElement("p");
+    en.className = "review-en";
+    const parts = sentence.en.split(BLANK);
+    const answer = document.createElement("span");
+    answer.className = "answer";
+    answer.textContent = sentence.accept[0];
+    en.append(document.createTextNode(parts[0]), answer, document.createTextNode(parts[1]));
 
     const item = document.createElement("li");
-    item.className = "card";
     item.append(ko, en);
     list.appendChild(item);
   }
 
-  showScreen("result");
+  const categoryKey = session.categoryKey;
+  const actions = [];
+
+  if (wrongSentences.length > 0) {
+    actions.push({
+      label: "틀린 " + wrongSentences.length + "문장 다시 풀기",
+      onClick: () => startSession(categoryKey, wrongSentences.length, shuffle(wrongSentences))
+    });
+  }
+  actions.push({
+    label: wrongSentences.length > 0 ? "새 문장 풀기" : "이어서 더 풀기",
+    tone: wrongSentences.length > 0 ? "quiet" : undefined,
+    onClick: () => renderSizeScreen(categoryKey)
+  });
+
+  setActions(actions);
+  showScreen("done");
+  announce("세트를 끝냈습니다. 첫 시도 " + session.firstTryCorrect + " / " + session.sessionSize + " 정답.");
 }
 
-/* ── 이벤트 연결 ─────────────────────────────────── */
-el("answer-input").addEventListener("input", (event) => {
-  el("btn-check").disabled = !event.target.value.trim();
-  syncCells(event.target.value);
-});
+/* ═══════════════════════════════════════════════════════════
+   이벤트
+   ═══════════════════════════════════════════════════════════ */
 
-el("answer-form").addEventListener("submit", (event) => {
+// 키보드만으로 진행: 입력 → Enter 채점 → Enter 다음 문제.
+// 빈칸이 여러 개면 Enter가 다음 빈칸으로 넘어가고, 마지막 빈칸에서 채점합니다.
+el("quiz-form").addEventListener("submit", (event) => {
   event.preventDefault();
-  check();
-});
+  if (session && session.graded) { next(); return; }
 
-el("btn-next").addEventListener("click", next);
-el("btn-exit").addEventListener("click", renderCategoryScreen);
-el("btn-retry").addEventListener("click", () => renderSizeScreen(session.categoryKey));
-el("btn-home").addEventListener("click", renderCategoryScreen);
+  const blanks = [...document.querySelectorAll("#sentence .blank")];
+  const active = document.activeElement;
+  const index = blanks.indexOf(active);
+  const nextEmpty = blanks.slice(index + 1).find((b) => !b.value.trim());
+
+  if (nextEmpty) { nextEmpty.focus(); keepBlankVisible(nextEmpty); return; }
+  if (blanks.every((b) => b.value.trim())) grade();
+});
 
 el("btn-size-back").addEventListener("click", renderCategoryScreen);
+el("btn-empty-back").addEventListener("click", renderCategoryScreen);
+el("btn-retry-load").addEventListener("click", (event) => {
+  event.currentTarget.dataset.loading = "true";
+  location.reload();
+});
 
-// 초기화는 실수로 누르기 쉬워 두 단계로 나눕니다.
-// 브라우저 확인창은 쓰지 않습니다. 확인창이 뜨면 자동화 검증이 멈춥니다.
 el("btn-reset").addEventListener("click", () => {
   el("btn-reset").hidden = true;
   el("reset-confirm").hidden = false;
@@ -981,8 +1353,23 @@ el("btn-reset-yes").addEventListener("click", () => {
   renderSizeScreen(sizeCategory);
 });
 
-// 풀던 세션이 남아 있으면 그 문제로 바로 돌아갑니다.
-if (!restoreSession()) renderCategoryScreen();
+/* ═══════════════════════════════════════════════════════════
+   시작
+   ═══════════════════════════════════════════════════════════ */
+function boot() {
+  if (typeof SENTENCES === "undefined" || !Array.isArray(SENTENCES)) {
+    setActions(null);
+    showScreen("error");
+    return;
+  }
+  if (restoreSession()) {
+    renderQuiz();
+  } else {
+    renderCategoryScreen();
+  }
+}
+
+boot();
 
 // 서비스워커 등록. file://로 열면 지원되지 않으므로 조용히 넘어갑니다.
 if ("serviceWorker" in navigator) {
