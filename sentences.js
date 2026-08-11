@@ -21,16 +21,16 @@ const SENTENCES = [
     en: "Excuse me, could you ___ me the way to the station?",
     accept: ["tell", "show"],
     hint: "정보를 상대에게 넘겨주는 동작",
-    note: "tell이 가장 자연스럽습니다. show me the way도 쓰지만 직접 데려다주는 느낌이 강합니다."
+    note: "둘 다 자연스럽습니다. 말로 알려주는 것은 tell, 직접 데려가거나 가리켜 보이는 것은 show입니다. 실제 예문에서는 show me the way가 더 많이 쓰입니다."
   },
   {
     id: "travel-out-02",
     category: "travel-out",
     ko: "저기요, 이 자리 누가 앉았나요?",
     en: "Excuse me, is this seat ___?",
-    accept: ["taken"],
+    accept: ["taken", "free", "available"],
     hint: "앉아 있는지가 아니라, 주인이 정해졌는지를 묻습니다",
-    note: "빈자리를 물을 때 영어는 taken(누가 차지했는지)으로 묻습니다. empty는 어색합니다."
+    note: "taken은 '누가 차지했는지'를 묻습니다. free나 available로 '비어 있는지'를 물어도 자연스럽습니다. 다만 empty는 방이나 그릇에 쓰는 말이라 자리에는 어색합니다."
   },
   {
     id: "travel-out-03",
@@ -282,7 +282,7 @@ const SENTENCES = [
     en: "Could I get a ___ box?",
     accept: ["to-go", "togo", "doggy"],
     hint: "남은 음식을 담아 가는 상자를 뜻하는 말",
-    note: "doggy bag이라는 표현도 있지만 요즘은 to-go box를 더 많이 씁니다."
+    note: "표준 표기는 to-go입니다. doggy bag이라는 표현도 있지만 요즘은 to-go box를 더 많이 씁니다."
   },
   {
     id: "travel-out-31",
@@ -442,7 +442,7 @@ const SENTENCES = [
     category: "travel-out",
     ko: "여기서 갈아타야 하나요?",
     en: "Do I need to ___ here?",
-    accept: ["transfer"],
+    accept: ["transfer", "change"],
     hint: "다른 노선으로 옮겨 탄다는 뜻의 동사",
     note: "환승역은 transfer station입니다."
   },
@@ -497,7 +497,7 @@ const SENTENCES = [
     category: "daily-greeting",
     ko: "만나서 반갑습니다.",
     en: "Nice to ___ you.",
-    accept: ["meet"],
+    accept: ["meet", "see"],
     hint: "처음 마주하는 것. 이미 아는 사이에는 쓰지 않습니다",
     note: "처음 만날 때는 meet, 이미 아는 사이면 see를 씁니다."
   },
@@ -758,7 +758,7 @@ const SENTENCES = [
     category: "daily-greeting",
     ko: "비가 올 것 같아요.",
     en: "It ___ like rain.",
-    accept: ["looks"],
+    accept: ["looks", "feels"],
     hint: "겉모습으로 짐작할 때 쓰는 동사. 3인칭 단수형",
     note: "It looks like 뒤에는 명사가 옵니다. 문장을 넣고 싶으면 It looks like it's going to rain이 됩니다."
   },
@@ -875,7 +875,7 @@ const SENTENCES = [
     category: "daily-greeting",
     ko: "조만간 밥 한번 먹어요.",
     en: "Let's grab a ___ sometime.",
-    accept: ["bite"],
+    accept: ["bite", "meal"],
     hint: "입으로 한 번 무는 동작을 뜻하는 명사",
     note: "grab a bite는 간단히 먹자는 뜻입니다. 정식 식사를 뜻하는 meal보다 가볍습니다."
   },
@@ -1047,7 +1047,7 @@ const SENTENCES = [
     category: "daily-request",
     ko: "너무 번거롭지 않다면요.",
     en: "If it's not too much ___.",
-    accept: ["trouble"],
+    accept: ["trouble", "bother"],
     hint: "번거로움·수고를 뜻하는 명사",
     note: "부탁 뒤에 붙여 상대의 부담을 덜어주는 표현입니다."
   },
@@ -1191,9 +1191,9 @@ const SENTENCES = [
     category: "daily-request",
     ko: "폐가 되지 않았으면 좋겠어요.",
     en: "I hope I'm not ___ you.",
-    accept: ["bothering", "troubling", "disturbing"],
+    accept: ["bothering", "troubling", "disturbing", "interrupting"],
     hint: "방해한다는 뜻의 동사 -ing형",
-    note: "일하는 사람에게 말을 걸 때 먼저 붙이면 좋습니다."
+    note: "일하는 사람에게 말을 걸 때 먼저 붙이면 좋습니다. interrupting이 가장 흔하게 쓰입니다."
   },
   {
     id: "daily-request-32",
@@ -1390,7 +1390,7 @@ const SENTENCES = [
     category: "daily-opinion",
     ko: "그건 잘 모르겠어요.",
     en: "I'm not ___ about that.",
-    accept: ["sure"],
+    accept: ["sure", "certain"],
     hint: "확신이 있는지를 뜻하는 형용사",
     note: "단정을 피하며 부드럽게 유보하는 표현입니다."
   },
@@ -1426,7 +1426,7 @@ const SENTENCES = [
     category: "daily-opinion",
     ko: "면접 때문에 긴장돼요.",
     en: "I'm ___ about the interview.",
-    accept: ["nervous"],
+    accept: ["nervous", "anxious"],
     hint: "시험·면접 앞에서 느끼는 감정을 뜻하는 형용사",
     note: "nervous about ~ 형태로 씁니다."
   },
@@ -1462,7 +1462,7 @@ const SENTENCES = [
     category: "daily-opinion",
     ko: "믿기지가 않네요.",
     en: "That's ___ to believe.",
-    accept: ["hard"],
+    accept: ["hard", "difficult"],
     hint: "difficult와 바꿔 쓸 수 있는 짧은 형용사",
     note: "hard to believe는 놀라움을 표현하는 굳어진 표현입니다."
   },
@@ -1525,7 +1525,7 @@ const SENTENCES = [
     category: "daily-opinion",
     ko: "솔직히 말하면 저는 별로예요.",
     en: "To be ___ with you, I don't like it.",
-    accept: ["honest"],
+    accept: ["honest", "frank"],
     hint: "'정직한'을 뜻하는 형용사",
     note: "to be honest with you는 솔직한 의견을 꺼내기 전 완충 표현입니다."
   },
@@ -1559,11 +1559,11 @@ const SENTENCES = [
   {
     id: "daily-opinion-22",
     category: "daily-opinion",
-    ko: "글쎄요, 잘 모르겠어요.",
-    en: "I'm not ___ about it.",
-    accept: ["certain", "positive"],
-    hint: "확신을 뜻하는 형용사면 둘 다 됩니다",
-    note: "sure보다 격식 있게 들립니다. positive는 '확신한다'는 뜻으로도 씁니다."
+    ko: "아직 결정을 못 했어요.",
+    en: "I haven't made up my ___ yet.",
+    accept: ["mind"],
+    hint: "생각을 담는 곳을 뜻하는 명사",
+    note: "make up one's mind는 결심한다는 뜻의 한 덩어리입니다. decide보다 구어적입니다."
   },
   {
     id: "daily-opinion-23",
@@ -1759,7 +1759,7 @@ const SENTENCES = [
     category: "daily-opinion",
     ko: "저한테는 너무 부담스러워요.",
     en: "It's too much for me to ___.",
-    accept: ["handle"],
+    accept: ["handle", "take"],
     hint: "감당해 낸다는 뜻의 동사",
     note: "handle은 물건을 다루는 것에서 상황을 감당하는 것까지 넓게 씁니다."
   },
@@ -1813,7 +1813,7 @@ const SENTENCES = [
     category: "daily-opinion",
     ko: "솔직히 잘 모르겠어요.",
     en: "___, I have no idea.",
-    accept: ["honestly"],
+    accept: ["honestly", "frankly"],
     hint: "'정직한'이라는 형용사에서 나온 부사",
     note: "Honestly는 문장 앞에서 '솔직히 말하면'이라는 뜻으로 씁니다."
   },
@@ -1850,7 +1850,7 @@ const SENTENCES = [
     category: "travel-airport",
     ko: "얼마나 머무르실 예정입니까?",
     en: "How long will you be ___?",
-    accept: ["staying"],
+    accept: ["staying", "here"],
     hint: "머무는 동작. will be 뒤라서 -ing 형태입니다",
     note: "예정된 미래라서 will be -ing를 씁니다."
   },
@@ -1895,7 +1895,7 @@ const SENTENCES = [
     category: "travel-airport",
     ko: "제 짐이 안 나왔어요.",
     en: "My luggage didn't ___ up.",
-    accept: ["show"],
+    accept: ["show", "turn"],
     hint: "up과 짝을 이뤄 '나타나다'가 됩니다",
     note: "show up은 '나타나다'입니다. luggage는 셀 수 없는 명사입니다."
   },
@@ -1922,7 +1922,7 @@ const SENTENCES = [
     category: "travel-airport",
     ko: "안전벨트를 매주십시오.",
     en: "Please ___ your seat belt.",
-    accept: ["fasten"],
+    accept: ["fasten", "buckle"],
     hint: "벨트를 '조여 매다'라는 동사",
     note: "기내 방송의 정형 표현입니다. t는 발음하지 않습니다."
   },
@@ -2230,7 +2230,7 @@ const SENTENCES = [
     en: "Where's the ___ shop?",
     accept: ["duty-free", "dutyfree"],
     hint: "세금이 붙지 않는다는 뜻의 말",
-    note: "duty는 관세를 뜻합니다. free는 '없다'는 뜻입니다."
+    note: "표준 표기는 duty-free입니다. duty는 관세, free는 '없다'는 뜻입니다."
   },
   {
     id: "travel-airport-47",
@@ -2418,7 +2418,7 @@ const SENTENCES = [
     category: "travel-hotel",
     ko: "빈방 있나요?",
     en: "Do you have any rooms ___?",
-    accept: ["available"],
+    accept: ["available", "free"],
     hint: "쓸 수 있는 상태라는 뜻의 형용사",
     note: "빈방은 empty가 아니라 available로 묻습니다."
   },
@@ -2715,7 +2715,7 @@ const SENTENCES = [
     category: "travel-hotel",
     ko: "정말 편안했습니다.",
     en: "It was very ___.",
-    accept: ["comfortable"],
+    accept: ["comfortable", "relaxing", "pleasant", "cozy"],
     hint: "몸이 편하다는 뜻의 형용사",
     note: "체크아웃할 때 건네면 좋은 인사입니다."
   }
