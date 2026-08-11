@@ -809,11 +809,11 @@ const SENTENCES = [
   {
     id: "travel-out-89",
     category: "travel-out",
-    ko: "영수증이 없어도 되나요?",
-    en: "Do I need the receipt, or is it ___?",
-    accept: ["optional"],
-    hint: "골라도 되고 안 해도 된다는 뜻의 형용사",
-    note: "영수증 없이 교환이 안 되는 곳이 많습니다."
+    ko: "영수증이 꼭 필요한가요?",
+    en: "Is the receipt ___?",
+    accept: ["required", "necessary"],
+    hint: "반드시 있어야 한다는 뜻의 형용사",
+    note: "영수증 없이 교환이 안 되는 곳이 많으니 받아두는 편이 좋습니다."
   },
   {
     id: "travel-out-90",
@@ -1532,8 +1532,8 @@ const SENTENCES = [
     category: "daily-greeting",
     ko: "저는 커피를 잘 못 마셔요.",
     en: "I can't ___ coffee.",
-    accept: ["handle", "drink"],
-    hint: "감당하거나 마신다는 뜻의 동사",
+    accept: ["drink", "handle"],
+    hint: "마시거나 감당한다는 뜻의 동사",
     note: "can't handle은 카페인이 몸에 안 받는다는 뉘앙스를 담습니다."
   },
   {
@@ -2489,7 +2489,7 @@ const SENTENCES = [
     en: "Could you ___ that a bit more?",
     accept: ["explain"],
     hint: "까닭이나 방법을 밝혀준다는 동사",
-    note: "Could you elaborate?가 더 격식 있는 표현입니다."
+    note: "더 격식 있게 말하려면 Could you elaborate on that?이라고 합니다. elaborate는 on 없이 목적어를 받지 못합니다."
   },
   {
     id: "daily-request-76",
@@ -2604,9 +2604,9 @@ const SENTENCES = [
     category: "daily-request",
     ko: "제가 처리할게요.",
     en: "I'll ___ it from here.",
-    accept: ["handle"],
-    hint: "감당해 낸다는 뜻의 동사",
-    note: "take it from here는 이어받아 처리하겠다는 뜻입니다." 
+    accept: ["take", "handle"],
+    hint: "이어받아 처리한다는 뜻을 만드는 동사",
+    note: "take it from here가 가장 흔합니다. handle it from here도 같은 뜻입니다."
   },
   {
     id: "daily-request-89",
@@ -2656,7 +2656,7 @@ const SENTENCES = [
   {
     id: "daily-request-94",
     category: "daily-request",
-    ko: "이거 빌려가도 될까요?",
+    ko: "이거 가져가도 될까요?",
     en: "Can I ___ this with me?",
     accept: ["bring"],
     hint: "가지고 온다는 뜻의 기본 동사",
@@ -3270,10 +3270,10 @@ const SENTENCES = [
     id: "daily-opinion-62",
     category: "daily-opinion",
     ko: "할 만해요.",
-    en: "It's ___ it.",
-    accept: ["manageable"],
+    en: "It's pretty ___.",
+    accept: ["manageable", "doable"],
     hint: "감당할 수 있다는 뜻의 형용사",
-    note: "manage(해내다)에 -able이 붙은 말입니다."
+    note: "manage(해내다)에 -able이 붙은 말입니다. doable은 '할 수 있다'는 뜻입니다."
   },
   {
     id: "daily-opinion-63",
@@ -3404,7 +3404,7 @@ const SENTENCES = [
   {
     id: "daily-opinion-77",
     category: "daily-opinion",
-    ko: "저는 그게 마음에 들어요.",
+    ko: "그 말이 와닿네요.",
     en: "That ___ with me.",
     accept: ["resonates", "sits well"],
     hint: "울림을 준다는 뜻의 동사. 3인칭 단수형",
@@ -3431,11 +3431,11 @@ const SENTENCES = [
   {
     id: "daily-opinion-80",
     category: "daily-opinion",
-    ko: "정말 답답해요.",
-    en: "It's so ___.",
-    accept: ["stifling", "suffocating"],
-    hint: "숨이 막힌다는 뜻의 형용사",
-    note: "공기와 상황 양쪽에 씁니다."
+    ko: "여기 공기가 답답해요.",
+    en: "It's so ___ in here.",
+    accept: ["stuffy", "stifling"],
+    hint: "공기가 탁해 숨이 막힌다는 뜻의 형용사",
+    note: "stuffy는 환기가 안 된 실내에, stifling은 더워서 숨 막힐 때 씁니다. 마음이 답답한 것은 frustrating입니다."
   },
   {
     id: "daily-opinion-81",
@@ -3530,7 +3530,7 @@ const SENTENCES = [
   {
     id: "daily-opinion-91",
     category: "daily-opinion",
-    ko: "좀 놀라운데요.",
+    ko: "그건 처음 듣는데요.",
     en: "That's ___ to me.",
     accept: ["news"],
     hint: "새로 듣는 소식을 뜻하는 명사",
@@ -3593,7 +3593,7 @@ const SENTENCES = [
   {
     id: "daily-opinion-98",
     category: "daily-opinion",
-    ko: "솔직히 부담됩니다.",
+    ko: "한꺼번에 받아들이기 벅차네요.",
     en: "It's a lot to ___ in.",
     accept: ["take"],
     hint: "안으로 받아들인다는 뜻의 동사",
@@ -4235,7 +4235,7 @@ const SENTENCES = [
     category: "travel-airport",
     ko: "비행 시간이 얼마나 되나요?",
     en: "How long is the ___ time?",
-    accept: ["flying", "flight"],
+    accept: ["flight", "flying"],
     hint: "하늘을 나는 것을 뜻하는 말",
     note: "flight time과 flying time 모두 씁니다."
   },
@@ -5315,10 +5315,10 @@ const SENTENCES = [
     id: "travel-hotel-89",
     category: "travel-hotel",
     ko: "영수증을 이메일로 보내주시겠어요?",
-    en: "Could you ___ the receipt to my email?",
-    accept: ["email", "send"],
-    hint: "전자우편으로 보낸다는 동사",
-    note: "email은 명사와 동사로 모두 씁니다."
+    en: "Could you ___ me the receipt by email?",
+    accept: ["send"],
+    hint: "보낸다는 뜻의 기본 동사",
+    note: "email은 동사로도 써서 Could you email me the receipt?라고도 합니다."
   },
   {
     id: "travel-hotel-90",
