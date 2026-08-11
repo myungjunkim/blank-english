@@ -599,7 +599,7 @@ ul { list-style: none; margin: 0; padding: 0; }
   <section id="screen-quiz" hidden>
     <div class="screen-head">
       <h2 id="quiz-category"></h2>
-      <button type="button" class="btn btn-plain" id="btn-exit">그만두기</button>
+      <button type="button" class="btn btn-plain" id="btn-exit">돌아가기</button>
     </div>
 
     <div class="meter-label">
@@ -1019,6 +1019,18 @@ function startSession(categoryKey, size, explicitPool) {
    ③ 문제
    ═══════════════════════════════════════════════════════════ */
 
+// 힌트 줄. 정답 후보의 길이가 모두 같을 때만 글자 수를 덧붙입니다.
+// 길이가 제각각인 문항(check / bill 등)에 특정 길이를 적으면 틀린 정보가 됩니다.
+function hintText(sentence) {
+  const parts = [];
+  if (sentence.hint) parts.push(sentence.hint);
+
+  const lengths = new Set(sentence.accept.map((valid) => valid.trim().length));
+  if (lengths.size === 1) parts.push([...lengths][0] + "글자");
+
+  return parts.join(" · ");
+}
+
 // 정답 후보 중 가장 긴 것을 기준으로 폭을 잡습니다.
 function blankWidth(sentence) {
   const longest = Math.max(...sentence.accept.map((a) => a.trim().length));
@@ -1079,7 +1091,7 @@ function renderQuiz() {
   el("prompt-ko").textContent = current.ko;
 
   const hint = el("hint");
-  hint.textContent = current.hint || "";
+  hint.textContent = hintText(current);
   hint.hidden = !hint.textContent;
 
   el("result").hidden = true;
