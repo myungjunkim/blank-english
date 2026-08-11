@@ -1123,8 +1123,11 @@ function onBlankInput(event) {
 }
 
 function isCorrect(input, accept) {
-  const normalized = input.trim().toLowerCase();
-  return accept.some((valid) => valid.trim().toLowerCase() === normalized);
+  // 곡선 따옴표(’)를 곧은 따옴표로 바꿉니다. 키보드에 따라 다른 문자가 들어와
+  // don't나 can't 같은 답이 오답으로 처리되는 것을 막기 위함입니다.
+  const normalize = (text) => text.trim().toLowerCase().replace(/[‘’ʼ]/g, "'");
+  const typed = normalize(input);
+  return accept.some((valid) => normalize(valid) === typed);
 }
 
 /* ── 채점 ─────────────────────────────────── */
