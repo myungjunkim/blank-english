@@ -3,13 +3,14 @@
 // 중요: 파일을 고쳐 다시 배포할 때는 CACHE_NAME의 버전을 반드시 올려야 합니다.
 // 올리지 않으면 이미 설치한 기기가 옛 파일을 계속 씁니다.
 
-const CACHE_NAME = "blank-fill-v4";
+const CACHE_NAME = "blank-fill-v5";
 
 const ASSETS = [
   "./",
   "./index.html",
   "./sentences.js",
   "./manifest.json",
+  "./newsreader-latin.woff2",
   "./icon-180.png",
   "./icon-192.png",
   "./icon-512.png"
