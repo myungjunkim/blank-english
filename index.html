@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>영어회화 빈칸 채우기</title>
-<meta name="theme-color" content="#e9edf2">
+<meta name="theme-color" content="#16203a">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="preload" href="newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -20,14 +20,19 @@
   }
 
   :root {
-    --paper:  #e9edf2;   /* 차가운 종이 */
-    --card:   #ffffff;
-    --ink:    #101820;   /* 본문 */
-    --ink-2:  #5b6673;   /* 보조 텍스트 */
-    --rule:   #c3ccd6;   /* 칸 테두리·구분선 */
-    --live:   #2b4bff;   /* 입력 중·포커스 */
-    --good:   #0f7a4d;
-    --miss:   #c8322b;
+    --ground:    #16203a;   /* 깊은 잉크 남색 — 앱 바탕 */
+    --ground-2:  #24304f;   /* 바탕 위 옅은 면 */
+    --on-ground: #e7e1d5;   /* 어두운 바탕 위 글자 */
+    --on-ground-2: #96a0b8;
+
+    --paper:  #fbf6ec;      /* 따뜻한 종이 — 문장이 놓이는 면 */
+    --ink:    #171310;      /* 종이 위 본문 */
+    --ink-2:  #736858;      /* 종이 위 보조 */
+    --rule:   #ded2be;      /* 종이 위 선·빈 칸 */
+
+    --signal: #ff7a1a;      /* 신호 주황 — 지금 채우는 칸, 진도, 기본 버튼 */
+    --good:   #0d7a52;
+    --miss:   #cc3326;
 
     --en:   "Newsreader", Georgia, "Times New Roman", serif;
     --ko:   system-ui, -apple-system, "Segoe UI", "Malgun Gothic", sans-serif;
@@ -39,24 +44,36 @@
 
   body {
     margin: 0;
-    padding: 1.75rem 1.1rem 4rem;
-    background: var(--paper);
-    color: var(--ink);
+    padding: 1.6rem 1.1rem 4rem;
+    background: var(--ground);
+    color: var(--on-ground);
     font-family: var(--ko);
     line-height: 1.65;
     -webkit-text-size-adjust: 100%;
+    word-break: keep-all;   /* 한글이 낱말 중간에서 잘리지 않게 합니다 */
   }
+
+  /* 영어가 주인 요소는 기본 줄바꿈을 씁니다 */
+  .quiz-en, .answer-compare, .wrong-list .en { word-break: normal; }
 
   #app { max-width: 34rem; margin: 0 auto; }
 
-  h1 { margin: 0 0 .35rem; font-size: 1.45rem; font-weight: 700; letter-spacing: -.02em; }
-  .lead { margin: 0 0 1.75rem; color: var(--ink-2); font-size: .875rem; }
+  h1 { margin: 0 0 .4rem; font-size: 1.4rem; font-weight: 700; letter-spacing: -.02em; }
+  .lead { margin: 0 0 1.5rem; color: var(--on-ground-2); font-size: .85rem; }
 
   button { cursor: pointer; font: inherit; color: inherit; }
-  :focus-visible { outline: 2px solid var(--live); outline-offset: 2px; }
+  :focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
 
-  /* 데이터·수치는 고정폭으로 통일합니다 */
-  .mono { font-family: var(--mono); font-size: .78rem; letter-spacing: .03em; color: var(--ink-2); }
+  /* 수치·라벨은 고정폭으로 통일합니다 */
+  .mono { font-family: var(--mono); font-size: .78rem; letter-spacing: .04em; }
+
+  /* 종이 면 — 읽고 조작하는 것은 모두 이 위에 올립니다 */
+  .card {
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: .7rem;
+    padding: 1.15rem 1.15rem 1.25rem;
+  }
 
   /* ── 진도 칸 ──────────────────────────────────────
      문장 하나가 칸 하나입니다. 빈칸의 글자 칸과 같은 언어를 씁니다. */
@@ -64,39 +81,35 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(9px, 1fr));
     gap: 3px;
-    margin-top: .55rem;
+    margin-top: .65rem;
   }
   .cells span {
     display: block;
     aspect-ratio: 1;
     border-radius: 1px;
     background: var(--rule);
-    opacity: .4;
   }
-  .cells span.on { background: var(--live); opacity: 1; }
+  .cells span.on { background: var(--signal); }
 
   /* ── ① 카테고리 선택 ───────────────────────────── */
-  .category-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem; }
+  .category-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
 
   .category-btn {
     width: 100%;
-    padding: .95rem 1rem 1rem;
-    border: 1px solid var(--rule);
-    border-radius: .5rem;
-    background: var(--card);
-    text-align: left;
     display: block;
-    transition: border-color .15s;
+    border: none;
+    text-align: left;
+    transition: transform .12s;
   }
-  .category-btn:hover { border-color: var(--live); }
+  .category-btn:hover { transform: translateY(-1px); }
   .category-btn .top {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     gap: 1rem;
   }
-  .category-btn .name { font-size: .95rem; font-weight: 600; letter-spacing: -.01em; }
-  .category-btn .count { white-space: nowrap; }
+  .category-btn .name { font-size: .98rem; font-weight: 600; letter-spacing: -.01em; }
+  .category-btn .count { white-space: nowrap; color: var(--ink-2); }
 
   /* ── ② 문장 수 선택 ─────────────────────────────── */
   .screen-head {
@@ -104,56 +117,59 @@
     justify-content: space-between;
     align-items: baseline;
     gap: 1rem;
-    margin-bottom: 1.5rem;
-    padding-bottom: .7rem;
-    border-bottom: 1px solid var(--rule);
+    margin-bottom: 1.15rem;
   }
-  .screen-head .title { font-size: .95rem; font-weight: 600; }
+  .screen-head .title { font-size: .98rem; font-weight: 600; }
+  .screen-head .mono { color: var(--on-ground-2); }
+
+  .size-lead { margin: 0 0 1rem; color: var(--on-ground-2); font-size: .85rem; }
 
   .size-list {
     list-style: none;
-    margin: 0 0 1.75rem;
+    margin: 0 0 1.6rem;
     padding: 0;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr));
-    gap: .55rem;
+    gap: .6rem;
   }
   .size-btn {
     width: 100%;
-    padding: 1.05rem .6rem;
-    white-space: nowrap;
-    border: 1px solid var(--rule);
-    border-radius: .5rem;
-    background: var(--card);
+    border: none;
+    padding: 1.15rem .6rem;
     font-family: var(--mono);
-    font-size: .85rem;
-    transition: border-color .15s, color .15s;
+    font-size: .88rem;
+    white-space: nowrap;
+    transition: transform .12s, color .12s;
   }
-  .size-btn:hover { border-color: var(--live); color: var(--live); }
+  .size-btn:hover { transform: translateY(-1px); color: var(--signal); }
+  /* '남은 전부'는 개수를 고르는 것과 성격이 달라 한 줄을 다 씁니다 */
+  .size-btn.all { grid-column: 1 / -1; }
 
-  .reset-area { margin: 0; color: var(--ink-2); font-size: .8rem; }
+  .reset-area { margin: 0; color: var(--on-ground-2); font-size: .8rem; }
 
   .btn-text {
     border: none;
     background: none;
     padding: .2rem;
-    color: var(--ink-2);
+    color: var(--on-ground-2);
     font-size: .8rem;
     text-decoration: underline;
     text-underline-offset: .18em;
   }
-  .btn-text:hover { color: var(--ink); }
-  .btn-text.danger { color: var(--miss); }
+  .btn-text:hover { color: var(--on-ground); }
+  .btn-text.danger { color: #ff8b80; }
 
   /* ── ③ 문제 ───────────────────────────────────── */
-  .quiz-ko { margin: 0 0 .9rem; color: var(--ink-2); font-size: .9rem; }
+  .question { margin-bottom: 1rem; }
+
+  .quiz-ko { margin: 0 0 .85rem; color: var(--ink-2); font-size: .88rem; }
 
   .quiz-en {
-    margin: 0 0 1.1rem;
+    margin: 0 0 1.05rem;
     font-family: var(--en);
-    font-size: 1.45rem;
-    font-variation-settings: "opsz" 36;
-    line-height: 1.75;
+    font-size: 1.42rem;
+    font-variation-settings: "opsz" 30;
+    line-height: 1.8;
     letter-spacing: -.005em;
   }
 
@@ -171,21 +187,23 @@
     height: 1.45em;
     border: 1.5px solid var(--rule);
     border-radius: 3px;
-    background: var(--card);
     font-family: var(--mono);
     font-size: .78em;
+    font-weight: 600;
     line-height: 1;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: border-color .12s, color .12s;
+    transition: background-color .12s, border-color .12s, color .12s;
   }
-  .blank .cell.on { border-color: var(--live); color: var(--live); }
-  .blank .cell.next {
-    border-color: var(--live);
-    box-shadow: inset 0 -3px 0 -1px var(--live);
+  /* 채워진 칸은 색으로 찹니다. 타이핑하면 문장에 색이 칠해집니다. */
+  .blank .cell.on {
+    background: var(--signal);
+    border-color: var(--signal);
+    color: #2a1300;   /* 주황 위 흰 글자는 대비가 모자라 어두운 갈색을 씁니다 */
   }
-  .blank.over .cell { border-color: var(--miss); color: var(--miss); }
+  .blank .cell.next { border-color: var(--signal); box-shadow: inset 0 -3px 0 -1px var(--signal); }
+  .blank.over .cell { background: var(--miss); border-color: var(--miss); color: #fff; }
 
   /* 정답 후보의 길이가 제각각이라 칸 수를 정할 수 없는 문항.
      칸을 나누지 않은 점선 상자 하나로 두어, 길이가 정해져 있지 않다는 것을 보여줍니다. */
@@ -195,30 +213,31 @@
     justify-content: center;
     min-width: 5.5em;
     height: 1.45em;
-    padding: 0 .35em;
+    padding: 0 .4em;
     border: 1.5px dashed var(--rule);
     border-radius: 3px;
-    background: var(--card);
     font-family: var(--mono);
     font-size: .78em;
+    font-weight: 600;
     line-height: 1;
-    transition: border-color .12s, color .12s;
+    transition: background-color .12s, border-color .12s, color .12s;
   }
-  .blank.open.on { border-color: var(--live); color: var(--live); }
+  .blank.open.on { background: var(--signal); border-color: var(--signal); border-style: solid; color: #2a1300; }
 
   /* 정답이 공개된 상태 */
   .blank.filled {
     display: inline;
-    font-weight: 600;
+    margin: 0;        /* 채워진 뒤에는 뒤따르는 물음표·쉼표와 붙어야 합니다 */
+    font-weight: 700;
     color: var(--good);
     border-bottom: 2px solid var(--good);
   }
 
   .quiz-hint {
-    margin: 0 0 1.6rem;
+    margin: 0;
     color: var(--ink-2);
     font-size: .85rem;
-    padding-left: .7rem;
+    padding-left: .75rem;
     border-left: 2px solid var(--rule);
   }
 
@@ -226,31 +245,32 @@
   #answer-input {
     flex: 1;
     min-width: 0;
-    padding: .8rem .85rem;
-    border: 1px solid var(--rule);
-    border-radius: .4rem;
-    background: var(--card);
-    color: var(--ink);
+    padding: .85rem .9rem;
+    border: 1px solid var(--ground-2);
+    border-radius: .5rem;
+    background: var(--ground-2);
+    color: var(--on-ground);
     font-family: var(--en);
     font-size: 1rem;
   }
-  #answer-input:focus { outline: none; border-color: var(--live); box-shadow: 0 0 0 3px rgba(43, 75, 255, .14); }
+  #answer-input::placeholder { color: var(--on-ground-2); }
+  #answer-input:focus { outline: none; border-color: var(--signal); }
 
   .btn-primary {
-    padding: .8rem 1.15rem;
+    padding: .85rem 1.25rem;
     border: none;
-    border-radius: .4rem;
-    background: var(--live);
-    color: #fff;
+    border-radius: .5rem;
+    background: var(--signal);
+    color: #2a1300;
     font-size: .9rem;
-    font-weight: 600;
+    font-weight: 700;
     white-space: nowrap;
   }
-  .btn-primary:disabled { background: var(--rule); color: #fff; cursor: default; }
+  .btn-primary:disabled { background: var(--ground-2); color: var(--on-ground-2); cursor: default; }
 
   /* ── 채점 결과 ─────────────────────────────────── */
-  #feedback { margin-top: 1.6rem; animation: rise .18s ease-out; }
-  @keyframes rise { from { opacity: 0; transform: translateY(4px); } }
+  #feedback { margin-top: 1rem; animation: rise .18s ease-out; }
+  @keyframes rise { from { opacity: 0; transform: translateY(5px); } }
 
   .verdict { margin: 0 0 .8rem; font-size: .9rem; font-weight: 700; letter-spacing: -.01em; }
   .verdict.ok { color: var(--good); }
@@ -259,38 +279,33 @@
   .answer-compare { margin: 0 0 .9rem; font-family: var(--en); font-size: 1rem; }
   .answer-compare .mine { color: var(--miss); text-decoration: line-through; }
   .answer-compare .arrow { font-family: var(--mono); color: var(--ink-2); padding: 0 .5em; }
-  .answer-compare .right { color: var(--good); font-weight: 600; }
+  .answer-compare .right { color: var(--good); font-weight: 700; }
 
-  .full-sentence {
-    margin: 0 0 .8rem;
-    padding: .9rem 1rem;
-    border-radius: .5rem;
-    background: var(--card);
-    border: 1px solid var(--rule);
-    font-family: var(--en);
-    font-size: 1.05rem;
-    line-height: 1.7;
-  }
-  .note { margin: 0 0 1.4rem; color: var(--ink-2); font-size: .85rem; }
+  .note { margin: 0 0 1.25rem; color: var(--ink-2); font-size: .85rem; }
 
   /* ── ④ 결과 ───────────────────────────────────── */
-  .score { margin: 0 0 .3rem; font-family: var(--mono); font-size: 2rem; font-weight: 700; letter-spacing: -.02em; }
-  .score-label { margin: 0 0 1.1rem; color: var(--ink-2); font-size: .8rem; }
-
-  .wrong-list { list-style: none; margin: 0 0 1.75rem; padding: 0; display: grid; gap: .55rem; }
-  .wrong-list li {
-    padding: .85rem 1rem;
-    border: 1px solid var(--rule);
-    border-radius: .5rem;
-    background: var(--card);
+  .score {
+    margin: 0 0 .3rem;
+    font-family: var(--mono);
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: -.03em;
+    color: var(--signal);
   }
-  .wrong-list .ko { color: var(--ink-2); font-size: .82rem; margin-bottom: .2rem; }
+  .score-label { margin: 0 0 .9rem; color: var(--on-ground-2); font-size: .8rem; }
+  .result-progress { margin: 0 0 1.6rem; font-size: .85rem; color: var(--on-ground); }
+
+  .wrong-lead { margin: 0 0 .7rem; color: var(--on-ground-2); font-size: .85rem; }
+  .wrong-list { list-style: none; margin: 0 0 1.6rem; padding: 0; display: grid; gap: .6rem; }
+  .wrong-list li { padding: .9rem 1rem; }
+  .wrong-list .ko { color: var(--ink-2); font-size: .82rem; margin-bottom: .15rem; }
   .wrong-list .en { font-family: var(--en); font-size: 1rem; }
 
-  .result-actions { display: flex; flex-wrap: wrap; gap: .55rem; align-items: center; }
+  .result-actions { display: flex; flex-wrap: wrap; gap: .7rem; align-items: center; }
 
   @media (max-width: 26rem) {
-    .quiz-en { font-size: 1.25rem; }
+    .quiz-en { font-size: 1.24rem; }
+    .card { padding: 1rem; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -315,7 +330,7 @@
       <button type="button" id="btn-size-back" class="btn-text">뒤로</button>
     </div>
 
-    <p id="size-lead" class="lead"></p>
+    <p id="size-lead" class="size-lead"></p>
     <ul id="size-list" class="size-list"></ul>
 
     <p class="reset-area">
@@ -335,19 +350,20 @@
       <button type="button" id="btn-exit" class="btn-text">나가기</button>
     </div>
 
-    <p id="quiz-ko" class="quiz-ko"></p>
-    <p id="quiz-en" class="quiz-en"></p>
-    <p id="quiz-hint" class="quiz-hint"></p>
+    <div class="card question">
+      <p id="quiz-ko" class="quiz-ko"></p>
+      <p id="quiz-en" class="quiz-en"></p>
+      <p id="quiz-hint" class="quiz-hint"></p>
+    </div>
 
     <form id="answer-form" autocomplete="off">
       <input id="answer-input" type="text" autocapitalize="off" spellcheck="false" aria-label="빈칸에 들어갈 단어">
       <button type="submit" id="btn-check" class="btn-primary" disabled>확인</button>
     </form>
 
-    <div id="feedback" hidden>
+    <div id="feedback" class="card" hidden>
       <p id="verdict" class="verdict"></p>
       <p id="answer-compare" class="answer-compare" hidden></p>
-      <p id="full-sentence" class="full-sentence"></p>
       <p id="note" class="note"></p>
       <button type="button" id="btn-next" class="btn-primary">다음</button>
     </div>
@@ -358,10 +374,10 @@
     <h1>세션 완료</h1>
     <p id="score" class="score"></p>
     <p class="score-label">첫 시도에 맞춘 개수입니다. 모든 문장은 맞출 때까지 반복되므로 이 값이 실제 지표입니다.</p>
-    <p id="result-progress" class="score-label"></p>
+    <p id="result-progress" class="result-progress"></p>
 
     <div id="wrong-section" hidden>
-      <p class="lead">한 번이라도 틀린 문장</p>
+      <p class="wrong-lead">한 번이라도 틀린 문장</p>
       <ul id="wrong-list" class="wrong-list"></ul>
     </div>
 
@@ -507,7 +523,7 @@ function renderCategoryScreen() {
   for (const category of listCategories(progress)) {
     const button = document.createElement("button");
     button.type = "button";
-    button.className = "category-btn";
+    button.className = "card category-btn";
 
     const name = document.createElement("span");
     name.className = "name";
@@ -570,10 +586,9 @@ function renderSizeScreen(categoryKey) {
   for (const size of options) {
     const button = document.createElement("button");
     button.type = "button";
-    button.className = "size-btn";
-    button.textContent = size === remaining.length
-      ? "남은 전부 (" + size + ")"
-      : size + "문장";
+    const isAll = size === remaining.length;
+    button.className = isAll ? "card size-btn all" : "card size-btn";
+    button.textContent = isAll ? "남은 전부 (" + size + ")" : size + "문장";
     button.addEventListener("click", () => startSession(categoryKey, size));
 
     const item = document.createElement("li");
@@ -856,7 +871,8 @@ function renderFeedback(sentence, userAnswer, correct) {
     compare.hidden = false;
   }
 
-  renderSentenceInto(el("full-sentence"), sentence, sentence.accept[0]);
+  // 보고 있던 빈칸을 그 자리에서 정답으로 채웁니다. 문장을 아래에 한 번 더 보여줄 필요가 없습니다.
+  renderSentenceInto(el("quiz-en"), sentence, sentence.accept[0]);
 
   const note = el("note");
   note.textContent = sentence.note || "";
@@ -886,8 +902,7 @@ function renderResult() {
 
   const remaining = remainingSentences(session.categoryKey, loadProgress());
   el("result-progress").textContent =
-    "이번에 완료된 문장 " + session.completed.size + "개 · " +
-    "이 카테고리에 남은 문장 " + remaining.length + "개";
+    "이번에 " + session.completed.size + "개 완료 · 남은 문장 " + remaining.length + "개";
 
   const wrongIds = [...session.wrong];
   el("wrong-section").hidden = wrongIds.length === 0;
@@ -906,6 +921,7 @@ function renderResult() {
     renderSentenceInto(en, sentence, sentence.accept[0]);
 
     const item = document.createElement("li");
+    item.className = "card";
     item.append(ko, en);
     list.appendChild(item);
   }
