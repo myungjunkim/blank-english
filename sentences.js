@@ -350,11 +350,11 @@ const SENTENCES = [
   {
     id: "travel-out-38",
     category: "travel-out",
-    ko: "그냥 둘러볼게요, 감사합니다.",
-    en: "I'm just ___ around.",
-    accept: ["looking"],
-    hint: "눈으로 훑어본다는 뜻의 동사 -ing형",
-    note: "look around는 매장 안을 돌아본다는 뜻입니다."
+    ko: "선물 포장 해주시겠어요?",
+    en: "Could you ___ it, please? It's a gift.",
+    accept: ["wrap"],
+    hint: "종이나 천으로 감싸는 동작을 뜻하는 동사",
+    note: "gift-wrap이라는 한 단어로도 씁니다. 포장지는 wrapping paper입니다."
   },
   {
     id: "travel-out-39",
@@ -1550,7 +1550,7 @@ const SENTENCES = [
   {
     id: "daily-opinion-21",
     category: "daily-opinion",
-    ko: "저도 그렇게 생각해요.",
+    ko: "제 생각도 그래요.",
     en: "That's what I ___.",
     accept: ["think", "thought"],
     hint: "머릿속으로 하는 동작을 뜻하는 동사",
@@ -1802,7 +1802,7 @@ const SENTENCES = [
   {
     id: "daily-opinion-49",
     category: "daily-opinion",
-    ko: "저는 상관없어요, 편하실 대로 하세요.",
+    ko: "편하실 대로 하세요.",
     en: "It's up to ___.",
     accept: ["you"],
     hint: "상대를 가리키는 대명사",
@@ -1859,8 +1859,8 @@ const SENTENCES = [
     category: "travel-airport",
     ko: "관광차 왔습니다.",
     en: "I'm here on ___.",
-    accept: ["vacation", "holiday", "business"],
-    hint: "on 뒤에 오는 명사. 관광이든 출장이든 다 됩니다",
+    accept: ["vacation", "holiday"],
+    hint: "on 뒤에 오는 명사. 휴가를 뜻하는 말이면 둘 다 됩니다",
     note: "미국은 vacation, 영국은 holiday를 씁니다. 출장이면 business입니다."
   },
   {
@@ -2208,7 +2208,7 @@ const SENTENCES = [
   {
     id: "travel-airport-44",
     category: "travel-airport",
-    ko: "일주일 정도 머물 예정입니다.",
+    ko: "일주일 정도요.",
     en: "About a ___.",
     accept: ["week"],
     hint: "7일을 묶어 부르는 단위",
@@ -2560,11 +2560,11 @@ const SENTENCES = [
   {
     id: "travel-hotel-33",
     category: "travel-hotel",
-    ko: "방을 바꿔주실 수 있을까요?",
-    en: "Is it possible to ___ rooms?",
-    accept: ["swap", "move"],
-    hint: "다른 방으로 옮기거나 맞바꾼다는 뜻",
-    note: "빈방이 있으면 대개 바꿔줍니다. 성수기에는 어려울 수 있습니다."
+    ko: "다른 층으로 옮길 수 있나요?",
+    en: "Could I move to a different ___?",
+    accept: ["floor"],
+    hint: "건물에서 같은 높이에 있는 공간을 뜻하는 말",
+    note: "높은 층은 higher floor, 낮은 층은 lower floor라고 합니다."
   },
   {
     id: "travel-hotel-34",
@@ -2668,7 +2668,7 @@ const SENTENCES = [
   {
     id: "travel-hotel-45",
     category: "travel-hotel",
-    ko: "모닝콜 좀 부탁드려요.",
+    ko: "7시에 모닝콜 좀 부탁드려요.",
     en: "Could I get a ___ call at seven?",
     accept: ["wake-up", "wakeup"],
     hint: "잠에서 깨우는 것을 뜻하는 말. 하이픈 유무 둘 다 인정합니다",
@@ -2704,7 +2704,7 @@ const SENTENCES = [
   {
     id: "travel-hotel-49",
     category: "travel-hotel",
-    ko: "짐을 두고 왔어요.",
+    ko: "방에 뭘 두고 왔어요.",
     en: "I ___ something in my room.",
     accept: ["left", "forgot"],
     hint: "물건을 남겨두고 나왔다는 뜻의 동사, 과거형",
