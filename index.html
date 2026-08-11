@@ -312,6 +312,12 @@ ul { list-style: none; margin: 0; padding: 0; }
 /* ═══════════════════════════════════════════════════════════
    ③ 문제
    ═══════════════════════════════════════════════════════════ */
+/* 세트를 시작한 뒤에도 언제든 빠져나올 수 있어야 합니다.
+   주 동작과 경쟁하지 않도록 하단 바가 아니라 화면 머리에 둡니다. */
+.screen-head #quiz-category { font-weight: var(--weight-medium); color: var(--text-muted); }
+
+.quiz-body { margin-top: var(--sp-8); }
+
 .prompt-ko {
   max-width: var(--measure);
   margin-bottom: var(--sp-4);
@@ -591,8 +597,13 @@ ul { list-style: none; margin: 0; padding: 0; }
 
   <!-- ③ 문제 -->
   <section id="screen-quiz" hidden>
+    <div class="screen-head">
+      <h2 id="quiz-category"></h2>
+      <button type="button" class="btn btn-plain" id="btn-exit">그만두기</button>
+    </div>
+
     <div class="meter-label">
-      <span id="quiz-category"></span>
+      <span>진행</span>
       <span><strong id="quiz-position">1</strong> / <span id="quiz-total">5</span></span>
     </div>
     <div class="meter" role="progressbar" id="quiz-meter" aria-valuemin="0" aria-valuenow="0" aria-valuemax="5" aria-label="세트 진행률">
@@ -601,7 +612,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 
     <p class="resume-note" id="resume-note" hidden>지난번에 풀던 자리에서 이어집니다.</p>
 
-    <form id="quiz-form" style="margin-top: var(--sp-8)">
+    <form id="quiz-form" class="quiz-body">
       <p class="prompt-ko" id="prompt-ko"></p>
       <p class="sentence" id="sentence"></p>
       <p class="hint" id="hint"></p>
@@ -1336,6 +1347,7 @@ el("quiz-form").addEventListener("submit", (event) => {
   if (blanks.every((b) => b.value.trim())) grade();
 });
 
+el("btn-exit").addEventListener("click", renderCategoryScreen);
 el("btn-size-back").addEventListener("click", renderCategoryScreen);
 el("btn-empty-back").addEventListener("click", renderCategoryScreen);
 el("btn-retry-load").addEventListener("click", (event) => {
