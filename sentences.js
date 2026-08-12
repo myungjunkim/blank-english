@@ -6318,5 +6318,6305 @@ const SENTENCES = [
     accept: ["them"],
     hint: "'그 사람들'에 해당하는 목적어 자리의 말",
     note: "Tell me about은 상대가 이야기를 이어가게 만드는 말입니다. 대화를 늘리는 데 좋습니다."
+  },
+  {
+    id: "travel-out-101",
+    category: "travel-out",
+    ko: "예약 시간을 8시로 옮길 수 있을까요?",
+    en: "Could we ___ our reservation to eight?",
+    accept: ["move"],
+    hint: "자리를 옮긴다는 뜻의 동사",
+    note: "move a reservation은 시간을 바꾼다는 뜻입니다. 취소하고 다시 잡는 것이 아닙니다."
+  },
+  {
+    id: "travel-out-102",
+    category: "travel-out",
+    ko: "두 명 더 와도 될까요?",
+    en: "Could we ___ two more people?",
+    accept: ["add"],
+    hint: "수를 더한다는 뜻의 동사",
+    note: "예약 인원을 늘릴 때 씁니다. 줄일 때는 drop을 씁니다."
+  },
+  {
+    id: "travel-out-103",
+    category: "travel-out",
+    ko: "얼마나 더 기다려야 하나요?",
+    en: "How much ___ is the wait?",
+    accept: ["longer"],
+    hint: "시간이 더 길다는 뜻의 비교급",
+    note: "How much longer는 이미 기다리고 있는 상황에서 씁니다."
+  },
+  {
+    id: "travel-out-104",
+    category: "travel-out",
+    ko: "대기자 명단에 올려주세요.",
+    en: "Could you put me on the ___ list?",
+    accept: ["waiting", "wait"],
+    hint: "기다린다는 뜻의 말",
+    note: "미국에서는 waitlist라는 한 단어로도 씁니다."
+  },
+  {
+    id: "travel-out-105",
+    category: "travel-out",
+    ko: "아기 의자 있나요?",
+    en: "Do you have a ___ chair?",
+    accept: ["high"],
+    hint: "높다는 뜻의 형용사. chair와 붙어 유아용 의자가 됩니다",
+    note: "high chair는 아기를 앉히는 다리 긴 의자입니다."
+  },
+  {
+    id: "travel-out-106",
+    category: "travel-out",
+    ko: "물 좀 주시겠어요?",
+    en: "Could we get some ___, please?",
+    accept: ["water"],
+    hint: "마시는 것 중 가장 기본이 되는 것",
+    note: "미국 식당에서는 물을 따로 청하지 않아도 먼저 내줍니다."
+  },
+  {
+    id: "travel-out-107",
+    category: "travel-out",
+    ko: "얼음은 빼주세요.",
+    en: "No ___, please.",
+    accept: ["ice"],
+    hint: "물을 얼린 것",
+    note: "얼음을 더 원하면 extra ice라고 합니다."
+  },
+  {
+    id: "travel-out-108",
+    category: "travel-out",
+    ko: "빨대 하나 주시겠어요?",
+    en: "Could I get a ___ for my drink?",
+    accept: ["straw"],
+    hint: "음료를 빨아 마시는 가는 관",
+    note: "요즘은 종이 빨대를 쓰는 곳이 많습니다. paper straw라고 합니다."
+  },
+  {
+    id: "travel-out-109",
+    category: "travel-out",
+    ko: "냅킨 좀 더 주세요.",
+    en: "Could we get more ___?",
+    accept: ["napkins"],
+    hint: "입이나 손을 닦는 종이",
+    note: "영국에서는 serviette이라고도 합니다."
+  },
+  {
+    id: "travel-out-110",
+    category: "travel-out",
+    ko: "앞접시 하나 주시겠어요?",
+    en: "Could we get a small ___?",
+    accept: ["plate"],
+    hint: "음식을 담는 납작한 그릇",
+    note: "나눠 먹을 때 쓰는 접시는 side plate라고도 합니다."
+  },
+  {
+    id: "travel-out-111",
+    category: "travel-out",
+    ko: "젓가락 있나요?",
+    en: "Do you have ___?",
+    accept: ["chopsticks"],
+    hint: "동아시아에서 쓰는 두 개짜리 식사 도구",
+    note: "항상 복수로 씁니다. 한 짝은 a chopstick입니다."
+  },
+  {
+    id: "travel-out-112",
+    category: "travel-out",
+    ko: "포크로 주시겠어요?",
+    en: "Could I get a ___ instead?",
+    accept: ["fork"],
+    hint: "끝이 갈라진 서양식 식사 도구",
+    note: "instead를 붙이면 '이것 말고 저것으로'라는 뜻이 됩니다."
+  },
+  {
+    id: "travel-out-113",
+    category: "travel-out",
+    ko: "소금 좀 건네주시겠어요?",
+    en: "Could you pass the ___?",
+    accept: ["salt"],
+    hint: "짠맛을 내는 조미료",
+    note: "pass the salt는 식탁에서 옆 사람에게 건네달라고 할 때 쓰는 정해진 표현입니다."
+  },
+  {
+    id: "travel-out-114",
+    category: "travel-out",
+    ko: "이거 다시 데워주시겠어요?",
+    en: "Could you ___ this, please?",
+    accept: ["reheat"],
+    hint: "다시 데운다는 뜻의 동사",
+    note: "heat up은 처음 데우는 것, reheat는 식은 것을 다시 데우는 것입니다."
+  },
+  {
+    id: "travel-out-115",
+    category: "travel-out",
+    ko: "음료는 뭐가 있나요?",
+    en: "What ___ do you have?",
+    accept: ["drinks", "beverages"],
+    hint: "마실 것을 뜻하는 복수 명사",
+    note: "drinks가 편한 말, beverages는 메뉴판에 적히는 말입니다."
+  },
+  {
+    id: "travel-out-116",
+    category: "travel-out",
+    ko: "생맥주 한 잔 주세요.",
+    en: "I'll have a ___ beer.",
+    accept: ["draft", "draught"],
+    hint: "통에서 바로 따르는 방식을 뜻하는 말",
+    note: "미국은 draft, 영국은 draught로 적지만 소리는 같습니다."
+  },
+  {
+    id: "travel-out-117",
+    category: "travel-out",
+    ko: "무알코올 음료 있나요?",
+    en: "Do you have any ___ drinks?",
+    accept: ["non-alcoholic", "nonalcoholic"],
+    hint: "술이 들어 있지 않다는 뜻의 형용사",
+    note: "요즘은 mocktail이라는 말도 씁니다."
+  },
+  {
+    id: "travel-out-118",
+    category: "travel-out",
+    ko: "하나 더 시킬까요?",
+    en: "Should we ___ another one?",
+    accept: ["order"],
+    hint: "음식을 주문한다는 뜻의 동사",
+    note: "another one은 '같은 걸로 하나 더'라는 뜻입니다."
+  },
+  {
+    id: "travel-out-119",
+    category: "travel-out",
+    ko: "이건 서비스인가요?",
+    en: "Is this on the ___?",
+    accept: ["house"],
+    hint: "집을 뜻하는 명사가 가게를 가리키면 무료가 됩니다",
+    note: "on the house는 가게에서 그냥 준다는 뜻입니다. 우리말 '서비스'는 영어로 통하지 않습니다."
+  },
+  {
+    id: "travel-out-120",
+    category: "travel-out",
+    ko: "계산이 잘못된 것 같아요.",
+    en: "I think there's an ___ on the bill.",
+    accept: ["error"],
+    hint: "잘못된 부분을 뜻하는 명사",
+    note: "There's an error on the bill은 따지지 않고 부드럽게 알리는 말투입니다."
+  },
+  {
+    id: "travel-out-121",
+    category: "travel-out",
+    ko: "음식이 좀 짜요.",
+    en: "It's a little too ___.",
+    accept: ["salty"],
+    hint: "소금 맛이 강하다는 뜻의 형용사",
+    note: "a little too를 붙이면 불평이 아니라 알려주는 느낌이 됩니다."
+  },
+  {
+    id: "travel-out-122",
+    category: "travel-out",
+    ko: "좀 기름져요.",
+    en: "It's a bit ___.",
+    accept: ["greasy", "oily"],
+    hint: "기름기가 많다는 뜻의 형용사",
+    note: "greasy는 기름진 음식에, oily는 기름이 겉도는 느낌에 씁니다."
+  },
+  {
+    id: "travel-out-123",
+    category: "travel-out",
+    ko: "이 고기가 덜 익은 것 같아요.",
+    en: "I think this meat is ___.",
+    accept: ["undercooked", "raw"],
+    hint: "충분히 익지 않았다는 뜻의 말",
+    note: "undercooked는 덜 익은 것, raw는 아예 날것입니다."
+  },
+  {
+    id: "travel-out-124",
+    category: "travel-out",
+    ko: "음식이 정말 훌륭했어요.",
+    en: "The food was ___.",
+    accept: ["fantastic", "amazing"],
+    hint: "아주 좋았다는 뜻의 강한 형용사",
+    note: "계산할 때 이 말을 건네면 좋은 인상을 남깁니다."
+  },
+  {
+    id: "travel-out-125",
+    category: "travel-out",
+    ko: "주방장님께 잘 먹었다고 전해주세요.",
+    en: "Please give my ___ to the chef.",
+    accept: ["compliments"],
+    hint: "칭찬을 뜻하는 명사. 이 뜻일 때는 복수로 씁니다",
+    note: "compliments to the chef는 정해진 표현입니다."
+  },
+  {
+    id: "travel-out-126",
+    category: "travel-out",
+    ko: "팁은 얼마나 드리면 되나요?",
+    en: "How much should I ___?",
+    accept: ["tip"],
+    hint: "봉사료를 준다는 뜻의 동사",
+    note: "미국은 보통 15~20퍼센트입니다. 한국과 일본은 팁 문화가 없습니다."
+  },
+  {
+    id: "travel-out-127",
+    category: "travel-out",
+    ko: "카드 두 장으로 나눠서 낼게요.",
+    en: "Can we split it between two ___?",
+    accept: ["cards"],
+    hint: "결제 수단을 뜻하는 복수 명사",
+    note: "가게에 따라 안 되는 곳도 있어 미리 물어보는 것이 좋습니다."
+  },
+  {
+    id: "travel-out-128",
+    category: "travel-out",
+    ko: "봉사료가 포함된 가격인가요?",
+    en: "Is the service ___ included?",
+    accept: ["charge"],
+    hint: "요금을 뜻하는 명사",
+    note: "유럽 식당에는 service charge가 청구서에 붙는 곳이 많습니다."
+  },
+  {
+    id: "travel-out-129",
+    category: "travel-out",
+    ko: "다른 자리로 앉아도 될까요?",
+    en: "Could we sit somewhere ___?",
+    accept: ["else"],
+    hint: "'그 밖의'를 뜻하는 말",
+    note: "somewhere else는 '다른 데'입니다."
+  },
+  {
+    id: "travel-out-130",
+    category: "travel-out",
+    ko: "콘센트 가까운 자리 있나요?",
+    en: "Is there a table near an ___?",
+    accept: ["outlet"],
+    hint: "전기를 꽂는 구멍",
+    note: "미국은 outlet, 영국은 socket이라고 합니다."
+  },
+  {
+    id: "travel-out-131",
+    category: "travel-out",
+    ko: "화장실 열쇠 있나요?",
+    en: "Do you have a key for the ___?",
+    accept: ["restroom", "bathroom"],
+    hint: "볼일을 보는 곳",
+    note: "미국 가게에서는 열쇠를 받아야 하는 곳이 종종 있습니다."
+  },
+  {
+    id: "travel-out-132",
+    category: "travel-out",
+    ko: "주차 도장 좀 찍어주시겠어요?",
+    en: "Could you ___ my parking?",
+    accept: ["validate"],
+    hint: "확인해 준다는 뜻의 동사",
+    note: "validate parking은 가게에서 주차비를 깎아 주는 절차입니다."
+  },
+  {
+    id: "travel-out-133",
+    category: "travel-out",
+    ko: "예약은 안 했는데요.",
+    en: "We don't have a ___.",
+    accept: ["reservation"],
+    hint: "미리 자리를 잡아두는 것",
+    note: "예약 없이 온 손님은 walk-in이라고 부릅니다."
+  },
+  {
+    id: "travel-out-134",
+    category: "travel-out",
+    ko: "몇 시에 문 닫아요?",
+    en: "What time do you ___?",
+    accept: ["close"],
+    hint: "영업을 마친다는 뜻의 동사",
+    note: "여는 시간을 물을 때는 What time do you open?입니다."
+  },
+  {
+    id: "travel-out-135",
+    category: "travel-out",
+    ko: "배달도 되나요?",
+    en: "Do you ___?",
+    accept: ["deliver"],
+    hint: "집까지 가져다준다는 뜻의 동사",
+    note: "포장만 되는 곳은 takeout only라고 합니다."
+  },
+  {
+    id: "travel-out-136",
+    category: "travel-out",
+    ko: "이거 재고 있나요?",
+    en: "Do you have this in ___?",
+    accept: ["stock"],
+    hint: "가게에 쌓아둔 물건을 뜻하는 명사",
+    note: "in stock은 있다, out of stock은 없다는 뜻입니다."
+  },
+  {
+    id: "travel-out-137",
+    category: "travel-out",
+    ko: "이거 품절인가요?",
+    en: "Is it ___ out?",
+    accept: ["sold"],
+    hint: "팔다의 과거분사",
+    note: "sold out은 다 팔렸다는 뜻입니다."
+  },
+  {
+    id: "travel-out-138",
+    category: "travel-out",
+    ko: "다른 지점에 있을까요?",
+    en: "Do you have it at another ___?",
+    accept: ["store", "location"],
+    hint: "가게 한 곳을 뜻하는 명사",
+    note: "체인점의 지점은 location이나 branch라고 합니다."
+  },
+  {
+    id: "travel-out-139",
+    category: "travel-out",
+    ko: "온라인으로 주문할 수 있나요?",
+    en: "Can I order it ___?",
+    accept: ["online"],
+    hint: "인터넷으로 한다는 뜻의 말",
+    note: "가게에서 주문해 집으로 받는 것은 ship to home이라고 합니다."
+  },
+  {
+    id: "travel-out-140",
+    category: "travel-out",
+    ko: "배송은 얼마나 걸리나요?",
+    en: "How long does ___ take?",
+    accept: ["delivery", "shipping"],
+    hint: "물건을 보내주는 일을 뜻하는 명사",
+    note: "delivery는 받는 쪽, shipping은 보내는 쪽에서 보는 말입니다."
+  },
+  {
+    id: "travel-out-141",
+    category: "travel-out",
+    ko: "집으로 보내주실 수 있나요?",
+    en: "Could you ___ it to my house?",
+    accept: ["ship", "send"],
+    hint: "물건을 부친다는 뜻의 동사",
+    note: "ship은 택배로 부치는 것, send는 더 넓게 씁니다."
+  },
+  {
+    id: "travel-out-142",
+    category: "travel-out",
+    ko: "보증 기간이 얼마나 되나요?",
+    en: "How long does the ___ last?",
+    accept: ["warranty"],
+    hint: "고장 나면 고쳐준다는 약속",
+    note: "warranty는 제조사가 주는 보증, guarantee는 더 넓은 뜻의 약속입니다."
+  },
+  {
+    id: "travel-out-143",
+    category: "travel-out",
+    ko: "선물용 영수증도 주시겠어요?",
+    en: "Could I get a ___ receipt?",
+    accept: ["gift"],
+    hint: "선물을 뜻하는 명사",
+    note: "gift receipt에는 가격이 찍히지 않아 받는 사람이 교환만 할 수 있습니다."
+  },
+  {
+    id: "travel-out-144",
+    category: "travel-out",
+    ko: "이 세일 언제까지예요?",
+    en: "When does the sale ___?",
+    accept: ["end"],
+    hint: "끝난다는 뜻의 동사",
+    note: "세일 마지막 날은 the last day of the sale입니다."
+  },
+  {
+    id: "travel-out-145",
+    category: "travel-out",
+    ko: "멤버십 카드 있으세요?",
+    en: "Do you have a ___ card?",
+    accept: ["membership", "loyalty"],
+    hint: "회원임을 나타내는 말",
+    note: "미국 가게에서 계산할 때 거의 매번 묻는 질문입니다."
+  },
+  {
+    id: "travel-out-146",
+    category: "travel-out",
+    ko: "포인트 적립되나요?",
+    en: "Do I earn ___?",
+    accept: ["points"],
+    hint: "쌓아두었다가 쓰는 것",
+    note: "쓸 때는 redeem points라고 합니다."
+  },
+  {
+    id: "travel-out-147",
+    category: "travel-out",
+    ko: "할부로 살 수 있나요?",
+    en: "Can I pay in ___?",
+    accept: ["installments"],
+    hint: "여러 번에 나눠 낸다는 뜻의 명사",
+    note: "한국만큼 흔하지 않아 안 되는 곳이 많습니다."
+  },
+  {
+    id: "travel-out-148",
+    category: "travel-out",
+    ko: "일시불로 할게요.",
+    en: "I'll pay in ___.",
+    accept: ["full"],
+    hint: "모자람 없이 전부라는 뜻의 말",
+    note: "pay in full은 한 번에 다 낸다는 뜻입니다."
+  },
+  {
+    id: "travel-out-149",
+    category: "travel-out",
+    ko: "이거 면세 되나요?",
+    en: "Is this ___ free?",
+    accept: ["duty", "tax"],
+    hint: "물건에 붙는 세금을 뜻하는 명사",
+    note: "공항 면세점은 duty-free, 관광객 세금 환급은 tax refund입니다."
+  },
+  {
+    id: "travel-out-150",
+    category: "travel-out",
+    ko: "이거 신상품인가요?",
+    en: "Is this a new ___?",
+    accept: ["arrival"],
+    hint: "새로 들어왔다는 뜻의 명사",
+    note: "가게 앞에 New Arrivals라고 써 붙인 것을 자주 볼 수 있습니다."
+  },
+  {
+    id: "travel-out-151",
+    category: "travel-out",
+    ko: "좀 더 밝은 색 있나요?",
+    en: "Do you have it in a ___ color?",
+    accept: ["lighter"],
+    hint: "색이 옅다는 뜻의 비교급",
+    note: "짙은 색은 darker입니다. light는 색이 옅다는 뜻과 가볍다는 뜻을 함께 가집니다."
+  },
+  {
+    id: "travel-out-152",
+    category: "travel-out",
+    ko: "이거 세탁기에 돌려도 되나요?",
+    en: "Is it machine ___?",
+    accept: ["washable"],
+    hint: "빨 수 있다는 뜻의 형용사",
+    note: "손빨래만 되는 것은 hand wash only라고 적혀 있습니다."
+  },
+  {
+    id: "travel-out-153",
+    category: "travel-out",
+    ko: "이거 소재가 뭐예요?",
+    en: "What ___ is it?",
+    accept: ["material", "fabric"],
+    hint: "무엇으로 만들었는지를 뜻하는 명사",
+    note: "옷감에는 fabric, 그 밖의 재료에는 material을 씁니다."
+  },
+  {
+    id: "travel-out-154",
+    category: "travel-out",
+    ko: "이거 정품인가요?",
+    en: "Is it ___?",
+    accept: ["genuine", "authentic"],
+    hint: "가짜가 아니라는 뜻의 형용사",
+    note: "가짜는 fake나 counterfeit라고 합니다."
+  },
+  {
+    id: "travel-out-155",
+    category: "travel-out",
+    ko: "이거 무게가 얼마나 나가요?",
+    en: "How much does it ___?",
+    accept: ["weigh"],
+    hint: "무게를 잰다는 뜻의 동사",
+    note: "명사 weight와 소리가 같습니다."
+  },
+  {
+    id: "travel-out-156",
+    category: "travel-out",
+    ko: "좀 무겁네요.",
+    en: "This one's a bit ___.",
+    accept: ["heavy"],
+    hint: "무겁다는 뜻의 형용사",
+    note: "가벼운 것은 light입니다."
+  },
+  {
+    id: "travel-out-157",
+    category: "travel-out",
+    ko: "이거 깨지기 쉬운가요?",
+    en: "Is this item ___?",
+    accept: ["fragile"],
+    hint: "잘 깨진다는 뜻의 형용사",
+    note: "택배 상자에 Fragile이라고 찍힌 것을 자주 볼 수 있습니다."
+  },
+  {
+    id: "travel-out-158",
+    category: "travel-out",
+    ko: "좀 더 보고 다시 올게요.",
+    en: "I'll ___ back later.",
+    accept: ["come"],
+    hint: "오다의 기본형",
+    note: "사지 않고 나올 때 쓰는 부드러운 말입니다."
+  },
+  {
+    id: "travel-out-159",
+    category: "travel-out",
+    ko: "이건 따로 담아주세요.",
+    en: "Could you put those in a ___ bag?",
+    accept: ["separate"],
+    hint: "따로 떨어져 있다는 뜻의 형용사",
+    note: "부사 separately와 헷갈리기 쉽습니다. 여기서는 bag을 꾸미므로 형용사입니다."
+  },
+  {
+    id: "travel-out-160",
+    category: "travel-out",
+    ko: "카트는 어디에 있나요?",
+    en: "Where can I get a ___?",
+    accept: ["cart"],
+    hint: "물건을 싣고 미는 수레",
+    note: "미국은 cart, 영국은 trolley라고 합니다."
+  },
+  {
+    id: "travel-out-161",
+    category: "travel-out",
+    ko: "계산대가 어디예요?",
+    en: "Where's the ___ counter?",
+    accept: ["checkout"],
+    hint: "돈을 내는 곳",
+    note: "미국에서는 cash register나 checkout이라고 합니다."
+  },
+  {
+    id: "travel-out-162",
+    category: "travel-out",
+    ko: "줄이 어디서부터인가요?",
+    en: "Where does the ___ start?",
+    accept: ["line", "queue"],
+    hint: "차례를 기다리며 선 줄",
+    note: "미국은 line, 영국은 queue를 씁니다."
+  },
+  {
+    id: "travel-out-163",
+    category: "travel-out",
+    ko: "이것들 살게요.",
+    en: "I'd like to ___ these.",
+    accept: ["buy", "purchase"],
+    hint: "돈을 주고 얻는다는 뜻의 동사",
+    note: "buy가 편한 말, purchase는 격식 있는 말입니다."
+  },
+  {
+    id: "travel-out-164",
+    category: "travel-out",
+    ko: "영수증은 안 주셔도 돼요.",
+    en: "I don't ___ the receipt.",
+    accept: ["need"],
+    hint: "필요하다는 뜻의 동사",
+    note: "요즘은 이메일로 보내주기도 합니다. email receipt라고 합니다."
+  },
+  {
+    id: "travel-out-165",
+    category: "travel-out",
+    ko: "가격표가 안 붙어 있어요.",
+    en: "There's no price ___ on this.",
+    accept: ["tag"],
+    hint: "물건에 매달린 작은 표",
+    note: "가격을 물으려면 Could you check the price?라고 합니다."
+  },
+  {
+    id: "travel-out-166",
+    category: "travel-out",
+    ko: "가격 좀 확인해 주시겠어요?",
+    en: "Could you ___ the price for me?",
+    accept: ["check"],
+    hint: "맞는지 살펴본다는 뜻의 동사",
+    note: "가게에서 바코드를 찍어 확인해 줍니다."
+  },
+  {
+    id: "travel-out-167",
+    category: "travel-out",
+    ko: "좀 더 생각해 볼게요.",
+    en: "Let me ___ about it.",
+    accept: ["think"],
+    hint: "생각한다는 뜻의 동사",
+    note: "사지 않고 자리를 뜰 때 쓰는 무난한 말입니다."
+  },
+  {
+    id: "travel-out-168",
+    category: "travel-out",
+    ko: "이걸로 정했어요.",
+    en: "I've ___.",
+    accept: ["decided"],
+    hint: "정하다의 과거분사",
+    note: "메뉴를 다 골랐을 때도 씁니다."
+  },
+  {
+    id: "travel-out-169",
+    category: "travel-out",
+    ko: "몇 번 출구로 나가야 하나요?",
+    en: "Which ___ should I take?",
+    accept: ["exit"],
+    hint: "밖으로 나가는 문",
+    note: "한국 지하철은 출구에 번호가 붙어 있어 Exit 3처럼 말합니다."
+  },
+  {
+    id: "travel-out-170",
+    category: "travel-out",
+    ko: "막차가 몇 시예요?",
+    en: "What time is the ___ train?",
+    accept: ["last"],
+    hint: "맨 나중이라는 뜻의 형용사",
+    note: "첫차는 the first train입니다."
+  },
+  {
+    id: "travel-out-171",
+    category: "travel-out",
+    ko: "배차 간격이 어떻게 되나요?",
+    en: "How ___ do the buses come?",
+    accept: ["often"],
+    hint: "얼마나 자주인지를 묻는 부사",
+    note: "대답은 Every ten minutes처럼 합니다."
+  },
+  {
+    id: "travel-out-172",
+    category: "travel-out",
+    ko: "이 카드로 탈 수 있나요?",
+    en: "Can I use this card to ___ the bus?",
+    accept: ["ride"],
+    hint: "차를 탄다는 뜻의 동사",
+    note: "대중교통을 탈 때는 ride, 운전할 때는 drive입니다."
+  },
+  {
+    id: "travel-out-173",
+    category: "travel-out",
+    ko: "교통카드 충전은 어디서 하나요?",
+    en: "Where can I ___ my transit card?",
+    accept: ["recharge", "reload"],
+    hint: "다시 채운다는 뜻의 동사",
+    note: "영국에서는 top up이라는 말을 씁니다."
+  },
+  {
+    id: "travel-out-174",
+    category: "travel-out",
+    ko: "환승 할인이 되나요?",
+    en: "Is there a ___ discount?",
+    accept: ["transfer"],
+    hint: "갈아탄다는 뜻의 명사",
+    note: "미국에서는 갈아탈 때 주는 표를 transfer라고 부르기도 합니다."
+  },
+  {
+    id: "travel-out-175",
+    category: "travel-out",
+    ko: "내리기 전에 벨을 눌러주세요.",
+    en: "Press the ___ before your stop.",
+    accept: ["button", "bell"],
+    hint: "손가락으로 누르는 것",
+    note: "미국 버스에는 줄을 당기는 것도 있습니다. pull the cord라고 합니다."
+  },
+  {
+    id: "travel-out-176",
+    category: "travel-out",
+    ko: "내릴 곳을 지나쳤어요.",
+    en: "I ___ my stop.",
+    accept: ["missed"],
+    hint: "놓치다의 과거형",
+    note: "다음 정류장에서 내려 되돌아가면 됩니다."
+  },
+  {
+    id: "travel-out-177",
+    category: "travel-out",
+    ko: "반대 방향으로 가는 것 같아요.",
+    en: "I think I'm going the wrong ___.",
+    accept: ["way"],
+    hint: "방향을 뜻하는 명사",
+    note: "the wrong way는 길을 잘못 들었다는 뜻입니다."
+  },
+  {
+    id: "travel-out-178",
+    category: "travel-out",
+    ko: "지하철 앱이 있나요?",
+    en: "Is there an ___ for the subway?",
+    accept: ["app"],
+    hint: "휴대폰에 까는 프로그램",
+    note: "application의 줄임말이지만 지금은 app이 굳어진 말입니다."
+  },
+  {
+    id: "travel-out-179",
+    category: "travel-out",
+    ko: "택시 승강장이 어디예요?",
+    en: "Where's the taxi ___?",
+    accept: ["stand", "rank"],
+    hint: "택시가 줄지어 서 있는 곳",
+    note: "미국은 taxi stand, 영국은 taxi rank라고 합니다."
+  },
+  {
+    id: "travel-out-180",
+    category: "travel-out",
+    ko: "미터기 좀 켜주세요.",
+    en: "Could you turn on the ___?",
+    accept: ["meter"],
+    hint: "요금을 재는 기계",
+    note: "미터기를 안 켜면 부르는 게 값이 되므로 반드시 확인합니다."
+  },
+  {
+    id: "travel-out-181",
+    category: "travel-out",
+    ko: "트렁크 좀 열어주시겠어요?",
+    en: "Could you open the ___?",
+    accept: ["trunk", "boot"],
+    hint: "차 뒤쪽의 짐 싣는 곳",
+    note: "미국은 trunk, 영국은 boot입니다."
+  },
+  {
+    id: "travel-out-182",
+    category: "travel-out",
+    ko: "여기서 유턴할 수 있나요?",
+    en: "Can you make a ___ here?",
+    accept: ["U-turn", "uturn"],
+    hint: "차를 반대 방향으로 돌리는 것",
+    note: "알파벳 U 모양으로 돈다는 뜻입니다."
+  },
+  {
+    id: "travel-out-183",
+    category: "travel-out",
+    ko: "길이 많이 막히나요?",
+    en: "Is the traffic ___?",
+    accept: ["bad", "heavy"],
+    hint: "상태가 안 좋다는 뜻의 형용사",
+    note: "traffic is heavy는 차가 많다, traffic is bad는 그래서 오래 걸린다는 쪽에 가깝습니다."
+  },
+  {
+    id: "travel-out-184",
+    category: "travel-out",
+    ko: "다른 길로 가주시겠어요?",
+    en: "Could you take a different ___?",
+    accept: ["route"],
+    hint: "가는 길을 뜻하는 명사",
+    note: "road는 길 자체, route는 그 길을 이어 만든 경로입니다."
+  },
+  {
+    id: "travel-out-185",
+    category: "travel-out",
+    ko: "여기서 얼마나 더 가야 해요?",
+    en: "How much ___ is it?",
+    accept: ["further", "farther"],
+    hint: "거리가 더 멀다는 뜻의 비교급",
+    note: "거리에는 farther, 정도에는 further를 쓴다고 하지만 실제로는 섞어 씁니다."
+  },
+  {
+    id: "travel-out-186",
+    category: "travel-out",
+    ko: "신호가 초록불로 바뀌었어요.",
+    en: "The ___ turned green.",
+    accept: ["light"],
+    hint: "길에 서서 색이 바뀌는 것",
+    note: "traffic light를 줄여 light라고만 해도 통합니다."
+  },
+  {
+    id: "travel-out-187",
+    category: "travel-out",
+    ko: "가장 가까운 횡단보도가 어디예요?",
+    en: "Where's the nearest ___?",
+    accept: ["crosswalk", "crossing"],
+    hint: "길을 건너도록 줄을 그어 놓은 곳",
+    note: "미국은 crosswalk, 영국은 zebra crossing이라고 합니다."
+  },
+  {
+    id: "travel-out-188",
+    category: "travel-out",
+    ko: "이 근처에 주차장 있나요?",
+    en: "Is there a ___ lot nearby?",
+    accept: ["parking"],
+    hint: "차를 세워두는 일을 뜻하는 말",
+    note: "미국은 parking lot, 영국은 car park입니다."
+  },
+  {
+    id: "travel-out-189",
+    category: "travel-out",
+    ko: "주차 요금이 어떻게 되나요?",
+    en: "What's the parking ___?",
+    accept: ["rate"],
+    hint: "정해진 값이나 비율을 뜻하는 명사",
+    note: "시간당 요금은 hourly rate입니다."
+  },
+  {
+    id: "travel-out-190",
+    category: "travel-out",
+    ko: "자전거 빌릴 수 있나요?",
+    en: "Can I ___ a bike?",
+    accept: ["rent"],
+    hint: "돈을 내고 잠시 쓴다는 뜻의 동사",
+    note: "borrow는 공짜로 빌리는 것, rent는 돈을 내고 빌리는 것입니다."
+  },
+  {
+    id: "travel-out-191",
+    category: "travel-out",
+    ko: "가장 가까운 버스 정류장이 어디예요?",
+    en: "Where's the nearest bus ___?",
+    accept: ["stop"],
+    hint: "버스가 서는 곳",
+    note: "기차역은 station, 버스는 stop을 씁니다."
+  },
+  {
+    id: "travel-out-192",
+    category: "travel-out",
+    ko: "안전벨트를 매야 하나요?",
+    en: "Do I need to wear a ___?",
+    accept: ["seatbelt", "seat belt"],
+    hint: "차에서 몸을 잡아주는 띠",
+    note: "뒷자리도 매야 하는 나라가 많습니다."
+  },
+  {
+    id: "travel-out-193",
+    category: "travel-out",
+    ko: "택시비는 현금으로 내도 되나요?",
+    en: "Can I pay the fare in ___?",
+    accept: ["cash"],
+    hint: "지폐와 동전을 뜻하는 명사",
+    note: "요즘은 카드만 받는 택시도 많습니다. cashless라고 합니다."
+  },
+  {
+    id: "travel-out-194",
+    category: "travel-out",
+    ko: "길 좀 여쭤봐도 될까요?",
+    en: "Could I ask you for ___?",
+    accept: ["directions"],
+    hint: "길 안내를 뜻하는 명사. 이 뜻일 때는 복수입니다",
+    note: "단수 direction은 '방향'이라는 다른 뜻이 됩니다."
+  },
+  {
+    id: "travel-out-195",
+    category: "travel-out",
+    ko: "여기가 어디쯤이에요?",
+    en: "Where ___ we right now?",
+    accept: ["are"],
+    hint: "be동사의 현재형",
+    note: "지도를 보여주며 물으면 훨씬 빨리 통합니다."
+  },
+  {
+    id: "travel-out-196",
+    category: "travel-out",
+    ko: "이 건물 이름이 뭐예요?",
+    en: "What's this ___ called?",
+    accept: ["building"],
+    hint: "사람이 지은 큰 구조물",
+    note: "길을 설명할 때 건물 이름이 가장 확실한 표시가 됩니다."
+  },
+  {
+    id: "travel-out-197",
+    category: "travel-out",
+    ko: "저기 보이는 게 뭐예요?",
+    en: "What's that over ___?",
+    accept: ["there"],
+    hint: "저쪽을 가리키는 말",
+    note: "over there는 '저기 저쪽'이라는 뜻입니다."
+  },
+  {
+    id: "travel-out-198",
+    category: "travel-out",
+    ko: "두 번째 신호에서 우회전하세요.",
+    en: "Turn right at the ___ light.",
+    accept: ["second"],
+    hint: "차례가 두 번째라는 뜻의 말",
+    note: "첫 번째는 first, 세 번째는 third입니다."
+  },
+  {
+    id: "travel-out-199",
+    category: "travel-out",
+    ko: "직진하시면 왼쪽에 있어요.",
+    en: "It's on the ___ after you go straight.",
+    accept: ["left"],
+    hint: "오른쪽의 반대",
+    note: "on the left는 '왼쪽에'입니다. to the left는 '왼쪽으로'입니다."
+  },
+  {
+    id: "travel-out-200",
+    category: "travel-out",
+    ko: "덕분에 잘 찾았어요.",
+    en: "I ___ it, thanks.",
+    accept: ["found"],
+    hint: "찾다의 과거형",
+    note: "길을 알려준 사람에게 건네는 짧은 인사입니다."
+  },
+  {
+    id: "daily-greeting-101",
+    category: "daily-greeting",
+    ko: "이제 퇴근하세요?",
+    en: "Are you ___ for the day?",
+    accept: ["done", "finished"],
+    hint: "일을 마쳤다는 뜻의 형용사",
+    note: "done for the day는 오늘 일이 끝났다는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-102",
+    category: "daily-greeting",
+    ko: "오늘 일찍 나오셨네요.",
+    en: "You're up ___ today.",
+    accept: ["early"],
+    hint: "이르다는 뜻의 말",
+    note: "You're up early는 아침에 마주쳤을 때 건네는 가벼운 인사입니다."
+  },
+  {
+    id: "daily-greeting-103",
+    category: "daily-greeting",
+    ko: "오늘 좋아 보이시네요.",
+    en: "You look ___ today.",
+    accept: ["well"],
+    hint: "건강하고 괜찮아 보인다는 뜻의 말",
+    note: "look good은 옷차림이나 외모, look well은 건강 상태를 말합니다."
+  },
+  {
+    id: "daily-greeting-104",
+    category: "daily-greeting",
+    ko: "머리 자르셨네요.",
+    en: "You got a ___.",
+    accept: ["haircut"],
+    hint: "머리를 자르는 일",
+    note: "You got a haircut은 알아봐 주는 인사로 자주 씁니다."
+  },
+  {
+    id: "daily-greeting-105",
+    category: "daily-greeting",
+    ko: "얼굴 좋아지셨어요.",
+    en: "You look better than ___ time.",
+    accept: ["last"],
+    hint: "바로 앞의 것을 뜻하는 말",
+    note: "아팠던 사람에게 건네는 인사로 자연스럽습니다."
+  },
+  {
+    id: "daily-greeting-106",
+    category: "daily-greeting",
+    ko: "요즘 통 안 보이시네요.",
+    en: "I haven't ___ you around lately.",
+    accept: ["seen"],
+    hint: "보다의 과거분사",
+    note: "seen you around는 근처에서 마주치지 못했다는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-107",
+    category: "daily-greeting",
+    ko: "여기 처음 오셨어요?",
+    en: "Is this your ___ time here?",
+    accept: ["first"],
+    hint: "맨 처음이라는 뜻의 말",
+    note: "Do you come here often?은 작업 멘트로 굳어진 표현이라 피하는 것이 좋습니다."
+  },
+  {
+    id: "daily-greeting-108",
+    category: "daily-greeting",
+    ko: "이 동네 분이세요?",
+    en: "Are you from ___ here?",
+    accept: ["around"],
+    hint: "근처를 뜻하는 말",
+    note: "from around here는 이 동네 사람이냐고 묻는 부드러운 말입니다."
+  },
+  {
+    id: "daily-greeting-109",
+    category: "daily-greeting",
+    ko: "어느 회사 다니세요?",
+    en: "What ___ do you work for?",
+    accept: ["company"],
+    hint: "사람들이 모여 일하는 조직",
+    note: "work for는 그 회사에 소속되어 일한다는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-110",
+    category: "daily-greeting",
+    ko: "그 일 하신 지 얼마나 되셨어요?",
+    en: "How ___ have you been doing that?",
+    accept: ["long"],
+    hint: "기간을 묻는 형용사",
+    note: "How long have you been -ing는 지금까지 이어온 일을 물을 때 씁니다."
+  },
+  {
+    id: "daily-greeting-111",
+    category: "daily-greeting",
+    ko: "일은 재미있으세요?",
+    en: "Do you ___ your job?",
+    accept: ["enjoy", "like"],
+    hint: "즐긴다는 뜻의 동사",
+    note: "Do you like your job?이 더 편한 말투입니다."
+  },
+  {
+    id: "daily-greeting-112",
+    category: "daily-greeting",
+    ko: "출근길이 머신가요?",
+    en: "Is it a long ___ for you?",
+    accept: ["drive", "trip"],
+    hint: "차로 가는 거리를 뜻하는 명사",
+    note: "대중교통이면 commute를 씁니다."
+  },
+  {
+    id: "daily-greeting-113",
+    category: "daily-greeting",
+    ko: "점심 드셨어요?",
+    en: "Have you ___ lunch yet?",
+    accept: ["had", "eaten"],
+    hint: "먹다의 과거분사",
+    note: "한국에서만큼 자주 묻지는 않습니다. 정말 궁금할 때 씁니다."
+  },
+  {
+    id: "daily-greeting-114",
+    category: "daily-greeting",
+    ko: "커피 한잔하실래요?",
+    en: "Do you want to ___ a coffee?",
+    accept: ["grab"],
+    hint: "잡아채듯 간단히 한다는 뜻의 동사",
+    note: "grab a coffee는 가볍게 커피 한잔한다는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-115",
+    category: "daily-greeting",
+    ko: "제가 살게요.",
+    en: "It's on ___.",
+    accept: ["me"],
+    hint: "'나'에 해당하는 목적어 자리의 말",
+    note: "It's on me는 '내가 낸다'는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-116",
+    category: "daily-greeting",
+    ko: "다음엔 제가 살게요.",
+    en: "I'll get it ___ time.",
+    accept: ["next"],
+    hint: "이번 다음이라는 뜻의 말",
+    note: "I'll get the next one이라고도 합니다."
+  },
+  {
+    id: "daily-greeting-117",
+    category: "daily-greeting",
+    ko: "요즘 일이 많으신가 봐요.",
+    en: "You must be ___ these days.",
+    accept: ["swamped"],
+    hint: "일에 파묻혀 있다는 뜻의 말",
+    note: "swamped는 늪에 빠졌다는 말에서 왔습니다. 일이 밀려 정신없다는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-118",
+    category: "daily-greeting",
+    ko: "너무 자신을 몰아붙이지 마세요.",
+    en: "Don't ___ yourself too hard.",
+    accept: ["push"],
+    hint: "밀어붙인다는 뜻의 동사",
+    note: "push yourself too hard는 자신을 몰아붙인다는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-119",
+    category: "daily-greeting",
+    ko: "좀 쉬셔야겠어요.",
+    en: "You could use a ___.",
+    accept: ["break"],
+    hint: "잠깐 쉬는 시간",
+    note: "You could use는 '~이 필요해 보인다'는 부드러운 권유입니다."
+  },
+  {
+    id: "daily-greeting-120",
+    category: "daily-greeting",
+    ko: "휴가는 다녀오셨어요?",
+    en: "Did you take any time ___?",
+    accept: ["off"],
+    hint: "일에서 벗어나 있다는 뜻을 만드는 말",
+    note: "time off는 일을 쉬는 기간을 통틀어 가리킵니다."
+  },
+  {
+    id: "daily-greeting-121",
+    category: "daily-greeting",
+    ko: "어디 좋은 데 다녀오셨어요?",
+    en: "Did you go ___ nice?",
+    accept: ["somewhere", "anywhere"],
+    hint: "'어딘가'를 뜻하는 말",
+    note: "형용사가 뒤에 붙는 것이 특징입니다. somewhere nice처럼 씁니다."
+  },
+  {
+    id: "daily-greeting-122",
+    category: "daily-greeting",
+    ko: "사진 좀 보여주세요.",
+    en: "I'd ___ to see the photos.",
+    accept: ["love"],
+    hint: "아주 좋아한다는 뜻의 동사. would와 붙어 부드러운 바람이 됩니다",
+    note: "I'd love to는 I want to보다 부드럽고 반가운 느낌입니다."
+  },
+  {
+    id: "daily-greeting-123",
+    category: "daily-greeting",
+    ko: "부럽네요.",
+    en: "I'm so ___.",
+    accept: ["jealous"],
+    hint: "남의 것을 부러워한다는 뜻의 형용사",
+    note: "여기서는 시샘이 아니라 가볍게 부러워하는 인사말입니다."
+  },
+  {
+    id: "daily-greeting-124",
+    category: "daily-greeting",
+    ko: "저도 언젠가 가보고 싶어요.",
+    en: "I'd like to go there ___.",
+    accept: ["someday", "sometime"],
+    hint: "언젠가를 뜻하는 말",
+    note: "someday는 먼 미래, sometime은 시기를 정하지 않은 때입니다."
+  },
+  {
+    id: "daily-greeting-125",
+    category: "daily-greeting",
+    ko: "오늘 무슨 날이에요?",
+    en: "What's the ___?",
+    accept: ["occasion"],
+    hint: "특별한 일이 있는 때를 뜻하는 명사",
+    note: "평소와 다르게 차려입은 사람에게 건네는 인사입니다."
+  },
+  {
+    id: "daily-greeting-126",
+    category: "daily-greeting",
+    ko: "옷이 잘 어울리세요.",
+    en: "That ___ you.",
+    accept: ["suits"],
+    hint: "잘 맞는다는 뜻의 동사",
+    note: "That suits you는 옷이나 머리 모양이 어울린다는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-127",
+    category: "daily-greeting",
+    ko: "새 신발 사셨네요.",
+    en: "Are those ___?",
+    accept: ["new"],
+    hint: "낡지 않았다는 뜻의 형용사",
+    note: "알아봐 주는 것 자체가 좋은 인사가 됩니다."
+  },
+  {
+    id: "daily-greeting-128",
+    category: "daily-greeting",
+    ko: "칭찬 감사합니다.",
+    en: "Thanks for the ___.",
+    accept: ["compliment"],
+    hint: "좋게 말해주는 것을 뜻하는 명사",
+    note: "칭찬을 들었을 때 이렇게 받으면 무난합니다."
+  },
+  {
+    id: "daily-greeting-129",
+    category: "daily-greeting",
+    ko: "과찬이세요.",
+    en: "You're too ___.",
+    accept: ["kind"],
+    hint: "마음이 곱다는 뜻의 형용사",
+    note: "칭찬을 겸손하게 받아넘기는 말입니다."
+  },
+  {
+    id: "daily-greeting-130",
+    category: "daily-greeting",
+    ko: "그렇게 말씀해 주시니 기분 좋네요.",
+    en: "That's ___ of you to say.",
+    accept: ["nice", "sweet"],
+    hint: "친절하다는 뜻의 형용사",
+    note: "sweet은 조금 더 다정한 느낌입니다."
+  },
+  {
+    id: "daily-greeting-131",
+    category: "daily-greeting",
+    ko: "덕분에 힘이 나네요.",
+    en: "That really ___ my day.",
+    accept: ["made"],
+    hint: "만들다의 과거형",
+    note: "made my day는 그 말 덕분에 하루가 좋아졌다는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-132",
+    category: "daily-greeting",
+    ko: "요즘 어떻게 지내시나 궁금했어요.",
+    en: "I've been ___ how you were doing.",
+    accept: ["wondering"],
+    hint: "궁금해한다는 뜻의 동사",
+    note: "I've been wondering은 한동안 마음에 두고 있었다는 느낌을 줍니다."
+  },
+  {
+    id: "daily-greeting-133",
+    category: "daily-greeting",
+    ko: "연락 못 드려서 죄송해요.",
+    en: "Sorry I've been ___ of touch.",
+    accept: ["out"],
+    hint: "밖을 뜻하는 말. of touch와 붙어 연락이 끊겼다는 뜻이 됩니다",
+    note: "out of touch는 한동안 연락을 못 했다는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-134",
+    category: "daily-greeting",
+    ko: "제가 먼저 연락드렸어야 했는데요.",
+    en: "I should have ___ sooner.",
+    accept: ["called", "reached out"],
+    hint: "연락한다는 뜻의 동사, 과거분사",
+    note: "reach out은 먼저 다가가 연락한다는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-135",
+    category: "daily-greeting",
+    ko: "언제 한번 뵈어요.",
+    en: "Let's ___ up sometime.",
+    accept: ["catch"],
+    hint: "잡다를 뜻하는 동사. up과 붙어 밀린 이야기를 나눈다는 뜻이 됩니다",
+    note: "catch up은 오랜만에 만나 근황을 나눈다는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-136",
+    category: "daily-greeting",
+    ko: "날짜 정해서 알려주세요.",
+    en: "Let me know what ___ works.",
+    accept: ["day", "date"],
+    hint: "달력에서 하루를 가리키는 말",
+    note: "What day works for you?라고 물으면 됩니다."
+  },
+  {
+    id: "daily-greeting-137",
+    category: "daily-greeting",
+    ko: "이번 주는 좀 어려울 것 같아요.",
+    en: "This week is a bit ___.",
+    accept: ["tight", "packed"],
+    hint: "빈틈이 없다는 뜻의 형용사",
+    note: "일정이 빡빡하다는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-138",
+    category: "daily-greeting",
+    ko: "다음 주는 어떠세요?",
+    en: "How ___ next week?",
+    accept: ["about"],
+    hint: "'~은 어때'라고 제안할 때 쓰는 말",
+    note: "How about과 What about은 거의 같이 씁니다."
+  },
+  {
+    id: "daily-greeting-139",
+    category: "daily-greeting",
+    ko: "일정 확인하고 알려드릴게요.",
+    en: "I'll check my ___ and let you know.",
+    accept: ["schedule", "calendar"],
+    hint: "예정된 일을 적어둔 것",
+    note: "미국에서는 calendar를 더 자주 씁니다."
+  },
+  {
+    id: "daily-greeting-140",
+    category: "daily-greeting",
+    ko: "그때 뵙겠습니다.",
+    en: "I'll see you ___.",
+    accept: ["then"],
+    hint: "그때를 뜻하는 말",
+    note: "약속을 잡고 헤어질 때 쓰는 짧은 마무리입니다."
+  },
+  {
+    id: "daily-greeting-141",
+    category: "daily-greeting",
+    ko: "먼저 들어가 볼게요.",
+    en: "I'm going to ___ out.",
+    accept: ["head"],
+    hint: "머리를 뜻하는 낱말이 동사로 쓰이면 향해 간다는 뜻이 됩니다",
+    note: "head out은 자리를 뜬다는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-142",
+    category: "daily-greeting",
+    ko: "이제 슬슬 가봐야겠어요.",
+    en: "I should ___ going.",
+    accept: ["get"],
+    hint: "되다·시작하다를 뜻하는 기본 동사",
+    note: "I should get going은 자리를 뜨기 전에 던지는 신호입니다."
+  },
+  {
+    id: "daily-greeting-143",
+    category: "daily-greeting",
+    ko: "붙잡아서 죄송해요.",
+    en: "Sorry to ___ you up.",
+    accept: ["hold", "keep"],
+    hint: "붙잡아 둔다는 뜻의 동사",
+    note: "hold someone up은 남의 시간을 붙든다는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-144",
+    category: "daily-greeting",
+    ko: "아니에요, 저도 즐거웠어요.",
+    en: "Not at ___, I enjoyed it.",
+    accept: ["all"],
+    hint: "'전혀'를 뜻하는 말",
+    note: "Not at all은 상대의 미안함을 덜어주는 대답입니다."
+  },
+  {
+    id: "daily-greeting-145",
+    category: "daily-greeting",
+    ko: "조심해서 가세요.",
+    en: "___ safe out there.",
+    accept: ["stay"],
+    hint: "머무르다·유지하다를 뜻하는 동사",
+    note: "Stay safe는 요즘 헤어질 때 가장 흔히 쓰는 인사 중 하나입니다."
+  },
+  {
+    id: "daily-greeting-146",
+    category: "daily-greeting",
+    ko: "도착하면 연락 주세요.",
+    en: "___ me when you get home.",
+    accept: ["Text"],
+    hint: "문자를 보낸다는 뜻의 동사",
+    note: "명사 '문자'가 그대로 동사로 쓰입니다. get home은 집에 도착한다는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-147",
+    category: "daily-greeting",
+    ko: "좋은 주말 보내세요.",
+    en: "Have a ___ weekend!",
+    accept: ["great"],
+    hint: "아주 좋다는 뜻의 형용사",
+    note: "금요일에 헤어질 때 거의 반드시 하는 인사입니다."
+  },
+  {
+    id: "daily-greeting-148",
+    category: "daily-greeting",
+    ko: "월요일에 봬요.",
+    en: "See you on ___.",
+    accept: ["Monday"],
+    hint: "한 주가 시작되는 요일",
+    note: "요일 앞에는 on을 씁니다."
+  },
+  {
+    id: "daily-greeting-149",
+    category: "daily-greeting",
+    ko: "즐거운 저녁 되세요.",
+    en: "Enjoy your ___.",
+    accept: ["evening"],
+    hint: "해가 진 뒤부터 잠들기 전까지",
+    note: "가게를 나설 때 점원이 자주 건네는 말입니다."
+  },
+  {
+    id: "daily-greeting-150",
+    category: "daily-greeting",
+    ko: "푹 주무세요.",
+    en: "Sleep ___.",
+    accept: ["well", "tight"],
+    hint: "잘·꼭을 뜻하는 부사",
+    note: "Sleep tight는 아이에게나 아주 가까운 사이에 씁니다."
+  },
+  {
+    id: "daily-greeting-151",
+    category: "daily-greeting",
+    ko: "오늘 하루 어떠셨어요?",
+    en: "How did your ___ go?",
+    accept: ["day"],
+    hint: "아침부터 밤까지의 하루",
+    note: "How was your day?는 저녁에 만났을 때 가장 흔한 인사입니다."
+  },
+  {
+    id: "daily-greeting-152",
+    category: "daily-greeting",
+    ko: "정신없는 하루였어요.",
+    en: "It was a ___ day.",
+    accept: ["crazy", "hectic"],
+    hint: "정신없이 바쁘다는 뜻의 형용사",
+    note: "crazy가 훨씬 편한 말투입니다."
+  },
+  {
+    id: "daily-greeting-153",
+    category: "daily-greeting",
+    ko: "이제 좀 살 것 같아요.",
+    en: "I can finally ___.",
+    accept: ["relax", "breathe"],
+    hint: "긴장을 푼다는 뜻의 동사",
+    note: "finally breathe는 한숨 돌린다는 느낌을 살립니다."
+  },
+  {
+    id: "daily-greeting-154",
+    category: "daily-greeting",
+    ko: "주말에 뭐 하셨어요?",
+    en: "What did you get up ___ this weekend?",
+    accept: ["to"],
+    hint: "get up과 짝을 이뤄 '무엇을 하며 지냈나'가 되는 말",
+    note: "get up to는 영국에서 특히 자주 씁니다."
+  },
+  {
+    id: "daily-greeting-155",
+    category: "daily-greeting",
+    ko: "집에서 푹 쉬었어요.",
+    en: "I just ___ at home.",
+    accept: ["stayed"],
+    hint: "머물다의 과거형",
+    note: "stayed in이라고도 합니다. 나가지 않고 집에 있었다는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-156",
+    category: "daily-greeting",
+    ko: "밀린 잠 좀 잤어요.",
+    en: "I ___ up on sleep.",
+    accept: ["caught"],
+    hint: "잡다의 과거형. up과 붙어 밀린 것을 따라잡는다는 뜻이 됩니다",
+    note: "catch up on은 밀린 일이나 잠을 메운다는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-157",
+    category: "daily-greeting",
+    ko: "친구들 만났어요.",
+    en: "I ___ out with some friends.",
+    accept: ["hung"],
+    hint: "걸다의 과거형. out과 붙어 어울려 논다는 뜻이 됩니다",
+    note: "hang out은 특별한 목적 없이 함께 시간을 보낸다는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-158",
+    category: "daily-greeting",
+    ko: "영화 한 편 봤어요.",
+    en: "I ___ a movie.",
+    accept: ["watched", "saw"],
+    hint: "보다의 과거형",
+    note: "극장에서 봤으면 saw, 집에서 봤으면 watched가 자연스럽습니다."
+  },
+  {
+    id: "daily-greeting-159",
+    category: "daily-greeting",
+    ko: "그 영화 어땠어요?",
+    en: "How was ___?",
+    accept: ["it"],
+    hint: "앞에 나온 것을 가리키는 말",
+    note: "How was it?은 무엇에 대해서든 감상을 묻는 만능 질문입니다."
+  },
+  {
+    id: "daily-greeting-160",
+    category: "daily-greeting",
+    ko: "볼만했어요.",
+    en: "It was ___ watching.",
+    accept: ["worth"],
+    hint: "그만한 값어치가 있다는 뜻의 말",
+    note: "worth 뒤에는 -ing가 옵니다."
+  },
+  {
+    id: "daily-greeting-161",
+    category: "daily-greeting",
+    ko: "요즘 뭐 재미있는 거 보세요?",
+    en: "What are you ___ these days?",
+    accept: ["watching"],
+    hint: "보다의 -ing형",
+    note: "드라마나 유튜브를 물을 때 쓰는 요즘 인사입니다."
+  },
+  {
+    id: "daily-greeting-162",
+    category: "daily-greeting",
+    ko: "추천 좀 해주세요.",
+    en: "Any ___?",
+    accept: ["recommendations"],
+    hint: "권해줄 만한 것을 뜻하는 복수 명사",
+    note: "Any recommendations?는 짧지만 아주 자주 쓰는 표현입니다."
+  },
+  {
+    id: "daily-greeting-163",
+    category: "daily-greeting",
+    ko: "저도 그거 봤어요.",
+    en: "I've seen that ___.",
+    accept: ["one"],
+    hint: "앞에 나온 것 중 하나를 가리키는 말",
+    note: "I've seen it은 이미 봤다는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-164",
+    category: "daily-greeting",
+    ko: "아직 못 봤어요.",
+    en: "I haven't ___ around to it.",
+    accept: ["gotten", "got"],
+    hint: "얻다의 과거분사. around to와 붙어 '드디어 하게 되다'가 됩니다",
+    note: "haven't gotten around to it은 하려다 못 했다는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-165",
+    category: "daily-greeting",
+    ko: "요즘 뭐 배우세요?",
+    en: "Are you ___ anything new?",
+    accept: ["learning"],
+    hint: "배우다의 -ing형",
+    note: "취미를 묻는 부드러운 질문입니다."
+  },
+  {
+    id: "daily-greeting-166",
+    category: "daily-greeting",
+    ko: "운동은 좀 하세요?",
+    en: "Do you go to the ___?",
+    accept: ["gym"],
+    hint: "운동하는 곳",
+    note: "헬스장은 gym입니다. health club이라는 말은 잘 쓰지 않습니다."
+  },
+  {
+    id: "daily-greeting-167",
+    category: "daily-greeting",
+    ko: "요즘 통 못 갔어요.",
+    en: "I haven't been in a ___.",
+    accept: ["while"],
+    hint: "얼마간의 시간을 뜻하는 명사",
+    note: "in a while은 '한동안'입니다."
+  },
+  {
+    id: "daily-greeting-168",
+    category: "daily-greeting",
+    ko: "다시 시작해 보려고요.",
+    en: "I'm trying to ___ it up again.",
+    accept: ["pick"],
+    hint: "집어 든다는 뜻의 동사. up과 붙어 다시 시작한다는 뜻이 됩니다",
+    note: "pick it up again은 그만뒀던 것을 다시 붙잡는다는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-169",
+    category: "daily-greeting",
+    ko: "작심삼일이었어요.",
+    en: "It only ___ three days.",
+    accept: ["lasted"],
+    hint: "이어지다의 과거형",
+    note: "last는 명사로는 '마지막', 동사로는 '이어지다'입니다."
+  },
+  {
+    id: "daily-greeting-170",
+    category: "daily-greeting",
+    ko: "이번엔 꼭 해볼게요.",
+    en: "I'll ___ with it this time.",
+    accept: ["stick"],
+    hint: "붙다를 뜻하는 동사. with와 붙어 끝까지 해낸다는 뜻이 됩니다",
+    note: "stick with it은 포기하지 않고 이어간다는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-171",
+    category: "daily-greeting",
+    ko: "잘하실 거예요.",
+    en: "You'll do ___.",
+    accept: ["fine", "great"],
+    hint: "괜찮다는 뜻의 말",
+    note: "You'll do fine은 앞둔 일을 앞두고 건네는 격려입니다."
+  },
+  {
+    id: "daily-greeting-172",
+    category: "daily-greeting",
+    ko: "행운을 빌게요.",
+    en: "I'll keep my fingers ___.",
+    accept: ["crossed"],
+    hint: "엇갈리게 겹치다의 과거분사",
+    note: "손가락을 겹쳐 행운을 빈다는 몸짓에서 온 말입니다."
+  },
+  {
+    id: "daily-greeting-173",
+    category: "daily-greeting",
+    ko: "잘됐으면 좋겠네요.",
+    en: "I hope it ___ out.",
+    accept: ["works"],
+    hint: "일이 잘 풀린다는 뜻의 동사",
+    note: "work out은 결과가 좋게 나온다는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-174",
+    category: "daily-greeting",
+    ko: "결과 나오면 알려주세요.",
+    en: "Let me know how it ___.",
+    accept: ["goes"],
+    hint: "가다·되어가다를 뜻하는 동사",
+    note: "how it goes는 '어떻게 됐는지'라는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-175",
+    category: "daily-greeting",
+    ko: "응원할게요.",
+    en: "I'm ___ for you.",
+    accept: ["rooting", "pulling"],
+    hint: "편을 들어 응원한다는 뜻의 동사",
+    note: "rooting for는 경기 응원에서 온 말이지만 일상에서도 씁니다."
+  },
+  {
+    id: "daily-greeting-176",
+    category: "daily-greeting",
+    ko: "고맙습니다, 정말요.",
+    en: "Thanks, I ___ it.",
+    accept: ["mean"],
+    hint: "진심으로 말한다는 뜻의 동사",
+    note: "I mean it은 빈말이 아니라는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-177",
+    category: "daily-greeting",
+    ko: "언제든지요.",
+    en: "___ time.",
+    accept: ["any"],
+    hint: "어느 것이든이라는 뜻의 말",
+    note: "Anytime은 고맙다는 말에 대한 가벼운 대답입니다."
+  },
+  {
+    id: "daily-greeting-178",
+    category: "daily-greeting",
+    ko: "별거 아니에요.",
+    en: "It was ___ problem.",
+    accept: ["no"],
+    hint: "'하나도 없다'를 뜻하는 말",
+    note: "No problem은 You're welcome보다 편한 대답입니다."
+  },
+  {
+    id: "daily-greeting-179",
+    category: "daily-greeting",
+    ko: "서로 돕고 사는 거죠.",
+    en: "That's what ___ are for.",
+    accept: ["friends"],
+    hint: "가깝게 지내는 사람들",
+    note: "That's what friends are for는 도움을 받은 사람에게 건네는 정해진 대답입니다."
+  },
+  {
+    id: "daily-greeting-180",
+    category: "daily-greeting",
+    ko: "다음에 또 봬요.",
+    en: "___ next time.",
+    accept: ["Until"],
+    hint: "'~까지'를 뜻하는 전치사",
+    note: "조금 격식 있는 작별 인사입니다."
+  },
+  {
+    id: "daily-greeting-181",
+    category: "daily-greeting",
+    ko: "오늘 날씨 정말 좋네요.",
+    en: "It's a ___ day, isn't it?",
+    accept: ["gorgeous", "glorious"],
+    hint: "눈부시게 좋다는 뜻의 형용사",
+    note: "날씨 이야기는 영어권에서 가장 무난한 대화 시작입니다."
+  },
+  {
+    id: "daily-greeting-182",
+    category: "daily-greeting",
+    ko: "밖에 바람이 많이 부네요.",
+    en: "It's really ___ out.",
+    accept: ["windy"],
+    hint: "바람이 세다는 뜻의 형용사",
+    note: "wind에 -y를 붙여 만든 날씨 형용사입니다."
+  },
+  {
+    id: "daily-greeting-183",
+    category: "daily-greeting",
+    ko: "습도가 높네요.",
+    en: "It's so ___ today.",
+    accept: ["humid"],
+    hint: "공기 중에 물기가 많다는 뜻의 형용사",
+    note: "muggy라고 하면 후덥지근하다는 느낌이 더 강합니다."
+  },
+  {
+    id: "daily-greeting-184",
+    category: "daily-greeting",
+    ko: "눈이 올 것 같아요.",
+    en: "It might ___ tonight.",
+    accept: ["snow"],
+    hint: "하늘에서 내리는 하얀 것",
+    note: "명사와 동사가 같은 꼴입니다."
+  },
+  {
+    id: "daily-greeting-185",
+    category: "daily-greeting",
+    ko: "길이 미끄러워요.",
+    en: "The roads are ___.",
+    accept: ["slippery", "icy"],
+    hint: "미끄럽다는 뜻의 형용사",
+    note: "icy는 얼어붙어 미끄럽다는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-186",
+    category: "daily-greeting",
+    ko: "장마철이네요.",
+    en: "It's the ___ season.",
+    accept: ["rainy"],
+    hint: "비가 자주 온다는 뜻의 형용사",
+    note: "동남아시아에서는 monsoon season이라고도 합니다."
+  },
+  {
+    id: "daily-greeting-187",
+    category: "daily-greeting",
+    ko: "여름이 다 갔네요.",
+    en: "Summer's ___ over.",
+    accept: ["almost"],
+    hint: "거의라는 뜻의 말",
+    note: "almost over는 '거의 끝났다'는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-188",
+    category: "daily-greeting",
+    ko: "해가 많이 짧아졌어요.",
+    en: "The days are getting ___.",
+    accept: ["shorter"],
+    hint: "짧다의 비교급",
+    note: "getting -er은 점점 그렇게 되어간다는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-189",
+    category: "daily-greeting",
+    ko: "환절기라 조심하세요.",
+    en: "Watch out for the ___ in weather.",
+    accept: ["change"],
+    hint: "달라짐을 뜻하는 명사",
+    note: "change in weather는 날씨가 바뀌는 시기를 말합니다."
+  },
+  {
+    id: "daily-greeting-190",
+    category: "daily-greeting",
+    ko: "감기가 유행이래요.",
+    en: "There's a ___ going around.",
+    accept: ["cold"],
+    hint: "기침과 콧물이 나는 가벼운 병",
+    note: "going around는 병이 돌고 있다는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-191",
+    category: "daily-greeting",
+    ko: "저도 목이 좀 칼칼해요.",
+    en: "My throat feels a bit ___.",
+    accept: ["scratchy", "sore"],
+    hint: "따끔거린다는 뜻의 형용사",
+    note: "sore throat는 인후통, scratchy는 그보다 가벼운 느낌입니다."
+  },
+  {
+    id: "daily-greeting-192",
+    category: "daily-greeting",
+    ko: "병원 가보셔야겠어요.",
+    en: "You should see a ___.",
+    accept: ["doctor"],
+    hint: "병을 봐주는 사람",
+    note: "영어에서는 go to the hospital보다 see a doctor를 씁니다. hospital은 큰 병원입니다."
+  },
+  {
+    id: "daily-greeting-193",
+    category: "daily-greeting",
+    ko: "약은 드셨어요?",
+    en: "Did you take any ___?",
+    accept: ["medicine"],
+    hint: "병을 낫게 하려고 먹는 것",
+    note: "약을 먹는 것은 eat이 아니라 take입니다."
+  },
+  {
+    id: "daily-greeting-194",
+    category: "daily-greeting",
+    ko: "빨리 나으세요.",
+    en: "Feel better ___.",
+    accept: ["soon"],
+    hint: "머지않아를 뜻하는 말",
+    note: "Get well soon과 함께 가장 흔한 쾌유 인사입니다."
+  },
+  {
+    id: "daily-greeting-195",
+    category: "daily-greeting",
+    ko: "무리하지 말고 쉬세요.",
+    en: "Take it easy and get some ___.",
+    accept: ["sleep"],
+    hint: "잠을 뜻하는 명사",
+    note: "get some sleep은 잠을 좀 자두라는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-196",
+    category: "daily-greeting",
+    ko: "도움 필요하면 말씀하세요.",
+    en: "___ me know if you need anything.",
+    accept: ["let"],
+    hint: "하게 해준다는 뜻의 동사",
+    note: "Let me know는 부담 없이 건네는 도움의 손길입니다."
+  },
+  {
+    id: "daily-greeting-197",
+    category: "daily-greeting",
+    ko: "생각해 주셔서 감사해요.",
+    en: "Thanks for ___ of me.",
+    accept: ["thinking"],
+    hint: "생각하다의 -ing형",
+    note: "thinking of me는 마음 써줘서 고맙다는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-198",
+    category: "daily-greeting",
+    ko: "이제 다 나았어요.",
+    en: "I'm completely ___ now.",
+    accept: ["recovered"],
+    hint: "병에서 회복되다의 과거분사",
+    note: "recover from은 병이나 힘든 일에서 벗어난다는 뜻입니다."
+  },
+  {
+    id: "daily-greeting-199",
+    category: "daily-greeting",
+    ko: "다시 뵙게 되어 반가워요.",
+    en: "Good to see you ___.",
+    accept: ["again"],
+    hint: "다시라는 뜻의 말",
+    note: "처음 만난 사이에는 Good to meet you를 씁니다."
+  },
+  {
+    id: "daily-greeting-200",
+    category: "daily-greeting",
+    ko: "오늘 이야기 즐거웠습니다.",
+    en: "I enjoyed our ___.",
+    accept: ["chat", "conversation"],
+    hint: "주고받은 이야기를 뜻하는 명사",
+    note: "chat은 가벼운 수다, conversation은 조금 더 격식 있는 말입니다."
+  },
+  {
+    id: "daily-request-101",
+    category: "daily-request",
+    ko: "잠깐 실례해도 될까요?",
+    en: "May I ___ you for a second?",
+    accept: ["interrupt"],
+    hint: "말이나 일을 중간에 끊는다는 뜻의 동사",
+    note: "말을 끊고 끼어들 때 먼저 던지는 말입니다."
+  },
+  {
+    id: "daily-request-102",
+    category: "daily-request",
+    ko: "부탁 하나 드려도 될까요?",
+    en: "___ you mind doing me a favor?",
+    accept: ["Would"],
+    hint: "정중하게 물을 때 문장 앞에 오는 조동사",
+    note: "Would you mind는 Could you보다 조심스러운 말투입니다."
+  },
+  {
+    id: "daily-request-103",
+    category: "daily-request",
+    ko: "이거 좀 봐주시겠어요?",
+    en: "Could you take a quick ___ at this?",
+    accept: ["glance"],
+    hint: "슬쩍 한 번 본다는 뜻의 명사",
+    note: "take a look보다 더 짧게 본다는 느낌입니다."
+  },
+  {
+    id: "daily-request-104",
+    category: "daily-request",
+    ko: "여기 서명 좀 해주시겠어요?",
+    en: "Could you ___ here, please?",
+    accept: ["sign"],
+    hint: "이름을 적어 확인한다는 뜻의 동사",
+    note: "signature는 명사, sign은 동사입니다."
+  },
+  {
+    id: "daily-request-105",
+    category: "daily-request",
+    ko: "번호 좀 알려주시겠어요?",
+    en: "Could I get your ___?",
+    accept: ["number"],
+    hint: "전화를 걸 때 누르는 것",
+    note: "친해진 뒤에 묻는 것이 자연스럽습니다."
+  },
+  {
+    id: "daily-request-106",
+    category: "daily-request",
+    ko: "사진 한 장만 더 부탁드려요.",
+    en: "Could you take ___ more?",
+    accept: ["one"],
+    hint: "숫자 하나를 뜻하는 말",
+    note: "one more는 '하나만 더'입니다."
+  },
+  {
+    id: "daily-request-107",
+    category: "daily-request",
+    ko: "가로로 찍어주시겠어요?",
+    en: "Could you turn it ___?",
+    accept: ["sideways", "horizontally"],
+    hint: "옆으로 눕혀서라는 뜻의 부사",
+    note: "세로는 vertically입니다. 요즘은 landscape와 portrait라는 말도 씁니다."
+  },
+  {
+    id: "daily-request-108",
+    category: "daily-request",
+    ko: "뒤에 건물이 나오게 찍어주세요.",
+    en: "Could you get the building in the ___?",
+    accept: ["background", "shot"],
+    hint: "사진에서 뒤쪽에 보이는 부분",
+    note: "in the shot은 '화면 안에'라는 뜻입니다."
+  },
+  {
+    id: "daily-request-109",
+    category: "daily-request",
+    ko: "원하시면 제가 찍어드릴게요.",
+    en: "I can take it for you, if you ___.",
+    accept: ["like"],
+    hint: "좋아한다는 뜻의 동사가 if와 붙으면 '원하시면'이 됩니다",
+    note: "if you like는 상대의 뜻에 맡기는 부드러운 마무리입니다."
+  },
+  {
+    id: "daily-request-110",
+    category: "daily-request",
+    ko: "여기서 잠깐 기다려 주시겠어요?",
+    en: "Could you ___ here for a moment?",
+    accept: ["stay"],
+    hint: "그 자리에 머문다는 뜻의 동사",
+    note: "wait보다 자리를 지켜달라는 느낌이 강합니다."
+  },
+  {
+    id: "daily-request-111",
+    category: "daily-request",
+    ko: "따라오시겠어요?",
+    en: "Would you ___ me, please?",
+    accept: ["follow"],
+    hint: "뒤를 따라간다는 뜻의 동사",
+    note: "안내할 때 쓰는 정중한 표현입니다."
+  },
+  {
+    id: "daily-request-112",
+    category: "daily-request",
+    ko: "이쪽으로 오시겠어요?",
+    en: "Could you come this ___?",
+    accept: ["way"],
+    hint: "방향을 뜻하는 명사",
+    note: "This way, please는 안내 문구로도 자주 쓰입니다."
+  },
+  {
+    id: "daily-request-113",
+    category: "daily-request",
+    ko: "제 뒤에 서주시겠어요?",
+    en: "Could you stand ___ me?",
+    accept: ["behind"],
+    hint: "뒤쪽을 뜻하는 전치사",
+    note: "앞은 in front of입니다."
+  },
+  {
+    id: "daily-request-114",
+    category: "daily-request",
+    ko: "한 발짝만 뒤로 가주세요.",
+    en: "Could you take a step ___?",
+    accept: ["back"],
+    hint: "뒤쪽을 뜻하는 말",
+    note: "take a step back은 한 걸음 물러선다는 뜻입니다."
+  },
+  {
+    id: "daily-request-115",
+    category: "daily-request",
+    ko: "가운데로 좀 모여주세요.",
+    en: "Could everyone move to the ___?",
+    accept: ["middle", "center"],
+    hint: "한가운데를 뜻하는 명사",
+    note: "영국에서는 centre로 적습니다."
+  },
+  {
+    id: "daily-request-116",
+    category: "daily-request",
+    ko: "제 짐 좀 봐주실 수 있나요?",
+    en: "Could you ___ my bag for a minute?",
+    accept: ["watch"],
+    hint: "눈을 떼지 않고 본다는 뜻의 동사",
+    note: "keep an eye on과 같은 뜻이지만 더 짧습니다."
+  },
+  {
+    id: "daily-request-117",
+    category: "daily-request",
+    ko: "자리 좀 맡아주세요.",
+    en: "Could you hold my ___?",
+    accept: ["spot"],
+    hint: "자리 한 곳을 편하게 부르는 말",
+    note: "spot은 자리 한 곳을 편하게 부르는 말입니다."
+  },
+  {
+    id: "daily-request-118",
+    category: "daily-request",
+    ko: "제 차례 좀 대신 봐주세요.",
+    en: "Could you keep my ___ in line?",
+    accept: ["place", "spot"],
+    hint: "줄에서 서 있던 자리",
+    note: "keep my place in line은 줄을 잠시 비울 때 부탁하는 말입니다."
+  },
+  {
+    id: "daily-request-119",
+    category: "daily-request",
+    ko: "금방 돌아올게요.",
+    en: "I'll be ___ back.",
+    accept: ["right"],
+    hint: "'바로'라는 뜻으로 뒤의 말을 강하게 만드는 부사",
+    note: "I'll be right back은 아주 짧게 자리를 뜰 때 씁니다."
+  },
+  {
+    id: "daily-request-120",
+    category: "daily-request",
+    ko: "잠깐 시간 좀 내주실 수 있나요?",
+    en: "Could you spare a ___?",
+    accept: ["moment"],
+    hint: "아주 짧은 시간",
+    note: "spare는 시간을 내준다는 뜻입니다."
+  },
+  {
+    id: "daily-request-121",
+    category: "daily-request",
+    ko: "우산 좀 빌려주실 수 있나요?",
+    en: "Could I borrow your ___?",
+    accept: ["umbrella"],
+    hint: "비 올 때 쓰는 것",
+    note: "빌린 것은 반드시 돌려줘야 합니다."
+  },
+  {
+    id: "daily-request-122",
+    category: "daily-request",
+    ko: "충전기 좀 빌릴 수 있을까요?",
+    en: "Could I use your ___?",
+    accept: ["charger"],
+    hint: "배터리를 채우는 도구",
+    note: "콘센트를 빌릴 때는 Could I use your outlet?이라고 합니다."
+  },
+  {
+    id: "daily-request-123",
+    category: "daily-request",
+    ko: "잠깐 전화 좀 써도 될까요?",
+    en: "Could I make a quick ___?",
+    accept: ["call"],
+    hint: "전화 통화를 뜻하는 명사",
+    note: "make a call은 전화를 건다는 뜻입니다."
+  },
+  {
+    id: "daily-request-124",
+    category: "daily-request",
+    ko: "와이파이 좀 쓸 수 있을까요?",
+    en: "Could I get on your ___?",
+    accept: ["Wi-Fi", "wifi"],
+    hint: "무선으로 인터넷에 연결하는 것",
+    note: "get on the Wi-Fi는 와이파이에 접속한다는 뜻입니다."
+  },
+  {
+    id: "daily-request-125",
+    category: "daily-request",
+    ko: "잠깐 자리 좀 비켜주시겠어요?",
+    en: "Could you give me some ___?",
+    accept: ["room"],
+    hint: "몸을 움직일 만한 빈 자리",
+    note: "room은 '방'과 '공간' 두 가지 뜻으로 씁니다."
+  },
+  {
+    id: "daily-request-126",
+    category: "daily-request",
+    ko: "문 좀 잡아주시겠어요?",
+    en: "Could you get the ___?",
+    accept: ["door"],
+    hint: "드나드는 곳을 막는 판",
+    note: "Could you get the door?는 문을 열어주거나 잡아달라는 뜻입니다."
+  },
+  {
+    id: "daily-request-127",
+    category: "daily-request",
+    ko: "엘리베이터 좀 잡아주세요.",
+    en: "Could you hold the ___?",
+    accept: ["elevator", "lift"],
+    hint: "층을 오르내리는 기계",
+    note: "Hold the elevator!라고 외치기도 합니다."
+  },
+  {
+    id: "daily-request-128",
+    category: "daily-request",
+    ko: "몇 층 누르실 거예요?",
+    en: "What ___ do you need?",
+    accept: ["floor"],
+    hint: "건물의 층을 뜻하는 명사",
+    note: "엘리베이터에서 자주 주고받는 말입니다."
+  },
+  {
+    id: "daily-request-129",
+    category: "daily-request",
+    ko: "3층 좀 눌러주시겠어요?",
+    en: "Could you ___ three, please?",
+    accept: ["press", "hit"],
+    hint: "버튼을 누른다는 뜻의 동사",
+    note: "hit은 더 편한 말투입니다."
+  },
+  {
+    id: "daily-request-130",
+    category: "daily-request",
+    ko: "먼저 타세요.",
+    en: "___ ahead.",
+    accept: ["go"],
+    hint: "가다를 뜻하는 기본 동사",
+    note: "Go ahead는 '먼저 하세요'라는 뜻으로 아주 널리 씁니다."
+  },
+  {
+    id: "daily-request-131",
+    category: "daily-request",
+    ko: "제가 들어드릴게요.",
+    en: "Let me ___ that for you.",
+    accept: ["carry", "grab"],
+    hint: "들고 나른다는 뜻의 동사",
+    note: "짐을 든 사람을 도울 때 건네는 말입니다."
+  },
+  {
+    id: "daily-request-132",
+    category: "daily-request",
+    ko: "제가 뭘 도와드릴까요?",
+    en: "How can I ___ you?",
+    accept: ["assist"],
+    hint: "돕는다는 뜻의 격식 있는 동사",
+    note: "How can I assist you?는 안내 창구에서 쓰는 말투입니다. 편하게는 help를 씁니다."
+  },
+  {
+    id: "daily-request-133",
+    category: "daily-request",
+    ko: "괜찮습니다, 제가 할게요.",
+    en: "I'm ___, thanks.",
+    accept: ["good", "fine"],
+    hint: "괜찮다는 뜻의 형용사",
+    note: "I'm good은 사양할 때 쓰는 가장 흔한 말입니다."
+  },
+  {
+    id: "daily-request-134",
+    category: "daily-request",
+    ko: "그래 주시면 감사하죠.",
+    en: "That would be ___.",
+    accept: ["great", "wonderful"],
+    hint: "아주 좋다는 뜻의 형용사",
+    note: "제안을 받아들일 때 쓰는 부드러운 대답입니다."
+  },
+  {
+    id: "daily-request-135",
+    category: "daily-request",
+    ko: "번거로우시면 안 하셔도 돼요.",
+    en: "Only if it's not a ___.",
+    accept: ["hassle", "bother"],
+    hint: "귀찮은 일을 뜻하는 명사",
+    note: "상대에게 빠져나갈 길을 열어주는 배려의 말입니다."
+  },
+  {
+    id: "daily-request-136",
+    category: "daily-request",
+    ko: "정말 감사합니다, 큰 도움 됐어요.",
+    en: "That ___ a lot.",
+    accept: ["helps", "helped"],
+    hint: "돕다의 현재형",
+    note: "That helps a lot은 실질적으로 도움이 됐다는 뜻입니다."
+  },
+  {
+    id: "daily-request-137",
+    category: "daily-request",
+    ko: "빚졌네요.",
+    en: "I owe you ___.",
+    accept: ["big"],
+    hint: "크게라는 뜻의 말",
+    note: "I owe you big time이라고도 합니다."
+  },
+  {
+    id: "daily-request-138",
+    category: "daily-request",
+    ko: "언제든 갚을게요.",
+    en: "I'll ___ it up to you.",
+    accept: ["make"],
+    hint: "만들다를 뜻하는 기본 동사. it up to와 붙어 갚는다는 뜻이 됩니다",
+    note: "make it up to someone은 신세를 갚는다는 뜻입니다."
+  },
+  {
+    id: "daily-request-139",
+    category: "daily-request",
+    ko: "제가 뭘 하면 될까요?",
+    en: "___ can I do?",
+    accept: ["What"],
+    hint: "무엇인지를 묻는 의문사",
+    note: "돕겠다고 나설 때 쓰는 짧은 말입니다."
+  },
+  {
+    id: "daily-request-140",
+    category: "daily-request",
+    ko: "제가 알아서 처리할게요.",
+    en: "I'll take ___ of it.",
+    accept: ["care"],
+    hint: "돌봄을 뜻하는 명사. take와 붙어 맡아 처리한다는 뜻이 됩니다",
+    note: "take care of it은 알아서 처리하겠다는 뜻입니다."
+  },
+  {
+    id: "daily-request-141",
+    category: "daily-request",
+    ko: "이거 언제까지 하면 될까요?",
+    en: "When is the ___?",
+    accept: ["deadline"],
+    hint: "정해진 기한을 뜻하는 명사",
+    note: "due date라고도 합니다."
+  },
+  {
+    id: "daily-request-142",
+    category: "daily-request",
+    ko: "조금 늦어도 될까요?",
+    en: "Would it be okay if I'm a little ___?",
+    accept: ["late"],
+    hint: "정해진 때보다 늦다는 뜻의 형용사",
+    note: "약속 시간에 늦을 때 미리 알리는 것이 예의입니다."
+  },
+  {
+    id: "daily-request-143",
+    category: "daily-request",
+    ko: "하루만 더 주실 수 있나요?",
+    en: "Could I have one more ___?",
+    accept: ["day"],
+    hint: "아침부터 밤까지의 하루",
+    note: "기한을 미룰 때 쓰는 정중한 부탁입니다."
+  },
+  {
+    id: "daily-request-144",
+    category: "daily-request",
+    ko: "먼저 처리해 주실 수 있나요?",
+    en: "Could you make this a ___?",
+    accept: ["priority"],
+    hint: "먼저 해야 할 일을 뜻하는 명사",
+    note: "top priority라고 하면 더 급하다는 뜻이 됩니다."
+  },
+  {
+    id: "daily-request-145",
+    category: "daily-request",
+    ko: "급한 건 아니에요.",
+    en: "It's ___ urgent.",
+    accept: ["not"],
+    hint: "부정을 만드는 말",
+    note: "부탁하면서 이 말을 덧붙이면 부담이 줄어듭니다."
+  },
+  {
+    id: "daily-request-146",
+    category: "daily-request",
+    ko: "가능하면 오늘 중으로요.",
+    en: "By the end of the day, if ___.",
+    accept: ["possible"],
+    hint: "할 수 있다는 뜻의 형용사",
+    note: "if possible을 붙이면 강요하지 않는 느낌이 됩니다."
+  },
+  {
+    id: "daily-request-147",
+    category: "daily-request",
+    ko: "다시 한번 확인해 주시겠어요?",
+    en: "Could you double-___ it?",
+    accept: ["check"],
+    hint: "살펴본다는 뜻의 동사",
+    note: "double-check는 한 번 더 확인한다는 뜻입니다."
+  },
+  {
+    id: "daily-request-148",
+    category: "daily-request",
+    ko: "제가 놓친 게 있을까요?",
+    en: "Did I ___ anything?",
+    accept: ["miss"],
+    hint: "빠뜨린다는 뜻의 동사",
+    note: "회의가 끝난 뒤나 검토를 마친 뒤에 씁니다."
+  },
+  {
+    id: "daily-request-149",
+    category: "daily-request",
+    ko: "다시 한번 짚어주시겠어요?",
+    en: "Could you run that ___ me again?",
+    accept: ["by"],
+    hint: "곁을 뜻하는 전치사. run과 붙어 다시 설명해 달라는 뜻이 됩니다",
+    note: "run something by someone은 상대에게 다시 짚어 설명한다는 뜻입니다."
+  },
+  {
+    id: "daily-request-150",
+    category: "daily-request",
+    ko: "쉽게 풀어서 말씀해 주시겠어요?",
+    en: "Could you put it more ___?",
+    accept: ["simply"],
+    hint: "쉽고 간단하게라는 뜻의 부사",
+    note: "put it은 '말로 표현하다'라는 뜻입니다."
+  },
+  {
+    id: "daily-request-151",
+    category: "daily-request",
+    ko: "메모해도 될까요?",
+    en: "Do you mind if I take ___?",
+    accept: ["notes"],
+    hint: "적어두는 것을 뜻하는 복수 명사",
+    note: "take notes는 받아 적는다는 뜻입니다."
+  },
+  {
+    id: "daily-request-152",
+    category: "daily-request",
+    ko: "녹음해도 괜찮을까요?",
+    en: "Would it be okay to ___ this?",
+    accept: ["record"],
+    hint: "소리를 담아둔다는 뜻의 동사",
+    note: "반드시 먼저 물어보아야 합니다."
+  },
+  {
+    id: "daily-request-153",
+    category: "daily-request",
+    ko: "사진 찍어도 되나요?",
+    en: "Am I ___ to take pictures?",
+    accept: ["allowed"],
+    hint: "허락받았다는 뜻의 과거분사",
+    note: "박물관이나 가게에서는 미리 물어보는 것이 좋습니다."
+  },
+  {
+    id: "daily-request-154",
+    category: "daily-request",
+    ko: "여기 들어가도 되나요?",
+    en: "Is this area ___ to the public?",
+    accept: ["open"],
+    hint: "닫히지 않았다는 뜻의 형용사",
+    note: "출입 금지 구역은 off-limits라고 합니다."
+  },
+  {
+    id: "daily-request-155",
+    category: "daily-request",
+    ko: "만져봐도 될까요?",
+    en: "Can I ___ it?",
+    accept: ["touch"],
+    hint: "손을 댄다는 뜻의 동사",
+    note: "가게에서는 Do not touch라고 적힌 곳이 있습니다."
+  },
+  {
+    id: "daily-request-156",
+    category: "daily-request",
+    ko: "잠깐 앉았다 가도 될까요?",
+    en: "Mind if I ___ down for a bit?",
+    accept: ["sit"],
+    hint: "앉는다는 뜻의 동사",
+    note: "Mind if I는 Do you mind if I를 줄인 편한 말투입니다."
+  },
+  {
+    id: "daily-request-157",
+    category: "daily-request",
+    ko: "여기 주차해도 되나요?",
+    en: "Is it okay to ___ here?",
+    accept: ["park"],
+    hint: "차를 세워둔다는 뜻의 동사",
+    note: "주차 금지는 No parking입니다."
+  },
+  {
+    id: "daily-request-158",
+    category: "daily-request",
+    ko: "반려견 데리고 들어가도 되나요?",
+    en: "Are dogs ___ inside?",
+    accept: ["welcome", "permitted"],
+    hint: "받아들여진다는 뜻의 말",
+    note: "pet-friendly라고 써 붙인 가게도 있습니다."
+  },
+  {
+    id: "daily-request-159",
+    category: "daily-request",
+    ko: "여기서 먹어도 되나요?",
+    en: "Can we eat ___ here?",
+    accept: ["in"],
+    hint: "안쪽을 뜻하는 말",
+    note: "eat in은 가게 안에서 먹는 것, take out은 가져가는 것입니다."
+  },
+  {
+    id: "daily-request-160",
+    category: "daily-request",
+    ko: "밖에서 사 온 음식 먹어도 되나요?",
+    en: "Can we bring in ___ food?",
+    accept: ["outside"],
+    hint: "바깥을 뜻하는 말",
+    note: "outside food는 가게에서 팔지 않은 음식을 말합니다."
+  },
+  {
+    id: "daily-request-161",
+    category: "daily-request",
+    ko: "잠깐 화장실 좀 다녀올게요.",
+    en: "I'm going to ___ to the restroom.",
+    accept: ["run"],
+    hint: "뛰다를 뜻하는 동사가 잠깐 다녀온다는 뜻으로도 쓰입니다",
+    note: "run to는 잠깐 빨리 다녀온다는 느낌을 줍니다."
+  },
+  {
+    id: "daily-request-162",
+    category: "daily-request",
+    ko: "먼저 가셔도 돼요.",
+    en: "Don't ___ for me.",
+    accept: ["wait"],
+    hint: "기다린다는 뜻의 동사",
+    note: "Don't wait for me는 먼저 가라는 뜻입니다."
+  },
+  {
+    id: "daily-request-163",
+    category: "daily-request",
+    ko: "같이 가도 될까요?",
+    en: "Can I ___ along?",
+    accept: ["come", "tag"],
+    hint: "따라간다는 뜻의 동사",
+    note: "tag along은 슬쩍 따라붙는다는 가벼운 느낌입니다."
+  },
+  {
+    id: "daily-request-164",
+    category: "daily-request",
+    ko: "저도 껴도 될까요?",
+    en: "Can I ___ you?",
+    accept: ["join"],
+    hint: "무리에 들어간다는 뜻의 동사",
+    note: "Can I join you?는 자리에 합석해도 되냐고 묻는 말입니다."
+  },
+  {
+    id: "daily-request-165",
+    category: "daily-request",
+    ko: "한 명 더 껴도 될까요?",
+    en: "Can we ___ in one more?",
+    accept: ["squeeze", "fit"],
+    hint: "비집고 넣는다는 뜻의 동사",
+    note: "squeeze in은 자리가 빠듯한데 억지로 넣는다는 느낌입니다."
+  },
+  {
+    id: "daily-request-166",
+    category: "daily-request",
+    ko: "제 몫은 제가 낼게요.",
+    en: "I'll pay my ___.",
+    accept: ["share"],
+    hint: "나눠 맡은 몫을 뜻하는 명사",
+    note: "각자 내는 것은 go Dutch나 split the bill이라고 합니다."
+  },
+  {
+    id: "daily-request-167",
+    category: "daily-request",
+    ko: "현금이 다 떨어졌어요.",
+    en: "I'm ___ of cash.",
+    accept: ["out"],
+    hint: "다 떨어졌다는 뜻을 만드는 말",
+    note: "out of cash는 현금이 다 떨어졌다는 뜻입니다."
+  },
+  {
+    id: "daily-request-168",
+    category: "daily-request",
+    ko: "제가 나중에 보내드릴게요.",
+    en: "I'll ___ you the money later.",
+    accept: ["send", "transfer"],
+    hint: "돈을 보낸다는 뜻의 동사",
+    note: "계좌 이체는 transfer라고 합니다."
+  },
+  {
+    id: "daily-request-169",
+    category: "daily-request",
+    ko: "잔돈 있으세요?",
+    en: "Do you have ___ change?",
+    accept: ["any"],
+    hint: "조금이라도 있는지 묻는 말",
+    note: "change는 잔돈을 뜻할 때 셀 수 없는 명사로 씁니다."
+  },
+  {
+    id: "daily-request-170",
+    category: "daily-request",
+    ko: "천 원만 빌려주실 수 있나요?",
+    en: "Could you ___ me a thousand won?",
+    accept: ["lend"],
+    hint: "돈을 빌려준다는 뜻의 동사",
+    note: "borrow는 빌리는 쪽, lend는 빌려주는 쪽입니다."
+  },
+  {
+    id: "daily-request-171",
+    category: "daily-request",
+    ko: "제 대신 좀 전해주시겠어요?",
+    en: "Could you ___ this on to them?",
+    accept: ["forward"],
+    hint: "앞으로를 뜻하는 낱말이 동사로 쓰이면 전달한다는 뜻이 됩니다",
+    note: "이메일을 전달할 때도 forward를 씁니다."
+  },
+  {
+    id: "daily-request-172",
+    category: "daily-request",
+    ko: "그분과 연결해 주실 수 있나요?",
+    en: "Could you ___ me with them?",
+    accept: ["connect"],
+    hint: "이어준다는 뜻의 동사",
+    note: "connect A with B는 두 사람을 이어준다는 뜻입니다."
+  },
+  {
+    id: "daily-request-173",
+    category: "daily-request",
+    ko: "좋은 곳 좀 알려주세요.",
+    en: "Any good ___?",
+    accept: ["spots", "places"],
+    hint: "가볼 만한 곳을 뜻하는 복수 명사",
+    note: "Any good spots?는 짧게 추천을 청하는 말입니다."
+  },
+  {
+    id: "daily-request-174",
+    category: "daily-request",
+    ko: "조언 좀 구할 수 있을까요?",
+    en: "Could I ask for your ___?",
+    accept: ["advice"],
+    hint: "어떻게 하면 좋을지 일러주는 말",
+    note: "셀 수 없는 명사라 an advice라고 하지 않습니다."
+  },
+  {
+    id: "daily-request-175",
+    category: "daily-request",
+    ko: "솔직하게 말씀해 주세요.",
+    en: "Please be ___ with me.",
+    accept: ["honest"],
+    hint: "숨기지 않는다는 뜻의 형용사",
+    note: "Be honest with me는 듣기 싫은 말이라도 해달라는 뜻입니다."
+  },
+  {
+    id: "daily-request-176",
+    category: "daily-request",
+    ko: "어떻게 생각하세요?",
+    en: "What are your ___ on this?",
+    accept: ["thoughts"],
+    hint: "생각을 뜻하는 복수 명사",
+    note: "What do you think?보다 조금 더 격식 있는 말입니다."
+  },
+  {
+    id: "daily-request-177",
+    category: "daily-request",
+    ko: "이 일 좀 맡아주실 수 있을까요?",
+    en: "Could you take this ___?",
+    accept: ["over"],
+    hint: "넘어감을 뜻하는 말. take와 붙어 넘겨받는다는 뜻이 됩니다",
+    note: "take over는 하던 일을 이어받는다는 뜻입니다."
+  },
+  {
+    id: "daily-request-178",
+    category: "daily-request",
+    ko: "저 대신 좀 나가주실 수 있나요?",
+    en: "Could you ___ in for me?",
+    accept: ["fill"],
+    hint: "빈자리를 채운다는 뜻의 동사",
+    note: "fill in for someone은 자리를 대신 메운다는 뜻입니다."
+  },
+  {
+    id: "daily-request-179",
+    category: "daily-request",
+    ko: "같이 좀 봐주시겠어요?",
+    en: "Could we go over it ___?",
+    accept: ["together"],
+    hint: "함께라는 뜻의 말",
+    note: "혼자 보기 어려울 때 같이 검토하자고 청하는 말입니다."
+  },
+  {
+    id: "daily-request-180",
+    category: "daily-request",
+    ko: "제 생각을 좀 정리해 주시겠어요?",
+    en: "Could you help me ___ my thoughts?",
+    accept: ["organize", "organise"],
+    hint: "가지런히 정리한다는 뜻의 동사",
+    note: "영국에서는 organise로 적습니다."
+  },
+  {
+    id: "daily-request-181",
+    category: "daily-request",
+    ko: "부탁이 하나 더 있는데요.",
+    en: "One ___ thing, if you don't mind.",
+    accept: ["more"],
+    hint: "수나 양이 더 있다는 뜻의 말",
+    note: "if you don't mind를 붙이면 부담이 줄어듭니다."
+  },
+  {
+    id: "daily-request-182",
+    category: "daily-request",
+    ko: "무리한 부탁인 건 알아요.",
+    en: "I know it's a ___ to ask.",
+    accept: ["lot"],
+    hint: "많다는 뜻의 말",
+    note: "a lot to ask는 부담이 큰 부탁이라는 뜻입니다."
+  },
+  {
+    id: "daily-request-183",
+    category: "daily-request",
+    ko: "안 되시면 말씀해 주세요.",
+    en: "Just say so if you ___.",
+    accept: ["can't"],
+    hint: "할 수 없다는 뜻의 줄임말",
+    note: "Just say so는 그냥 말만 해달라는 뜻입니다."
+  },
+  {
+    id: "daily-request-184",
+    category: "daily-request",
+    ko: "억지로 안 하셔도 돼요.",
+    en: "You don't have to say ___.",
+    accept: ["yes"],
+    hint: "받아들인다는 뜻의 짧은 대답",
+    note: "거절할 여지를 남겨주는 배려의 말입니다."
+  },
+  {
+    id: "daily-request-185",
+    category: "daily-request",
+    ko: "생각해 보고 알려주세요.",
+    en: "___ it over and let me know.",
+    accept: ["Think", "Sleep"],
+    hint: "생각한다는 뜻의 동사",
+    note: "sleep on it은 하룻밤 자면서 생각해 보라는 뜻입니다."
+  },
+  {
+    id: "daily-request-186",
+    category: "daily-request",
+    ko: "지금 답 안 주셔도 돼요.",
+    en: "You don't have to ___ right away.",
+    accept: ["decide", "answer"],
+    hint: "정한다는 뜻의 동사",
+    note: "right away는 '지금 당장'입니다."
+  },
+  {
+    id: "daily-request-187",
+    category: "daily-request",
+    ko: "여쭤보길 잘했네요.",
+    en: "I'm ___ I asked.",
+    accept: ["glad"],
+    hint: "기쁘다는 뜻의 형용사",
+    note: "I'm glad I asked는 물어보길 잘했다는 뜻입니다."
+  },
+  {
+    id: "daily-request-188",
+    category: "daily-request",
+    ko: "혹시 몰라서 여쭤봐요.",
+    en: "Just in ___.",
+    accept: ["case"],
+    hint: "어떤 경우를 뜻하는 명사",
+    note: "just in case는 '혹시 몰라서'라는 뜻입니다."
+  },
+  {
+    id: "daily-request-189",
+    category: "daily-request",
+    ko: "괜히 여쭤봤네요.",
+    en: "___ mind.",
+    accept: ["Never"],
+    hint: "'한 번도 ~않다'를 뜻하는 말",
+    note: "Never mind는 없던 일로 하자는 뜻입니다."
+  },
+  {
+    id: "daily-request-190",
+    category: "daily-request",
+    ko: "제가 잘못 여쭤봤어요.",
+    en: "Let me ___ that.",
+    accept: ["rephrase"],
+    hint: "다시 표현한다는 뜻의 동사",
+    note: "말을 잘못 꺼냈을 때 고쳐 말하겠다는 뜻입니다."
+  },
+  {
+    id: "daily-request-191",
+    category: "daily-request",
+    ko: "제가 여쭤볼 자리가 아니었네요.",
+    en: "That was out of ___.",
+    accept: ["line"],
+    hint: "선을 뜻하는 명사",
+    note: "out of line은 선을 넘었다는 뜻입니다."
+  },
+  {
+    id: "daily-request-192",
+    category: "daily-request",
+    ko: "불편하셨다면 죄송해요.",
+    en: "Sorry if that made you ___.",
+    accept: ["uncomfortable"],
+    hint: "마음이 편하지 않다는 뜻의 형용사",
+    note: "made you uncomfortable은 상대를 불편하게 했다는 뜻입니다."
+  },
+  {
+    id: "daily-request-193",
+    category: "daily-request",
+    ko: "제가 선을 넘었네요.",
+    en: "I ___ too far.",
+    accept: ["went"],
+    hint: "가다의 과거형",
+    note: "go too far는 도를 지나쳤다는 뜻입니다."
+  },
+  {
+    id: "daily-request-194",
+    category: "daily-request",
+    ko: "다시는 안 그럴게요.",
+    en: "It won't ___ again.",
+    accept: ["happen"],
+    hint: "일이 생긴다는 뜻의 동사",
+    note: "It won't happen again은 사과 뒤에 덧붙이는 다짐입니다."
+  },
+  {
+    id: "daily-request-195",
+    category: "daily-request",
+    ko: "이해해 주셔서 감사해요.",
+    en: "Thanks for ___.",
+    accept: ["understanding"],
+    hint: "알아준다는 뜻의 -ing형",
+    note: "Thanks for understanding은 양해해 줘서 고맙다는 뜻입니다."
+  },
+  {
+    id: "daily-request-196",
+    category: "daily-request",
+    ko: "제 부탁 들어주셔서 감사해요.",
+    en: "Thanks for ___ me out.",
+    accept: ["helping"],
+    hint: "돕다의 -ing형",
+    note: "help someone out은 곤란한 상황에서 도와줬다는 뜻입니다."
+  },
+  {
+    id: "daily-request-197",
+    category: "daily-request",
+    ko: "정말 큰 힘이 됐어요.",
+    en: "You really came ___ for me.",
+    accept: ["through"],
+    hint: "통과를 뜻하는 말. come과 붙어 기대에 부응했다는 뜻이 됩니다",
+    note: "come through for someone은 어려울 때 힘이 되어줬다는 뜻입니다."
+  },
+  {
+    id: "daily-request-198",
+    category: "daily-request",
+    ko: "다음엔 제가 도울게요.",
+    en: "I'll ___ the favor.",
+    accept: ["return"],
+    hint: "돌려준다는 뜻의 동사",
+    note: "return the favor는 받은 도움을 갚는다는 뜻입니다."
+  },
+  {
+    id: "daily-request-199",
+    category: "daily-request",
+    ko: "필요하시면 언제든 부르세요.",
+    en: "___ free to ask anytime.",
+    accept: ["Feel"],
+    hint: "느끼다를 뜻하는 동사",
+    note: "Feel free to는 부담 갖지 말라는 뜻입니다."
+  },
+  {
+    id: "daily-request-200",
+    category: "daily-request",
+    ko: "제가 있잖아요.",
+    en: "I've ___ your back.",
+    accept: ["got"],
+    hint: "가지다의 과거분사",
+    note: "I've got your back은 뒤를 봐주겠다, 즉 편이 되어주겠다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-101",
+    category: "daily-opinion",
+    ko: "제 말이 그 말이에요.",
+    en: "That's ___ my point.",
+    accept: ["exactly"],
+    hint: "조금도 다르지 않다는 뜻의 부사",
+    note: "That's exactly my point는 상대가 내 뜻을 짚어줬을 때 씁니다."
+  },
+  {
+    id: "daily-opinion-102",
+    category: "daily-opinion",
+    ko: "무슨 말씀인지 알겠어요.",
+    en: "I ___ you.",
+    accept: ["hear"],
+    hint: "소리가 들린다는 뜻의 동사",
+    note: "I hear you는 동의까지는 아니지만 이해했다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-103",
+    category: "daily-opinion",
+    ko: "일리가 있네요.",
+    en: "You ___ a point.",
+    accept: ["have"],
+    hint: "가지고 있다는 뜻의 기본 동사",
+    note: "완전히 동의하지 않아도 상대 말에 근거가 있다고 인정할 때 씁니다."
+  },
+  {
+    id: "daily-opinion-104",
+    category: "daily-opinion",
+    ko: "생각해 볼 만하네요.",
+    en: "That's worth ___ about.",
+    accept: ["thinking"],
+    hint: "생각하다의 -ing형",
+    note: "worth 뒤에는 -ing가 옵니다."
+  },
+  {
+    id: "daily-opinion-105",
+    category: "daily-opinion",
+    ko: "저는 좀 망설여져요.",
+    en: "I'm a bit ___ about this.",
+    accept: ["hesitant"],
+    hint: "선뜻 못 하고 머뭇거린다는 뜻의 형용사",
+    note: "hesitant는 반대까지는 아니고 조심스럽다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-106",
+    category: "daily-opinion",
+    ko: "좀 더 알아보고 싶어요.",
+    en: "I'd like to look ___ it more.",
+    accept: ["into"],
+    hint: "안쪽으로를 뜻하는 전치사. look과 붙어 알아본다는 뜻이 됩니다",
+    note: "look into는 자세히 알아본다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-107",
+    category: "daily-opinion",
+    ko: "판단하기엔 아직 일러요.",
+    en: "It's too ___ to tell.",
+    accept: ["early", "soon"],
+    hint: "때가 이르다는 뜻의 형용사",
+    note: "tell은 여기서 '알아차리다'라는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-108",
+    category: "daily-opinion",
+    ko: "두고 보면 알겠죠.",
+    en: "Time will ___.",
+    accept: ["tell"],
+    hint: "알려준다는 뜻의 동사",
+    note: "Time will tell은 시간이 지나면 알게 된다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-109",
+    category: "daily-opinion",
+    ko: "저는 잘 모르겠어요.",
+    en: "I'm on the ___ about it.",
+    accept: ["fence"],
+    hint: "울타리를 뜻하는 명사",
+    note: "on the fence는 담장 위에 앉아 어느 쪽으로도 못 내려온다는 그림에서 온 말입니다."
+  },
+  {
+    id: "daily-opinion-110",
+    category: "daily-opinion",
+    ko: "반반이에요.",
+    en: "I'm ___ between the two.",
+    accept: ["torn"],
+    hint: "찢다의 과거분사",
+    note: "torn은 마음이 두 쪽으로 갈렸다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-111",
+    category: "daily-opinion",
+    ko: "결정을 못 하겠어요.",
+    en: "I can't ___ up my mind on this.",
+    accept: ["make"],
+    hint: "만들다를 뜻하는 기본 동사. up one's mind와 붙어 마음을 정한다는 뜻이 됩니다",
+    note: "make up one's mind는 마음을 정한다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-112",
+    category: "daily-opinion",
+    ko: "어느 쪽이든 괜찮아요.",
+    en: "___ way works for me.",
+    accept: ["Either"],
+    hint: "둘 중 어느 쪽이든이라는 뜻의 말",
+    note: "Either way는 어느 쪽으로 정해도 좋다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-113",
+    category: "daily-opinion",
+    ko: "저는 그냥 따라갈게요.",
+    en: "I'll go with the ___.",
+    accept: ["flow"],
+    hint: "흐름을 뜻하는 명사",
+    note: "go with the flow는 흐름에 맡긴다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-114",
+    category: "daily-opinion",
+    ko: "굳이 반대하진 않아요.",
+    en: "I have no ___ feelings.",
+    accept: ["strong"],
+    hint: "세다는 뜻의 형용사",
+    note: "no strong feelings는 어느 쪽이든 크게 상관없다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-115",
+    category: "daily-opinion",
+    ko: "저도 그렇게 생각했어요.",
+    en: "I was thinking the same ___.",
+    accept: ["thing"],
+    hint: "일이나 사항을 두루 가리키는 말",
+    note: "I was thinking the same thing은 말이 통했다는 반가움을 담습니다."
+  },
+  {
+    id: "daily-opinion-116",
+    category: "daily-opinion",
+    ko: "완전 공감해요.",
+    en: "I can totally ___ to that.",
+    accept: ["relate"],
+    hint: "남의 처지를 자기 일처럼 느낀다는 뜻의 동사",
+    note: "relate to는 겪어봐서 안다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-117",
+    category: "daily-opinion",
+    ko: "저도 그런 적 있어요.",
+    en: "I've ___ there.",
+    accept: ["been"],
+    hint: "be동사의 과거분사",
+    note: "I've been there는 나도 겪어봤다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-118",
+    category: "daily-opinion",
+    ko: "어떤 기분인지 알아요.",
+    en: "I know the ___.",
+    accept: ["feeling"],
+    hint: "느낌을 뜻하는 명사",
+    note: "I know the feeling은 위로할 때 자주 씁니다."
+  },
+  {
+    id: "daily-opinion-119",
+    category: "daily-opinion",
+    ko: "제 얘기 같네요.",
+    en: "That ___ home.",
+    accept: ["hits"],
+    hint: "때린다는 뜻의 동사",
+    note: "hit home은 남 얘기 같지 않게 와닿는다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-120",
+    category: "daily-opinion",
+    ko: "생각도 못 했네요.",
+    en: "That never ___ my mind.",
+    accept: ["crossed"],
+    hint: "가로지르다의 과거형",
+    note: "cross one's mind는 머릿속을 스친다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-121",
+    category: "daily-opinion",
+    ko: "그렇게 볼 수도 있겠네요.",
+    en: "I never ___ of it that way.",
+    accept: ["thought"],
+    hint: "생각하다의 과거형",
+    note: "새 관점을 인정할 때 쓰는 부드러운 말입니다."
+  },
+  {
+    id: "daily-opinion-122",
+    category: "daily-opinion",
+    ko: "관점을 바꿔서 보면요.",
+    en: "Look at it from a different ___.",
+    accept: ["angle", "perspective"],
+    hint: "바라보는 방향을 뜻하는 명사",
+    note: "angle은 더 편한 말, perspective는 조금 더 무게 있는 말입니다."
+  },
+  {
+    id: "daily-opinion-123",
+    category: "daily-opinion",
+    ko: "일장일단이 있죠.",
+    en: "There are ___ and cons.",
+    accept: ["pros"],
+    hint: "좋은 점을 뜻하는 복수 명사",
+    note: "pros and cons는 장점과 단점입니다."
+  },
+  {
+    id: "daily-opinion-124",
+    category: "daily-opinion",
+    ko: "장점이 더 커요.",
+    en: "The benefits ___ the risks.",
+    accept: ["outweigh"],
+    hint: "저울에서 더 무겁다는 뜻의 동사",
+    note: "outweigh는 견주었을 때 더 크다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-125",
+    category: "daily-opinion",
+    ko: "위험 부담이 너무 커요.",
+    en: "It's too ___.",
+    accept: ["risky"],
+    hint: "위험이 따른다는 뜻의 형용사",
+    note: "risk에 -y를 붙인 형용사입니다."
+  },
+  {
+    id: "daily-opinion-126",
+    category: "daily-opinion",
+    ko: "밑져야 본전이죠.",
+    en: "We have nothing to ___.",
+    accept: ["lose"],
+    hint: "잃는다는 뜻의 동사",
+    note: "nothing to lose는 손해 볼 것이 없다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-127",
+    category: "daily-opinion",
+    ko: "한번 해볼 만해요.",
+    en: "It's worth a ___.",
+    accept: ["shot"],
+    hint: "한 번 해보는 시도를 뜻하는 명사",
+    note: "worth a shot은 밑져야 본전이라는 느낌입니다."
+  },
+  {
+    id: "daily-opinion-128",
+    category: "daily-opinion",
+    ko: "저는 신중한 편이에요.",
+    en: "I tend to play it ___.",
+    accept: ["safe"],
+    hint: "위험하지 않다는 뜻의 형용사",
+    note: "play it safe는 안전한 쪽을 고른다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-129",
+    category: "daily-opinion",
+    ko: "성급했던 것 같아요.",
+    en: "I think I ___ into it.",
+    accept: ["rushed"],
+    hint: "서두르다의 과거형",
+    note: "rush into는 충분히 생각하지 않고 뛰어든다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-130",
+    category: "daily-opinion",
+    ko: "다시 생각해 봐야겠어요.",
+    en: "I need to ___ it.",
+    accept: ["reconsider"],
+    hint: "다시 생각한다는 뜻의 동사",
+    note: "re-를 붙이면 '다시'라는 뜻이 더해집니다."
+  },
+  {
+    id: "daily-opinion-131",
+    category: "daily-opinion",
+    ko: "제 잘못이 아니에요.",
+    en: "It's not ___ fault.",
+    accept: ["my"],
+    hint: "'나의'에 해당하는 말",
+    note: "선을 그을 때는 이렇게 짧게 말합니다."
+  },
+  {
+    id: "daily-opinion-132",
+    category: "daily-opinion",
+    ko: "누구 탓도 아니에요.",
+    en: "No one's to ___.",
+    accept: ["blame"],
+    hint: "탓한다는 뜻의 동사",
+    note: "be to blame은 책임이 있다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-133",
+    category: "daily-opinion",
+    ko: "어쩔 수 없었어요.",
+    en: "There was nothing I could ___.",
+    accept: ["do"],
+    hint: "하다를 뜻하는 기본 동사",
+    note: "손쓸 방법이 없었다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-134",
+    category: "daily-opinion",
+    ko: "그럴 수도 있죠.",
+    en: "It ___.",
+    accept: ["happens"],
+    hint: "일이 생긴다는 뜻의 동사",
+    note: "It happens는 누구나 겪는 일이라며 넘겨주는 말입니다."
+  },
+  {
+    id: "daily-opinion-135",
+    category: "daily-opinion",
+    ko: "이미 지난 일이에요.",
+    en: "It's water under the ___.",
+    accept: ["bridge"],
+    hint: "강 위에 놓인 다리",
+    note: "water under the bridge는 이미 흘러간 일이라는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-136",
+    category: "daily-opinion",
+    ko: "그만 잊어버리세요.",
+    en: "Just ___ it go.",
+    accept: ["let"],
+    hint: "하게 놔둔다는 뜻의 동사",
+    note: "let it go는 마음에서 놓아준다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-137",
+    category: "daily-opinion",
+    ko: "마음에 담아두지 마세요.",
+    en: "Don't take it ___.",
+    accept: ["personally"],
+    hint: "개인적으로라는 뜻의 부사",
+    note: "take it personally는 자기를 향한 말로 받아들인다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-138",
+    category: "daily-opinion",
+    ko: "악의는 없었어요.",
+    en: "I didn't ___ it that way.",
+    accept: ["mean"],
+    hint: "그런 뜻으로 말한다는 뜻의 동사",
+    note: "I didn't mean it that way는 오해를 풀 때 씁니다."
+  },
+  {
+    id: "daily-opinion-139",
+    category: "daily-opinion",
+    ko: "말이 헛나왔어요.",
+    en: "That came out ___.",
+    accept: ["wrong"],
+    hint: "잘못됐다는 뜻의 형용사",
+    note: "That came out wrong은 뜻과 다르게 말이 나갔다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-140",
+    category: "daily-opinion",
+    ko: "오해가 있었네요.",
+    en: "There's been a ___.",
+    accept: ["misunderstanding"],
+    hint: "서로 다르게 알아들은 것을 뜻하는 명사",
+    note: "mis-는 '잘못'이라는 뜻을 더합니다."
+  },
+  {
+    id: "daily-opinion-141",
+    category: "daily-opinion",
+    ko: "제 뜻은 그게 아니었어요.",
+    en: "That's not what I was ___ at.",
+    accept: ["getting"],
+    hint: "얻다의 -ing형. at과 붙어 말하려는 바가 됩니다",
+    note: "what I'm getting at은 '내가 말하려는 것'입니다."
+  },
+  {
+    id: "daily-opinion-142",
+    category: "daily-opinion",
+    ko: "정리하자면요.",
+    en: "To ___ it up.",
+    accept: ["sum", "wrap"],
+    hint: "합치거나 마무리한다는 뜻의 동사",
+    note: "sum up은 요약한다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-143",
+    category: "daily-opinion",
+    ko: "결론적으로요.",
+    en: "At the end of the ___.",
+    accept: ["day"],
+    hint: "아침부터 밤까지의 하루",
+    note: "at the end of the day는 '결국'이라는 뜻의 관용구입니다."
+  },
+  {
+    id: "daily-opinion-144",
+    category: "daily-opinion",
+    ko: "중요한 건 그게 아니에요.",
+    en: "That's ___ the point.",
+    accept: ["beside"],
+    hint: "곁을 뜻하는 전치사",
+    note: "beside the point는 논점에서 벗어났다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-145",
+    category: "daily-opinion",
+    ko: "본론으로 들어가죠.",
+    en: "Let's ___ to the point.",
+    accept: ["get"],
+    hint: "닿는다는 뜻의 기본 동사",
+    note: "get to the point는 빙 돌리지 말고 본론을 말하자는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-146",
+    category: "daily-opinion",
+    ko: "솔직히 말씀드리면요.",
+    en: "To be ___ with you.",
+    accept: ["straight"],
+    hint: "곧다는 뜻의 형용사",
+    note: "be straight with someone은 돌리지 않고 솔직히 말한다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-147",
+    category: "daily-opinion",
+    ko: "제 개인적인 생각입니다만.",
+    en: "This is ___ my opinion.",
+    accept: ["just"],
+    hint: "'그저'를 뜻하는 말",
+    note: "앞에 붙여두면 주장이 부드러워집니다."
+  },
+  {
+    id: "daily-opinion-148",
+    category: "daily-opinion",
+    ko: "틀릴 수도 있어요.",
+    en: "I ___ be wrong.",
+    accept: ["could"],
+    hint: "'~일 수도 있다'를 만드는 조동사",
+    note: "I could be wrong을 덧붙이면 여지를 남기게 됩니다."
+  },
+  {
+    id: "daily-opinion-149",
+    category: "daily-opinion",
+    ko: "확실하진 않아요.",
+    en: "Don't ___ me on that.",
+    accept: ["quote"],
+    hint: "말을 그대로 옮긴다는 뜻의 동사",
+    note: "Don't quote me on that은 확실하지 않으니 옮기지 말라는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-150",
+    category: "daily-opinion",
+    ko: "제가 알기로는요.",
+    en: "As far as I ___.",
+    accept: ["know"],
+    hint: "알고 있다는 뜻의 동사",
+    note: "as far as I know는 '내가 아는 한'입니다."
+  },
+  {
+    id: "daily-opinion-151",
+    category: "daily-opinion",
+    ko: "들은 얘기예요.",
+    en: "That's just what I ___.",
+    accept: ["heard"],
+    hint: "듣다의 과거형",
+    note: "책임을 지지 않고 전할 때 씁니다."
+  },
+  {
+    id: "daily-opinion-152",
+    category: "daily-opinion",
+    ko: "소문일 뿐이에요.",
+    en: "It's just a ___.",
+    accept: ["rumor", "rumour"],
+    hint: "떠도는 이야기를 뜻하는 명사",
+    note: "영국에서는 rumour로 적습니다."
+  },
+  {
+    id: "daily-opinion-153",
+    category: "daily-opinion",
+    ko: "믿기 어렵네요.",
+    en: "I find that hard to ___.",
+    accept: ["believe"],
+    hint: "믿는다는 뜻의 동사",
+    note: "I find that hard to believe는 대놓고 부정하지 않으면서 의심을 드러냅니다."
+  },
+  {
+    id: "daily-opinion-154",
+    category: "daily-opinion",
+    ko: "정말요?",
+    en: "___ really?",
+    accept: ["Oh"],
+    hint: "놀람을 나타내는 짧은 감탄사",
+    note: "Oh really?는 어조에 따라 놀람도 되고 빈정거림도 됩니다."
+  },
+  {
+    id: "daily-opinion-155",
+    category: "daily-opinion",
+    ko: "설마요.",
+    en: "___ way.",
+    accept: ["No"],
+    hint: "부정을 나타내는 짧은 말",
+    note: "No way는 놀람과 부정을 함께 나타냅니다."
+  },
+  {
+    id: "daily-opinion-156",
+    category: "daily-opinion",
+    ko: "농담이시죠?",
+    en: "You've got to be ___.",
+    accept: ["kidding"],
+    hint: "농담한다는 뜻의 -ing형",
+    note: "You're kidding me는 믿기지 않을 때 씁니다."
+  },
+  {
+    id: "daily-opinion-157",
+    category: "daily-opinion",
+    ko: "진짜 그럴 줄 몰랐어요.",
+    en: "I'm genuinely ___.",
+    accept: ["shocked"],
+    hint: "크게 놀랐다는 뜻의 형용사",
+    note: "genuinely는 '정말로'라는 뜻을 더합니다."
+  },
+  {
+    id: "daily-opinion-158",
+    category: "daily-opinion",
+    ko: "말문이 막히네요.",
+    en: "I'm ___.",
+    accept: ["speechless"],
+    hint: "말이 안 나온다는 뜻의 형용사",
+    note: "speech에 -less를 붙여 만든 말입니다."
+  },
+  {
+    id: "daily-opinion-159",
+    category: "daily-opinion",
+    ko: "어이가 없네요.",
+    en: "That's ___.",
+    accept: ["unbelievable"],
+    hint: "믿을 수 없다는 뜻의 형용사",
+    note: "좋은 뜻으로도 나쁜 뜻으로도 씁니다. 어조로 갈립니다."
+  },
+  {
+    id: "daily-opinion-160",
+    category: "daily-opinion",
+    ko: "화가 나요.",
+    en: "It ___ me off.",
+    accept: ["ticks"],
+    hint: "시계 소리를 뜻하는 낱말이 off와 붙으면 짜증나게 한다는 뜻이 됩니다",
+    note: "tick someone off는 화나게 한다는 뜻입니다. 심한 말은 아닙니다."
+  },
+  {
+    id: "daily-opinion-161",
+    category: "daily-opinion",
+    ko: "참기 힘들어요.",
+    en: "I can't ___ it anymore.",
+    accept: ["stand", "take"],
+    hint: "견딘다는 뜻의 동사",
+    note: "can't stand는 도저히 못 견디겠다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-162",
+    category: "daily-opinion",
+    ko: "진정하세요.",
+    en: "___ down.",
+    accept: ["Calm"],
+    hint: "가라앉힌다는 뜻의 동사",
+    note: "화난 사람에게 이 말을 하면 오히려 더 화낼 수 있습니다."
+  },
+  {
+    id: "daily-opinion-163",
+    category: "daily-opinion",
+    ko: "한숨 돌리고 얘기해요.",
+    en: "Let's take a ___.",
+    accept: ["breather"],
+    hint: "잠깐 숨 돌리는 시간",
+    note: "take a breather는 잠시 쉬어간다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-164",
+    category: "daily-opinion",
+    ko: "그 얘긴 나중에 해요.",
+    en: "Let's ___ that for later.",
+    accept: ["save"],
+    hint: "남겨둔다는 뜻의 동사",
+    note: "save it for later는 나중으로 미루자는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-165",
+    category: "daily-opinion",
+    ko: "이 얘긴 그만하죠.",
+    en: "Let's ___ the subject.",
+    accept: ["change", "drop"],
+    hint: "바꾸거나 그만둔다는 뜻의 동사",
+    note: "drop the subject는 더 이상 말하지 말자는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-166",
+    category: "daily-opinion",
+    ko: "제가 예민했네요.",
+    en: "I was being too ___.",
+    accept: ["sensitive"],
+    hint: "쉽게 상처받는다는 뜻의 형용사",
+    note: "was being은 그때 그렇게 굴었다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-167",
+    category: "daily-opinion",
+    ko: "제가 지나쳤어요.",
+    en: "I ___.",
+    accept: ["overreacted"],
+    hint: "지나치게 반응하다의 과거형",
+    note: "over-를 붙이면 '지나치게'라는 뜻이 더해집니다."
+  },
+  {
+    id: "daily-opinion-168",
+    category: "daily-opinion",
+    ko: "속이 후련해요.",
+    en: "That's a load off my ___.",
+    accept: ["chest"],
+    hint: "몸의 앞쪽 윗부분",
+    note: "get something off one's chest는 담아둔 말을 털어놓는다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-169",
+    category: "daily-opinion",
+    ko: "말하고 나니 낫네요.",
+    en: "I feel better now that I ___ it.",
+    accept: ["said"],
+    hint: "말하다의 과거형",
+    note: "now that은 '~하고 나니'라는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-170",
+    category: "daily-opinion",
+    ko: "고민이 좀 있어요.",
+    en: "Something's been ___ me.",
+    accept: ["bugging", "eating"],
+    hint: "신경 쓰이게 한다는 뜻의 -ing형",
+    note: "bug someone은 계속 거슬리게 한다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-171",
+    category: "daily-opinion",
+    ko: "밤에 잠이 안 와요.",
+    en: "It's keeping me ___ at night.",
+    accept: ["up"],
+    hint: "깨어 있다는 뜻을 만드는 말",
+    note: "keep someone up은 잠 못 들게 한다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-172",
+    category: "daily-opinion",
+    ko: "스트레스가 심해요.",
+    en: "I'm under a lot of ___.",
+    accept: ["stress"],
+    hint: "마음을 짓누르는 부담",
+    note: "under stress는 압박을 받고 있다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-173",
+    category: "daily-opinion",
+    ko: "번아웃이 온 것 같아요.",
+    en: "I think I'm ___ out.",
+    accept: ["burning"],
+    hint: "타다의 -ing형",
+    note: "burn out은 다 타버렸다는 말에서 온 표현입니다."
+  },
+  {
+    id: "daily-opinion-174",
+    category: "daily-opinion",
+    ko: "쉬어야 할 것 같아요.",
+    en: "I need to take some time ___.",
+    accept: ["off"],
+    hint: "일에서 벗어나 있다는 뜻을 만드는 말",
+    note: "take time off는 일에서 잠시 벗어난다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-175",
+    category: "daily-opinion",
+    ko: "요즘 의욕이 없어요.",
+    en: "I've lost my ___.",
+    accept: ["motivation"],
+    hint: "하고 싶게 만드는 마음",
+    note: "lose motivation은 의욕을 잃었다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-176",
+    category: "daily-opinion",
+    ko: "다시 힘을 내볼게요.",
+    en: "I'll ___ myself together.",
+    accept: ["pull"],
+    hint: "당긴다는 뜻의 동사",
+    note: "pull oneself together는 마음을 다잡는다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-177",
+    category: "daily-opinion",
+    ko: "잘될 거예요.",
+    en: "Everything will turn out ___.",
+    accept: ["fine", "okay", "alright"],
+    hint: "괜찮다는 뜻의 형용사",
+    note: "turn out 뒤에는 결과를 나타내는 말이 옵니다. turn out fine처럼 씁니다."
+  },
+  {
+    id: "daily-opinion-178",
+    category: "daily-opinion",
+    ko: "너무 걱정 마세요.",
+    en: "Try not to stress ___ it.",
+    accept: ["over"],
+    hint: "'~에 대해'를 뜻하는 전치사",
+    note: "stress는 명사와 동사가 같은 꼴입니다."
+  },
+  {
+    id: "daily-opinion-179",
+    category: "daily-opinion",
+    ko: "생각보다 별거 아닐 거예요.",
+    en: "It's probably not as bad as it ___.",
+    accept: ["seems"],
+    hint: "~처럼 보인다는 뜻의 동사",
+    note: "as ... as it seems는 '보이는 만큼'이라는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-180",
+    category: "daily-opinion",
+    ko: "긍정적으로 봐요.",
+    en: "Look on the ___ side.",
+    accept: ["bright"],
+    hint: "밝다는 뜻의 형용사",
+    note: "look on the bright side는 좋은 쪽을 보자는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-181",
+    category: "daily-opinion",
+    ko: "그래도 다행이에요.",
+    en: "At least that's ___.",
+    accept: ["something"],
+    hint: "'무언가'를 뜻하는 말",
+    note: "At least that's something은 그나마 건진 게 있다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-182",
+    category: "daily-opinion",
+    ko: "그럴 만한 이유가 있겠죠.",
+    en: "There must be a ___.",
+    accept: ["reason"],
+    hint: "까닭을 뜻하는 명사",
+    note: "상대를 함부로 판단하지 않을 때 쓰는 말입니다."
+  },
+  {
+    id: "daily-opinion-183",
+    category: "daily-opinion",
+    ko: "제가 뭐라 할 처지는 아니죠.",
+    en: "Who am I to ___?",
+    accept: ["judge"],
+    hint: "옳고 그름을 가른다는 뜻의 동사",
+    note: "Who am I to judge?는 나도 남 말 할 처지가 아니라는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-184",
+    category: "daily-opinion",
+    ko: "각자 사정이 있는 거죠.",
+    en: "Everyone has their own ___.",
+    accept: ["reasons"],
+    hint: "까닭을 뜻하는 복수 명사",
+    note: "own을 붙이면 '저마다의'라는 뜻이 됩니다."
+  },
+  {
+    id: "daily-opinion-185",
+    category: "daily-opinion",
+    ko: "취향은 다 다르니까요.",
+    en: "To each their ___.",
+    accept: ["own"],
+    hint: "자기만의 것을 뜻하는 말",
+    note: "To each their own은 사람마다 취향이 다르다는 뜻의 관용구입니다."
+  },
+  {
+    id: "daily-opinion-186",
+    category: "daily-opinion",
+    ko: "저랑은 안 맞아요.",
+    en: "It's just not for ___.",
+    accept: ["me"],
+    hint: "'나'에 해당하는 목적어 자리의 말",
+    note: "not for me는 나쁘다기보다 나와 안 맞는다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-187",
+    category: "daily-opinion",
+    ko: "생각보다 훨씬 좋았어요.",
+    en: "It ___ my expectations.",
+    accept: ["exceeded"],
+    hint: "넘어선다는 뜻의 과거형",
+    note: "exceed expectations는 기대를 뛰어넘었다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-188",
+    category: "daily-opinion",
+    ko: "제 기대에는 못 미쳤어요.",
+    en: "It didn't ___ up to the hype.",
+    accept: ["live"],
+    hint: "산다는 뜻의 동사. up to와 붙어 기대에 부응한다는 뜻이 됩니다",
+    note: "hype는 실제보다 부풀려진 기대를 말합니다."
+  },
+  {
+    id: "daily-opinion-189",
+    category: "daily-opinion",
+    ko: "괜히 기대했어요.",
+    en: "I got my ___ up for nothing.",
+    accept: ["hopes"],
+    hint: "바람을 뜻하는 복수 명사",
+    note: "get one's hopes up은 기대를 부풀린다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-190",
+    category: "daily-opinion",
+    ko: "다음엔 더 잘하면 되죠.",
+    en: "There's always ___ time.",
+    accept: ["next"],
+    hint: "이번 다음이라는 뜻의 말",
+    note: "실패한 사람을 다독일 때 쓰는 말입니다."
+  },
+  {
+    id: "daily-opinion-191",
+    category: "daily-opinion",
+    ko: "배운 게 있으니 됐어요.",
+    en: "At ___ I learned something.",
+    accept: ["least"],
+    hint: "'적어도'를 만드는 말",
+    note: "영국에서는 learnt를 더 자주 씁니다."
+  },
+  {
+    id: "daily-opinion-192",
+    category: "daily-opinion",
+    ko: "후회는 안 해요.",
+    en: "I don't ___ it.",
+    accept: ["regret"],
+    hint: "뉘우친다는 뜻의 동사",
+    note: "regret 뒤에 -ing가 오면 이미 한 일을 뉘우친다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-193",
+    category: "daily-opinion",
+    ko: "제 선택이었으니까요.",
+    en: "It was my ___.",
+    accept: ["choice", "call"],
+    hint: "고른 것을 뜻하는 명사",
+    note: "my call은 내가 정했다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-194",
+    category: "daily-opinion",
+    ko: "책임은 제가 질게요.",
+    en: "I'll take ___ for it.",
+    accept: ["responsibility"],
+    hint: "맡아 감당해야 할 몫",
+    note: "take responsibility는 책임을 진다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-195",
+    category: "daily-opinion",
+    ko: "제가 처리했어야 했는데요.",
+    en: "I should have ___ it.",
+    accept: ["handled"],
+    hint: "다루다의 과거분사",
+    note: "should have + 과거분사는 하지 못한 일에 대한 아쉬움입니다."
+  },
+  {
+    id: "daily-opinion-196",
+    category: "daily-opinion",
+    ko: "다음엔 미리 말씀드릴게요.",
+    en: "I'll give you a ___ next time.",
+    accept: ["heads-up", "headsup"],
+    hint: "미리 알려주는 것을 뜻하는 명사",
+    note: "give a heads-up은 미리 귀띔한다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-197",
+    category: "daily-opinion",
+    ko: "이번 일로 많이 배웠어요.",
+    en: "It was a good ___ for me.",
+    accept: ["lesson"],
+    hint: "배움을 뜻하는 명사",
+    note: "a good lesson은 값진 교훈이라는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-198",
+    category: "daily-opinion",
+    ko: "다시는 안 그럴 거예요.",
+    en: "Never ___.",
+    accept: ["again"],
+    hint: "다시라는 뜻의 말",
+    note: "Never again은 두 번 다시 하지 않겠다는 짧고 단호한 다짐입니다."
+  },
+  {
+    id: "daily-opinion-199",
+    category: "daily-opinion",
+    ko: "덕분에 마음이 편해졌어요.",
+    en: "That takes a ___ off my mind.",
+    accept: ["worry"],
+    hint: "걱정을 뜻하는 명사",
+    note: "take a worry off one's mind는 걱정을 덜어준다는 뜻입니다."
+  },
+  {
+    id: "daily-opinion-200",
+    category: "daily-opinion",
+    ko: "얘기 들어주셔서 감사해요.",
+    en: "Thanks for ___.",
+    accept: ["listening"],
+    hint: "귀 기울인다는 뜻의 -ing형",
+    note: "hear는 그냥 들리는 것, listen은 귀 기울여 듣는 것입니다."
+  },
+  {
+    id: "travel-airport-101",
+    category: "travel-airport",
+    ko: "탑승 수속은 언제까지 해야 하나요?",
+    en: "What's the check-in ___?",
+    accept: ["deadline", "cutoff"],
+    hint: "정해진 마감 시각을 뜻하는 명사",
+    note: "보통 출발 한 시간 전에 마감합니다."
+  },
+  {
+    id: "travel-airport-102",
+    category: "travel-airport",
+    ko: "터미널이 어디인가요?",
+    en: "Which ___ am I departing from?",
+    accept: ["terminal"],
+    hint: "공항에서 탑승동을 가리키는 말",
+    note: "큰 공항은 터미널이 여러 개라 미리 확인해야 합니다."
+  },
+  {
+    id: "travel-airport-103",
+    category: "travel-airport",
+    ko: "자동 체크인 기계는 어디 있나요?",
+    en: "Where are the check-in ___?",
+    accept: ["kiosks", "machines"],
+    hint: "혼자 조작하는 작은 기계",
+    note: "self-check-in kiosk라고 부릅니다."
+  },
+  {
+    id: "travel-airport-104",
+    category: "travel-airport",
+    ko: "예약 번호가 여기 있어요.",
+    en: "Here's my ___ number.",
+    accept: ["booking", "confirmation"],
+    hint: "예약을 확인하는 번호",
+    note: "booking reference나 PNR이라고도 합니다."
+  },
+  {
+    id: "travel-airport-105",
+    category: "travel-airport",
+    ko: "여권 번호를 입력해야 하나요?",
+    en: "Do I need to ___ my passport number?",
+    accept: ["enter"],
+    hint: "적어 넣는다는 뜻의 동사",
+    note: "기계 화면에서 자주 나오는 말입니다."
+  },
+  {
+    id: "travel-airport-106",
+    category: "travel-airport",
+    ko: "짐이 두 개예요.",
+    en: "I have two ___ to check.",
+    accept: ["suitcases"],
+    hint: "옷을 넣어 다니는 여행 가방",
+    note: "부치는 짐은 checked baggage입니다."
+  },
+  {
+    id: "travel-airport-107",
+    category: "travel-airport",
+    ko: "이 가방 무게 좀 재주시겠어요?",
+    en: "Could you ___ this bag?",
+    accept: ["weigh"],
+    hint: "무게를 잰다는 뜻의 동사",
+    note: "무게 초과면 추가 요금을 내야 합니다."
+  },
+  {
+    id: "travel-airport-108",
+    category: "travel-airport",
+    ko: "몇 킬로까지 되나요?",
+    en: "What's the weight ___ per bag?",
+    accept: ["allowance"],
+    hint: "허용되는 양을 뜻하는 명사",
+    note: "항공사마다 다르니 미리 확인해야 합니다."
+  },
+  {
+    id: "travel-airport-109",
+    category: "travel-airport",
+    ko: "여기서 짐을 다시 싸도 될까요?",
+    en: "Can I ___ my bag here?",
+    accept: ["repack"],
+    hint: "다시 싼다는 뜻의 동사",
+    note: "무게가 넘으면 그 자리에서 짐을 옮겨 담기도 합니다."
+  },
+  {
+    id: "travel-airport-110",
+    category: "travel-airport",
+    ko: "이 가방은 기내 반입 되나요?",
+    en: "Is this bag allowed on ___?",
+    accept: ["board"],
+    hint: "배나 비행기 안을 뜻하는 말",
+    note: "크기와 무게 모두 기준이 있습니다."
+  },
+  {
+    id: "travel-airport-111",
+    category: "travel-airport",
+    ko: "배터리는 기내에 들고 타야 하나요?",
+    en: "Do batteries have to ___ in my carry-on bag?",
+    accept: ["go"],
+    hint: "들어간다는 뜻의 기본 동사",
+    note: "보조 배터리는 부치는 짐에 넣을 수 없습니다."
+  },
+  {
+    id: "travel-airport-112",
+    category: "travel-airport",
+    ko: "액체는 얼마까지 되나요?",
+    en: "How much ___ can I bring?",
+    accept: ["liquid"],
+    hint: "물처럼 흐르는 것을 뜻하는 명사",
+    note: "보통 100밀리리터짜리 용기까지만 됩니다."
+  },
+  {
+    id: "travel-airport-113",
+    category: "travel-airport",
+    ko: "이건 버려야 하나요?",
+    en: "Do I have to ___ this away?",
+    accept: ["throw"],
+    hint: "던진다는 뜻의 동사. away와 붙어 버린다는 뜻이 됩니다",
+    note: "보안 검색에서 기준을 넘는 액체는 버려야 합니다."
+  },
+  {
+    id: "travel-airport-114",
+    category: "travel-airport",
+    ko: "가방에 자물쇠가 달려 있어요.",
+    en: "My bag has a ___ on it.",
+    accept: ["padlock"],
+    hint: "고리에 걸어 잠그는 자물쇠",
+    note: "미국행 짐은 TSA 인증 자물쇠를 써야 합니다."
+  },
+  {
+    id: "travel-airport-115",
+    category: "travel-airport",
+    ko: "안에 깨지기 쉬운 게 있어요.",
+    en: "There's something ___ inside.",
+    accept: ["breakable"],
+    hint: "깨질 수 있다는 뜻의 형용사",
+    note: "미리 말하면 fragile 표를 붙여줍니다."
+  },
+  {
+    id: "travel-airport-116",
+    category: "travel-airport",
+    ko: "우선 하차 표 붙여주시겠어요?",
+    en: "Could you add a ___ tag?",
+    accept: ["priority"],
+    hint: "먼저 처리한다는 뜻의 명사",
+    note: "priority tag가 붙으면 짐이 먼저 나옵니다."
+  },
+  {
+    id: "travel-airport-117",
+    category: "travel-airport",
+    ko: "최종 목적지까지 부쳐주세요.",
+    en: "Please check it ___ to my final destination.",
+    accept: ["through"],
+    hint: "끝까지 통과한다는 뜻의 말",
+    note: "check through는 갈아타도 짐을 다시 찾지 않는다는 뜻입니다."
+  },
+  {
+    id: "travel-airport-118",
+    category: "travel-airport",
+    ko: "탑승권 두 장 다 주시겠어요?",
+    en: "Could I get ___ boarding passes?",
+    accept: ["both"],
+    hint: "둘 다를 뜻하는 말",
+    note: "환승이 있으면 두 장을 함께 받습니다."
+  },
+  {
+    id: "travel-airport-119",
+    category: "travel-airport",
+    ko: "좌석 배정은 어떻게 되나요?",
+    en: "How is seating ___?",
+    accept: ["assigned"],
+    hint: "정해서 나눠준다는 뜻의 과거분사",
+    note: "저가 항공은 자리를 따로 사야 하는 경우가 많습니다."
+  },
+  {
+    id: "travel-airport-120",
+    category: "travel-airport",
+    ko: "앞쪽 자리로 주실 수 있나요?",
+    en: "Could I get a seat near the ___?",
+    accept: ["front"],
+    hint: "앞쪽을 뜻하는 명사",
+    note: "뒤쪽은 back이나 rear입니다."
+  },
+  {
+    id: "travel-airport-121",
+    category: "travel-airport",
+    ko: "다리 뻗을 공간이 넓은 자리 있나요?",
+    en: "Any seats with extra ___?",
+    accept: ["legroom"],
+    hint: "다리를 놓을 자리를 뜻하는 명사",
+    note: "비상구 좌석은 legroom이 넓습니다."
+  },
+  {
+    id: "travel-airport-122",
+    category: "travel-airport",
+    ko: "화장실 근처는 피하고 싶어요.",
+    en: "I'd rather not sit ___ the lavatory.",
+    accept: ["near", "by"],
+    hint: "가까이를 뜻하는 전치사",
+    note: "I'd rather not은 부드러운 거절입니다."
+  },
+  {
+    id: "travel-airport-123",
+    category: "travel-airport",
+    ko: "일행이 두 명이에요.",
+    en: "There are two of ___.",
+    accept: ["us"],
+    hint: "'우리'에 해당하는 목적어 자리의 말",
+    note: "함께 앉고 싶다면 이 말을 먼저 꺼냅니다."
+  },
+  {
+    id: "travel-airport-124",
+    category: "travel-airport",
+    ko: "탑승 시각이 몇 시인가요?",
+    en: "What time do we ___ boarding?",
+    accept: ["start", "begin"],
+    hint: "시작한다는 뜻의 동사",
+    note: "탑승은 보통 출발 40분 전에 시작합니다."
+  },
+  {
+    id: "travel-airport-125",
+    category: "travel-airport",
+    ko: "몇 번째 그룹이에요?",
+    en: "Which boarding ___ am I in?",
+    accept: ["group", "zone"],
+    hint: "차례를 나눈 묶음",
+    note: "탑승권에 Group 3처럼 찍혀 있습니다."
+  },
+  {
+    id: "travel-airport-126",
+    category: "travel-airport",
+    ko: "라운지를 쓸 수 있나요?",
+    en: "Do I have ___ to the lounge?",
+    accept: ["access"],
+    hint: "들어갈 수 있는 자격",
+    note: "카드 혜택으로 쓸 수 있는 경우가 많습니다."
+  },
+  {
+    id: "travel-airport-127",
+    category: "travel-airport",
+    ko: "충전할 곳이 어디인가요?",
+    en: "Where can I ___ my phone?",
+    accept: ["charge"],
+    hint: "배터리를 채운다는 뜻의 동사",
+    note: "charging station이라고 적힌 곳을 찾으면 됩니다."
+  },
+  {
+    id: "travel-airport-128",
+    category: "travel-airport",
+    ko: "공항 와이파이는 무료인가요?",
+    en: "Is the airport Wi-Fi ___?",
+    accept: ["free"],
+    hint: "돈을 안 낸다는 뜻의 형용사",
+    note: "시간 제한이 있는 곳도 있습니다."
+  },
+  {
+    id: "travel-airport-129",
+    category: "travel-airport",
+    ko: "게이트까지 얼마나 걸리나요?",
+    en: "How long does it take to ___ the gate?",
+    accept: ["reach"],
+    hint: "닿는다는 뜻의 동사",
+    note: "큰 공항은 게이트까지 20분 넘게 걸리기도 합니다."
+  },
+  {
+    id: "travel-airport-130",
+    category: "travel-airport",
+    ko: "셔틀 트레인을 타야 하나요?",
+    en: "Do I need to take the ___ train?",
+    accept: ["shuttle"],
+    hint: "짧은 구간을 오가는 것",
+    note: "터미널 사이를 오가는 무료 열차입니다."
+  },
+  {
+    id: "travel-airport-131",
+    category: "travel-airport",
+    ko: "출발 안내 화면이 어디 있나요?",
+    en: "Where's the departure ___?",
+    accept: ["board", "screen"],
+    hint: "정보를 띄워 보여주는 판",
+    note: "departures board를 보면 게이트를 알 수 있습니다."
+  },
+  {
+    id: "travel-airport-132",
+    category: "travel-airport",
+    ko: "지금 탑승 중인가요?",
+    en: "___ they boarding yet?",
+    accept: ["Are"],
+    hint: "be동사의 현재형. 의문문 맨 앞에 옵니다",
+    note: "게이트 직원에게 짧게 물을 때 씁니다."
+  },
+  {
+    id: "travel-airport-133",
+    category: "travel-airport",
+    ko: "마지막 안내 방송이었나요?",
+    en: "Was that the ___ call?",
+    accept: ["final", "last"],
+    hint: "맨 나중이라는 뜻의 형용사",
+    note: "final call이 나오면 서둘러 가야 합니다."
+  },
+  {
+    id: "travel-airport-134",
+    category: "travel-airport",
+    ko: "제 이름이 불렸어요.",
+    en: "They just ___ my name.",
+    accept: ["called"],
+    hint: "부르다의 과거형",
+    note: "이름이 불리면 게이트로 가야 합니다."
+  },
+  {
+    id: "travel-airport-135",
+    category: "travel-airport",
+    ko: "좌석 등급을 올릴 수 있나요?",
+    en: "Can I ___ to business class?",
+    accept: ["upgrade"],
+    hint: "등급을 올린다는 뜻의 동사",
+    note: "빈 자리가 있으면 돈을 더 내고 올릴 수 있습니다."
+  },
+  {
+    id: "travel-airport-136",
+    category: "travel-airport",
+    ko: "마일리지로 결제할 수 있나요?",
+    en: "Can I pay with ___?",
+    accept: ["miles", "points"],
+    hint: "탄 거리만큼 쌓이는 것",
+    note: "항공사에 따라 miles나 points라고 부릅니다."
+  },
+  {
+    id: "travel-airport-137",
+    category: "travel-airport",
+    ko: "제 마일리지 적립해 주세요.",
+    en: "Could you add this to my ___ account?",
+    accept: ["mileage", "frequent flyer"],
+    hint: "마일리지를 모아두는 회원 제도",
+    note: "탑승 전에 말해야 적립됩니다."
+  },
+  {
+    id: "travel-airport-138",
+    category: "travel-airport",
+    ko: "휠체어 도움을 받을 수 있나요?",
+    en: "Could I request ___ assistance?",
+    accept: ["wheelchair"],
+    hint: "바퀴 달린 의자",
+    note: "미리 신청하면 게이트까지 안내해 줍니다."
+  },
+  {
+    id: "travel-airport-139",
+    category: "travel-airport",
+    ko: "유아 동반석이 있나요?",
+    en: "Do you have seats for ___ with infants?",
+    accept: ["families"],
+    hint: "한 집안 사람들을 뜻하는 복수 명사",
+    note: "아기 요람을 달 수 있는 자리를 bassinet seat이라고 합니다."
+  },
+  {
+    id: "travel-airport-140",
+    category: "travel-airport",
+    ko: "유모차는 어디에 맡기나요?",
+    en: "Where do I leave the ___?",
+    accept: ["stroller", "pram"],
+    hint: "아기를 태워 미는 것",
+    note: "미국은 stroller, 영국은 pram이나 pushchair라고 합니다."
+  },
+  {
+    id: "travel-airport-141",
+    category: "travel-airport",
+    ko: "보안 검색이 오래 걸리나요?",
+    en: "Is the security line ___?",
+    accept: ["long"],
+    hint: "줄이 길다는 뜻의 형용사",
+    note: "성수기에는 한 시간 넘게 걸리기도 합니다."
+  },
+  {
+    id: "travel-airport-142",
+    category: "travel-airport",
+    ko: "벨트를 풀어야 하나요?",
+    en: "Do I need to take off my ___?",
+    accept: ["belt"],
+    hint: "허리에 매는 띠",
+    note: "금속이 있으면 소리가 울립니다."
+  },
+  {
+    id: "travel-airport-143",
+    category: "travel-airport",
+    ko: "시계도 벗어야 하나요?",
+    en: "What about my ___?",
+    accept: ["watch"],
+    hint: "손목에 차는 시계",
+    note: "What about은 '이건 어떤가요'라고 이어 물을 때 씁니다."
+  },
+  {
+    id: "travel-airport-144",
+    category: "travel-airport",
+    ko: "이 통에 넣으면 되나요?",
+    en: "Do these go in the ___?",
+    accept: ["tray", "bin"],
+    hint: "물건을 담는 얕은 그릇",
+    note: "보안 검색대에서 쓰는 플라스틱 통입니다."
+  },
+  {
+    id: "travel-airport-145",
+    category: "travel-airport",
+    ko: "다시 검사해야 한다고 하네요.",
+    en: "They need to ___ my bag again.",
+    accept: ["scan"],
+    hint: "기계로 훑어본다는 뜻의 동사",
+    note: "의심스러운 물건이 보이면 다시 봅니다."
+  },
+  {
+    id: "travel-airport-146",
+    category: "travel-airport",
+    ko: "가방을 열어봐도 될까요?",
+    en: "May I ___ your bag?",
+    accept: ["search", "inspect"],
+    hint: "속을 살펴본다는 뜻의 동사",
+    note: "보안 요원이 물어보는 말입니다."
+  },
+  {
+    id: "travel-airport-147",
+    category: "travel-airport",
+    ko: "이건 뭔가요?",
+    en: "What's this ___?",
+    accept: ["item"],
+    hint: "물건 하나를 뜻하는 명사",
+    note: "보안 검색에서 걸린 물건을 가리킬 때 씁니다."
+  },
+  {
+    id: "travel-airport-148",
+    category: "travel-airport",
+    ko: "약이에요, 처방전도 있어요.",
+    en: "It's medication, and I have the ___.",
+    accept: ["prescription"],
+    hint: "의사가 써준 약 지시서",
+    note: "약은 원래 통에 담아 가는 것이 안전합니다."
+  },
+  {
+    id: "travel-airport-149",
+    category: "travel-airport",
+    ko: "이제 가셔도 됩니다.",
+    en: "You're all ___.",
+    accept: ["set", "clear"],
+    hint: "다 됐다는 뜻의 말",
+    note: "You're all set은 절차가 끝났다는 뜻입니다."
+  },
+  {
+    id: "travel-airport-150",
+    category: "travel-airport",
+    ko: "제 물건 하나가 안 보여요.",
+    en: "One of my things is ___.",
+    accept: ["missing"],
+    hint: "없어졌다는 뜻의 형용사",
+    note: "보안 검색대에서 물건을 두고 오기 쉽습니다."
+  },
+  {
+    id: "travel-airport-151",
+    category: "travel-airport",
+    ko: "출국 심사는 어디서 하나요?",
+    en: "Where do I go through passport ___?",
+    accept: ["control"],
+    hint: "살펴 관리한다는 뜻의 명사",
+    note: "영국에서는 passport control, 미국에서는 immigration이라고 합니다."
+  },
+  {
+    id: "travel-airport-152",
+    category: "travel-airport",
+    ko: "이 줄이 외국인 줄인가요?",
+    en: "Is this the line for ___?",
+    accept: ["visitors", "foreigners"],
+    hint: "그 나라 사람이 아닌 이들을 뜻하는 복수 명사",
+    note: "공항 안내판에는 보통 Visitors나 All Passports라고 적혀 있습니다."
+  },
+  {
+    id: "travel-airport-153",
+    category: "travel-airport",
+    ko: "직업이 무엇입니까?",
+    en: "What's your ___?",
+    accept: ["occupation"],
+    hint: "직업을 뜻하는 격식 있는 명사",
+    note: "입국 신고서에 자주 나오는 항목입니다."
+  },
+  {
+    id: "travel-airport-154",
+    category: "travel-airport",
+    ko: "혼자 오셨습니까?",
+    en: "Are you traveling ___?",
+    accept: ["alone"],
+    hint: "홀로라는 뜻의 말",
+    note: "입국 심사에서 자주 묻는 질문입니다."
+  },
+  {
+    id: "travel-airport-155",
+    category: "travel-airport",
+    ko: "일행이 있습니다.",
+    en: "I'm traveling with a ___.",
+    accept: ["colleague", "companion"],
+    hint: "함께 다니는 사람",
+    note: "동료면 colleague, 그냥 동행이면 companion입니다."
+  },
+  {
+    id: "travel-airport-156",
+    category: "travel-airport",
+    ko: "전에 와보신 적 있습니까?",
+    en: "Have you been here ___?",
+    accept: ["before"],
+    hint: "전에라는 뜻의 말",
+    note: "입국 심사관이 자주 던지는 질문입니다."
+  },
+  {
+    id: "travel-airport-157",
+    category: "travel-airport",
+    ko: "출장차 왔습니다.",
+    en: "I'm traveling on ___.",
+    accept: ["business"],
+    hint: "일을 뜻하는 명사",
+    note: "관광이면 on vacation, 일이면 on business입니다."
+  },
+  {
+    id: "travel-airport-158",
+    category: "travel-airport",
+    ko: "회의에 참석하러 왔습니다.",
+    en: "I'm attending a ___.",
+    accept: ["conference"],
+    hint: "여러 사람이 모이는 큰 회의",
+    note: "작은 회의는 meeting이라고 합니다."
+  },
+  {
+    id: "travel-airport-159",
+    category: "travel-airport",
+    ko: "친척을 만나러 왔습니다.",
+    en: "I'm here to visit ___.",
+    accept: ["relatives"],
+    hint: "친척을 뜻하는 복수 명사",
+    note: "family라고 해도 통합니다."
+  },
+  {
+    id: "travel-airport-160",
+    category: "travel-airport",
+    ko: "돌아가는 표를 보여드릴까요?",
+    en: "Would you like to see my ___ ticket?",
+    accept: ["return"],
+    hint: "돌아온다는 뜻의 말",
+    note: "돌아가는 표가 없으면 입국이 거절될 수 있습니다."
+  },
+  {
+    id: "travel-airport-161",
+    category: "travel-airport",
+    ko: "비자는 여기 있습니다.",
+    en: "Here's my ___.",
+    accept: ["visa"],
+    hint: "입국을 허락하는 서류",
+    note: "무비자로 들어가는 나라도 많습니다."
+  },
+  {
+    id: "travel-airport-162",
+    category: "travel-airport",
+    ko: "전자 여행 허가를 받았습니다.",
+    en: "I have an electronic travel ___.",
+    accept: ["authorization", "authorisation"],
+    hint: "허락을 뜻하는 명사",
+    note: "미국은 ESTA, 캐나다는 eTA라고 부릅니다."
+  },
+  {
+    id: "travel-airport-163",
+    category: "travel-airport",
+    ko: "숙소 주소를 적어야 하나요?",
+    en: "Do I need to write down the ___?",
+    accept: ["address"],
+    hint: "집이나 건물이 있는 곳을 적은 것",
+    note: "입국 신고서에 묵을 곳을 적어야 합니다."
+  },
+  {
+    id: "travel-airport-164",
+    category: "travel-airport",
+    ko: "머무는 동안 호텔에 있을 겁니다.",
+    en: "I'll be staying at a ___.",
+    accept: ["hotel"],
+    hint: "여행객이 묵는 곳",
+    note: "친척 집이면 with my family라고 하면 됩니다."
+  },
+  {
+    id: "travel-airport-165",
+    category: "travel-airport",
+    ko: "체류 기간은 이 주입니다.",
+    en: "My ___ is two weeks.",
+    accept: ["stay"],
+    hint: "머무는 일을 뜻하는 명사",
+    note: "동사와 명사가 같은 꼴입니다."
+  },
+  {
+    id: "travel-airport-166",
+    category: "travel-airport",
+    ko: "지문을 채취하겠습니다.",
+    en: "We need to take your ___.",
+    accept: ["fingerprints"],
+    hint: "손가락 끝에 있는 무늬",
+    note: "요즘은 얼굴도 함께 찍습니다."
+  },
+  {
+    id: "travel-airport-167",
+    category: "travel-airport",
+    ko: "안경을 벗어주세요.",
+    en: "Please remove your ___.",
+    accept: ["glasses"],
+    hint: "눈에 쓰는 것",
+    note: "얼굴을 찍을 때 벗으라고 합니다."
+  },
+  {
+    id: "travel-airport-168",
+    category: "travel-airport",
+    ko: "모자를 벗어주세요.",
+    en: "Please take off your ___.",
+    accept: ["hat", "cap"],
+    hint: "머리에 쓰는 것",
+    note: "얼굴이 가려지면 확인이 안 됩니다."
+  },
+  {
+    id: "travel-airport-169",
+    category: "travel-airport",
+    ko: "입국이 거절되었습니다.",
+    en: "Entry has been ___.",
+    accept: ["denied", "refused"],
+    hint: "받아들이지 않았다는 뜻의 과거분사",
+    note: "이유를 물어보고 항공사에 알려야 합니다."
+  },
+  {
+    id: "travel-airport-170",
+    category: "travel-airport",
+    ko: "통역이 필요합니다.",
+    en: "I need an ___.",
+    accept: ["interpreter"],
+    hint: "말을 옮겨주는 사람",
+    note: "translator는 글, interpreter는 말을 옮깁니다."
+  },
+  {
+    id: "travel-airport-171",
+    category: "travel-airport",
+    ko: "대사관에 연락하고 싶습니다.",
+    en: "I'd like to contact my ___.",
+    accept: ["embassy", "consulate"],
+    hint: "다른 나라에 있는 자기 나라 공관",
+    note: "큰 도시에는 consulate가 있습니다."
+  },
+  {
+    id: "travel-airport-172",
+    category: "travel-airport",
+    ko: "수하물 벨트가 몇 번인가요?",
+    en: "Which ___ is my luggage on?",
+    accept: ["carousel", "belt"],
+    hint: "짐이 돌아 나오는 둥근 장치",
+    note: "carousel은 회전목마를 뜻하는 말에서 왔습니다."
+  },
+  {
+    id: "travel-airport-173",
+    category: "travel-airport",
+    ko: "짐이 아직 안 나왔어요.",
+    en: "My bag hasn't come ___ yet.",
+    accept: ["out"],
+    hint: "밖으로를 뜻하는 말",
+    note: "come out은 벨트에서 나온다는 뜻입니다."
+  },
+  {
+    id: "travel-airport-174",
+    category: "travel-airport",
+    ko: "제 것과 비슷한 가방이 많네요.",
+    en: "A lot of bags look like ___.",
+    accept: ["mine"],
+    hint: "'내 것'을 뜻하는 소유대명사",
+    note: "가방에 표를 달아두면 찾기 쉽습니다."
+  },
+  {
+    id: "travel-airport-175",
+    category: "travel-airport",
+    ko: "누가 제 가방을 가져간 것 같아요.",
+    en: "I think someone ___ my bag.",
+    accept: ["took"],
+    hint: "가져가다의 과거형",
+    note: "비슷한 가방을 착각해 가져가는 일이 종종 있습니다."
+  },
+  {
+    id: "travel-airport-176",
+    category: "travel-airport",
+    ko: "분실물 센터가 어디인가요?",
+    en: "Where's ___ and found?",
+    accept: ["lost"],
+    hint: "잃다의 과거분사",
+    note: "lost and found는 분실물 보관소입니다."
+  },
+  {
+    id: "travel-airport-177",
+    category: "travel-airport",
+    ko: "여기 서류를 작성해 주세요.",
+    en: "Please fill out this ___.",
+    accept: ["form"],
+    hint: "빈칸을 채워 넣는 종이",
+    note: "분실 신고를 하면 접수 번호를 줍니다."
+  },
+  {
+    id: "travel-airport-178",
+    category: "travel-airport",
+    ko: "찾으면 호텔로 보내주시나요?",
+    en: "Will you ___ it to my hotel?",
+    accept: ["deliver"],
+    hint: "가져다준다는 뜻의 동사",
+    note: "대부분 숙소까지 무료로 보내줍니다."
+  },
+  {
+    id: "travel-airport-179",
+    category: "travel-airport",
+    ko: "생필품 살 돈을 받을 수 있나요?",
+    en: "Can I get ___ for essentials?",
+    accept: ["compensation", "reimbursement"],
+    hint: "손해를 메워주는 돈",
+    note: "짐이 늦어지면 세면도구 값을 받을 수 있습니다."
+  },
+  {
+    id: "travel-airport-180",
+    category: "travel-airport",
+    ko: "세관 신고할 물건이 있습니다.",
+    en: "I ___ something to declare.",
+    accept: ["have"],
+    hint: "가지고 있다는 뜻의 기본 동사",
+    note: "정해진 금액을 넘는 물건은 반드시 신고해야 합니다."
+  },
+  {
+    id: "travel-airport-181",
+    category: "travel-airport",
+    ko: "선물로 가져온 겁니다.",
+    en: "These are ___ for my family.",
+    accept: ["gifts", "presents"],
+    hint: "남에게 주려고 산 것",
+    note: "선물도 금액이 크면 신고 대상이 됩니다."
+  },
+  {
+    id: "travel-airport-182",
+    category: "travel-airport",
+    ko: "음식은 가지고 있지 않습니다.",
+    en: "I'm not carrying any ___ products.",
+    accept: ["food"],
+    hint: "먹는 것을 뜻하는 명사",
+    note: "고기와 과일은 대부분의 나라에서 금지됩니다."
+  },
+  {
+    id: "travel-airport-183",
+    category: "travel-airport",
+    ko: "면세로 얼마까지 가져갈 수 있나요?",
+    en: "How much can I bring in ___-free?",
+    accept: ["duty"],
+    hint: "물건에 붙는 세금을 뜻하는 명사",
+    note: "술과 담배는 따로 정해진 양이 있습니다."
+  },
+  {
+    id: "travel-airport-184",
+    category: "travel-airport",
+    ko: "세금을 내야 하나요?",
+    en: "Do I have to pay ___ on this?",
+    accept: ["duty", "tax"],
+    hint: "물건에 붙는 세금",
+    note: "한도를 넘으면 그 자리에서 냅니다."
+  },
+  {
+    id: "travel-airport-185",
+    category: "travel-airport",
+    ko: "녹색 통로로 가면 되나요?",
+    en: "Should I go through the ___ channel?",
+    accept: ["green"],
+    hint: "신호등에서 지나가도 좋다는 색",
+    note: "신고할 것이 없으면 green, 있으면 red입니다."
+  },
+  {
+    id: "travel-airport-186",
+    category: "travel-airport",
+    ko: "환승 시간이 빠듯해요.",
+    en: "My connection is ___.",
+    accept: ["tight"],
+    hint: "여유가 없다는 뜻의 형용사",
+    note: "환승 시간이 촉박하면 직원에게 미리 말합니다."
+  },
+  {
+    id: "travel-airport-187",
+    category: "travel-airport",
+    ko: "다시 보안 검색을 받아야 하나요?",
+    en: "Do I have to go through security ___?",
+    accept: ["again"],
+    hint: "다시라는 뜻의 말",
+    note: "나라에 따라 환승할 때도 다시 검색합니다."
+  },
+  {
+    id: "travel-airport-188",
+    category: "travel-airport",
+    ko: "환승 비자가 꼭 있어야 하나요?",
+    en: "Is a transit visa ___?",
+    accept: ["required", "necessary"],
+    hint: "꼭 있어야 한다는 뜻의 형용사",
+    note: "공항 밖으로 나가지 않아도 필요한 나라가 있습니다."
+  },
+  {
+    id: "travel-airport-189",
+    category: "travel-airport",
+    ko: "다음 게이트까지 안내해 주시겠어요?",
+    en: "Could you ___ me to my next gate?",
+    accept: ["direct", "point"],
+    hint: "길을 알려준다는 뜻의 동사",
+    note: "직원에게 탑승권을 보여주면 알려줍니다."
+  },
+  {
+    id: "travel-airport-190",
+    category: "travel-airport",
+    ko: "짐은 자동으로 넘어가나요?",
+    en: "Does my luggage ___ automatically?",
+    accept: ["transfer"],
+    hint: "옮겨 간다는 뜻의 동사",
+    note: "같은 항공사끼리는 대부분 자동으로 넘어갑니다."
+  },
+  {
+    id: "travel-airport-191",
+    category: "travel-airport",
+    ko: "창문 덮개를 올려주세요.",
+    en: "Please open your window ___.",
+    accept: ["shade"],
+    hint: "햇빛을 가리는 덮개",
+    note: "이착륙 때는 창문 덮개를 올려두어야 합니다."
+  },
+  {
+    id: "travel-airport-192",
+    category: "travel-airport",
+    ko: "테이블을 접어주세요.",
+    en: "Please stow your tray ___.",
+    accept: ["table"],
+    hint: "앞좌석에 붙은 작은 판",
+    note: "stow는 제자리에 넣어둔다는 뜻입니다."
+  },
+  {
+    id: "travel-airport-193",
+    category: "travel-airport",
+    ko: "휴대폰을 비행기 모드로 해주세요.",
+    en: "Please switch your phone to ___ mode.",
+    accept: ["airplane", "flight"],
+    hint: "하늘을 나는 것을 뜻하는 명사",
+    note: "미국은 airplane mode, 영국은 flight mode라고 합니다."
+  },
+  {
+    id: "travel-airport-194",
+    category: "travel-airport",
+    ko: "이어폰을 빼주시겠어요?",
+    en: "Could you take out your ___?",
+    accept: ["earphones"],
+    hint: "귀에 꽂는 작은 소리 장치",
+    note: "안내 방송을 들어야 할 때 부탁합니다."
+  },
+  {
+    id: "travel-airport-195",
+    category: "travel-airport",
+    ko: "마실 것은 뭐가 있나요?",
+    en: "What do you have to ___?",
+    accept: ["drink"],
+    hint: "마신다는 뜻의 동사",
+    note: "기내에서는 대부분 무료입니다."
+  },
+  {
+    id: "travel-airport-196",
+    category: "travel-airport",
+    ko: "커피 한 잔 주시겠어요?",
+    en: "Could I get a ___ of coffee?",
+    accept: ["cup"],
+    hint: "손잡이가 달린 잔",
+    note: "물은 a glass of water라고 합니다."
+  },
+  {
+    id: "travel-airport-197",
+    category: "travel-airport",
+    ko: "이거 치워주시겠어요?",
+    en: "Could you ___ this for me?",
+    accept: ["clear"],
+    hint: "치운다는 뜻의 동사",
+    note: "다 먹은 그릇을 치워달라고 할 때 씁니다."
+  },
+  {
+    id: "travel-airport-198",
+    category: "travel-airport",
+    ko: "담요 한 장 더 주시겠어요?",
+    en: "Could I get one more ___?",
+    accept: ["blanket"],
+    hint: "몸을 덮는 천",
+    note: "기내는 생각보다 춥습니다."
+  },
+  {
+    id: "travel-airport-199",
+    category: "travel-airport",
+    ko: "입국 신고서를 한 장 더 주세요.",
+    en: "Could I get another landing ___?",
+    accept: ["card"],
+    hint: "적어 내는 작은 종이",
+    note: "잘못 적으면 새로 받아 다시 씁니다."
+  },
+  {
+    id: "travel-airport-200",
+    category: "travel-airport",
+    ko: "편안한 비행이었습니다.",
+    en: "It was a ___ flight.",
+    accept: ["smooth", "comfortable"],
+    hint: "흔들림 없이 순조로웠다는 뜻의 형용사",
+    note: "내릴 때 승무원에게 건네면 좋은 인사가 됩니다."
+  },
+  {
+    id: "travel-hotel-101",
+    category: "travel-hotel",
+    ko: "이름 철자를 알려드릴게요.",
+    en: "Let me ___ my name for you.",
+    accept: ["spell"],
+    hint: "글자를 하나하나 말한다는 뜻의 동사",
+    note: "이름이 길면 먼저 철자를 알려주는 것이 빠릅니다."
+  },
+  {
+    id: "travel-hotel-102",
+    category: "travel-hotel",
+    ko: "예약 번호를 보여드릴까요?",
+    en: "Would you like to see my ___ number?",
+    accept: ["confirmation"],
+    hint: "예약이 됐음을 알리는 것",
+    note: "이메일로 받은 번호를 보여주면 됩니다."
+  },
+  {
+    id: "travel-hotel-103",
+    category: "travel-hotel",
+    ko: "이 요금이 맞나요?",
+    en: "Is this the ___ I booked?",
+    accept: ["rate"],
+    hint: "정해진 값을 뜻하는 명사",
+    note: "예약할 때와 값이 다르면 바로 확인해야 합니다."
+  },
+  {
+    id: "travel-hotel-104",
+    category: "travel-hotel",
+    ko: "조식 포함으로 예약했는데요.",
+    en: "I booked the room ___ breakfast included.",
+    accept: ["with"],
+    hint: "함께 딸려 있다는 뜻의 전치사",
+    note: "예약 확인 메일을 보여주면 확실합니다."
+  },
+  {
+    id: "travel-hotel-105",
+    category: "travel-hotel",
+    ko: "2박 예약했습니다.",
+    en: "I booked it for two ___.",
+    accept: ["nights"],
+    hint: "잠자는 밤을 세는 단위",
+    note: "숙박은 밤 수로 셉니다. 2박 3일은 two nights입니다."
+  },
+  {
+    id: "travel-hotel-106",
+    category: "travel-hotel",
+    ko: "성인 두 명입니다.",
+    en: "It's for two ___.",
+    accept: ["adults"],
+    hint: "다 자란 사람을 뜻하는 복수 명사",
+    note: "아이는 children이나 kids로 따로 셉니다."
+  },
+  {
+    id: "travel-hotel-107",
+    category: "travel-hotel",
+    ko: "여기 서명하면 되나요?",
+    en: "Do I ___ here?",
+    accept: ["sign"],
+    hint: "이름을 적어 확인한다는 뜻의 동사",
+    note: "체크인 서류에 서명을 요구하는 곳이 많습니다."
+  },
+  {
+    id: "travel-hotel-108",
+    category: "travel-hotel",
+    ko: "짐 좀 잠깐 맡아주시겠어요?",
+    en: "Could you ___ my bags for now?",
+    accept: ["watch"],
+    hint: "눈을 떼지 않고 본다는 뜻의 동사",
+    note: "체크인 시간 전에 도착했을 때 부탁합니다."
+  },
+  {
+    id: "travel-hotel-109",
+    category: "travel-hotel",
+    ko: "방이 준비되면 연락 주시겠어요?",
+    en: "Could you ___ me when the room is ready?",
+    accept: ["text", "call"],
+    hint: "연락한다는 뜻의 동사",
+    note: "번호를 남겨두면 준비되는 대로 알려줍니다."
+  },
+  {
+    id: "travel-hotel-110",
+    category: "travel-hotel",
+    ko: "짐표를 주시겠어요?",
+    en: "Could I get a luggage ___?",
+    accept: ["ticket", "claim"],
+    hint: "맡긴 짐을 찾을 때 내는 표",
+    note: "이 표가 없으면 짐을 못 찾을 수 있습니다."
+  },
+  {
+    id: "travel-hotel-111",
+    category: "travel-hotel",
+    ko: "방 번호는 알려주지 마세요.",
+    en: "Please don't say my room number out ___.",
+    accept: ["loud"],
+    hint: "소리 내어라는 뜻을 만드는 말",
+    note: "안전을 위해 방 번호는 종이에 적어 건네는 곳이 많습니다."
+  },
+  {
+    id: "travel-hotel-112",
+    category: "travel-hotel",
+    ko: "몇 층인지 여쭤봐도 될까요?",
+    en: "Which floor am I ___?",
+    accept: ["on"],
+    hint: "층을 말할 때 쓰는 전치사",
+    note: "on the fifth floor처럼 씁니다."
+  },
+  {
+    id: "travel-hotel-113",
+    category: "travel-hotel",
+    ko: "엘리베이터에 카드를 대야 하나요?",
+    en: "Do I need to ___ my card in the elevator?",
+    accept: ["tap", "scan"],
+    hint: "카드를 대는 동작을 뜻하는 동사",
+    note: "보안 때문에 카드가 있어야 층을 누를 수 있는 곳이 있습니다."
+  },
+  {
+    id: "travel-hotel-114",
+    category: "travel-hotel",
+    ko: "방까지 안내해 드릴까요?",
+    en: "Would you like me to ___ you to your room?",
+    accept: ["show"],
+    hint: "데려다준다는 뜻의 동사",
+    note: "직원이 짐을 들고 안내해 주기도 합니다."
+  },
+  {
+    id: "travel-hotel-115",
+    category: "travel-hotel",
+    ko: "이 방이 제가 예약한 방이 아닌데요.",
+    en: "This isn't the room ___ I booked.",
+    accept: ["type"],
+    hint: "종류를 뜻하는 명사",
+    note: "예약한 것과 다르면 바로 프런트에 말해야 합니다."
+  },
+  {
+    id: "travel-hotel-116",
+    category: "travel-hotel",
+    ko: "방이 사진과 다르네요.",
+    en: "The room looks ___ from the photos.",
+    accept: ["different"],
+    hint: "같지 않다는 뜻의 형용사",
+    note: "different from과 different than 둘 다 씁니다."
+  },
+  {
+    id: "travel-hotel-117",
+    category: "travel-hotel",
+    ko: "방이 생각보다 좁아요.",
+    en: "The room is ___ than I expected.",
+    accept: ["smaller"],
+    hint: "작다의 비교급",
+    note: "than I expected는 '생각했던 것보다'입니다."
+  },
+  {
+    id: "travel-hotel-118",
+    category: "travel-hotel",
+    ko: "전망이 벽이네요.",
+    en: "The window ___ a wall.",
+    accept: ["faces"],
+    hint: "마주 본다는 뜻의 동사",
+    note: "face는 '얼굴'이라는 명사에서 온 동사입니다."
+  },
+  {
+    id: "travel-hotel-119",
+    category: "travel-hotel",
+    ko: "다른 방을 보여주시겠어요?",
+    en: "Could you show me ___ room?",
+    accept: ["another"],
+    hint: "다른 하나를 뜻하는 말",
+    note: "another는 하나 더, other는 나머지를 가리킵니다."
+  },
+  {
+    id: "travel-hotel-120",
+    category: "travel-hotel",
+    ko: "이 방으로 할게요.",
+    en: "I'll ___ this one.",
+    accept: ["take"],
+    hint: "고른다는 뜻의 기본 동사",
+    note: "I'll take it은 물건을 살 때도 그대로 씁니다."
+  },
+  {
+    id: "travel-hotel-121",
+    category: "travel-hotel",
+    ko: "침대가 하나 더 들어갈까요?",
+    en: "Can you add an extra ___?",
+    accept: ["bed"],
+    hint: "잠을 자는 가구",
+    note: "추가 침대는 rollaway bed나 cot이라고 합니다."
+  },
+  {
+    id: "travel-hotel-122",
+    category: "travel-hotel",
+    ko: "아기 침대가 있나요?",
+    en: "Do you have a ___?",
+    accept: ["crib", "cot"],
+    hint: "아기가 자는 작은 침대",
+    note: "미국은 crib, 영국은 cot이라고 합니다."
+  },
+  {
+    id: "travel-hotel-123",
+    category: "travel-hotel",
+    ko: "베개가 너무 딱딱해요.",
+    en: "The pillows are too ___.",
+    accept: ["hard", "firm"],
+    hint: "단단하다는 뜻의 형용사",
+    note: "부드러운 베개를 원하면 softer pillows라고 하면 됩니다."
+  },
+  {
+    id: "travel-hotel-124",
+    category: "travel-hotel",
+    ko: "이불이 얇아요.",
+    en: "The blanket is too ___.",
+    accept: ["thin"],
+    hint: "두껍지 않다는 뜻의 형용사",
+    note: "두꺼운 것은 thick입니다."
+  },
+  {
+    id: "travel-hotel-125",
+    category: "travel-hotel",
+    ko: "매트리스가 꺼졌어요.",
+    en: "The mattress ___.",
+    accept: ["sags"],
+    hint: "가운데가 내려앉는다는 뜻의 동사",
+    note: "sag는 힘없이 처진다는 뜻입니다."
+  },
+  {
+    id: "travel-hotel-126",
+    category: "travel-hotel",
+    ko: "방에서 곰팡이 냄새가 나요.",
+    en: "The room smells ___.",
+    accept: ["musty", "damp"],
+    hint: "눅눅하고 퀴퀴하다는 뜻의 형용사",
+    note: "musty는 오래 닫아둔 방에서 나는 냄새입니다."
+  },
+  {
+    id: "travel-hotel-127",
+    category: "travel-hotel",
+    ko: "환기가 안 돼요.",
+    en: "There's no ___ in here.",
+    accept: ["ventilation", "airflow"],
+    hint: "공기가 드나드는 것을 뜻하는 명사",
+    note: "창문이 안 열리는 방이 종종 있습니다."
+  },
+  {
+    id: "travel-hotel-128",
+    category: "travel-hotel",
+    ko: "물이 미지근해요.",
+    en: "The water is only ___.",
+    accept: ["lukewarm", "warm"],
+    hint: "뜨겁지도 차갑지도 않다는 뜻의 형용사",
+    note: "lukewarm은 미지근하다는 뜻의 정확한 낱말입니다."
+  },
+  {
+    id: "travel-hotel-129",
+    category: "travel-hotel",
+    ko: "물이 잘 안 내려가요.",
+    en: "The toilet doesn't ___ properly.",
+    accept: ["flush"],
+    hint: "물을 내린다는 뜻의 동사",
+    note: "flush는 변기 물을 내리는 동작입니다."
+  },
+  {
+    id: "travel-hotel-130",
+    category: "travel-hotel",
+    ko: "수도꼭지에서 물이 새요.",
+    en: "The faucet is ___.",
+    accept: ["leaking", "dripping"],
+    hint: "물이 조금씩 흘러나온다는 뜻의 -ing형",
+    note: "미국은 faucet, 영국은 tap이라고 합니다."
+  },
+  {
+    id: "travel-hotel-131",
+    category: "travel-hotel",
+    ko: "샤워 커튼이 없어요.",
+    en: "There's no shower ___.",
+    accept: ["curtain"],
+    hint: "물이 튀지 않게 치는 천",
+    note: "없으면 바닥이 다 젖습니다."
+  },
+  {
+    id: "travel-hotel-132",
+    category: "travel-hotel",
+    ko: "비누가 다 떨어졌어요.",
+    en: "We're out of ___.",
+    accept: ["soap"],
+    hint: "몸을 씻을 때 쓰는 것",
+    note: "out of는 다 떨어졌다는 뜻입니다."
+  },
+  {
+    id: "travel-hotel-133",
+    category: "travel-hotel",
+    ko: "샴푸를 좀 더 주시겠어요?",
+    en: "Could we get more ___?",
+    accept: ["shampoo"],
+    hint: "머리를 감을 때 쓰는 것",
+    note: "린스는 conditioner라고 합니다."
+  },
+  {
+    id: "travel-hotel-134",
+    category: "travel-hotel",
+    ko: "칫솔을 받을 수 있나요?",
+    en: "Could I get a ___?",
+    accept: ["toothbrush"],
+    hint: "이를 닦는 도구",
+    note: "치약은 toothpaste입니다. 없는 호텔도 많습니다."
+  },
+  {
+    id: "travel-hotel-135",
+    category: "travel-hotel",
+    ko: "드라이어가 고장 났어요.",
+    en: "The hair dryer is ___.",
+    accept: ["broken"],
+    hint: "부서지다의 과거분사",
+    note: "고장 나면 바로 바꿔 줍니다."
+  },
+  {
+    id: "travel-hotel-136",
+    category: "travel-hotel",
+    ko: "콘센트가 안 되네요.",
+    en: "This ___ doesn't work.",
+    accept: ["outlet"],
+    hint: "전기를 꽂는 구멍",
+    note: "미국은 outlet, 영국은 socket입니다."
+  },
+  {
+    id: "travel-hotel-137",
+    category: "travel-hotel",
+    ko: "변압기가 필요한가요?",
+    en: "Do I need a ___?",
+    accept: ["converter", "transformer"],
+    hint: "전압을 바꿔주는 기계",
+    note: "모양만 바꾸는 것은 adapter, 전압을 바꾸는 것은 converter입니다."
+  },
+  {
+    id: "travel-hotel-138",
+    category: "travel-hotel",
+    ko: "리모컨 건전지가 없어요.",
+    en: "The remote needs new ___.",
+    accept: ["batteries"],
+    hint: "전기를 담아두는 작은 통",
+    note: "remote control을 줄여 remote라고만 해도 통합니다."
+  },
+  {
+    id: "travel-hotel-139",
+    category: "travel-hotel",
+    ko: "채널이 안 나와요.",
+    en: "I can't get any ___.",
+    accept: ["channels"],
+    hint: "텔레비전에서 골라 보는 방송",
+    note: "케이블이 빠져 있는 경우가 많습니다."
+  },
+  {
+    id: "travel-hotel-140",
+    category: "travel-hotel",
+    ko: "와이파이가 아예 안 잡혀요.",
+    en: "I can't ___ to the Wi-Fi at all.",
+    accept: ["connect"],
+    hint: "이어진다는 뜻의 동사",
+    note: "층마다 신호가 다를 수 있습니다."
+  },
+  {
+    id: "travel-hotel-141",
+    category: "travel-hotel",
+    ko: "비밀번호가 틀린 것 같아요.",
+    en: "The password doesn't seem to be ___.",
+    accept: ["correct", "right"],
+    hint: "맞다는 뜻의 형용사",
+    note: "대소문자를 구별하는 경우가 많습니다."
+  },
+  {
+    id: "travel-hotel-142",
+    category: "travel-hotel",
+    ko: "옆방 소리가 다 들려요.",
+    en: "I can hear ___ next door.",
+    accept: ["everything"],
+    hint: "모든 것을 뜻하는 말",
+    note: "벽이 얇은 호텔에서 자주 겪는 일입니다."
+  },
+  {
+    id: "travel-hotel-143",
+    category: "travel-hotel",
+    ko: "복도가 시끄러워요.",
+    en: "It's noisy in the ___.",
+    accept: ["hallway", "corridor"],
+    hint: "방과 방 사이를 잇는 통로",
+    note: "미국은 hallway, 영국은 corridor를 씁니다."
+  },
+  {
+    id: "travel-hotel-144",
+    category: "travel-hotel",
+    ko: "새벽에 공사 소리가 났어요.",
+    en: "There was ___ noise early this morning.",
+    accept: ["construction"],
+    hint: "건물을 짓는 일을 뜻하는 명사",
+    note: "미리 알려주지 않은 공사는 항의할 만합니다."
+  },
+  {
+    id: "travel-hotel-145",
+    category: "travel-hotel",
+    ko: "조용한 방으로 바꿔주실 수 있나요?",
+    en: "Could you ___ us to a quieter room?",
+    accept: ["move"],
+    hint: "옮긴다는 뜻의 동사",
+    note: "빈 방이 있으면 대부분 바꿔 줍니다."
+  },
+  {
+    id: "travel-hotel-146",
+    category: "travel-hotel",
+    ko: "잠을 못 잤어요.",
+    en: "I couldn't ___ all night.",
+    accept: ["sleep"],
+    hint: "잠잔다는 뜻의 동사",
+    note: "불편을 알릴 때는 사실만 담담히 말하는 것이 낫습니다."
+  },
+  {
+    id: "travel-hotel-147",
+    category: "travel-hotel",
+    ko: "어젯밤 일로 말씀드리고 싶어요.",
+    en: "I'd like to ___ about last night.",
+    accept: ["talk", "speak"],
+    hint: "말한다는 뜻의 동사",
+    note: "따지기 전에 이렇게 운을 떼면 대화가 부드러워집니다."
+  },
+  {
+    id: "travel-hotel-148",
+    category: "travel-hotel",
+    ko: "매니저와 이야기할 수 있을까요?",
+    en: "Could I speak with the ___?",
+    accept: ["manager"],
+    hint: "그곳을 책임지고 관리하는 사람",
+    note: "직원이 해결하지 못하는 일은 매니저에게 갑니다."
+  },
+  {
+    id: "travel-hotel-149",
+    category: "travel-hotel",
+    ko: "불만을 접수하고 싶습니다.",
+    en: "I'd like to file a ___.",
+    accept: ["complaint"],
+    hint: "불편을 알리는 것을 뜻하는 명사",
+    note: "file a complaint는 정식으로 접수한다는 뜻입니다."
+  },
+  {
+    id: "travel-hotel-150",
+    category: "travel-hotel",
+    ko: "보상을 받을 수 있을까요?",
+    en: "Is there any ___ for this?",
+    accept: ["compensation"],
+    hint: "손해를 메워주는 것",
+    note: "요금 할인이나 무료 조식으로 대신하기도 합니다."
+  },
+  {
+    id: "travel-hotel-151",
+    category: "travel-hotel",
+    ko: "요금을 좀 깎아주실 수 있나요?",
+    en: "Could you ___ the rate?",
+    accept: ["reduce", "lower"],
+    hint: "낮춘다는 뜻의 동사",
+    note: "불편을 겪었다면 정중히 요청해 볼 수 있습니다."
+  },
+  {
+    id: "travel-hotel-152",
+    category: "travel-hotel",
+    ko: "사과 말씀 감사합니다.",
+    en: "Thank you for the ___.",
+    accept: ["apology"],
+    hint: "잘못을 비는 말",
+    note: "사과를 받아들일 때 쓰는 짧은 대답입니다."
+  },
+  {
+    id: "travel-hotel-153",
+    category: "travel-hotel",
+    ko: "덕분에 잘 해결됐어요.",
+    en: "That ___ the problem.",
+    accept: ["solves", "solved"],
+    hint: "문제를 푼다는 뜻의 동사",
+    note: "That solves it이라고 짧게 말해도 됩니다."
+  },
+  {
+    id: "travel-hotel-154",
+    category: "travel-hotel",
+    ko: "조식 시간이 언제 끝나요?",
+    en: "When does breakfast ___?",
+    accept: ["end", "finish"],
+    hint: "끝난다는 뜻의 동사",
+    note: "보통 아침 열 시에 끝납니다."
+  },
+  {
+    id: "travel-hotel-155",
+    category: "travel-hotel",
+    ko: "조식은 뷔페인가요?",
+    en: "Is breakfast a ___?",
+    accept: ["buffet"],
+    hint: "차려놓고 골라 먹는 방식",
+    note: "정해진 메뉴가 나오는 것은 set breakfast입니다."
+  },
+  {
+    id: "travel-hotel-156",
+    category: "travel-hotel",
+    ko: "방으로 가져다주실 수 있나요?",
+    en: "Could I get room ___?",
+    accept: ["service"],
+    hint: "방까지 가져다주는 것",
+    note: "room service는 값이 조금 더 비쌉니다."
+  },
+  {
+    id: "travel-hotel-157",
+    category: "travel-hotel",
+    ko: "채식 메뉴가 있나요?",
+    en: "Are there any ___ options?",
+    accept: ["vegetarian", "vegan"],
+    hint: "고기를 먹지 않는 사람을 위한 것",
+    note: "vegan은 달걀과 우유도 먹지 않습니다."
+  },
+  {
+    id: "travel-hotel-158",
+    category: "travel-hotel",
+    ko: "커피는 어디서 마실 수 있나요?",
+    en: "Where can I ___ some coffee?",
+    accept: ["grab", "get"],
+    hint: "가져온다는 뜻의 동사",
+    note: "로비에 무료 커피를 두는 곳이 많습니다."
+  },
+  {
+    id: "travel-hotel-159",
+    category: "travel-hotel",
+    ko: "얼음은 어디서 구하나요?",
+    en: "Where's the ___ machine?",
+    accept: ["ice"],
+    hint: "물을 얼린 것",
+    note: "미국 호텔은 층마다 얼음 기계가 있습니다."
+  },
+  {
+    id: "travel-hotel-160",
+    category: "travel-hotel",
+    ko: "마실 물이 있나요?",
+    en: "Is there ___ water available?",
+    accept: ["drinking"],
+    hint: "마신다는 뜻의 -ing형",
+    note: "수돗물을 마셔도 되는지 물을 때는 Is the tap water safe?라고 합니다."
+  },
+  {
+    id: "travel-hotel-161",
+    category: "travel-hotel",
+    ko: "생수 두 병 주시겠어요?",
+    en: "Could I get two ___ of water?",
+    accept: ["bottles"],
+    hint: "물을 담는 통",
+    note: "무료로 주는 곳도 있고 미니바 값을 받는 곳도 있습니다."
+  },
+  {
+    id: "travel-hotel-162",
+    category: "travel-hotel",
+    ko: "냉장고를 써도 되나요?",
+    en: "Can I use the ___?",
+    accept: ["fridge", "refrigerator"],
+    hint: "음식을 차게 보관하는 기계",
+    note: "fridge는 refrigerator의 줄임말입니다."
+  },
+  {
+    id: "travel-hotel-163",
+    category: "travel-hotel",
+    ko: "전자레인지가 있나요?",
+    en: "Is there a ___ I can use?",
+    accept: ["microwave"],
+    hint: "음식을 데우는 기계",
+    note: "로비나 공용 주방에 있는 경우가 많습니다."
+  },
+  {
+    id: "travel-hotel-164",
+    category: "travel-hotel",
+    ko: "주방을 같이 쓰는 건가요?",
+    en: "Is the kitchen ___?",
+    accept: ["shared", "communal"],
+    hint: "여럿이 함께 쓴다는 뜻의 형용사",
+    note: "게스트하우스에서 자주 나오는 질문입니다."
+  },
+  {
+    id: "travel-hotel-165",
+    category: "travel-hotel",
+    ko: "세탁기를 쓸 수 있나요?",
+    en: "Can I use the ___ machine?",
+    accept: ["washing"],
+    hint: "빨래한다는 뜻의 -ing형",
+    note: "동전을 넣는 곳이 많습니다. coin laundry라고 합니다."
+  },
+  {
+    id: "travel-hotel-166",
+    category: "travel-hotel",
+    ko: "건조기도 있나요?",
+    en: "Is there a ___ too?",
+    accept: ["dryer"],
+    hint: "젖은 것을 말리는 기계",
+    note: "영국에서는 tumble dryer라고 합니다."
+  },
+  {
+    id: "travel-hotel-167",
+    category: "travel-hotel",
+    ko: "세제를 살 수 있나요?",
+    en: "Can I buy ___ here?",
+    accept: ["detergent"],
+    hint: "빨래할 때 넣는 것",
+    note: "작은 봉지로 파는 곳이 많습니다."
+  },
+  {
+    id: "travel-hotel-168",
+    category: "travel-hotel",
+    ko: "빨래는 언제 되나요?",
+    en: "When will my laundry be ___?",
+    accept: ["ready", "done"],
+    hint: "다 됐다는 뜻의 형용사",
+    note: "보통 하루 걸립니다."
+  },
+  {
+    id: "travel-hotel-169",
+    category: "travel-hotel",
+    ko: "다림질도 해주시나요?",
+    en: "Do you offer ___?",
+    accept: ["ironing", "pressing"],
+    hint: "옷을 눌러 펴는 일",
+    note: "정장을 다릴 때는 pressing이라고 합니다."
+  },
+  {
+    id: "travel-hotel-170",
+    category: "travel-hotel",
+    ko: "짐을 방까지 올려주실 수 있나요?",
+    en: "Could someone ___ my bags up?",
+    accept: ["carry"],
+    hint: "들고 나른다는 뜻의 동사",
+    note: "짐을 들어주는 직원을 bellhop이라고 합니다."
+  },
+  {
+    id: "travel-hotel-171",
+    category: "travel-hotel",
+    ko: "팁을 드려야 하나요?",
+    en: "Should I ___ the staff?",
+    accept: ["tip"],
+    hint: "봉사료를 준다는 뜻의 동사",
+    note: "미국 호텔에서는 짐을 들어주면 1~2달러를 줍니다."
+  },
+  {
+    id: "travel-hotel-172",
+    category: "travel-hotel",
+    ko: "귀중품을 맡길 수 있나요?",
+    en: "Can I store my ___ somewhere?",
+    accept: ["valuables"],
+    hint: "값나가는 물건을 뜻하는 복수 명사",
+    note: "프런트에 금고를 두는 곳이 많습니다."
+  },
+  {
+    id: "travel-hotel-173",
+    category: "travel-hotel",
+    ko: "금고 비밀번호를 잊어버렸어요.",
+    en: "I forgot the safe ___.",
+    accept: ["code", "combination"],
+    hint: "금고를 여는 번호",
+    note: "직원이 열어줄 수 있습니다."
+  },
+  {
+    id: "travel-hotel-174",
+    category: "travel-hotel",
+    ko: "방에 아무도 못 들어오게 해주세요.",
+    en: "Please don't let ___ into my room.",
+    accept: ["anyone", "anybody"],
+    hint: "'누구도'를 뜻하는 말",
+    note: "부정문에서는 someone이 아니라 anyone을 씁니다."
+  },
+  {
+    id: "travel-hotel-175",
+    category: "travel-hotel",
+    ko: "제 물건이 없어진 것 같아요.",
+    en: "I think something is ___ from my room.",
+    accept: ["missing", "gone"],
+    hint: "없어졌다는 뜻의 말",
+    note: "먼저 방을 다시 찾아보고 프런트에 알립니다."
+  },
+  {
+    id: "travel-hotel-176",
+    category: "travel-hotel",
+    ko: "경찰에 신고해야 할까요?",
+    en: "Should I ___ the police?",
+    accept: ["call", "contact"],
+    hint: "연락한다는 뜻의 동사",
+    note: "여행자 보험 청구에는 신고 서류가 필요합니다."
+  },
+  {
+    id: "travel-hotel-177",
+    category: "travel-hotel",
+    ko: "제 방 카드를 잃어버렸어요.",
+    en: "I ___ my key card.",
+    accept: ["lost"],
+    hint: "잃다의 과거형",
+    note: "신분증을 보여주면 새로 만들어 줍니다."
+  },
+  {
+    id: "travel-hotel-178",
+    category: "travel-hotel",
+    ko: "카드를 다시 발급받을 수 있나요?",
+    en: "Could you ___ my key card?",
+    accept: ["reissue", "replace"],
+    hint: "다시 내준다는 뜻의 동사",
+    note: "잃어버린 카드는 바로 못 쓰게 막아 줍니다."
+  },
+  {
+    id: "travel-hotel-179",
+    category: "travel-hotel",
+    ko: "카드가 안 먹는 것 같아요.",
+    en: "I think my key card is ___.",
+    accept: ["demagnetized", "deactivated"],
+    hint: "기능이 풀렸다는 뜻의 과거분사",
+    note: "휴대폰 옆에 두면 자기 정보가 지워질 수 있습니다."
+  },
+  {
+    id: "travel-hotel-180",
+    category: "travel-hotel",
+    ko: "짐을 하루 더 맡길 수 있나요?",
+    en: "Can I leave my bags one more ___?",
+    accept: ["day"],
+    hint: "아침부터 밤까지의 하루",
+    note: "체크아웃한 뒤에도 대부분 맡아 줍니다."
+  },
+  {
+    id: "travel-hotel-181",
+    category: "travel-hotel",
+    ko: "체크아웃은 어떻게 하나요?",
+    en: "What's the checkout ___?",
+    accept: ["process", "procedure"],
+    hint: "일을 처리하는 순서를 뜻하는 명사",
+    note: "요즘은 카드만 두고 나가면 되는 곳도 많습니다."
+  },
+  {
+    id: "travel-hotel-182",
+    category: "travel-hotel",
+    ko: "카드는 여기 두고 가면 되나요?",
+    en: "Can I just ___ the key card here?",
+    accept: ["drop"],
+    hint: "떨어뜨려 놓는다는 뜻의 동사",
+    note: "drop off라고도 합니다."
+  },
+  {
+    id: "travel-hotel-183",
+    category: "travel-hotel",
+    ko: "최종 요금을 확인하고 싶어요.",
+    en: "I'd like to see the ___ bill.",
+    accept: ["final"],
+    hint: "맨 마지막이라는 뜻의 형용사",
+    note: "체크아웃 전에 확인하면 다툼을 줄일 수 있습니다."
+  },
+  {
+    id: "travel-hotel-184",
+    category: "travel-hotel",
+    ko: "이 항목이 뭔지 모르겠어요.",
+    en: "I don't recognize this ___.",
+    accept: ["item", "charge"],
+    hint: "청구서에 적힌 한 줄",
+    note: "모르는 항목은 그 자리에서 물어봐야 합니다."
+  },
+  {
+    id: "travel-hotel-185",
+    category: "travel-hotel",
+    ko: "이건 제가 쓴 게 아니에요.",
+    en: "I didn't ___ this.",
+    accept: ["order"],
+    hint: "시킨다는 뜻의 동사",
+    note: "미니바 요금이 잘못 붙는 일이 종종 있습니다."
+  },
+  {
+    id: "travel-hotel-186",
+    category: "travel-hotel",
+    ko: "빼주실 수 있나요?",
+    en: "Could you ___ it from the bill?",
+    accept: ["remove"],
+    hint: "치워 없앤다는 뜻의 동사",
+    note: "잘못 붙은 요금은 대부분 바로 빼 줍니다."
+  },
+  {
+    id: "travel-hotel-187",
+    category: "travel-hotel",
+    ko: "카드 승인이 안 됐다고 하네요.",
+    en: "They said my card was ___.",
+    accept: ["declined"],
+    hint: "거절되었다는 뜻의 과거분사",
+    note: "해외 결제가 막혀 있는 경우가 많습니다."
+  },
+  {
+    id: "travel-hotel-188",
+    category: "travel-hotel",
+    ko: "다른 카드로 해볼게요.",
+    en: "Let me ___ another card.",
+    accept: ["try"],
+    hint: "해본다는 뜻의 동사",
+    note: "여러 장을 가져가는 것이 안전합니다."
+  },
+  {
+    id: "travel-hotel-189",
+    category: "travel-hotel",
+    ko: "영수증을 두 장 주시겠어요?",
+    en: "Could I get two ___ of the receipt?",
+    accept: ["copies"],
+    hint: "똑같이 만든 것을 뜻하는 복수 명사",
+    note: "회사에 낼 것과 따로 챙길 때 씁니다."
+  },
+  {
+    id: "travel-hotel-190",
+    category: "travel-hotel",
+    ko: "공항까지 어떻게 가나요?",
+    en: "How do I ___ to the airport?",
+    accept: ["get"],
+    hint: "닿는다는 뜻의 기본 동사",
+    note: "How do I get to는 길을 물을 때 가장 무난한 표현입니다."
+  },
+  {
+    id: "travel-hotel-191",
+    category: "travel-hotel",
+    ko: "몇 시에 나가면 될까요?",
+    en: "What time should I head ___?",
+    accept: ["out"],
+    hint: "밖으로를 뜻하는 말. head와 붙어 길을 나선다는 뜻이 됩니다",
+    note: "직원이 교통 상황을 보고 알려줍니다."
+  },
+  {
+    id: "travel-hotel-192",
+    category: "travel-hotel",
+    ko: "택시를 미리 불러주시겠어요?",
+    en: "Could you ___ a taxi in advance?",
+    accept: ["reserve"],
+    hint: "미리 잡아둔다는 뜻의 동사",
+    note: "in advance는 '미리'라는 뜻입니다."
+  },
+  {
+    id: "travel-hotel-193",
+    category: "travel-hotel",
+    ko: "짐 싣는 것 좀 도와주시겠어요?",
+    en: "Could you help me ___ my bags?",
+    accept: ["load"],
+    hint: "차에 싣는다는 뜻의 동사",
+    note: "내리는 것은 unload입니다."
+  },
+  {
+    id: "travel-hotel-194",
+    category: "travel-hotel",
+    ko: "여기 머무는 동안 정말 좋았어요.",
+    en: "We really ___ our stay.",
+    accept: ["enjoyed"],
+    hint: "즐기다의 과거형",
+    note: "떠날 때 건네면 좋은 인사가 됩니다."
+  },
+  {
+    id: "travel-hotel-195",
+    category: "travel-hotel",
+    ko: "직원분들이 정말 친절하셨어요.",
+    en: "The staff were very ___.",
+    accept: ["friendly", "helpful"],
+    hint: "따뜻하고 도움이 된다는 뜻의 형용사",
+    note: "staff는 영국에서 복수로 취급하는 일이 많습니다."
+  },
+  {
+    id: "travel-hotel-196",
+    category: "travel-hotel",
+    ko: "후기를 남길게요.",
+    en: "I'll leave a ___.",
+    accept: ["review"],
+    hint: "이용한 뒤 남기는 평가",
+    note: "좋은 후기는 작은 숙소에 큰 힘이 됩니다."
+  },
+  {
+    id: "travel-hotel-197",
+    category: "travel-hotel",
+    ko: "꼭 다시 오고 싶어요.",
+    en: "I'd love to ___ back someday.",
+    accept: ["come"],
+    hint: "오다를 뜻하는 기본 동사",
+    note: "come back은 다시 온다는 뜻입니다."
+  },
+  {
+    id: "travel-hotel-198",
+    category: "travel-hotel",
+    ko: "친구들에게 추천할게요.",
+    en: "I'll ___ this place to my friends.",
+    accept: ["recommend"],
+    hint: "권한다는 뜻의 동사",
+    note: "recommend A to B는 A를 B에게 권한다는 뜻입니다."
+  },
+  {
+    id: "travel-hotel-199",
+    category: "travel-hotel",
+    ko: "신경 써주셔서 감사했습니다.",
+    en: "Thank you for taking such good ___ of us.",
+    accept: ["care"],
+    hint: "돌봄을 뜻하는 명사",
+    note: "take care of는 잘 챙겨준다는 뜻입니다."
+  },
+  {
+    id: "travel-hotel-200",
+    category: "travel-hotel",
+    ko: "다음에 또 뵙겠습니다.",
+    en: "See you next ___.",
+    accept: ["time"],
+    hint: "때를 뜻하는 명사",
+    note: "See you next time은 가볍고 따뜻한 작별 인사입니다."
+  },
+  {
+    id: "daily-people-101",
+    category: "daily-people",
+    ko: "저희 형은 저보다 세 살 많아요.",
+    en: "My brother is three ___ older than me.",
+    accept: ["years"],
+    hint: "나이를 세는 단위",
+    note: "나이 차이는 숫자를 앞에 붙여 말합니다."
+  },
+  {
+    id: "daily-people-102",
+    category: "daily-people",
+    ko: "저희는 나이 차이가 많이 나요.",
+    en: "There's a big age ___ between us.",
+    accept: ["gap", "difference"],
+    hint: "벌어진 사이를 뜻하는 명사",
+    note: "age gap은 나이 차이를 뜻하는 흔한 말입니다."
+  },
+  {
+    id: "daily-people-103",
+    category: "daily-people",
+    ko: "쌍둥이예요.",
+    en: "They're ___.",
+    accept: ["twins"],
+    hint: "한날 태어난 두 아이",
+    note: "일란성은 identical twins입니다."
+  },
+  {
+    id: "daily-people-104",
+    category: "daily-people",
+    ko: "저는 둘째예요.",
+    en: "I'm the ___ child.",
+    accept: ["middle"],
+    hint: "가운데를 뜻하는 형용사",
+    note: "삼 남매 중 가운데를 middle child라고 합니다."
+  },
+  {
+    id: "daily-people-105",
+    category: "daily-people",
+    ko: "저희 집 맏이예요.",
+    en: "I'm the ___ of four.",
+    accept: ["oldest", "eldest"],
+    hint: "나이가 가장 많다는 뜻의 최상급",
+    note: "영국에서는 eldest를 조금 더 씁니다."
+  },
+  {
+    id: "daily-people-106",
+    category: "daily-people",
+    ko: "동생이 곧 결혼해요.",
+    en: "My sister is ___ married soon.",
+    accept: ["getting"],
+    hint: "되다를 뜻하는 동사의 -ing형",
+    note: "get married는 결혼하는 동작입니다."
+  },
+  {
+    id: "daily-people-107",
+    category: "daily-people",
+    ko: "결혼식이 다음 달이에요.",
+    en: "The ___ is next month.",
+    accept: ["wedding"],
+    hint: "결혼하는 날의 행사",
+    note: "결혼 생활 자체는 marriage입니다."
+  },
+  {
+    id: "daily-people-108",
+    category: "daily-people",
+    ko: "제부가 참 좋은 사람이에요.",
+    en: "My brother-in-___ is a great guy.",
+    accept: ["law"],
+    hint: "제도나 규칙을 뜻하는 낱말. brother-in-___ 꼴로 인척을 나타냅니다",
+    note: "-in-law를 붙이면 결혼으로 맺어진 가족이 됩니다."
+  },
+  {
+    id: "daily-people-109",
+    category: "daily-people",
+    ko: "시부모님과 사이가 좋아요.",
+    en: "I get along well with my ___.",
+    accept: ["in-laws"],
+    hint: "결혼으로 맺어진 가족을 통틀어 부르는 말",
+    note: "시댁과 처가를 가리지 않고 in-laws라고 합니다."
+  },
+  {
+    id: "daily-people-110",
+    category: "daily-people",
+    ko: "조카가 정말 귀여워요.",
+    en: "My ___ is so cute.",
+    accept: ["niece", "nephew"],
+    hint: "형제자매의 아이",
+    note: "여자 조카는 niece, 남자 조카는 nephew입니다."
+  },
+  {
+    id: "daily-people-111",
+    category: "daily-people",
+    ko: "저희 집안은 대가족이에요.",
+    en: "I come from a ___ family.",
+    accept: ["big"],
+    hint: "크다는 뜻의 형용사",
+    note: "come from a big family는 형제가 많다는 뜻입니다."
+  },
+  {
+    id: "daily-people-112",
+    category: "daily-people",
+    ko: "명절에 다 같이 모여요.",
+    en: "We all get ___ on holidays.",
+    accept: ["together"],
+    hint: "함께라는 뜻의 말",
+    note: "get together는 여럿이 모인다는 뜻입니다."
+  },
+  {
+    id: "daily-people-113",
+    category: "daily-people",
+    ko: "가족 모임이 있어요.",
+    en: "We're having a family ___.",
+    accept: ["gathering", "reunion"],
+    hint: "여럿이 모이는 자리",
+    note: "오랜만에 모이는 것은 reunion입니다."
+  },
+  {
+    id: "daily-people-114",
+    category: "daily-people",
+    ko: "다들 멀리 살아요.",
+    en: "We all live ___ apart.",
+    accept: ["far"],
+    hint: "거리가 멀다는 뜻의 말",
+    note: "far apart는 서로 멀리 떨어져 있다는 뜻입니다."
+  },
+  {
+    id: "daily-people-115",
+    category: "daily-people",
+    ko: "영상통화로 자주 봐요.",
+    en: "We ___ chat a lot.",
+    accept: ["video"],
+    hint: "움직이는 화면을 뜻하는 명사",
+    note: "video chat이나 video call 둘 다 씁니다."
+  },
+  {
+    id: "daily-people-116",
+    category: "daily-people",
+    ko: "부모님이 많이 늙으셨어요.",
+    en: "My parents are getting ___.",
+    accept: ["old", "older"],
+    hint: "나이가 든다는 뜻의 형용사",
+    note: "getting old는 나이 들어간다는 뜻입니다."
+  },
+  {
+    id: "daily-people-117",
+    category: "daily-people",
+    ko: "제가 부모님을 모시고 있어요.",
+    en: "I take ___ of my parents.",
+    accept: ["care"],
+    hint: "돌봄을 뜻하는 명사",
+    note: "take care of는 돌본다는 뜻입니다."
+  },
+  {
+    id: "daily-people-118",
+    category: "daily-people",
+    ko: "아버지가 편찮으세요.",
+    en: "My ___ isn't well.",
+    accept: ["father"],
+    hint: "가족 중 남자 어른을 뜻하는 격식 있는 말",
+    note: "isn't well은 몸이 안 좋다는 부드러운 표현입니다."
+  },
+  {
+    id: "daily-people-119",
+    category: "daily-people",
+    ko: "많이 걱정돼요.",
+    en: "I'm really ___ about him.",
+    accept: ["worried"],
+    hint: "걱정한다는 뜻의 형용사",
+    note: "worried about은 누구를 걱정한다는 뜻입니다."
+  },
+  {
+    id: "daily-people-120",
+    category: "daily-people",
+    ko: "곧 나으실 거예요.",
+    en: "He'll ___ soon.",
+    accept: ["recover"],
+    hint: "병에서 낫는다는 뜻의 동사",
+    note: "get better라고 해도 같은 뜻입니다."
+  },
+  {
+    id: "daily-people-121",
+    category: "daily-people",
+    ko: "그분은 저희 회사 선배예요.",
+    en: "He's ___ to me at work.",
+    accept: ["senior"],
+    hint: "지위나 경력이 위라는 뜻의 형용사",
+    note: "한국식 선후배 개념은 영어에 딱 맞는 말이 없어 senior나 more experienced로 풀어 씁니다."
+  },
+  {
+    id: "daily-people-122",
+    category: "daily-people",
+    ko: "같은 팀에서 일해요.",
+    en: "We're on the same ___.",
+    accept: ["team"],
+    hint: "함께 일하는 무리",
+    note: "on the same team은 같은 팀 소속이라는 뜻입니다."
+  },
+  {
+    id: "daily-people-123",
+    category: "daily-people",
+    ko: "제 상사예요.",
+    en: "He's my ___.",
+    accept: ["boss", "supervisor"],
+    hint: "일을 시키는 윗사람",
+    note: "boss가 편한 말, supervisor는 격식 있는 말입니다."
+  },
+  {
+    id: "daily-people-124",
+    category: "daily-people",
+    ko: "부하 직원이 셋 있어요.",
+    en: "I have three people ___ to me.",
+    accept: ["reporting"],
+    hint: "보고한다는 뜻의 -ing형",
+    note: "report to someone은 그 사람 밑에서 일한다는 뜻입니다."
+  },
+  {
+    id: "daily-people-125",
+    category: "daily-people",
+    ko: "일 잘하는 사람이에요.",
+    en: "She's really ___ at her job.",
+    accept: ["good"],
+    hint: "잘한다는 뜻의 형용사",
+    note: "good at 뒤에는 잘하는 것이 옵니다."
+  },
+  {
+    id: "daily-people-126",
+    category: "daily-people",
+    ko: "믿을 만한 사람이에요.",
+    en: "You can ___ on him.",
+    accept: ["count", "rely"],
+    hint: "기댄다는 뜻의 동사",
+    note: "count on someone은 믿고 맡길 수 있다는 뜻입니다."
+  },
+  {
+    id: "daily-people-127",
+    category: "daily-people",
+    ko: "말이 잘 통해요.",
+    en: "We're always on the same ___.",
+    accept: ["page", "wavelength"],
+    hint: "책의 한 쪽을 뜻하는 명사",
+    note: "on the same page는 생각이 맞아떨어진다는 뜻입니다."
+  },
+  {
+    id: "daily-people-128",
+    category: "daily-people",
+    ko: "좀 어려운 분이에요.",
+    en: "He's hard to ___ to.",
+    accept: ["talk"],
+    hint: "말한다는 뜻의 동사",
+    note: "hard to talk to는 말 붙이기 어렵다는 뜻입니다."
+  },
+  {
+    id: "daily-people-129",
+    category: "daily-people",
+    ko: "성격이 좀 급하세요.",
+    en: "She's a bit ___.",
+    accept: ["impatient"],
+    hint: "참을성이 없다는 뜻의 형용사",
+    note: "patient에 im-을 붙여 뜻을 뒤집었습니다."
+  },
+  {
+    id: "daily-people-130",
+    category: "daily-people",
+    ko: "느긋한 편이에요.",
+    en: "He's pretty ___.",
+    accept: ["laid-back", "easygoing"],
+    hint: "서두르지 않는다는 뜻의 형용사",
+    note: "laid-back은 여유롭고 태평하다는 뜻입니다."
+  },
+  {
+    id: "daily-people-131",
+    category: "daily-people",
+    ko: "낯을 좀 가려요.",
+    en: "I'm a little ___ around new people.",
+    accept: ["shy"],
+    hint: "부끄러움을 탄다는 뜻의 형용사",
+    note: "shy around는 누구 앞에서 수줍다는 뜻입니다."
+  },
+  {
+    id: "daily-people-132",
+    category: "daily-people",
+    ko: "사람 만나는 걸 좋아해요.",
+    en: "I'm a ___ people person.",
+    accept: ["real", "total"],
+    hint: "진짜라는 뜻으로 뒤의 말을 강하게 만드는 형용사",
+    note: "a people person은 사람 사귀기를 좋아하는 사람입니다."
+  },
+  {
+    id: "daily-people-133",
+    category: "daily-people",
+    ko: "혼자 있는 게 편해요.",
+    en: "I prefer ___ on my own.",
+    accept: ["being"],
+    hint: "'~이다'를 뜻하는 동사의 -ing형",
+    note: "on my own은 혼자라는 뜻입니다."
+  },
+  {
+    id: "daily-people-134",
+    category: "daily-people",
+    ko: "친구가 많지는 않아요.",
+    en: "I don't have ___ friends.",
+    accept: ["many"],
+    hint: "수가 많다는 뜻의 말",
+    note: "부정문에서는 much가 아니라 many를 씁니다."
+  },
+  {
+    id: "daily-people-135",
+    category: "daily-people",
+    ko: "그래도 오래 가는 사이예요.",
+    en: "But the ones I have ___ a long time.",
+    accept: ["last"],
+    hint: "이어진다는 뜻의 동사",
+    note: "last a long time은 오래 이어진다는 뜻입니다."
+  },
+  {
+    id: "daily-people-136",
+    category: "daily-people",
+    ko: "그분과는 소원해졌어요.",
+    en: "We've ___ apart.",
+    accept: ["grown", "drifted"],
+    hint: "자라거나 떠내려간다는 뜻의 과거분사",
+    note: "grow apart는 사이가 자연스럽게 멀어진다는 뜻입니다."
+  },
+  {
+    id: "daily-people-137",
+    category: "daily-people",
+    ko: "연락이 끊겼어요.",
+    en: "We ___ touch.",
+    accept: ["lost"],
+    hint: "잃다의 과거형",
+    note: "lose touch는 연락이 끊긴다는 뜻입니다."
+  },
+  {
+    id: "daily-people-138",
+    category: "daily-people",
+    ko: "다시 연락해 볼까 해요.",
+    en: "I'm thinking of ___ out to her.",
+    accept: ["reaching"],
+    hint: "손을 뻗다의 -ing형",
+    note: "reach out은 먼저 다가가 연락한다는 뜻입니다."
+  },
+  {
+    id: "daily-people-139",
+    category: "daily-people",
+    ko: "저희는 다퉜어요.",
+    en: "We had a ___.",
+    accept: ["falling-out", "fight"],
+    hint: "사이가 틀어진 일을 뜻하는 명사",
+    note: "falling-out은 크게 다투고 멀어졌다는 뜻입니다."
+  },
+  {
+    id: "daily-people-140",
+    category: "daily-people",
+    ko: "이제는 화해했어요.",
+    en: "We've ___ up now.",
+    accept: ["made"],
+    hint: "만들다의 과거분사. up과 붙어 화해한다는 뜻이 됩니다",
+    note: "make up은 다툰 뒤 화해한다는 뜻입니다."
+  },
+  {
+    id: "daily-people-141",
+    category: "daily-people",
+    ko: "그분이 먼저 사과했어요.",
+    en: "He ___ first.",
+    accept: ["apologized", "apologised"],
+    hint: "사과하다의 과거형",
+    note: "영국에서는 apologised로 적습니다."
+  },
+  {
+    id: "daily-people-142",
+    category: "daily-people",
+    ko: "제가 잘못했어요.",
+    en: "I was in the ___.",
+    accept: ["wrong"],
+    hint: "잘못된 쪽을 뜻하는 말",
+    note: "in the wrong은 내 잘못이라는 뜻입니다."
+  },
+  {
+    id: "daily-people-143",
+    category: "daily-people",
+    ko: "서로 오해가 있었어요.",
+    en: "We just ___ each other.",
+    accept: ["misunderstood"],
+    hint: "잘못 알아듣다의 과거형",
+    note: "mis-는 '잘못'이라는 뜻을 더합니다."
+  },
+  {
+    id: "daily-people-144",
+    category: "daily-people",
+    ko: "이제 괜찮아요.",
+    en: "We're ___ now.",
+    accept: ["fine", "good"],
+    hint: "사이가 괜찮다는 뜻의 형용사",
+    note: "We're good은 '이제 아무 문제 없다'는 뜻으로 자주 씁니다."
+  },
+  {
+    id: "daily-people-145",
+    category: "daily-people",
+    ko: "그분 덕분에 많이 배웠어요.",
+    en: "I learned a lot ___ him.",
+    accept: ["from"],
+    hint: "출처를 나타내는 전치사",
+    note: "learn from someone은 그 사람에게서 배운다는 뜻입니다."
+  },
+  {
+    id: "daily-people-146",
+    category: "daily-people",
+    ko: "저를 많이 챙겨주셨어요.",
+    en: "She really ___ out for me.",
+    accept: ["looked"],
+    hint: "보다의 과거형. out for와 붙어 챙겨준다는 뜻이 됩니다",
+    note: "look out for someone은 남을 살펴 챙긴다는 뜻입니다."
+  },
+  {
+    id: "daily-people-147",
+    category: "daily-people",
+    ko: "제 롤모델이에요.",
+    en: "He's my role ___.",
+    accept: ["model"],
+    hint: "본보기를 뜻하는 명사",
+    note: "role model은 닮고 싶은 사람입니다."
+  },
+  {
+    id: "daily-people-148",
+    category: "daily-people",
+    ko: "저도 그렇게 되고 싶어요.",
+    en: "I want to ___ like him.",
+    accept: ["be"],
+    hint: "'~이다'를 뜻하는 기본 동사",
+    note: "be like someone은 그 사람처럼 되고 싶다는 뜻입니다."
+  },
+  {
+    id: "daily-people-149",
+    category: "daily-people",
+    ko: "그분이 저를 여기까지 이끌어주셨어요.",
+    en: "She ___ me get here.",
+    accept: ["helped"],
+    hint: "돕다의 과거형",
+    note: "help someone do는 누가 무엇을 하도록 돕는다는 뜻입니다."
+  },
+  {
+    id: "daily-people-150",
+    category: "daily-people",
+    ko: "정말 고마운 분이에요.",
+    en: "I'm really ___ to him.",
+    accept: ["grateful", "thankful"],
+    hint: "고맙게 여긴다는 뜻의 형용사",
+    note: "grateful to someone은 그 사람에게 고맙다는 뜻입니다."
+  },
+  {
+    id: "daily-people-151",
+    category: "daily-people",
+    ko: "그분들은 이웃이에요.",
+    en: "They're our ___.",
+    accept: ["neighbors", "neighbours"],
+    hint: "가까이 사는 사람들",
+    note: "영국에서는 neighbours로 적습니다."
+  },
+  {
+    id: "daily-people-152",
+    category: "daily-people",
+    ko: "이사 온 지 얼마 안 됐어요.",
+    en: "They just ___ in.",
+    accept: ["moved"],
+    hint: "옮기다의 과거형",
+    note: "move in은 이사 들어온다는 뜻입니다."
+  },
+  {
+    id: "daily-people-153",
+    category: "daily-people",
+    ko: "인사만 하는 사이예요.",
+    en: "We just ___ hello.",
+    accept: ["say"],
+    hint: "말한다는 뜻의 기본 동사",
+    note: "say hello는 가볍게 인사만 나눈다는 뜻입니다."
+  },
+  {
+    id: "daily-people-154",
+    category: "daily-people",
+    ko: "그 집 개가 정말 순해요.",
+    en: "Their dog is so ___.",
+    accept: ["gentle", "friendly"],
+    hint: "순하고 다정하다는 뜻의 형용사",
+    note: "사나운 개는 aggressive라고 합니다."
+  },
+  {
+    id: "daily-people-155",
+    category: "daily-people",
+    ko: "아이들이 같은 학교에 다녀요.",
+    en: "Our kids go to the same ___.",
+    accept: ["school"],
+    hint: "공부하러 가는 곳",
+    note: "go to school은 학교에 다닌다는 뜻입니다."
+  },
+  {
+    id: "daily-people-156",
+    category: "daily-people",
+    ko: "같은 반이래요.",
+    en: "They're in the same ___.",
+    accept: ["class"],
+    hint: "학교에서 나눈 학생 무리",
+    note: "in the same class는 같은 반이라는 뜻입니다."
+  },
+  {
+    id: "daily-people-157",
+    category: "daily-people",
+    ko: "그 애가 제 딸 친구예요.",
+    en: "She's a friend of my ___.",
+    accept: ["daughter's"],
+    hint: "자기 아이 중 여자아이. '~의' 꼴로 씁니다",
+    note: "a friend of my daughter's처럼 소유격을 겹쳐 쓰는 꼴입니다."
+  },
+  {
+    id: "daily-people-158",
+    category: "daily-people",
+    ko: "아이들끼리 잘 놀아요.",
+    en: "The kids ___ well together.",
+    accept: ["play"],
+    hint: "논다는 뜻의 동사",
+    note: "play well together는 사이좋게 논다는 뜻입니다."
+  },
+  {
+    id: "daily-people-159",
+    category: "daily-people",
+    ko: "그분은 학부모 모임 회장이에요.",
+    en: "She ___ the parents' group.",
+    accept: ["leads", "runs"],
+    hint: "이끈다는 뜻의 동사",
+    note: "run은 조직을 이끌어 간다는 뜻으로도 씁니다."
+  },
+  {
+    id: "daily-people-160",
+    category: "daily-people",
+    ko: "저희 부부는 맞벌이예요.",
+    en: "We both work ___.",
+    accept: ["full-time", "fulltime"],
+    hint: "온종일 일한다는 뜻의 말",
+    note: "full-time은 온종일 일한다는 뜻입니다."
+  },
+  {
+    id: "daily-people-161",
+    category: "daily-people",
+    ko: "아이는 어머니가 봐주세요.",
+    en: "My mom ___ the kids.",
+    accept: ["watches"],
+    hint: "돌본다는 뜻으로도 쓰이는 동사",
+    note: "watch the kids는 아이를 봐준다는 뜻입니다."
+  },
+  {
+    id: "daily-people-162",
+    category: "daily-people",
+    ko: "어린이집에 맡겨요.",
+    en: "We send them to ___.",
+    accept: ["daycare"],
+    hint: "낮 동안 아이를 맡아주는 곳",
+    note: "영국에서는 nursery라고도 합니다."
+  },
+  {
+    id: "daily-people-163",
+    category: "daily-people",
+    ko: "육아가 쉽지 않네요.",
+    en: "Parenting isn't ___.",
+    accept: ["easy"],
+    hint: "쉽다는 뜻의 형용사",
+    note: "parenting은 아이를 기르는 일 전체를 가리킵니다."
+  },
+  {
+    id: "daily-people-164",
+    category: "daily-people",
+    ko: "손이 많이 가요.",
+    en: "They need a lot of ___.",
+    accept: ["attention"],
+    hint: "마음을 쏟아 살피는 것",
+    note: "need attention은 계속 신경 써야 한다는 뜻입니다."
+  },
+  {
+    id: "daily-people-165",
+    category: "daily-people",
+    ko: "그래도 보람이 있어요.",
+    en: "But it's ___ it.",
+    accept: ["worth"],
+    hint: "그만한 값어치가 있다는 뜻의 말",
+    note: "It's worth it은 힘들어도 가치가 있다는 뜻입니다."
+  },
+  {
+    id: "daily-people-166",
+    category: "daily-people",
+    ko: "아이가 벌써 학교에 가요.",
+    en: "She's ___ in school.",
+    accept: ["already"],
+    hint: "예상보다 이르다는 뜻의 부사",
+    note: "already는 벌써 그렇게 되었다는 놀라움을 담습니다."
+  },
+  {
+    id: "daily-people-167",
+    category: "daily-people",
+    ko: "애들이 금방 크네요.",
+    en: "They ___ up so fast.",
+    accept: ["grow"],
+    hint: "자란다는 뜻의 동사",
+    note: "grow up so fast는 아이 이야기를 할 때 늘 나오는 말입니다."
+  },
+  {
+    id: "daily-people-168",
+    category: "daily-people",
+    ko: "사춘기가 왔어요.",
+    en: "He's a ___ now.",
+    accept: ["teenager"],
+    hint: "열세 살에서 열아홉 살 사이의 아이",
+    note: "-teen으로 끝나는 나이라서 teenager입니다."
+  },
+  {
+    id: "daily-people-169",
+    category: "daily-people",
+    ko: "말을 잘 안 해요.",
+    en: "He doesn't ___ up much.",
+    accept: ["open"],
+    hint: "연다는 뜻의 동사. up과 붙어 속마음을 털어놓는다는 뜻이 됩니다",
+    note: "open up은 마음을 열고 이야기한다는 뜻입니다."
+  },
+  {
+    id: "daily-people-170",
+    category: "daily-people",
+    ko: "기다려주는 수밖에 없죠.",
+    en: "I just have to be ___.",
+    accept: ["patient"],
+    hint: "참고 기다린다는 뜻의 형용사",
+    note: "be patient는 조급해하지 않는다는 뜻입니다."
+  },
+  {
+    id: "daily-people-171",
+    category: "daily-people",
+    ko: "그분 소식 들으셨어요?",
+    en: "Did you ___ about him?",
+    accept: ["hear"],
+    hint: "소식이 들린다는 뜻의 동사",
+    note: "hear about someone은 그 사람 소식을 듣는다는 뜻입니다."
+  },
+  {
+    id: "daily-people-172",
+    category: "daily-people",
+    ko: "승진하셨대요.",
+    en: "He got a ___.",
+    accept: ["promotion"],
+    hint: "직급이 올라가는 것",
+    note: "get promoted라고 해도 같은 뜻입니다."
+  },
+  {
+    id: "daily-people-173",
+    category: "daily-people",
+    ko: "회사를 옮기셨대요.",
+    en: "She ___ jobs.",
+    accept: ["changed", "switched"],
+    hint: "바꾸다의 과거형",
+    note: "change jobs는 직장을 옮긴다는 뜻입니다."
+  },
+  {
+    id: "daily-people-174",
+    category: "daily-people",
+    ko: "외국으로 가셨대요.",
+    en: "He moved ___.",
+    accept: ["abroad", "overseas"],
+    hint: "바다 건너 다른 나라로라는 뜻의 부사",
+    note: "move abroad는 외국으로 이주한다는 뜻입니다."
+  },
+  {
+    id: "daily-people-175",
+    category: "daily-people",
+    ko: "잘 지내신다니 다행이에요.",
+    en: "I'm ___ to hear he's doing well.",
+    accept: ["glad", "happy"],
+    hint: "기쁘다는 뜻의 형용사",
+    note: "glad to hear는 좋은 소식에 대한 반응입니다."
+  },
+  {
+    id: "daily-people-176",
+    category: "daily-people",
+    ko: "언제 한번 다 같이 봐요.",
+    en: "We should all get together ___.",
+    accept: ["sometime"],
+    hint: "언젠가를 뜻하는 말",
+    note: "get together는 모인다는 뜻입니다."
+  },
+  {
+    id: "daily-people-177",
+    category: "daily-people",
+    ko: "제가 자리를 마련해 볼게요.",
+    en: "I'll ___ something up.",
+    accept: ["set"],
+    hint: "놓는다는 뜻의 동사. up과 붙어 자리를 마련한다는 뜻이 됩니다",
+    note: "set something up은 약속이나 모임을 잡는다는 뜻입니다."
+  },
+  {
+    id: "daily-people-178",
+    category: "daily-people",
+    ko: "다들 부를까요?",
+    en: "Should we ___ everyone?",
+    accept: ["invite"],
+    hint: "오라고 청한다는 뜻의 동사",
+    note: "invite everyone은 다 부른다는 뜻입니다."
+  },
+  {
+    id: "daily-people-179",
+    category: "daily-people",
+    ko: "그분도 오실까요?",
+    en: "Do you think he'll ___?",
+    accept: ["come", "show"],
+    hint: "온다는 뜻의 동사",
+    note: "show up이라고 하면 '나타나다'라는 뜻이 됩니다."
+  },
+  {
+    id: "daily-people-180",
+    category: "daily-people",
+    ko: "그분은 바빠서 못 오실 거예요.",
+    en: "He's too busy to ___ it.",
+    accept: ["make"],
+    hint: "만들다를 뜻하는 동사가 '참석하다'로도 쓰입니다",
+    note: "make it은 약속 자리에 갈 수 있다는 뜻입니다."
+  },
+  {
+    id: "daily-people-181",
+    category: "daily-people",
+    ko: "제가 연락해 볼게요.",
+    en: "I'll ___ him a message.",
+    accept: ["send", "drop"],
+    hint: "보낸다는 뜻의 동사",
+    note: "drop someone a message는 가볍게 연락한다는 뜻입니다."
+  },
+  {
+    id: "daily-people-182",
+    category: "daily-people",
+    ko: "그분 번호 있으세요?",
+    en: "Do you have his contact ___?",
+    accept: ["info", "information", "details"],
+    hint: "연락처 정보를 뜻하는 명사",
+    note: "contact info는 전화번호와 이메일을 통틀어 말합니다."
+  },
+  {
+    id: "daily-people-183",
+    category: "daily-people",
+    ko: "제가 알려드릴게요.",
+    en: "I'll ___ it on to you.",
+    accept: ["pass"],
+    hint: "넘겨준다는 뜻의 동사",
+    note: "pass it on은 다른 사람에게 전달한다는 뜻입니다."
+  },
+  {
+    id: "daily-people-184",
+    category: "daily-people",
+    ko: "그분이 여기 계셨으면 좋았을 텐데요.",
+    en: "I ___ he were here.",
+    accept: ["wish"],
+    hint: "바란다는 뜻의 동사",
+    note: "I wish 뒤에 과거형을 쓰면 지금 그렇지 않다는 아쉬움이 됩니다."
+  },
+  {
+    id: "daily-people-185",
+    category: "daily-people",
+    ko: "그분이 많이 그리워요.",
+    en: "I ___ him a lot.",
+    accept: ["miss"],
+    hint: "보고 싶다는 뜻의 동사",
+    note: "miss someone은 그 사람이 그립다는 뜻입니다."
+  },
+  {
+    id: "daily-people-186",
+    category: "daily-people",
+    ko: "좋은 분이셨어요.",
+    en: "He was a good ___.",
+    accept: ["man", "person"],
+    hint: "사람을 가리키는 말",
+    note: "돌아가신 분을 두고 하는 말로도 씁니다."
+  },
+  {
+    id: "daily-people-187",
+    category: "daily-people",
+    ko: "그분 이야기를 자주 해요.",
+    en: "We talk about him ___.",
+    accept: ["often"],
+    hint: "자주라는 뜻의 부사",
+    note: "talk about someone often은 자주 화제에 올린다는 뜻입니다."
+  },
+  {
+    id: "daily-people-188",
+    category: "daily-people",
+    ko: "사진을 아직 갖고 있어요.",
+    en: "I still ___ his photo.",
+    accept: ["have", "keep"],
+    hint: "가지고 있다는 뜻의 동사",
+    note: "still을 붙이면 지금까지도 그렇다는 뜻이 됩니다."
+  },
+  {
+    id: "daily-people-189",
+    category: "daily-people",
+    ko: "저희 어머니 말씀이 늘 옳으셨어요.",
+    en: "My mom was always ___.",
+    accept: ["right"],
+    hint: "맞다는 뜻의 형용사",
+    note: "be right는 말이 맞다는 뜻입니다."
+  },
+  {
+    id: "daily-people-190",
+    category: "daily-people",
+    ko: "이제야 그 말이 이해돼요.",
+    en: "I finally ___ what she meant.",
+    accept: ["understand", "get"],
+    hint: "알아듣는다는 뜻의 동사",
+    note: "get은 understand의 편한 말입니다."
+  },
+  {
+    id: "daily-people-191",
+    category: "daily-people",
+    ko: "저도 부모가 되어보니 알겠어요.",
+    en: "Now that I'm a ___, I understand.",
+    accept: ["parent"],
+    hint: "아버지나 어머니 한 사람",
+    note: "Now that은 '~하고 나니'라는 뜻입니다."
+  },
+  {
+    id: "daily-people-192",
+    category: "daily-people",
+    ko: "가족이 제일 소중하죠.",
+    en: "Family ___ first.",
+    accept: ["comes"],
+    hint: "온다는 뜻의 동사. first와 붙어 가장 앞선다는 뜻이 됩니다",
+    note: "come first는 무엇보다 앞선다는 뜻입니다."
+  },
+  {
+    id: "daily-people-193",
+    category: "daily-people",
+    ko: "표현을 잘 못 해서요.",
+    en: "I'm not good at ___ my feelings.",
+    accept: ["expressing", "showing"],
+    hint: "드러낸다는 뜻의 -ing형",
+    note: "be good at 뒤에는 -ing가 옵니다."
+  },
+  {
+    id: "daily-people-194",
+    category: "daily-people",
+    ko: "말로 다 못 하죠.",
+    en: "Words aren't ___.",
+    accept: ["enough"],
+    hint: "모자라지 않다는 뜻의 말",
+    note: "Words aren't enough는 말로는 부족하다는 뜻입니다."
+  },
+  {
+    id: "daily-people-195",
+    category: "daily-people",
+    ko: "고맙다는 말을 못 했어요.",
+    en: "I never ___ to say thank you.",
+    accept: ["got"],
+    hint: "얻다의 과거형. to와 붙어 '~할 기회가 있었다'가 됩니다",
+    note: "never got to는 끝내 그러지 못했다는 아쉬움을 담습니다."
+  },
+  {
+    id: "daily-people-196",
+    category: "daily-people",
+    ko: "이번엔 꼭 전할 거예요.",
+    en: "I'll make ___ to tell him this time.",
+    accept: ["sure"],
+    hint: "틀림없다는 뜻의 형용사",
+    note: "make sure to는 꼭 그렇게 하겠다는 다짐입니다."
+  },
+  {
+    id: "daily-people-197",
+    category: "daily-people",
+    ko: "가까이 있을 때 잘해야죠.",
+    en: "You should ___ people while they're here.",
+    accept: ["appreciate", "cherish"],
+    hint: "귀하게 여긴다는 뜻의 동사",
+    note: "appreciate someone은 그 사람의 소중함을 안다는 뜻입니다."
+  },
+  {
+    id: "daily-people-198",
+    category: "daily-people",
+    ko: "제가 요즘 자주 하는 생각이에요.",
+    en: "That's been on my ___ lately.",
+    accept: ["mind"],
+    hint: "생각이 자리 잡는 곳",
+    note: "on my mind는 계속 마음에 걸린다는 뜻입니다."
+  },
+  {
+    id: "daily-people-199",
+    category: "daily-people",
+    ko: "이런 얘기 하니까 좋네요.",
+    en: "It's ___ to talk about this.",
+    accept: ["nice", "good"],
+    hint: "좋다는 뜻의 형용사",
+    note: "It's nice to는 그렇게 하는 것이 좋다는 뜻입니다."
+  },
+  {
+    id: "daily-people-200",
+    category: "daily-people",
+    ko: "들어주셔서 고마워요.",
+    en: "Thanks for hearing me ___.",
+    accept: ["out"],
+    hint: "끝까지라는 뜻을 만드는 말",
+    note: "hear someone out은 끝까지 들어준다는 뜻입니다."
   }
 ];
