@@ -224,7 +224,7 @@ const SENTENCES = [
   {
     id: "travel-out-24",
     category: "travel-out",
-    ko: "이건 무슨 요리인가요?",
+    ko: "이 요리에는 뭐가 들어가나요?",
     en: "What's in this ___?",
     accept: ["dish"],
     hint: "요리 한 접시를 뜻하는 명사",
@@ -584,7 +584,7 @@ const SENTENCES = [
   {
     id: "travel-out-64",
     category: "travel-out",
-    ko: "덜 익혀주세요.",
+    ko: "미디엄 레어로 해주세요.",
     en: "Medium ___, please.",
     accept: ["rare"],
     hint: "덜 익힌 상태를 뜻하는 형용사",
@@ -602,7 +602,7 @@ const SENTENCES = [
   {
     id: "travel-out-66",
     category: "travel-out",
-    ko: "이거 주문한 것과 다른 것 같아요.",
+    ko: "이거 제 것이 아닌 것 같은데요.",
     en: "I don't think this is ___.",
     accept: ["mine"],
     hint: "내 것이라는 뜻의 소유대명사",
@@ -1080,11 +1080,11 @@ const SENTENCES = [
   {
     id: "daily-greeting-19",
     category: "daily-greeting",
-    ko: "처음 뵙겠습니다.",
-    en: "___ do you do?",
-    accept: ["how"],
-    hint: "안부를 묻는 의문사입니다",
-    note: "격식을 갖춘 첫인사입니다. 질문이 아니라 인사라서, 대답도 같은 말로 받습니다."
+    ko: "제 명함 한 장 드릴게요.",
+    en: "Here's my ___ card.",
+    accept: ["business"],
+    hint: "일·회사를 뜻하는 명사. card와 붙어 명함이 됩니다",
+    note: "처음 인사할 때는 How do you do?보다 Nice to meet you를 씁니다. How do you do?는 요즘 거의 쓰지 않습니다."
   },
   {
     id: "daily-greeting-20",
@@ -2269,11 +2269,11 @@ const SENTENCES = [
   {
     id: "daily-request-51",
     category: "daily-request",
-    ko: "제 부탁 하나만 들어주실 수 있나요?",
-    en: "Could you do me a ___?",
-    accept: ["solid"],
-    hint: "단단하다는 뜻의 형용사가 명사로 쓰이면 '도움'이 됩니다",
-    note: "do me a solid는 아주 편한 사이에서 쓰는 구어 표현입니다."
+    ko: "좀 급한 일이라서요.",
+    en: "It's kind of ___.",
+    accept: ["urgent"],
+    hint: "빨리 처리해야 한다는 뜻의 형용사",
+    note: "kind of를 앞에 붙이면 재촉하는 느낌이 덜해집니다."
   },
   {
     id: "daily-request-52",
@@ -2422,7 +2422,7 @@ const SENTENCES = [
   {
     id: "daily-request-68",
     category: "daily-request",
-    ko: "확인 좀 부탁드립니다.",
+    ko: "이 건은 회신 좀 부탁드립니다.",
     en: "Please ___ back to me on this.",
     accept: ["get"],
     hint: "회신한다는 뜻을 만드는 기본 동사",
@@ -2658,9 +2658,9 @@ const SENTENCES = [
     category: "daily-request",
     ko: "이거 가져가도 될까요?",
     en: "Can I ___ this with me?",
-    accept: ["bring"],
-    hint: "가지고 온다는 뜻의 기본 동사",
-    note: "borrow는 그 자리에서 쓰고 돌려줄 때, take with me는 가져갈 때 씁니다."
+    accept: ["bring", "take"],
+    hint: "물건을 지니고 이동한다는 뜻의 기본 동사. 두 가지가 다 됩니다",
+    note: "가는 곳으로 함께 가져가는 것은 bring, 지금 있는 곳에서 가지고 나가는 것은 take입니다. with me를 붙이면 둘 다 자연스럽습니다."
   },
   {
     id: "daily-request-95",
@@ -2694,9 +2694,9 @@ const SENTENCES = [
     category: "daily-request",
     ko: "제 대신 좀 가주실 수 있나요?",
     en: "Could you go in my ___?",
-    accept: ["place", "stead"],
+    accept: ["place"],
     hint: "자리를 뜻하는 명사",
-    note: "in my place는 '나 대신'이라는 뜻입니다."
+    note: "in my place는 '나 대신'이라는 뜻입니다. in my stead도 같은 뜻이지만 요즘 말로는 쓰지 않습니다."
   },
   {
     id: "daily-request-99",
@@ -3082,7 +3082,7 @@ const SENTENCES = [
     category: "daily-opinion",
     ko: "겁이 좀 나요.",
     en: "I'm ___ of it.",
-    accept: ["scared", "afraid", "terrified"],
+    accept: ["scared", "afraid"],
     hint: "두려움을 뜻하는 형용사",
     note: "afraid of는 대상에 대한 두려움, afraid that은 걱정하는 상황에 씁니다."
   },
@@ -5418,5 +5418,905 @@ const SENTENCES = [
     accept: ["lovely", "wonderful", "great"],
     hint: "아주 좋았다는 뜻의 형용사",
     note: "체크아웃할 때 건네면 좋은 인사입니다."
+  },
+  {
+    id: "daily-people-01",
+    category: "daily-people",
+    ko: "저희 아버지는 작년에 은퇴하셨어요.",
+    en: "My ___ retired last year.",
+    accept: ["dad", "father"],
+    hint: "가족 중 남자 어른을 부르는 말. 편한 말과 격식 있는 말 둘 다 됩니다",
+    note: "dad가 일상 대화에서 훨씬 많이 쓰입니다. father는 격식 있는 자리나 글에서 씁니다."
+  },
+  {
+    id: "daily-people-02",
+    category: "daily-people",
+    ko: "저희 어머니가 요리를 정말 잘하세요.",
+    en: "My ___ is a great cook.",
+    accept: ["mom", "mother"],
+    hint: "가족 중 여자 어른을 부르는 말",
+    note: "영국에서는 mum으로 씁니다. 미국은 mom입니다."
+  },
+  {
+    id: "daily-people-03",
+    category: "daily-people",
+    ko: "저는 형이 하나 있어요.",
+    en: "I have an older ___.",
+    accept: ["brother"],
+    hint: "같은 부모에게서 난 남자 형제",
+    note: "영어에는 형과 남동생을 가르는 낱말이 없습니다. older brother, younger brother로 구별합니다."
+  },
+  {
+    id: "daily-people-04",
+    category: "daily-people",
+    ko: "제 여동생이 저보다 키가 커요.",
+    en: "My younger ___ is taller than me.",
+    accept: ["sister"],
+    hint: "같은 부모에게서 난 여자 형제",
+    note: "little sister라고도 자주 씁니다. 나이가 어리다는 뜻이지 키가 작다는 뜻이 아닙니다."
+  },
+  {
+    id: "daily-people-05",
+    category: "daily-people",
+    ko: "아들이 이제 막 다섯 살이 됐어요.",
+    en: "My ___ just turned five.",
+    accept: ["son"],
+    hint: "자기 아이 중 남자아이",
+    note: "turn 다음에 나이를 붙이면 '몇 살이 되다'입니다. He turns ten next month처럼 씁니다."
+  },
+  {
+    id: "daily-people-06",
+    category: "daily-people",
+    ko: "딸이 지금 대학에 다녀요.",
+    en: "My ___ is in college.",
+    accept: ["daughter"],
+    hint: "자기 아이 중 여자아이",
+    note: "미국은 대학을 college, 영국은 university라고 부르는 경우가 많습니다."
+  },
+  {
+    id: "daily-people-07",
+    category: "daily-people",
+    ko: "아내가 지금 출장 중이에요.",
+    en: "My ___ is away on business.",
+    accept: ["wife"],
+    hint: "결혼한 여자 배우자",
+    note: "away on business가 '출장 가 있다'입니다. on a business trip도 같은 뜻입니다."
+  },
+  {
+    id: "daily-people-08",
+    category: "daily-people",
+    ko: "남편이 요리를 다 해요.",
+    en: "My ___ does all the cooking.",
+    accept: ["husband"],
+    hint: "결혼한 남자 배우자",
+    note: "does all the cooking은 '요리를 도맡아 한다'는 뜻의 흔한 표현입니다."
+  },
+  {
+    id: "daily-people-09",
+    category: "daily-people",
+    ko: "아기가 밤새 안 깨고 잤어요.",
+    en: "The ___ slept through the night.",
+    accept: ["baby"],
+    hint: "갓난아이를 가리키는 말",
+    note: "sleep through the night는 아기를 키우는 사람들이 늘 쓰는 표현입니다. 중간에 안 깨고 쭉 잤다는 뜻입니다."
+  },
+  {
+    id: "daily-people-10",
+    category: "daily-people",
+    ko: "저는 아이가 둘이에요.",
+    en: "I've got two ___.",
+    accept: ["kids", "children"],
+    hint: "아이를 뜻하는 복수 명사. 편한 말과 격식 있는 말 둘 다 됩니다",
+    note: "일상 대화에서는 kids가 압도적으로 많습니다. children은 글이나 안내문에서 씁니다."
+  },
+  {
+    id: "daily-people-11",
+    category: "daily-people",
+    ko: "저는 부모님이랑 같이 살아요.",
+    en: "I live with my ___.",
+    accept: ["parents"],
+    hint: "아버지와 어머니를 한꺼번에 부르는 말",
+    note: "항상 복수로 씁니다. 한 분만 가리킬 때는 parent입니다."
+  },
+  {
+    id: "daily-people-12",
+    category: "daily-people",
+    ko: "저희 가족은 다 서울에 살아요.",
+    en: "My whole ___ lives in Seoul.",
+    accept: ["family"],
+    hint: "한 집안 사람들을 통틀어 부르는 말",
+    note: "미국에서는 family를 하나의 덩어리로 보아 단수 취급합니다. 영국에서는 복수로도 씁니다."
+  },
+  {
+    id: "daily-people-13",
+    category: "daily-people",
+    ko: "저희 할머니가 올해 아흔이세요.",
+    en: "My ___ is ninety this year.",
+    accept: ["grandmother", "grandma"],
+    hint: "어머니나 아버지의 어머니",
+    note: "grandma가 일상 대화에서 더 자주 쓰입니다. 할아버지는 grandpa입니다."
+  },
+  {
+    id: "daily-people-14",
+    category: "daily-people",
+    ko: "삼촌이 저를 키우다시피 하셨어요.",
+    en: "My ___ pretty much raised me.",
+    accept: ["uncle"],
+    hint: "부모의 남자 형제",
+    note: "영어에는 삼촌·외삼촌·고모부를 가르는 낱말이 없고 모두 uncle입니다. 이모·고모는 aunt입니다."
+  },
+  {
+    id: "daily-people-15",
+    category: "daily-people",
+    ko: "저는 사촌들이랑 같이 자랐어요.",
+    en: "I grew up with my ___.",
+    accept: ["cousins"],
+    hint: "삼촌이나 이모의 자녀들",
+    note: "영어의 cousin은 친가·외가, 남녀를 가리지 않습니다."
+  },
+  {
+    id: "daily-people-16",
+    category: "daily-people",
+    ko: "저희 부모님은 아들 셋을 두셨어요.",
+    en: "My parents had three ___.",
+    accept: ["boys", "sons"],
+    hint: "남자아이를 뜻하는 복수 명사",
+    note: "boys가 더 편한 말투입니다. sons는 조금 더 또박또박한 느낌입니다."
+  },
+  {
+    id: "daily-people-17",
+    category: "daily-people",
+    ko: "제가 아버지를 많이 닮았어요.",
+    en: "I look a lot ___ my dad.",
+    accept: ["like"],
+    hint: "'~처럼'을 뜻하는 전치사. look과 짝을 이룹니다",
+    note: "look like는 생김새가 닮았다는 뜻입니다. 성격이 닮았을 때는 take after를 씁니다."
+  },
+  {
+    id: "daily-people-18",
+    category: "daily-people",
+    ko: "어머니 성함을 따서 지은 이름이에요.",
+    en: "I was ___ after my mom.",
+    accept: ["named"],
+    hint: "이름을 붙인다는 뜻의 동사. 여기서는 수동태 자리입니다",
+    note: "be named after는 '누구의 이름을 따서 짓다'입니다."
+  },
+  {
+    id: "daily-people-19",
+    category: "daily-people",
+    ko: "저희 부부는 결혼한 지 10년 됐어요.",
+    en: "My wife and I have been ___ for ten years.",
+    accept: ["married"],
+    hint: "혼인한 상태를 뜻하는 말",
+    note: "get married가 '결혼하다'라는 동작이고, be married는 '결혼한 상태'입니다."
+  },
+  {
+    id: "daily-people-20",
+    category: "daily-people",
+    ko: "곧 둘째가 태어나요.",
+    en: "We're having ___ baby soon.",
+    accept: ["another"],
+    hint: "'하나 더'를 뜻하는 말",
+    note: "We're having a baby는 '아이가 생겼다'는 뜻으로 임신 소식을 전할 때 씁니다."
+  },
+  {
+    id: "daily-people-21",
+    category: "daily-people",
+    ko: "그분 정말 좋은 분이세요.",
+    en: "He's a really nice ___.",
+    accept: ["guy", "man", "person"],
+    hint: "남자 한 사람을 가리키는 말. 편한 말과 점잖은 말 둘 다 됩니다",
+    note: "guy가 가장 흔한 구어입니다. person은 남녀를 가리지 않습니다."
+  },
+  {
+    id: "daily-people-22",
+    category: "daily-people",
+    ko: "저기 저 여자분 아세요?",
+    en: "Do you know that ___ over there?",
+    accept: ["woman", "lady"],
+    hint: "여자 한 사람을 가리키는 말",
+    note: "woman이 가장 무난합니다. lady는 정중한 느낌이지만 상황에 따라 어색할 수 있습니다."
+  },
+  {
+    id: "daily-people-23",
+    category: "daily-people",
+    ko: "그 사람 되게 웃겨요.",
+    en: "He's a really ___ guy.",
+    accept: ["funny"],
+    hint: "남을 웃게 만든다는 뜻의 형용사",
+    note: "funny는 '재미있다'와 '이상하다' 두 가지로 쓰입니다. 여기서는 앞의 뜻입니다."
+  },
+  {
+    id: "daily-people-24",
+    category: "daily-people",
+    ko: "저보다 두 살 위세요.",
+    en: "She's two years ___ than me.",
+    accept: ["older"],
+    hint: "나이가 많다는 뜻의 비교급",
+    note: "나이 차이는 숫자를 앞에 붙여 two years older처럼 말합니다."
+  },
+  {
+    id: "daily-people-25",
+    category: "daily-people",
+    ko: "저보다 어려요.",
+    en: "He's ___ than me.",
+    accept: ["younger"],
+    hint: "나이가 적다는 뜻의 비교급",
+    note: "than me와 than I am 둘 다 씁니다. 일상에서는 than me가 훨씬 흔합니다."
+  },
+  {
+    id: "daily-people-26",
+    category: "daily-people",
+    ko: "사람이 참 많네요.",
+    en: "There are so many ___ here.",
+    accept: ["people"],
+    hint: "사람을 뜻하는 복수 명사",
+    note: "people 자체가 복수라서 peoples라고 쓰지 않습니다."
+  },
+  {
+    id: "daily-people-27",
+    category: "daily-people",
+    ko: "저 남자애가 제 아들이에요.",
+    en: "That ___ is my son.",
+    accept: ["boy", "kid"],
+    hint: "남자아이를 가리키는 말",
+    note: "kid는 남녀를 가리지 않는 편한 말입니다."
+  },
+  {
+    id: "daily-people-28",
+    category: "daily-people",
+    ko: "저 여자애가 제 딸이에요.",
+    en: "That ___ is my daughter.",
+    accept: ["girl", "kid"],
+    hint: "여자아이를 가리키는 말",
+    note: "다 자란 성인 여성에게 girl을 쓰면 실례가 될 수 있습니다. 그때는 woman을 씁니다."
+  },
+  {
+    id: "daily-people-29",
+    category: "daily-people",
+    ko: "좀 조용한 편이세요.",
+    en: "She's kind of a quiet ___.",
+    accept: ["person"],
+    hint: "남녀를 가리지 않고 한 사람을 뜻하는 말",
+    note: "kind of는 '좀', '약간'이라는 뜻으로 말을 부드럽게 만듭니다."
+  },
+  {
+    id: "daily-people-30",
+    category: "daily-people",
+    ko: "남자들끼리만 있었어요.",
+    en: "It was just the ___.",
+    accept: ["guys"],
+    hint: "남자 여럿을 편하게 부르는 말",
+    note: "미국에서는 you guys를 남녀 섞인 무리에게도 씁니다. 다만 이 문장처럼 the guys라고 하면 보통 남자들만을 가리킵니다."
+  },
+  {
+    id: "daily-people-31",
+    category: "daily-people",
+    ko: "다들 정말 친절하셨어요.",
+    en: "___ was so nice.",
+    accept: ["Everyone", "Everybody"],
+    hint: "빠짐없이 모든 사람을 뜻하는 말",
+    note: "둘 다 단수로 취급해서 was를 씁니다. everybody가 조금 더 편한 말투입니다."
+  },
+  {
+    id: "daily-people-32",
+    category: "daily-people",
+    ko: "나이에 비해 젊어 보이세요.",
+    en: "You look young for your ___.",
+    accept: ["age"],
+    hint: "몇 살인지를 뜻하는 명사",
+    note: "for your age는 '나이에 비해'입니다. 칭찬으로 쓰이지만 나이 이야기 자체를 꺼리는 사람도 있습니다."
+  },
+  {
+    id: "daily-people-33",
+    category: "daily-people",
+    ko: "성격이 정말 좋으세요.",
+    en: "She's got a great ___.",
+    accept: ["personality"],
+    hint: "그 사람의 됨됨이나 성향을 뜻하는 명사",
+    note: "She's got은 She has의 구어체입니다. 말할 때는 이쪽이 훨씬 많습니다."
+  },
+  {
+    id: "daily-people-34",
+    category: "daily-people",
+    ko: "그분은 웃는 모습이 참 예뻐요.",
+    en: "She has a lovely ___.",
+    accept: ["smile"],
+    hint: "입가에 웃음을 띤 표정",
+    note: "웃음소리를 내는 것은 laugh, 표정만 짓는 것은 smile입니다."
+  },
+  {
+    id: "daily-people-35",
+    category: "daily-people",
+    ko: "어디서 뵌 것 같아요.",
+    en: "You look ___.",
+    accept: ["familiar"],
+    hint: "전에 본 적이 있는 것 같다는 뜻의 형용사",
+    note: "처음 본 사람 같지 않을 때 쓰는 표현입니다. 정확히 어디서 봤는지 모를 때 딱 맞습니다."
+  },
+  {
+    id: "daily-people-36",
+    category: "daily-people",
+    ko: "이름이 기억이 안 나요.",
+    en: "I can't remember his ___.",
+    accept: ["name"],
+    hint: "사람을 부를 때 쓰는 말",
+    note: "It's on the tip of my tongue이라고 하면 '입에서 맴도는데 안 나온다'는 뜻입니다."
+  },
+  {
+    id: "daily-people-37",
+    category: "daily-people",
+    ko: "목소리가 낯익어요.",
+    en: "His ___ sounds familiar.",
+    accept: ["voice"],
+    hint: "말할 때 나는 소리",
+    note: "전화로 아는 사람을 알아볼 때 자주 쓰는 표현입니다."
+  },
+  {
+    id: "daily-people-38",
+    category: "daily-people",
+    ko: "두 분 정말 닮으셨네요.",
+    en: "You two look so ___.",
+    accept: ["alike", "similar"],
+    hint: "서로 비슷하다는 뜻의 말",
+    note: "alike는 항상 뒤에 명사를 두지 않고 씁니다. similar는 similar to each other처럼 쓰기도 합니다."
+  },
+  {
+    id: "daily-people-39",
+    category: "daily-people",
+    ko: "그 애가 아빠를 쏙 빼닮았네요.",
+    en: "He looks ___ like his dad.",
+    accept: ["just", "exactly"],
+    hint: "'꼭', '똑같이'라는 뜻으로 like를 강하게 만드는 말",
+    note: "just like가 '똑 닮았다'는 느낌을 살립니다. exactly like도 같은 뜻이지만 조금 더 딱딱합니다."
+  },
+  {
+    id: "daily-people-40",
+    category: "daily-people",
+    ko: "제가 어머니 성격을 닮았어요.",
+    en: "I take ___ my mom.",
+    accept: ["after"],
+    hint: "'뒤'를 뜻하는 전치사가 take와 붙으면 닮았다는 뜻이 됩니다",
+    note: "take after는 성격이나 기질이 닮았을 때, look like는 생김새가 닮았을 때 씁니다."
+  },
+  {
+    id: "daily-people-41",
+    category: "daily-people",
+    ko: "그 사람들 다음 주에 와요.",
+    en: "___ are coming next week.",
+    accept: ["They"],
+    hint: "여러 사람을 가리키는 주어",
+    note: "가까운 미래의 정해진 일정은 be coming처럼 진행형으로 말하는 것이 자연스럽습니다."
+  },
+  {
+    id: "daily-people-42",
+    category: "daily-people",
+    ko: "제가 그분한테 말씀드릴게요.",
+    en: "I'll tell ___ about it.",
+    accept: ["him", "her"],
+    hint: "'그 사람에게'에 해당하는 목적어 자리의 말",
+    note: "tell 뒤에는 he가 아니라 him이 옵니다. 동사 뒤에서는 목적격을 씁니다."
+  },
+  {
+    id: "daily-people-43",
+    category: "daily-people",
+    ko: "그 여자분한테 물어보세요.",
+    en: "You should ask ___.",
+    accept: ["her"],
+    hint: "'그 여자에게'에 해당하는 목적어 자리의 말",
+    note: "her는 '그녀를'과 '그녀의' 두 가지로 다 쓰입니다."
+  },
+  {
+    id: "daily-people-44",
+    category: "daily-people",
+    ko: "그 사람들한테 연락해 볼게요.",
+    en: "I'll ___ in touch with them.",
+    accept: ["get"],
+    hint: "in touch with와 붙어 연락을 취한다는 뜻이 되는 동사",
+    note: "get in touch with는 '연락을 취하다'입니다. 이미 아는 사이에 다시 연락할 때 씁니다."
+  },
+  {
+    id: "daily-people-45",
+    category: "daily-people",
+    ko: "그건 그분 생각이고요.",
+    en: "That's just his ___.",
+    accept: ["opinion"],
+    hint: "어떤 일에 대한 생각이나 견해를 뜻하는 명사",
+    note: "That's just his opinion은 '그건 그 사람 생각일 뿐'이라며 선을 긋는 말입니다."
+  },
+  {
+    id: "daily-people-46",
+    category: "daily-people",
+    ko: "그분들 집이 여기서 가까워요.",
+    en: "___ place is close by.",
+    accept: ["Their"],
+    hint: "'그 사람들의'에 해당하는 말",
+    note: "place는 house보다 편하게 '집'을 가리키는 말입니다."
+  },
+  {
+    id: "daily-people-47",
+    category: "daily-people",
+    ko: "그 사람이 바쁘다고 하던데요.",
+    en: "He ___ he was busy.",
+    accept: ["said"],
+    hint: "말하다의 과거형",
+    note: "say 뒤에는 들은 사람을 두지 않습니다. He said he was busy처럼 바로 내용이 옵니다."
+  },
+  {
+    id: "daily-people-48",
+    category: "daily-people",
+    ko: "그 사람들이 저한테 알려줬어요.",
+    en: "They ___ me about it.",
+    accept: ["told"],
+    hint: "말해 주다의 과거형. 듣는 사람을 바로 뒤에 둡니다",
+    note: "tell은 듣는 사람을 바로 뒤에 둡니다. told me처럼 씁니다. say는 그렇게 쓰지 않습니다."
+  },
+  {
+    id: "daily-people-49",
+    category: "daily-people",
+    ko: "그분이 안부 전해달라세요.",
+    en: "He says ___.",
+    accept: ["hi", "hello"],
+    hint: "만났을 때 건네는 짧은 인사말",
+    note: "Say hi to your family처럼도 씁니다. '가족들한테 안부 전해줘'라는 뜻입니다."
+  },
+  {
+    id: "daily-people-50",
+    category: "daily-people",
+    ko: "그분 요즘 어떻게 지내세요?",
+    en: "How's ___ doing?",
+    accept: ["he", "she"],
+    hint: "한 사람을 가리키는 주어 자리의 말",
+    note: "How's he doing?은 그 사람의 근황을 제3자에게 묻는 표현입니다."
+  },
+  {
+    id: "daily-people-51",
+    category: "daily-people",
+    ko: "그 사람들 아직 안 왔어요.",
+    en: "They haven't arrived ___.",
+    accept: ["yet"],
+    hint: "'아직'을 뜻하는 말. 부정문 끝에 붙습니다",
+    note: "yet은 아직 일어나지 않은 일을 말할 때 문장 끝에 붙입니다. 긍정문에서는 already를 씁니다."
+  },
+  {
+    id: "daily-people-52",
+    category: "daily-people",
+    ko: "그분을 만나러 왔어요.",
+    en: "I'm here to ___ him.",
+    accept: ["see", "meet"],
+    hint: "사람을 만난다는 뜻의 동사",
+    note: "I'm here to see는 약속하고 찾아갔을 때 안내 데스크에서 쓰는 말입니다. 이미 아는 사이면 see, 처음이면 meet이 자연스럽습니다."
+  },
+  {
+    id: "daily-people-53",
+    category: "daily-people",
+    ko: "그분이 직접 하셨어요.",
+    en: "He did it ___.",
+    accept: ["himself"],
+    hint: "'그 사람 자신'을 뜻하는 말",
+    note: "did it himself는 남을 시키지 않고 직접 했다는 뜻입니다."
+  },
+  {
+    id: "daily-people-54",
+    category: "daily-people",
+    ko: "그 여자분이 혼자서 다 하셨어요.",
+    en: "She did it all by ___.",
+    accept: ["herself"],
+    hint: "'그 여자 자신'을 뜻하는 말",
+    note: "by herself는 '혼자 힘으로'입니다. 앞에 all을 붙이면 뜻이 더 강해집니다."
+  },
+  {
+    id: "daily-people-55",
+    category: "daily-people",
+    ko: "그 사람들끼리 알아서 해결했어요.",
+    en: "They worked it out ___.",
+    accept: ["themselves"],
+    hint: "'그 사람들 자신'을 뜻하는 말",
+    note: "work out은 문제를 풀어 해결한다는 뜻입니다. 운동한다는 뜻으로도 씁니다."
+  },
+  {
+    id: "daily-people-56",
+    category: "daily-people",
+    ko: "그분 얘기 많이 들었어요.",
+    en: "I've ___ a lot about him.",
+    accept: ["heard"],
+    hint: "듣다의 과거분사",
+    note: "처음 만난 자리에서 하는 인사말로 자주 씁니다. 좋은 뜻으로 들립니다."
+  },
+  {
+    id: "daily-people-57",
+    category: "daily-people",
+    ko: "두 분 다 오세요.",
+    en: "___ of them are coming.",
+    accept: ["Both"],
+    hint: "둘 다를 뜻하는 말",
+    note: "both of them은 두 명일 때, all of them은 셋 이상일 때 씁니다."
+  },
+  {
+    id: "daily-people-58",
+    category: "daily-people",
+    ko: "그 사람 지금 자리에 없어요.",
+    en: "He's not here right ___.",
+    accept: ["now"],
+    hint: "'지금'을 뜻하는 말",
+    note: "right now는 '바로 지금'입니다. 전화를 대신 받았을 때 자주 쓰는 말입니다."
+  },
+  {
+    id: "daily-people-59",
+    category: "daily-people",
+    ko: "두 사람 사이가 좋아요.",
+    en: "They get ___ well.",
+    accept: ["along"],
+    hint: "'~을 따라'라는 전치사가 get과 붙으면 사이가 좋다는 뜻이 됩니다",
+    note: "get along with는 '~와 잘 지내다'입니다. 사람 사이를 말할 때 가장 흔한 표현입니다."
+  },
+  {
+    id: "daily-people-60",
+    category: "daily-people",
+    ko: "그분 이름이 뭐예요?",
+    en: "What's ___ name?",
+    accept: ["his", "her"],
+    hint: "'그 사람의'에 해당하는 말",
+    note: "본인에게 직접 물을 때는 What's your name?이지만, 조금 딱딱하게 들려 May I ask your name?을 쓰기도 합니다."
+  },
+  {
+    id: "daily-people-61",
+    category: "daily-people",
+    ko: "우리 전에 만난 적 있죠?",
+    en: "Haven't we met ___?",
+    accept: ["before"],
+    hint: "'전에'를 뜻하는 말",
+    note: "Haven't we met before?는 낯익은 사람에게 말을 걸 때 쓰는 자연스러운 표현입니다."
+  },
+  {
+    id: "daily-people-62",
+    category: "daily-people",
+    ko: "저희는 대학 때 만났어요.",
+    en: "We ___ in college.",
+    accept: ["met"],
+    hint: "만나다의 과거형",
+    note: "meet은 처음 만나는 것, see는 이미 아는 사람을 보는 것입니다."
+  },
+  {
+    id: "daily-people-63",
+    category: "daily-people",
+    ko: "친구 소개로 알게 됐어요.",
+    en: "We met through a ___.",
+    accept: ["friend"],
+    hint: "가깝게 지내는 사람",
+    note: "through a friend는 '친구를 거쳐서', 즉 소개로 알게 됐다는 뜻입니다."
+  },
+  {
+    id: "daily-people-64",
+    category: "daily-people",
+    ko: "십 년 넘게 알고 지낸 사이예요.",
+    en: "We've known each ___ for over ten years.",
+    accept: ["other"],
+    hint: "each와 짝을 이뤄 '서로'가 되는 말",
+    note: "each other는 두 사람 사이에, one another는 셋 이상에 쓴다고 하지만 실제로는 구별 없이 씁니다."
+  },
+  {
+    id: "daily-people-65",
+    category: "daily-people",
+    ko: "같이 일하는 사이예요.",
+    en: "We ___ together.",
+    accept: ["work"],
+    hint: "직장에서 일한다는 뜻의 동사",
+    note: "We work together는 동료 사이라는 뜻입니다. 직장 동료 한 명은 coworker입니다."
+  },
+  {
+    id: "daily-people-66",
+    category: "daily-people",
+    ko: "저희 옆집에 살아요.",
+    en: "They live next ___.",
+    accept: ["door"],
+    hint: "'문'을 뜻하는 말이 next와 붙으면 옆집이 됩니다",
+    note: "next door가 '바로 옆집'입니다. 옆집 사람은 next-door neighbor라고 합니다."
+  },
+  {
+    id: "daily-people-67",
+    category: "daily-people",
+    ko: "같은 동네에서 자랐어요.",
+    en: "We grew ___ in the same town.",
+    accept: ["up"],
+    hint: "'위로'를 뜻하는 말이 grow와 붙으면 자란다는 뜻이 됩니다",
+    note: "grow up은 사람이 자라는 것, grow는 키나 식물이 자라는 것입니다."
+  },
+  {
+    id: "daily-people-68",
+    category: "daily-people",
+    ko: "오래된 친구예요.",
+    en: "He's an ___ friend.",
+    accept: ["old"],
+    hint: "오래되었다는 뜻의 형용사",
+    note: "an old friend는 나이가 많다는 뜻이 아니라 오래 알고 지낸 사이라는 뜻입니다."
+  },
+  {
+    id: "daily-people-69",
+    category: "daily-people",
+    ko: "두 분은 어떻게 아는 사이세요?",
+    en: "How do you two ___ each other?",
+    accept: ["know"],
+    hint: "알고 있다는 뜻의 동사",
+    note: "처음 만난 자리에서 두 사람의 관계를 물을 때 쓰는 자연스러운 표현입니다."
+  },
+  {
+    id: "daily-people-70",
+    category: "daily-people",
+    ko: "두 분 정말 잘 어울리세요.",
+    en: "You two make a great ___.",
+    accept: ["couple"],
+    hint: "짝을 이룬 두 사람을 뜻하는 명사",
+    note: "make a great couple은 연인이나 부부에게 하는 덕담입니다."
+  },
+  {
+    id: "daily-people-71",
+    category: "daily-people",
+    ko: "연락하고 지내요.",
+    en: "We keep in ___.",
+    accept: ["touch"],
+    hint: "'닿음'을 뜻하는 명사가 keep in과 붙으면 연락을 이어간다는 뜻이 됩니다",
+    note: "헤어질 때 Let's keep in touch라고 하면 '연락하고 지내자'입니다."
+  },
+  {
+    id: "daily-people-72",
+    category: "daily-people",
+    ko: "요즘은 자주 못 봐요.",
+    en: "I don't see him ___ these days.",
+    accept: ["much", "often"],
+    hint: "양이나 횟수가 많다는 뜻의 말",
+    note: "부정문에서 much는 '별로'라는 뜻이 됩니다. don't see him much가 자연스럽습니다."
+  },
+  {
+    id: "daily-people-73",
+    category: "daily-people",
+    ko: "같이 갈 사람 있어요?",
+    en: "Is ___ coming with you?",
+    accept: ["anyone", "anybody"],
+    hint: "'누군가'를 뜻하는 말. 묻는 문장에 쓰는 쪽입니다",
+    note: "물음과 부정에는 anyone, 평서문에는 someone을 쓰는 것이 기본입니다."
+  },
+  {
+    id: "daily-people-74",
+    category: "daily-people",
+    ko: "아무도 안 왔어요.",
+    en: "___ showed up.",
+    accept: ["Nobody", "No one"],
+    hint: "'아무도 ~않다'를 한 낱말로 나타내는 말",
+    note: "이미 부정의 뜻이 들어 있어 didn't를 함께 쓰지 않습니다. show up은 '나타나다'입니다."
+  },
+  {
+    id: "daily-people-75",
+    category: "daily-people",
+    ko: "누가 저한테 그러던데요.",
+    en: "___ told me that.",
+    accept: ["Someone", "Somebody"],
+    hint: "'누군가'를 뜻하는 말. 평서문에 쓰는 쪽입니다",
+    note: "누구인지 밝히고 싶지 않거나 기억나지 않을 때 씁니다."
+  },
+  {
+    id: "daily-people-76",
+    category: "daily-people",
+    ko: "그분은 다들 아세요.",
+    en: "Everyone ___ him.",
+    accept: ["knows"],
+    hint: "알고 있다는 뜻의 동사. 주어가 단수 취급이라는 점에 유의합니다",
+    note: "everyone은 뜻은 여럿이지만 단수 취급이라 knows처럼 동사에 s가 붙습니다."
+  },
+  {
+    id: "daily-people-77",
+    category: "daily-people",
+    ko: "다른 분들은 어디 가셨어요?",
+    en: "Where did the ___ go?",
+    accept: ["others"],
+    hint: "나머지 사람들을 뜻하는 복수 명사",
+    note: "the others는 '나머지 사람들 전부'입니다. others는 그냥 '다른 사람들'입니다."
+  },
+  {
+    id: "daily-people-78",
+    category: "daily-people",
+    ko: "또 누가 오나요?",
+    en: "Who ___ is coming?",
+    accept: ["else"],
+    hint: "'그 밖에'를 뜻하는 말. 의문사 바로 뒤에 붙습니다",
+    note: "who else, what else, anything else처럼 항상 뒤에 붙습니다."
+  },
+  {
+    id: "daily-people-79",
+    category: "daily-people",
+    ko: "혼자 사세요?",
+    en: "Do you live by ___?",
+    accept: ["yourself"],
+    hint: "'당신 자신'을 뜻하는 말",
+    note: "by yourself는 '혼자서'입니다. alone도 같은 뜻이지만 조금 쓸쓸한 느낌이 있습니다."
+  },
+  {
+    id: "daily-people-80",
+    category: "daily-people",
+    ko: "저희끼리 갈게요.",
+    en: "We'll go on our ___.",
+    accept: ["own"],
+    hint: "'자기만의'를 뜻하는 말",
+    note: "on our own은 '우리끼리, 우리 힘으로'입니다."
+  },
+  {
+    id: "daily-people-81",
+    category: "daily-people",
+    ko: "아이들이 이제 다 컸어요.",
+    en: "The kids are all ___ up.",
+    accept: ["grown"],
+    hint: "자라다의 과거분사",
+    note: "grown-up을 명사로 쓰면 '어른'이라는 뜻이 됩니다."
+  },
+  {
+    id: "daily-people-82",
+    category: "daily-people",
+    ko: "애들 키우느라 정신이 없어요.",
+    en: "___ kids keeps me busy.",
+    accept: ["Raising"],
+    hint: "아이를 키운다는 뜻의 동사. 주어 자리라 -ing 꼴입니다",
+    note: "raise는 아이를 키우는 것, grow는 식물을 기르는 것입니다."
+  },
+  {
+    id: "daily-people-83",
+    category: "daily-people",
+    ko: "저희 아버지가 하시던 일을 물려받았어요.",
+    en: "I took over my ___ business.",
+    accept: ["dad's", "father's"],
+    hint: "가족 중 남자 어른. '~의'를 나타내는 꼴로 씁니다",
+    note: "take over는 일이나 자리를 넘겨받는다는 뜻입니다."
+  },
+  {
+    id: "daily-people-84",
+    category: "daily-people",
+    ko: "저희 어머니가 늘 그렇게 말씀하셨어요.",
+    en: "My mom ___ said that.",
+    accept: ["always"],
+    hint: "'늘', '언제나'를 뜻하는 말",
+    note: "always는 보통 일반동사 앞에 옵니다. be동사일 때는 뒤에 옵니다."
+  },
+  {
+    id: "daily-people-85",
+    category: "daily-people",
+    ko: "남편이랑 같이 왔어요.",
+    en: "I ___ with my husband.",
+    accept: ["came"],
+    hint: "오다의 과거형",
+    note: "came with는 함께 왔다는 뜻입니다. 지금 함께 있다면 I'm here with my husband라고 합니다."
+  },
+  {
+    id: "daily-people-86",
+    category: "daily-people",
+    ko: "아내가 좋아하겠네요.",
+    en: "My wife will ___ this.",
+    accept: ["love"],
+    hint: "아주 좋아한다는 뜻의 동사",
+    note: "will love this는 선물을 고를 때 자주 쓰는 말입니다. like보다 훨씬 강한 뜻입니다."
+  },
+  {
+    id: "daily-people-87",
+    category: "daily-people",
+    ko: "아들이 축구를 해요.",
+    en: "My son ___ soccer.",
+    accept: ["plays"],
+    hint: "운동을 한다는 뜻의 동사. 주어가 3인칭 단수입니다",
+    note: "운동 종목에는 play를 씁니다. 미국은 soccer, 영국은 football이라고 부릅니다."
+  },
+  {
+    id: "daily-people-88",
+    category: "daily-people",
+    ko: "딸이 저보다 영어를 잘해요.",
+    en: "My daughter speaks ___ English than I do.",
+    accept: ["better"],
+    hint: "good의 비교급",
+    note: "than I do는 than me보다 조금 더 또박또박한 말투입니다. 둘 다 씁니다."
+  },
+  {
+    id: "daily-people-89",
+    category: "daily-people",
+    ko: "손주가 셋이에요.",
+    en: "I have three ___.",
+    accept: ["grandkids", "grandchildren"],
+    hint: "자식의 아이들을 뜻하는 복수 명사",
+    note: "grandkids가 더 편한 말입니다. 손자는 grandson, 손녀는 granddaughter입니다."
+  },
+  {
+    id: "daily-people-90",
+    category: "daily-people",
+    ko: "형제 중에 제가 막내예요.",
+    en: "I'm the ___ of three.",
+    accept: ["youngest"],
+    hint: "나이가 가장 적다는 뜻의 최상급",
+    note: "맏이는 the oldest, 가운데는 the middle child입니다."
+  },
+  {
+    id: "daily-people-91",
+    category: "daily-people",
+    ko: "여자분들이 남자분들보다 많았어요.",
+    en: "There were more ___ than men.",
+    accept: ["women"],
+    hint: "여자 여럿을 뜻하는 복수 명사",
+    note: "woman의 복수는 womans가 아니라 women입니다. 소리도 '워먼'에서 '위민'으로 달라집니다."
+  },
+  {
+    id: "daily-people-92",
+    category: "daily-people",
+    ko: "부모님이 자주 오세요.",
+    en: "My parents ___ a lot.",
+    accept: ["visit"],
+    hint: "찾아온다는 뜻의 동사. 주어가 복수입니다",
+    note: "parents는 복수라서 visits가 아니라 visit입니다."
+  },
+  {
+    id: "daily-people-93",
+    category: "daily-people",
+    ko: "저희 가족은 다들 늦잠을 자요.",
+    en: "Everyone in my family ___ in.",
+    accept: ["sleeps"],
+    hint: "잠을 잔다는 뜻의 동사. in과 붙으면 늦게까지 잔다는 뜻이 됩니다",
+    note: "sleep in은 일부러 늦게까지 자는 것입니다. 늦잠을 자서 늦은 것은 oversleep입니다."
+  },
+  {
+    id: "daily-people-94",
+    category: "daily-people",
+    ko: "어떤 남자분이 도와주셨어요.",
+    en: "A ___ helped me out.",
+    accept: ["man", "guy"],
+    hint: "남자 한 사람을 가리키는 말",
+    note: "help someone out은 곤란한 상황에서 도와줬다는 뜻입니다."
+  },
+  {
+    id: "daily-people-95",
+    category: "daily-people",
+    ko: "어떤 여자분이 길을 알려주셨어요.",
+    en: "A woman gave me ___.",
+    accept: ["directions"],
+    hint: "길 안내를 뜻하는 명사. 이 뜻일 때는 항상 복수입니다",
+    note: "단수 direction은 '방향'이라는 다른 뜻이 됩니다."
+  },
+  {
+    id: "daily-people-96",
+    category: "daily-people",
+    ko: "저 사람들 아까부터 기다리고 있었어요.",
+    en: "They've been ___ for a while.",
+    accept: ["waiting"],
+    hint: "기다린다는 뜻의 동사. 진행형 자리입니다",
+    note: "for a while은 '꽤 오래'라는 뜻입니다. 계속 이어진 일이라 have been -ing를 씁니다."
+  },
+  {
+    id: "daily-people-97",
+    category: "daily-people",
+    ko: "제 친구 한 명을 소개해 드릴게요.",
+    en: "I'd like you to ___ a friend of mine.",
+    accept: ["meet"],
+    hint: "처음 만난다는 뜻의 동사",
+    note: "I'd like you to meet은 사람을 소개할 때 쓰는 가장 무난한 표현입니다."
+  },
+  {
+    id: "daily-people-98",
+    category: "daily-people",
+    ko: "저희는 서로 잘 아는 사이예요.",
+    en: "We know each other pretty ___.",
+    accept: ["well"],
+    hint: "'잘'을 뜻하는 부사",
+    note: "pretty well은 '꽤 잘'입니다. 여기서 pretty는 '예쁜'이 아니라 정도를 나타냅니다."
+  },
+  {
+    id: "daily-people-99",
+    category: "daily-people",
+    ko: "제 또래예요.",
+    en: "He's ___ my age.",
+    accept: ["about", "around"],
+    hint: "'대략', '~쯤'을 뜻하는 말",
+    note: "about my age가 '나랑 비슷한 나이'입니다. around도 같은 뜻으로 씁니다."
+  },
+  {
+    id: "daily-people-100",
+    category: "daily-people",
+    ko: "그분들 얘기 좀 해주세요.",
+    en: "Tell me about ___.",
+    accept: ["them"],
+    hint: "'그 사람들'에 해당하는 목적어 자리의 말",
+    note: "Tell me about은 상대가 이야기를 이어가게 만드는 말입니다. 대화를 늘리는 데 좋습니다."
   }
 ];

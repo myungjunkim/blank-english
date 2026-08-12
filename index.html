@@ -720,6 +720,7 @@ const CATEGORY_NAMES = {
   "daily-greeting": "인사 · 스몰토크",
   "daily-request":  "부탁 · 요청 · 허락 구하기",
   "daily-opinion":  "감정 · 의견 표현",
+  "daily-people":   "사람 · 가족 · 주변 이야기",
   "travel-airport": "공항 · 입국심사 · 기내",
   "travel-hotel":   "숙소 · 체크인 · 문제 해결",
   "travel-out":     "식당 · 쇼핑 · 길찾기 · 교통"
@@ -922,7 +923,11 @@ function ipaToHangul(ipa) {
 
     if (u.t === "c") {
       const next = units[k + 1];
-      if (next && (next.t === "v" || next.t === "glide")) {
+      // w 앞의 비음·유음은 초성이 아니라 받침입니다. always → 올웨이즈, someone → 섬원
+      // (p·t·k는 그렇지 않습니다. network → 네트워크)
+      const codaBeforeW = next && next.t === "glide" && next.v === "w" &&
+        ["m", "n", "ŋ", "l", "ɫ"].includes(u.raw);
+      if (next && (next.t === "v" || next.t === "glide") && !codaBeforeW) {
         flushOnset();
         // 모음 앞의 l은 앞 글자에 ㄹ 받침을 더해 ㄹㄹ로 적습니다. flight → 플라이트, family → 패멀리
         if (["l", "ɫ"].includes(u.raw) && (standalone || lastVowel)) attachCoda("ㄹ");
