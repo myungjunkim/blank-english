@@ -468,10 +468,10 @@ const SENTENCES = [
     id: "travel-out-51",
     category: "travel-out",
     ko: "예약 안 했는데 자리 있나요?",
-    en: "We don't have a reservation. Do you have any ___?",
-    accept: ["openings", "availability"],
-    hint: "비어 있는 자리를 뜻하는 명사",
-    note: "walk-in은 예약 없이 온 손님을 뜻합니다."
+    en: "Do you have any tables ___?",
+    accept: ["available", "free"],
+    hint: "쓸 수 있는 상태라는 뜻의 형용사",
+    note: "예약 없이 온 손님을 walk-in이라고 합니다."
   },
   {
     id: "travel-out-52",
@@ -675,10 +675,10 @@ const SENTENCES = [
     id: "travel-out-74",
     category: "travel-out",
     ko: "따뜻한 걸로 주세요.",
-    en: "I'll have it ___.",
+    en: "Can I get that ___?",
     accept: ["hot"],
     hint: "온도가 높다는 뜻의 형용사",
-    note: "차가운 것은 iced라고 합니다."
+    note: "차가운 것은 iced로 주문합니다. Iced americano처럼 씁니다."
   },
   {
     id: "travel-out-75",
@@ -1441,7 +1441,7 @@ const SENTENCES = [
     id: "daily-greeting-59",
     category: "daily-greeting",
     ko: "결혼 축하드립니다.",
-    en: "___ wishes on your wedding.",
+    en: "___ wishes on your wedding day.",
     accept: ["best"],
     hint: "가장 좋다는 뜻의 최상급",
     note: "Best wishes는 축하 카드에 흔히 쓰는 문구입니다."
@@ -1738,10 +1738,10 @@ const SENTENCES = [
     id: "daily-greeting-92",
     category: "daily-greeting",
     ko: "감기 조심하세요.",
-    en: "Don't ___ a cold.",
-    accept: ["catch", "get"],
-    hint: "붙잡는다는 뜻의 동사가 병에도 쓰입니다",
-    note: "catch a cold가 한 덩어리입니다. get a cold도 씁니다."
+    en: "___ warm out there.",
+    accept: ["stay", "keep"],
+    hint: "그 상태를 유지하라는 뜻의 동사",
+    note: "헤어질 때 감기 조심하라는 뜻으로 Stay warm을 씁니다. Don't catch a cold는 문법은 맞지만 인사로는 잘 쓰지 않습니다."
   },
   {
     id: "daily-greeting-93",
@@ -2369,7 +2369,7 @@ const SENTENCES = [
     id: "daily-request-62",
     category: "daily-request",
     ko: "제가 도와드릴게요.",
-    en: "Let me ___ in and help.",
+    en: "Let me ___ in.",
     accept: ["pitch"],
     hint: "던져 넣는다는 동사가 '거들다'라는 뜻이 됩니다",
     note: "pitch in은 여럿이 함께 일을 거든다는 뜻입니다."
@@ -2377,8 +2377,8 @@ const SENTENCES = [
   {
     id: "daily-request-63",
     category: "daily-request",
-    ko: "부탁 좀 드려도 될까요?",
-    en: "Can I ___ on you for something?",
+    ko: "이것 좀 부탁드려도 될까요?",
+    en: "Can I ___ on you for this?",
     accept: ["count", "rely", "depend"],
     hint: "믿고 기댄다는 뜻의 동사",
     note: "count on은 '믿는다'는 뜻으로, 부탁 앞에 붙이면 정중해집니다."
@@ -2620,11 +2620,11 @@ const SENTENCES = [
   {
     id: "daily-request-90",
     category: "daily-request",
-    ko: "그 내용 한번 확인해 주시겠어요?",
-    en: "Could you ___ that again?",
-    accept: ["confirm", "verify"],
-    hint: "사실인지 다시 못 박는다는 동사",
-    note: "confirm은 예약이나 일정 확인에도 자주 씁니다."
+    ko: "일정 확인 좀 부탁드려요.",
+    en: "Could you ___ the schedule?",
+    accept: ["confirm", "check"],
+    hint: "사실인지 못 박는다는 동사",
+    note: "confirm은 예약이나 일정을 확정할 때 씁니다."
   },
   {
     id: "daily-request-91",
@@ -3513,7 +3513,7 @@ const SENTENCES = [
     id: "daily-opinion-89",
     category: "daily-opinion",
     ko: "차라리 그게 낫겠어요.",
-    en: "I'd ___ do that instead.",
+    en: "I'd ___ do that.",
     accept: ["rather"],
     hint: "차라리라는 뜻의 부사",
     note: "would rather 뒤에는 동사원형이 옵니다."
@@ -3577,9 +3577,9 @@ const SENTENCES = [
     category: "daily-opinion",
     ko: "그럴 리가 없어요.",
     en: "That ___ be right.",
-    accept: ["cannot", "can't"],
+    accept: ["can't", "cannot"],
     hint: "가능성을 부정하는 조동사",
-    note: "cannot be는 '그럴 리 없다'는 강한 추측입니다. 줄여서 can't be라고도 씁니다."
+    note: "can't be는 '그럴 리 없다'는 강한 추측입니다. 격식을 갖추면 cannot be입니다."
   },
   {
     id: "daily-opinion-97",
@@ -4161,11 +4161,11 @@ const SENTENCES = [
   {
     id: "travel-airport-61",
     category: "travel-airport",
-    ko: "이건 액체인데 괜찮나요?",
-    en: "Is this ___ allowed?",
-    accept: ["liquid"],
-    hint: "흐르는 물질을 뜻하는 명사",
-    note: "기내 반입 액체는 보통 100ml까지입니다."
+    ko: "이거 가지고 들어가도 되나요?",
+    en: "Can I ___ this through?",
+    accept: ["take", "bring"],
+    hint: "가지고 통과한다는 뜻의 동사",
+    note: "take something through는 검색대를 통과시킨다는 뜻입니다. 기내 반입 액체는 보통 100ml까지입니다."
   },
   {
     id: "travel-airport-62",
@@ -4316,7 +4316,7 @@ const SENTENCES = [
     category: "travel-airport",
     ko: "화장실이 비었나요?",
     en: "Is the lavatory ___?",
-    accept: ["vacant", "free"],
+    accept: ["free", "vacant"],
     hint: "비어 있다는 뜻의 형용사",
     note: "기내 화장실 표시는 VACANT와 OCCUPIED입니다."
   },
@@ -4458,10 +4458,10 @@ const SENTENCES = [
   {
     id: "travel-airport-94",
     category: "travel-airport",
-    ko: "유심 카드 파는 곳이 있나요?",
-    en: "Is there a place that ___ SIM cards?",
-    accept: ["sells"],
-    hint: "판다는 뜻의 동사. 3인칭 단수형",
+    ko: "유심 카드는 어디서 사나요?",
+    en: "Where can I buy a ___ card?",
+    accept: ["SIM"],
+    hint: "휴대폰에 넣는 작은 칩을 부르는 세 글자 약어",
     note: "공항 도착층에 통신사 부스가 있는 경우가 많습니다."
   },
   {
@@ -4981,11 +4981,11 @@ const SENTENCES = [
   {
     id: "travel-hotel-52",
     category: "travel-hotel",
-    ko: "몇 시부터 입실할 수 있나요?",
-    en: "What time can I ___ in?",
-    accept: ["get"],
-    hint: "들어간다는 뜻을 만드는 기본 동사",
-    note: "get in은 방에 들어갈 수 있는 시각을 뜻합니다."
+    ko: "방은 몇 시부터 쓸 수 있나요?",
+    en: "What time is the room ___?",
+    accept: ["ready"],
+    hint: "준비가 끝났다는 뜻의 형용사",
+    note: "청소가 끝나 입실 가능한 상태를 ready라고 합니다."
   },
   {
     id: "travel-hotel-53",
