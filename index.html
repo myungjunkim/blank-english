@@ -3,7 +3,9 @@
 <head>
 <meta charset="utf-8">
 <!-- interactive-widget=resizes-content: 키보드가 올라오면 레이아웃 자체를 줄여
-     하단 고정 바가 키보드에 가려지지 않게 합니다. -->
+     하단 고정 바가 키보드에 가려지지 않게 합니다.
+     크롬(안드로이드) 전용입니다. 아이폰 사파리는 이 값을 무시하므로
+     아래 liftBarAboveKeyboard가 visualViewport로 직접 끌어올립니다. -->
 <meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content">
 <title>영어회화 빈칸 채우기</title>
 <meta name="theme-color" content="#faf9f7">
@@ -477,6 +479,9 @@ ul { list-style: none; margin: 0; padding: 0; }
   position: fixed;
   inset: auto 0 0 0;
   padding: var(--sp-4);
+  /* 아이폰 홈 인디케이터 영역만큼 아래를 더 띄웁니다.
+     그러지 않으면 버튼이 인디케이터에 겹치고 쓸어올리기와 부딪힙니다. */
+  padding-bottom: calc(var(--sp-4) + env(safe-area-inset-bottom, 0px));
   background: var(--bg);
   box-shadow: var(--shadow-bar);
 }
@@ -1564,6 +1569,25 @@ function keepBlankVisible(input) {
   input.scrollIntoView({ block: "center", behavior: reduce ? "auto" : "smooth" });
 }
 
+// 아이폰 사파리는 키보드가 올라와도 레이아웃 높이가 그대로라, 화면 아래에
+// 고정한 바가 키보드 뒤로 숨습니다. 보이는 영역(visualViewport)과의 차이만큼
+// 바를 위로 올려 줍니다.
+// 안드로이드 크롬은 레이아웃이 함께 줄어 차이가 0이므로 아무 일도 하지 않습니다.
+function liftBarAboveKeyboard() {
+  const view = window.visualViewport;
+  if (!view) return;
+
+  const bar = el("action-bar");
+  const apply = () => {
+    const covered = window.innerHeight - view.height - view.offsetTop;
+    bar.style.transform = covered > 24 ? "translateY(" + -Math.round(covered) + "px)" : "";
+  };
+
+  view.addEventListener("resize", apply);
+  view.addEventListener("scroll", apply);
+  apply();
+}
+
 function onBlankInput(event) {
   const input = event.target;
   const filled = input.value.trim().length > 0;
@@ -1903,6 +1927,7 @@ function boot() {
 }
 
 boot();
+liftBarAboveKeyboard();
 
 // 서비스워커 등록. file://로 열면 지원되지 않으므로 조용히 넘어갑니다.
 if ("serviceWorker" in navigator) {
