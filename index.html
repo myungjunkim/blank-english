@@ -430,6 +430,35 @@ ul { list-style: none; margin: 0; padding: 0; }
 
 .result-note { color: var(--text-muted); font-size: var(--size-15); }
 
+/* ── 발음과 단어 뜻 ─────────────────────────── */
+.pron {
+  margin-top: var(--sp-4);
+  padding-top: var(--sp-4);
+  border-top: var(--border-hairline) solid var(--rule);
+}
+.pron-ipa {
+  font-family: var(--font-serif);
+  font-size: var(--size-15);
+  color: var(--text-muted);
+  word-break: normal;
+}
+.pron-ko {
+  margin-top: var(--sp-1);
+  font-size: var(--size-15);
+  color: var(--text);
+}
+.pron-words {
+  margin-top: var(--sp-3);
+  font-size: var(--size-13);
+  color: var(--text-muted);
+}
+.pron-words b {
+  font-family: var(--font-serif);
+  font-weight: var(--weight-bold);
+  color: var(--text);
+}
+.pron-words .sep { padding: 0 var(--sp-1); color: var(--rule-strong); }
+
 /* ═══════════════════════════════════════════════════════════
    하단 고정 바 — 한 손 엄지 범위. 유일하게 그림자를 쓰는 곳
    ═══════════════════════════════════════════════════════════ */
@@ -635,6 +664,12 @@ ul { list-style: none; margin: 0; padding: 0; }
         <p class="result-head" id="result-head"></p>
         <p class="result-answer" id="result-answer" hidden></p>
         <p class="result-note" id="result-note"></p>
+
+        <div class="pron" id="pron" hidden>
+          <p class="pron-ipa" id="pron-ipa"></p>
+          <p class="pron-ko" id="pron-ko"></p>
+          <p class="pron-words" id="pron-words"></p>
+        </div>
       </div>
     </form>
 
@@ -672,6 +707,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 </div>
 
 <script src="sentences.js" onerror="window.__loadFailed = true"></script>
+<script src="words.js" onerror="window.__wordsFailed = true"></script>
 <script>
 "use strict";
 
@@ -698,6 +734,207 @@ const BLANK_SLACK_CH = 3;
 const BLANK_MAX_CH = 18;
 
 const el = (id) => document.getElementById(id);
+
+/* ═══════════════════════════════════════════════════════════
+   발음 기호 → 한글
+   ═══════════════════════════════════════════════════════════ */
+// 발음 기호(IPA)를 한글로 옮깁니다.
+//
+// 영어 소리를 한글로 정확히 적는 것은 불가능합니다. th, r/l, f/v 같은 소리는
+// 한글에 대응하는 글자가 없습니다. 이 변환은 근사값이고, 발음 기호를 읽지 못하는
+// 학습자가 대강의 소리를 잡도록 돕는 용도입니다.
+//
+// 규칙은 국립국어원 외래어 표기법을 따릅니다.
+//   · 어말·자음 앞 무성파열음(p t k): 짧은 모음 뒤면 받침, 아니면 프/트/크
+//   · 유성파열음(b d g): 언제나 브/드/그
+//   · 마찰음(s z f v θ ð): 어말·자음 앞에서 스/즈/프/브/스/드
+//   · 비음·유음(m n ŋ l): 받침 ㅁ/ㄴ/ㅇ/ㄹ
+//   · 반모음(j w): 뒤 모음과 합쳐 한 글자로
+
+const ONSET = ["ㄱ","ㄲ","ㄴ","ㄷ","ㄸ","ㄹ","ㅁ","ㅂ","ㅃ","ㅅ","ㅆ","ㅇ","ㅈ","ㅉ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"];
+const NUCLEUS = ["ㅏ","ㅐ","ㅑ","ㅒ","ㅓ","ㅔ","ㅕ","ㅖ","ㅗ","ㅘ","ㅙ","ㅚ","ㅛ","ㅜ","ㅝ","ㅞ","ㅟ","ㅠ","ㅡ","ㅢ","ㅣ"];
+const CODA = ["","ㄱ","ㄲ","ㄳ","ㄴ","ㄵ","ㄶ","ㄷ","ㄹ","ㄺ","ㄻ","ㄼ","ㄽ","ㄾ","ㄿ","ㅀ","ㅁ","ㅂ","ㅄ","ㅅ","ㅆ","ㅇ","ㅈ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"];
+
+function syllable(onset, nucleus, coda) {
+  const o = ONSET.indexOf(onset), n = NUCLEUS.indexOf(nucleus), c = CODA.indexOf(coda || "");
+  if (o < 0 || n < 0 || c < 0) return "";
+  return String.fromCharCode(0xAC00 + (o * 21 + n) * 28 + c);
+}
+
+/* ── 소리 표 ─────────────────────────────────── */
+
+// 모음: [한글 모음, 이중모음 꼬리]
+const VOWELS = {
+  "iː": ["ㅣ"], "i": ["ㅣ"], "ɪ": ["ㅣ"], "ɨ": ["ㅣ"],
+  "eɪ": ["ㅔ", "이"], "e": ["ㅔ"], "ɛ": ["ㅔ"], "æ": ["ㅐ"],
+  "ɑː": ["ㅏ"], "ɑ": ["ㅏ"], "ɒ": ["ㅗ"], "a": ["ㅏ"],
+  "ʌ": ["ㅓ"], "ə": ["ㅓ"], "ɜː": ["ㅓ"], "ɜ": ["ㅓ"], "ɝ": ["ㅓ"], "ɚ": ["ㅓ"],
+  "ɔː": ["ㅗ"], "ɔ": ["ㅗ"], "oʊ": ["ㅗ"], "əʊ": ["ㅗ"], "o": ["ㅗ"], "oː": ["ㅗ"],
+  "uː": ["ㅜ"], "u": ["ㅜ"], "ʊ": ["ㅜ"], "ʉː": ["ㅜ"], "ʉ": ["ㅜ"],
+  "ɐ": ["ㅓ"], "ɘ": ["ㅓ"], "ɞ": ["ㅓ"], "ä": ["ㅏ"], "ŏ": ["ㅗ"],
+  "aɪ": ["ㅏ", "이"], "aʊ": ["ㅏ", "우"], "ɔɪ": ["ㅗ", "이"],
+  "ɪə": ["ㅣ", "어"], "eə": ["ㅔ", "어"], "ʊə": ["ㅜ", "어"], "ɛə": ["ㅔ", "어"], "ɑɪ": ["ㅏ", "이"]
+};
+
+// 반모음 + 모음 → 한 글자로 합쳐지는 모음
+const GLIDE = {
+  "j": { "ㅏ": "ㅑ", "ㅓ": "ㅕ", "ㅗ": "ㅛ", "ㅜ": "ㅠ", "ㅔ": "ㅖ", "ㅐ": "ㅒ", "ㅣ": "ㅣ", "ㅡ": "ㅣ" },
+  "w": { "ㅏ": "ㅘ", "ㅓ": "ㅝ", "ㅗ": "ㅝ", "ㅜ": "ㅜ", "ㅔ": "ㅞ", "ㅐ": "ㅙ", "ㅣ": "ㅟ", "ㅡ": "ㅜ" }
+};
+
+// 자음: [초성, 받침, 홀로 설 때]
+const CONSONANTS = {
+  "p": ["ㅍ", "ㅂ", "프"], "t": ["ㅌ", "ㅅ", "트"], "k": ["ㅋ", "ㄱ", "크"],
+  "b": ["ㅂ", null, "브"], "d": ["ㄷ", null, "드"], "g": ["ㄱ", null, "그"], "ɡ": ["ㄱ", null, "그"],
+  "f": ["ㅍ", null, "프"], "v": ["ㅂ", null, "브"],
+  "θ": ["ㅅ", null, "스"], "ð": ["ㄷ", null, "드"],
+  "s": ["ㅅ", null, "스"], "z": ["ㅈ", null, "즈"],
+  "ʃ": ["ㅅ", null, "시"], "ʒ": ["ㅈ", null, "지"],
+  "tʃ": ["ㅊ", null, "치"], "dʒ": ["ㅈ", null, "지"],
+  "m": ["ㅁ", "ㅁ", "므"], "n": ["ㄴ", "ㄴ", "느"], "ŋ": ["ㅇ", "ㅇ", "응"],
+  "l": ["ㄹ", "ㄹ", "르"], "ɫ": ["ㄹ", "ㄹ", "르"],
+  "r": ["ㄹ", null, ""], "ɹ": ["ㄹ", null, ""], "ɾ": ["ㄹ", null, "르"],
+  "h": ["ㅎ", null, "흐"], "x": ["ㅎ", null, "흐"]
+};
+
+// 짧은 모음 — 이 뒤의 p/t/k는 받침으로 적습니다
+const SHORT = new Set(["ɪ", "e", "ɛ", "æ", "ʌ", "ə", "ɒ", "ʊ", "i", "u", "ɑ", "a", "o", "ɔ"]);
+
+// 유음·비음 — 짧은 모음과 이 소리들 사이의 p/t/k는 받침으로 적지 않습니다
+const LIQUID = new Set(["l", "ɫ", "r", "ɹ", "ɾ", "m", "n", "ŋ"]);
+
+const VOWEL_KEYS = Object.keys(VOWELS).sort((a, b) => b.length - a.length);
+const CONSONANT_KEYS = Object.keys(CONSONANTS).sort((a, b) => b.length - a.length);
+
+/* ── 낱소리로 쪼개기 ─────────────────────────── */
+function parse(ipa) {
+  // 강세·음절 구분과 세부 발음을 나타내는 보조 기호는 버립니다.
+  // ̯ ̩ ̚ ʰ 같은 것은 한글로 옮길 수 없고, 있어도 소리를 잡는 데 도움이 되지 않습니다.
+  // 장음 기호 ː(U+02D0)는 모음 길이를 가르므로 남기고, 나머지 보조 기호만 지웁니다.
+  const text = ipa
+    .replace(/[̀-ͯʰ-ˏˑ-˿]/g, "")
+    .replace(/[.\/\[\]()|‿]/g, "")
+    .trim();
+  const units = [];
+  let i = 0;
+  while (i < text.length) {
+    if (text[i] === " " || text[i] === "-") { units.push({ t: "sp" }); i += 1; continue; }
+    if (text[i] === "j" || text[i] === "w" || text[i] === "ʍ") {
+      units.push({ t: "glide", v: text[i] === "ʍ" ? "w" : text[i] }); i += 1; continue;
+    }
+
+    const v = VOWEL_KEYS.find((k) => text.startsWith(k, i));
+    if (v) { units.push({ t: "v", v: VOWELS[v], raw: v }); i += v.length; continue; }
+
+    const c = CONSONANT_KEYS.find((k) => text.startsWith(k, i));
+    if (c) { units.push({ t: "c", v: CONSONANTS[c], raw: c }); i += c.length; continue; }
+
+    i += 1;   // 모르는 기호는 버립니다
+  }
+  return units;
+}
+
+/* ── 한글로 조립 ─────────────────────────────── */
+function ipaToHangul(ipa) {
+  if (!ipa) return "";
+  const units = parse(ipa);
+  let out = "";
+  let onset = null;         // 다음 모음에 붙일 초성
+  let lastVowel = null;     // 직전 모음(받침 판단용)
+  let standalone = false;   // 직전에 홀로 적은 자음인지(플라의 ㄹ 받침 판단용)
+
+  const attachCoda = (coda) => {
+    if (!coda || !out) return false;
+    const code = out.charCodeAt(out.length - 1) - 0xAC00;
+    if (code < 0 || code % 28 !== 0) return false;
+    out = out.slice(0, -1) + String.fromCharCode(0xAC00 + code + CODA.indexOf(coda));
+    return true;
+  };
+
+  // 마지막 글자의 가운뎃소리만 바꿉니다
+  const changeNucleus = (nucleus) => {
+    if (!out) return;
+    const code = out.charCodeAt(out.length - 1) - 0xAC00;
+    if (code < 0 || code % 28 !== 0) return;
+    const onsetIndex = Math.floor(code / (21 * 28));
+    out = out.slice(0, -1) +
+      String.fromCharCode(0xAC00 + (onsetIndex * 21 + NUCLEUS.indexOf(nucleus)) * 28);
+  };
+
+  const flushOnset = () => {
+    if (!onset) return;
+    out += onset[2] || "";
+    onset = null;
+  };
+
+  for (let k = 0; k < units.length; k++) {
+    const u = units[k];
+
+    if (u.t === "sp") { flushOnset(); out += " "; lastVowel = null; continue; }
+
+    if (u.t === "glide") {
+      const next = units[k + 1];
+      // 자음 뒤의 w는 음절을 갈라 적습니다. switch → 스위치 (단 g·k·h 뒤는 붙여서 quick → 퀵)
+      if (u.v === "w" && onset && !["ㄱ", "ㅋ", "ㅎ"].includes(onset[0])) flushOnset();
+      if (next && next.t === "v") {
+        const merged = GLIDE[u.v][next.v[0]];
+        if (merged) {
+          out += syllable(onset ? onset[0] : "ㅇ", merged, "");
+          if (next.v[1]) out += next.v[1];
+          onset = null;
+          lastVowel = next.raw;
+          k += 1;
+          continue;
+        }
+      }
+      flushOnset();
+      out += u.v === "j" ? "이" : "우";
+      continue;
+    }
+
+    if (u.t === "c") {
+      const next = units[k + 1];
+      if (next && (next.t === "v" || next.t === "glide")) {
+        flushOnset();
+        // 모음 앞의 l은 앞 글자에 ㄹ 받침을 더해 ㄹㄹ로 적습니다. flight → 플라이트, family → 패멀리
+        if (["l", "ɫ"].includes(u.raw) && (standalone || lastVowel)) attachCoda("ㄹ");
+        // ʃ·ʒ는 뒤 모음을 구개음화합니다. station → 스테이션
+        if (["ʃ", "ʒ"].includes(u.raw) && next.t === "v") {
+          const soft = GLIDE["j"][next.v[0]];
+          if (soft) {
+            out += syllable(u.v[0], soft, "");
+            if (next.v[1]) out += next.v[1];
+            lastVowel = next.raw; standalone = false; k += 1; continue;
+          }
+        }
+        onset = u.v; standalone = false; continue;
+      }
+
+      // 뒤에 모음이 없습니다. 받침으로 붙일지 따로 적을지 정합니다.
+      flushOnset();
+      // 어말 -əl은 '-을'이 아니라 'ㅡ+ㄹ'로 적습니다. table → 테이블, little → 리틀
+      if (["l", "ɫ"].includes(u.raw) && !next && lastVowel === "ə") changeNucleus("ㅡ");
+      const canCoda = u.v[1] && (["m", "n", "ŋ", "l", "ɫ"].includes(u.raw) ||
+        (["p", "t", "k"].includes(u.raw) && lastVowel && SHORT.has(lastVowel) &&
+          (!next || (next.t === "c" && !LIQUID.has(next.raw)))));
+      if (canCoda && attachCoda(u.v[1])) { lastVowel = null; standalone = false; continue; }
+      out += u.v[2] || "";
+      lastVowel = null;
+      standalone = Boolean(u.v[2]);
+      continue;
+    }
+
+    // 모음
+    out += syllable(onset ? onset[0] : "ㅇ", u.v[0], "");
+    if (u.v[1]) out += u.v[1];
+    onset = null;
+    lastVowel = u.raw;
+    standalone = false;
+  }
+  flushOnset();
+  return out.replace(/\s+/g, " ").trim();
+}
+
 
 let session = null;
 let sizeCategory = null;
@@ -1262,6 +1499,7 @@ function renderResult(input) {
 
   el("result-note").textContent = sentence.note || "";
   el("result-note").hidden = !sentence.note;
+  renderPronunciation(sentence);
   result.hidden = false;
 
   el("hint").hidden = true;
@@ -1299,6 +1537,57 @@ function renderResult(input) {
 
   setActions(actions);
   el("btn-next").focus();
+}
+
+/* ── 발음과 단어 뜻 ─────────────────────────────
+   words.js에 담긴 발음 기호와 뜻을 씁니다. 사전에 없어 발음을 못 구한 단어는
+   그 자리만 비우고 나머지를 보여줍니다. */
+function renderPronunciation(sentence) {
+  const box = el("pron");
+  if (typeof WORDS === "undefined") { box.hidden = true; return; }
+
+  const full = sentence.en.replace(BLANK, sentence.accept[0]);
+  const tokens = full.match(/[A-Za-z]+(?:['-][A-Za-z]+)*/g) || [];
+
+  const ipaParts = [];
+  const koParts = [];
+  const seen = new Set();
+  const glosses = [];
+
+  for (const token of tokens) {
+    const key = token.toLowerCase();
+    const entry = WORDS[key];
+    if (entry && entry.ipa) {
+      ipaParts.push(entry.ipa);
+      koParts.push(ipaToHangul(entry.ipa));
+    }
+    if (entry && entry.ko && !seen.has(key)) {
+      seen.add(key);
+      glosses.push({ word: token, ko: entry.ko });
+    }
+  }
+
+  el("pron-ipa").textContent = ipaParts.length ? "/" + ipaParts.join(" ") + "/" : "";
+  el("pron-ipa").hidden = ipaParts.length === 0;
+  el("pron-ko").textContent = koParts.join(" ");
+  el("pron-ko").hidden = koParts.length === 0;
+
+  const list = el("pron-words");
+  list.textContent = "";
+  glosses.forEach((g, i) => {
+    if (i > 0) {
+      const sep = document.createElement("span");
+      sep.className = "sep";
+      sep.textContent = "·";
+      list.appendChild(sep);
+    }
+    const word = document.createElement("b");
+    word.textContent = g.word;
+    list.append(word, document.createTextNode(" " + g.ko + " "));
+  });
+  list.hidden = glosses.length === 0;
+
+  box.hidden = ipaParts.length === 0 && glosses.length === 0;
 }
 
 function verdictIcon(correct) {
