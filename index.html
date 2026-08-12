@@ -499,6 +499,9 @@ ul { list-style: none; margin: 0; padding: 0; }
 .skeleton.is-medium { width: 70%; }
 @keyframes pulse { 50% { opacity: .45; } }
 
+.resume-card { margin-bottom: var(--sp-6); }
+.resume-actions { display: flex; gap: var(--sp-2); flex-wrap: wrap; }
+
 .resume-note {
   margin-bottom: var(--sp-5);
   padding: var(--sp-3) var(--sp-4);
@@ -560,6 +563,17 @@ ul { list-style: none; margin: 0; padding: 0; }
   <section id="screen-category" hidden>
     <div class="screen-head"><h1>영어회화 빈칸 채우기</h1></div>
     <p class="page-intro">주제를 고르고 원하는 만큼 풀어 보세요. 첫 시도에 맞춘 문장은 완료되어 다시 나오지 않습니다.</p>
+
+    <!-- 앱이 갑자기 닫혔을 때만 나타납니다. 뒤로가기로 나온 경우에는 세션을 지우므로 뜨지 않습니다. -->
+    <div id="resume-card" class="notice resume-card" hidden>
+      <h2>풀던 문제가 남아 있습니다</h2>
+      <p id="resume-detail"></p>
+      <div class="resume-actions">
+        <button type="button" class="btn btn-primary" id="btn-resume">이어서 풀기</button>
+        <button type="button" class="btn btn-quiet" id="btn-discard">새로 시작</button>
+      </div>
+    </div>
+
     <ul id="category-list" class="category-list"></ul>
     <div id="category-empty" class="notice" hidden>
       <h2>아직 문장이 없습니다</h2>
@@ -763,6 +777,24 @@ function clearSavedSession() {
   try { localStorage.removeItem(STORAGE_KEY); } catch (error) {}
 }
 
+// 저장된 세션을 적용하지 않고 내용만 들여다봅니다. 첫 화면에서 이어할지 물어볼 때 씁니다.
+function peekSavedSession() {
+  let data = null;
+  try { data = JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch (error) { return null; }
+  if (!data || !data.categoryKey || !(data.sessionSize > 0)) return null;
+
+  const byId = new Map(SENTENCES.map((s) => [s.id, s]));
+  const left = (data.queue || []).filter((id) => byId.has(id)).length;
+  if (left === 0) return null;
+
+  return {
+    categoryKey: data.categoryKey,
+    name: CATEGORY_NAMES[data.categoryKey] || data.categoryKey,
+    left: left,
+    size: data.sessionSize
+  };
+}
+
 function restoreSession() {
   let data = null;
   try { data = JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch (error) { return false; }
@@ -842,6 +874,20 @@ function announce(message) {
   el("live-region").textContent = message;
 }
 
+/* ── 안드로이드 뒤로가기 ──────────────────────────
+   첫 화면을 벗어날 때 방문 기록을 하나 쌓아둡니다. 그래야 뒤로가기가
+   앱을 곧장 닫지 않고 첫 화면으로 돌아옵니다. */
+function pushScreenState() {
+  if (history.state && history.state.inApp) return;
+  history.pushState({ inApp: true }, "");
+}
+
+window.addEventListener("popstate", () => {
+  // 이미 첫 화면이면 그대로 둡니다. 이때의 뒤로가기는 앱을 닫습니다.
+  if (!el("screen-category").hidden) return;
+  renderCategoryScreen();   // 풀던 세션은 버립니다
+});
+
 /* ═══════════════════════════════════════════════════════════
    ① 카테고리
    ═══════════════════════════════════════════════════════════ */
@@ -896,11 +942,22 @@ function buildMeter(done, total, label) {
   return wrap;
 }
 
-function renderCategoryScreen() {
+// keepSaved가 참이면 저장된 세션을 지우지 않고, 이어할지 묻는 카드를 띄웁니다.
+// 앱을 처음 열 때만 참이고, 뒤로가기나 돌아가기로 올 때는 거짓이라 세션이 지워집니다.
+function renderCategoryScreen(keepSaved) {
   session = null;
   sizeCategory = null;
   justResumed = false;
-  clearSavedSession();
+
+  const saved = keepSaved === true ? peekSavedSession() : null;
+  if (!saved) clearSavedSession();
+
+  const card = el("resume-card");
+  card.hidden = !saved;
+  if (saved) {
+    el("resume-detail").textContent =
+      saved.name + " · " + saved.size + "문장 중 " + saved.left + "문장이 남았습니다.";
+  }
 
   const progress = loadProgress();
   const categories = listCategories(progress);
@@ -979,6 +1036,7 @@ function renderSizeScreen(categoryKey) {
 
   hideResetConfirm();
   setActions(null);
+  pushScreenState();
   showScreen("size");
 }
 
@@ -1103,6 +1161,7 @@ function renderQuiz() {
   setActions([{ id: "btn-grade", label: "채점하기", onClick: grade }]);
   el("btn-grade").disabled = true;
 
+  pushScreenState();
   showScreen("quiz");
   input.focus({ preventScroll: true });
   keepBlankVisible(input);
@@ -1362,9 +1421,15 @@ el("quiz-form").addEventListener("submit", (event) => {
   if (blanks.every((b) => b.value.trim())) grade();
 });
 
-el("btn-exit").addEventListener("click", renderCategoryScreen);
-el("btn-size-back").addEventListener("click", renderCategoryScreen);
-el("btn-empty-back").addEventListener("click", renderCategoryScreen);
+el("btn-exit").addEventListener("click", () => renderCategoryScreen());
+el("btn-size-back").addEventListener("click", () => renderCategoryScreen());
+el("btn-empty-back").addEventListener("click", () => renderCategoryScreen());
+
+el("btn-resume").addEventListener("click", () => {
+  if (restoreSession()) { pushScreenState(); renderQuiz(); }
+  else renderCategoryScreen();
+});
+el("btn-discard").addEventListener("click", () => renderCategoryScreen());
 el("btn-retry-load").addEventListener("click", (event) => {
   event.currentTarget.dataset.loading = "true";
   location.reload();
@@ -1389,11 +1454,8 @@ function boot() {
     showScreen("error");
     return;
   }
-  if (restoreSession()) {
-    renderQuiz();
-  } else {
-    renderCategoryScreen();
-  }
+  // 앱을 열면 언제나 첫 화면입니다. 풀던 것이 남아 있으면 이어할지 물어봅니다.
+  renderCategoryScreen(true);
 }
 
 boot();
