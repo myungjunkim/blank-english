@@ -7168,10 +7168,10 @@ const SENTENCES = [
   {
     id: "travel-out-195",
     category: "travel-out",
-    ko: "여기가 어디쯤이에요?",
-    en: "Where ___ we right now?",
-    accept: ["are"],
-    hint: "be동사의 현재형",
+    ko: "여기가 어느 동네예요?",
+    en: "What ___ are we in?",
+    accept: ["area", "neighborhood"],
+    hint: "동네나 구역을 뜻하는 명사",
     note: "지도를 보여주며 물으면 훨씬 빨리 통합니다."
   },
   {
@@ -8131,11 +8131,11 @@ const SENTENCES = [
   {
     id: "daily-request-102",
     category: "daily-request",
-    ko: "부탁 하나 드려도 될까요?",
-    en: "___ you mind doing me a favor?",
-    accept: ["Would"],
-    hint: "정중하게 물을 때 문장 앞에 오는 조동사",
-    note: "Would you mind는 Could you보다 조심스러운 말투입니다."
+    ko: "염치없지만 부탁 하나 드릴게요.",
+    en: "I hate to ___, but could you help me?",
+    accept: ["impose"],
+    hint: "남에게 부담을 지운다는 뜻의 동사",
+    note: "I hate to impose는 폐를 끼쳐 미안하다는 뜻으로 부탁 앞에 붙입니다."
   },
   {
     id: "daily-request-103",
@@ -8464,11 +8464,11 @@ const SENTENCES = [
   {
     id: "daily-request-139",
     category: "daily-request",
-    ko: "제가 뭘 하면 될까요?",
-    en: "___ can I do?",
-    accept: ["What"],
-    hint: "무엇인지를 묻는 의문사",
-    note: "돕겠다고 나설 때 쓰는 짧은 말입니다."
+    ko: "제가 뭘 하면 될지 말씀해 주세요.",
+    en: "Just tell me what you ___ me to do.",
+    accept: ["want"],
+    hint: "원한다는 뜻의 동사",
+    note: "want someone to do는 남에게 무엇을 시킬 때 쓰는 기본 꼴입니다."
   },
   {
     id: "daily-request-140",
@@ -8518,11 +8518,11 @@ const SENTENCES = [
   {
     id: "daily-request-145",
     category: "daily-request",
-    ko: "급한 건 아니에요.",
-    en: "It's ___ urgent.",
-    accept: ["not"],
-    hint: "부정을 만드는 말",
-    note: "부탁하면서 이 말을 덧붙이면 부담이 줄어듭니다."
+    ko: "편하실 때 주셔도 돼요.",
+    en: "Whenever is ___ for you.",
+    accept: ["convenient"],
+    hint: "때가 알맞고 부담이 없다는 뜻의 형용사",
+    note: "이 말을 덧붙이면 재촉하지 않는다는 뜻이 됩니다."
   },
   {
     id: "daily-request-146",
@@ -9013,11 +9013,11 @@ const SENTENCES = [
   {
     id: "daily-request-200",
     category: "daily-request",
-    ko: "제가 있잖아요.",
-    en: "I've ___ your back.",
-    accept: ["got"],
-    hint: "가지다의 과거분사",
-    note: "I've got your back은 뒤를 봐주겠다, 즉 편이 되어주겠다는 뜻입니다."
+    ko: "제가 편이 되어드릴게요.",
+    en: "I'm on your ___.",
+    accept: ["side"],
+    hint: "어느 한쪽을 뜻하는 명사",
+    note: "on your side는 편을 들어주겠다는 뜻입니다. I've got your back도 같은 뜻입니다."
   },
   {
     id: "daily-opinion-101",
@@ -9040,11 +9040,11 @@ const SENTENCES = [
   {
     id: "daily-opinion-103",
     category: "daily-opinion",
-    ko: "일리가 있네요.",
-    en: "You ___ a point.",
-    accept: ["have"],
-    hint: "가지고 있다는 뜻의 기본 동사",
-    note: "완전히 동의하지 않아도 상대 말에 근거가 있다고 인정할 때 씁니다."
+    ko: "그건 인정해요.",
+    en: "I'll give you ___.",
+    accept: ["that"],
+    hint: "앞에 나온 말을 가리키는 낱말",
+    note: "I'll give you that은 다른 건 몰라도 그 점은 인정한다는 뜻입니다."
   },
   {
     id: "daily-opinion-104",
@@ -9292,11 +9292,11 @@ const SENTENCES = [
   {
     id: "daily-opinion-131",
     category: "daily-opinion",
-    ko: "제 잘못이 아니에요.",
-    en: "It's not ___ fault.",
-    accept: ["my"],
-    hint: "'나의'에 해당하는 말",
-    note: "선을 그을 때는 이렇게 짧게 말합니다."
+    ko: "저는 아무 상관 없어요.",
+    en: "I had nothing to do with ___.",
+    accept: ["it"],
+    hint: "앞에 나온 일을 가리키는 말",
+    note: "have nothing to do with는 그 일과 아무 관련이 없다는 뜻입니다."
   },
   {
     id: "daily-opinion-132",
@@ -9445,11 +9445,11 @@ const SENTENCES = [
   {
     id: "daily-opinion-148",
     category: "daily-opinion",
-    ko: "틀릴 수도 있어요.",
-    en: "I ___ be wrong.",
-    accept: ["could"],
-    hint: "'~일 수도 있다'를 만드는 조동사",
-    note: "I could be wrong을 덧붙이면 여지를 남기게 됩니다."
+    ko: "제가 잘못 알고 있을 수도 있어요.",
+    en: "I might be ___.",
+    accept: ["mistaken"],
+    hint: "잘못 알고 있다는 뜻의 형용사",
+    note: "I might be mistaken은 I could be wrong보다 조금 더 정중합니다."
   },
   {
     id: "daily-opinion-149",
@@ -10012,10 +10012,10 @@ const SENTENCES = [
   {
     id: "travel-airport-111",
     category: "travel-airport",
-    ko: "배터리는 기내에 들고 타야 하나요?",
-    en: "Do batteries have to ___ in my carry-on bag?",
-    accept: ["go"],
-    hint: "들어간다는 뜻의 기본 동사",
+    ko: "보조 배터리는 기내에 들고 타야 하나요?",
+    en: "Do ___ have to go in my carry-on bag?",
+    accept: ["batteries"],
+    hint: "전기를 담아두는 작은 통을 뜻하는 복수 명사",
     note: "보조 배터리는 부치는 짐에 넣을 수 없습니다."
   },
   {
@@ -10201,11 +10201,11 @@ const SENTENCES = [
   {
     id: "travel-airport-132",
     category: "travel-airport",
-    ko: "지금 탑승 중인가요?",
-    en: "___ they boarding yet?",
-    accept: ["Are"],
-    hint: "be동사의 현재형. 의문문 맨 앞에 옵니다",
-    note: "게이트 직원에게 짧게 물을 때 씁니다."
+    ko: "탑승 안내 방송이 나왔나요?",
+    en: "Has the boarding ___ been made?",
+    accept: ["announcement"],
+    hint: "여러 사람에게 알리는 말",
+    note: "공항에서 나오는 방송을 announcement라고 합니다."
   },
   {
     id: "travel-airport-133",
@@ -10633,11 +10633,11 @@ const SENTENCES = [
   {
     id: "travel-airport-180",
     category: "travel-airport",
-    ko: "세관 신고할 물건이 있습니다.",
-    en: "I ___ something to declare.",
-    accept: ["have"],
-    hint: "가지고 있다는 뜻의 기본 동사",
-    note: "정해진 금액을 넘는 물건은 반드시 신고해야 합니다."
+    ko: "세관 신고서는 어디에 내나요?",
+    en: "Where do I ___ in the customs form?",
+    accept: ["turn", "hand"],
+    hint: "in과 붙어 서류를 제출한다는 뜻이 되는 동사",
+    note: "turn in과 hand in 모두 서류를 낸다는 뜻입니다."
   },
   {
     id: "travel-airport-181",
@@ -10849,10 +10849,10 @@ const SENTENCES = [
   {
     id: "travel-hotel-104",
     category: "travel-hotel",
-    ko: "조식 포함으로 예약했는데요.",
-    en: "I booked the room ___ breakfast included.",
-    accept: ["with"],
-    hint: "함께 딸려 있다는 뜻의 전치사",
+    ko: "조식이 포함된 요금으로 예약했어요.",
+    en: "I booked the rate that ___ breakfast.",
+    accept: ["includes"],
+    hint: "포함한다는 뜻의 동사. 주어가 단수입니다",
     note: "예약 확인 메일을 보여주면 확실합니다."
   },
   {
@@ -12010,10 +12010,10 @@ const SENTENCES = [
   {
     id: "daily-people-133",
     category: "daily-people",
-    ko: "혼자 있는 게 편해요.",
-    en: "I prefer ___ on my own.",
-    accept: ["being"],
-    hint: "'~이다'를 뜻하는 동사의 -ing형",
+    ko: "혼자 있는 게 더 편해요.",
+    en: "I'm more ___ on my own.",
+    accept: ["comfortable"],
+    hint: "마음이 편하다는 뜻의 형용사",
     note: "on my own은 혼자라는 뜻입니다."
   },
   {
@@ -12145,11 +12145,11 @@ const SENTENCES = [
   {
     id: "daily-people-148",
     category: "daily-people",
-    ko: "저도 그렇게 되고 싶어요.",
-    en: "I want to ___ like him.",
-    accept: ["be"],
-    hint: "'~이다'를 뜻하는 기본 동사",
-    note: "be like someone은 그 사람처럼 되고 싶다는 뜻입니다."
+    ko: "저도 그분처럼 되고 싶어요.",
+    en: "I want to ___ in his footsteps.",
+    accept: ["follow"],
+    hint: "뒤를 따라간다는 뜻의 동사",
+    note: "follow in someone's footsteps는 그 사람이 걸어간 길을 따라간다는 뜻입니다."
   },
   {
     id: "daily-people-149",
