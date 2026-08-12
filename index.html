@@ -393,6 +393,15 @@ ul { list-style: none; margin: 0; padding: 0; }
   font-size: var(--size-15);
 }
 
+/* 첫글자를 본 문장에만 뜨는 안내 */
+.reveal-note {
+  max-width: var(--measure);
+  margin-top: var(--sp-2);
+  padding-left: var(--sp-3);
+  color: var(--text-muted);
+  font-size: var(--size-13);
+}
+
 /* ── 채점 결과 ─────────────────────────────── */
 .result {
   max-width: var(--measure);
@@ -661,6 +670,7 @@ ul { list-style: none; margin: 0; padding: 0; }
       <p class="prompt-ko" id="prompt-ko"></p>
       <p class="sentence" id="sentence"></p>
       <p class="hint" id="hint"></p>
+      <p class="reveal-note" id="reveal-note" hidden>첫글자를 봤으므로 이 문장은 완료로 기록되지 않습니다.</p>
 
       <div class="result" id="result" hidden>
         <p class="result-head" id="result-head"></p>
@@ -1042,6 +1052,7 @@ function saveSession() {
       sessionSize: session.sessionSize,
       queue: session.queue.map((s) => s.id),
       attempted: [...session.attempted],
+      revealed: [...session.revealed],
       wrong: [...session.wrong],
       completed: [...session.completed],
       firstTryCorrect: session.firstTryCorrect
@@ -1096,6 +1107,7 @@ function restoreSession() {
     sessionSize: sessionSize,
     queue: queue,
     attempted: keepKnown(data.attempted),
+    revealed: keepKnown(data.revealed),
     wrong: keepKnown(data.wrong),
     completed: keepKnown(data.completed),
     firstTryCorrect: Math.min(data.firstTryCorrect || 0, sessionSize),
@@ -1340,6 +1352,7 @@ function startSession(categoryKey, size, explicitPool) {
     sessionSize: picked.length,
     queue: picked,
     attempted: new Set(),   // 이미 채점해 본 문장 (첫 시도 판별용)
+    revealed: new Set(),    // 첫글자를 본 문장 (완료로 치지 않습니다)
     wrong: new Set(),       // 한 번이라도 틀린 문장
     completed: new Set(),   // 이번 세션에서 완료된 문장
     firstTryCorrect: 0,
@@ -1364,7 +1377,16 @@ function hintText(sentence) {
   const lengths = new Set(sentence.accept.map((valid) => valid.trim().length));
   if (lengths.size === 1) parts.push([...lengths][0] + "글자");
 
+  if (session && session.revealed.has(sentence.id)) parts.push(firstLetterText(sentence));
+
   return parts.join(" · ");
+}
+
+// 첫글자 힌트. 정답 후보의 첫글자가 서로 다르면 모두 보여줍니다.
+// 하나만 보여주면 나머지 정답이 틀린 것처럼 읽히기 때문입니다.
+function firstLetterText(sentence) {
+  const letters = [...new Set(sentence.accept.map((valid) => valid.trim()[0].toLowerCase()))];
+  return letters.join(" 또는 ") + "로 시작";
 }
 
 // 정답 후보 중 가장 긴 것을 기준으로 폭을 잡습니다.
@@ -1419,6 +1441,32 @@ function updateMeter() {
   el("quiz-meter-fill").style.width = (solved / session.sessionSize) * 100 + "%";
 }
 
+// 힌트 줄과, 첫글자를 본 경우의 안내를 함께 그립니다
+function renderHint(sentence) {
+  const hint = el("hint");
+  hint.textContent = hintText(sentence);
+  hint.hidden = !hint.textContent;
+
+  const warn = el("reveal-note");
+  warn.hidden = !session.revealed.has(sentence.id);
+}
+
+// 첫글자를 보여줍니다. 본 문장은 맞혀도 완료로 기록하지 않습니다.
+function revealFirstLetter() {
+  const current = session.queue[0];
+  if (session.revealed.has(current.id)) return;
+
+  session.revealed.add(current.id);
+  saveSession();
+  renderHint(current);
+  announce(firstLetterText(current) + ". 이 문장은 완료로 기록되지 않습니다.");
+
+  setActions([{ id: "btn-grade", label: "채점하기", onClick: grade }]);
+  const input = el("blank-1");
+  el("btn-grade").disabled = !input || !input.value.trim();
+  if (input) input.focus({ preventScroll: true });
+}
+
 function renderQuiz() {
   const current = session.queue[0];
   session.graded = null;
@@ -1426,9 +1474,7 @@ function renderQuiz() {
   updateMeter();
   el("prompt-ko").textContent = current.ko;
 
-  const hint = el("hint");
-  hint.textContent = hintText(current);
-  hint.hidden = !hint.textContent;
+  renderHint(current);
 
   el("result").hidden = true;
   el("resume-note").hidden = !justResumed;
@@ -1436,7 +1482,11 @@ function renderQuiz() {
   const input = renderSentence(current);
   input.addEventListener("input", onBlankInput);
 
-  setActions([{ id: "btn-grade", label: "채점하기", onClick: grade }]);
+  const actions = [{ id: "btn-grade", label: "채점하기", onClick: grade }];
+  if (!session.revealed.has(current.id)) {
+    actions.push({ id: "btn-reveal", label: "첫글자 보기", tone: "quiet", onClick: revealFirstLetter });
+  }
+  setActions(actions);
   el("btn-grade").disabled = true;
 
   pushScreenState();
@@ -1477,7 +1527,8 @@ function grade() {
   if (!typed) return;
 
   const correct = isCorrect(typed, current.accept);
-  const firstAttempt = !session.attempted.has(current.id);
+  // 첫글자를 본 문장은 스스로 맞힌 것이 아니므로 완료로 치지 않습니다.
+  const firstAttempt = !session.attempted.has(current.id) && !session.revealed.has(current.id);
   session.attempted.add(current.id);
 
   // 첫 시도에 맞춘 문장만 완료로 기록합니다.
@@ -1544,6 +1595,7 @@ function renderResult(input) {
   result.hidden = false;
 
   el("hint").hidden = true;
+  el("reveal-note").hidden = true;
   el("resume-note").hidden = true;
 
   announce(
