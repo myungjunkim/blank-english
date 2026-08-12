@@ -452,6 +452,8 @@ ul { list-style: none; margin: 0; padding: 0; }
   font-size: var(--size-13);
   color: var(--text-muted);
 }
+/* 강세를 받는 글자 */
+.pron-ko b { font-weight: var(--weight-bold); }
 .pron-words b {
   font-family: var(--font-serif);
   font-weight: var(--weight-bold);
@@ -810,24 +812,33 @@ const CONSONANT_KEYS = Object.keys(CONSONANTS).sort((a, b) => b.length - a.lengt
 function parse(ipa) {
   // 강세·음절 구분과 세부 발음을 나타내는 보조 기호는 버립니다.
   // ̯ ̩ ̚ ʰ 같은 것은 한글로 옮길 수 없고, 있어도 소리를 잡는 데 도움이 되지 않습니다.
-  // 장음 기호 ː(U+02D0)는 모음 길이를 가르므로 남기고, 나머지 보조 기호만 지웁니다.
+  // 장음 ː(U+02D0)는 모음 길이를 가르고 제1강세 ˈ(U+02C8)는 볼드 위치를 잡는 데
+  // 쓰므로 남깁니다. 제2강세 ˌ를 포함한 나머지 보조 기호는 지웁니다.
   const text = ipa
-    .replace(/[̀-ͯʰ-ˏˑ-˿]/g, "")
+    .replace(/[̀-ͯʰ-ˇˉ-ˏˑ-˿]/g, "")
     .replace(/[.\/\[\]()|‿]/g, "")
     .trim();
   const units = [];
   let i = 0;
+  let stress = false;
+  // 강세는 따로 단위로 두지 않고 바로 뒤 소리에 표식으로 답니다.
+  // 단위로 두면 받침을 정할 때 보는 앞뒤 소리가 어긋납니다.
+  const push = (unit) => {
+    if (stress) { unit.stress = true; stress = false; }
+    units.push(unit);
+  };
   while (i < text.length) {
-    if (text[i] === " " || text[i] === "-") { units.push({ t: "sp" }); i += 1; continue; }
+    if (text[i] === " " || text[i] === "-") { push({ t: "sp" }); i += 1; continue; }
+    if (text[i] === "ˈ") { stress = true; i += 1; continue; }
     if (text[i] === "j" || text[i] === "w" || text[i] === "ʍ") {
-      units.push({ t: "glide", v: text[i] === "ʍ" ? "w" : text[i] }); i += 1; continue;
+      push({ t: "glide", v: text[i] === "ʍ" ? "w" : text[i] }); i += 1; continue;
     }
 
     const v = VOWEL_KEYS.find((k) => text.startsWith(k, i));
-    if (v) { units.push({ t: "v", v: VOWELS[v], raw: v }); i += v.length; continue; }
+    if (v) { push({ t: "v", v: VOWELS[v], raw: v }); i += v.length; continue; }
 
     const c = CONSONANT_KEYS.find((k) => text.startsWith(k, i));
-    if (c) { units.push({ t: "c", v: CONSONANTS[c], raw: c }); i += c.length; continue; }
+    if (c) { push({ t: "c", v: CONSONANTS[c], raw: c }); i += c.length; continue; }
 
     i += 1;   // 모르는 기호는 버립니다
   }
@@ -835,13 +846,26 @@ function parse(ipa) {
 }
 
 /* ── 한글로 조립 ─────────────────────────────── */
+// { text, start, end }를 돌려줍니다. start~end는 제1강세를 받는 글자의 자리이고,
+// 강세 기호가 없으면 start가 -1입니다. 받침은 글자를 새로 붙이지 않고 제자리에서
+// 바꾸므로 자리를 기록해 둔 뒤에 받침이 붙어도 범위는 그대로 맞습니다.
 function ipaToHangul(ipa) {
-  if (!ipa) return "";
+  if (!ipa) return { text: "", start: -1, end: -1 };
   const units = parse(ipa);
   let out = "";
   let onset = null;         // 다음 모음에 붙일 초성
   let lastVowel = null;     // 직전 모음(받침 판단용)
   let standalone = false;   // 직전에 홀로 적은 자음인지(플라의 ㄹ 받침 판단용)
+  let pendingStress = false;
+  let start = -1;
+  let end = -1;
+
+  // 강세 뒤 첫 모음이 만든 글자를 표시해 둡니다
+  const markStress = (write) => {
+    const from = out.length;
+    write();
+    if (pendingStress) { start = from; end = out.length; pendingStress = false; }
+  };
 
   const attachCoda = (coda) => {
     if (!coda || !out) return false;
@@ -870,6 +894,8 @@ function ipaToHangul(ipa) {
   for (let k = 0; k < units.length; k++) {
     const u = units[k];
 
+    if (u.stress) pendingStress = true;
+
     if (u.t === "sp") { flushOnset(); out += " "; lastVowel = null; continue; }
 
     if (u.t === "glide") {
@@ -879,8 +905,10 @@ function ipaToHangul(ipa) {
       if (next && next.t === "v") {
         const merged = GLIDE[u.v][next.v[0]];
         if (merged) {
-          out += syllable(onset ? onset[0] : "ㅇ", merged, "");
-          if (next.v[1]) out += next.v[1];
+          markStress(() => {
+            out += syllable(onset ? onset[0] : "ㅇ", merged, "");
+            if (next.v[1]) out += next.v[1];
+          });
           onset = null;
           lastVowel = next.raw;
           k += 1;
@@ -902,8 +930,10 @@ function ipaToHangul(ipa) {
         if (["ʃ", "ʒ"].includes(u.raw) && next.t === "v") {
           const soft = GLIDE["j"][next.v[0]];
           if (soft) {
-            out += syllable(u.v[0], soft, "");
-            if (next.v[1]) out += next.v[1];
+            markStress(() => {
+              out += syllable(u.v[0], soft, "");
+              if (next.v[1]) out += next.v[1];
+            });
             lastVowel = next.raw; standalone = false; k += 1; continue;
           }
         }
@@ -925,14 +955,20 @@ function ipaToHangul(ipa) {
     }
 
     // 모음
-    out += syllable(onset ? onset[0] : "ㅇ", u.v[0], "");
-    if (u.v[1]) out += u.v[1];
+    markStress(() => {
+      out += syllable(onset ? onset[0] : "ㅇ", u.v[0], "");
+      if (u.v[1]) out += u.v[1];
+    });
     onset = null;
     lastVowel = u.raw;
     standalone = false;
   }
   flushOnset();
-  return out.replace(/\s+/g, " ").trim();
+
+  const text = out.replace(/\s+/g, " ").trim();
+  // 공백을 정리하며 글자 자리가 밀렸다면 엉뚱한 글자를 굵게 하느니 표시를 버립니다
+  if (start >= 0 && text.slice(start, end) !== out.slice(start, end)) { start = -1; end = -1; }
+  return { text, start, end };
 }
 
 
@@ -1569,8 +1605,21 @@ function renderPronunciation(sentence) {
 
   el("pron-ipa").textContent = ipaParts.length ? "/" + ipaParts.join(" ") + "/" : "";
   el("pron-ipa").hidden = ipaParts.length === 0;
-  el("pron-ko").textContent = koParts.join(" ");
-  el("pron-ko").hidden = koParts.length === 0;
+  // 강세를 받는 글자만 굵게 씁니다
+  const ko = el("pron-ko");
+  ko.textContent = "";
+  koParts.forEach((part, i) => {
+    if (i > 0) ko.append(document.createTextNode(" "));
+    if (part.start < 0) { ko.append(document.createTextNode(part.text)); return; }
+    const mark = document.createElement("b");
+    mark.textContent = part.text.slice(part.start, part.end);
+    ko.append(
+      document.createTextNode(part.text.slice(0, part.start)),
+      mark,
+      document.createTextNode(part.text.slice(part.end))
+    );
+  });
+  ko.hidden = koParts.length === 0;
 
   const list = el("pron-words");
   list.textContent = "";
