@@ -515,6 +515,11 @@ ul { list-style: none; margin: 0; padding: 0; }
 .review-en { font-family: var(--font-serif); font-size: var(--size-17); word-break: normal; }
 .review-en .answer { color: var(--correct); font-weight: var(--weight-bold); }
 
+/* 완료 문장 목록 — 길어질 수 있어 높이를 제한하고 안에서 스크롤합니다 */
+#done-panel { max-width: var(--measure); }
+#done-panel .review-list { max-height: 60vh; overflow-y: auto; }
+.done-empty { color: var(--text-muted); font-size: var(--size-15); }
+
 /* ═══════════════════════════════════════════════════════════
    빈 상태 · 오류 · 로딩
    ═══════════════════════════════════════════════════════════ */
@@ -637,6 +642,15 @@ ul { list-style: none; margin: 0; padding: 0; }
       <h2>이 주제를 모두 익혔습니다</h2>
       <p>남은 문장이 없습니다. 다른 주제를 고르거나, 이 주제를 처음부터 다시 풀 수 있습니다.</p>
       <button type="button" class="btn btn-quiet" id="btn-empty-back">다른 주제 고르기</button>
+    </div>
+
+    <p class="page-intro" style="margin-top: var(--sp-8)">
+      <button type="button" class="btn btn-plain" id="btn-done">완료 문장 보기</button>
+    </p>
+
+    <div id="done-panel" hidden>
+      <p class="done-empty" id="done-empty" hidden>아직 완료한 문장이 없습니다.</p>
+      <ul id="done-list" class="review-list"></ul>
     </div>
 
     <p class="page-intro" style="margin-top: var(--sp-8)">
@@ -1287,6 +1301,54 @@ function hideResetConfirm() {
   el("reset-confirm").hidden = true;
 }
 
+// 한국어와, 빈칸에 정답을 채운 영어를 담은 목록 항목을 만듭니다.
+// 세션 끝 오답 복습과 완료 문장 목록이 함께 씁니다.
+function reviewItem(sentence) {
+  const ko = document.createElement("p");
+  ko.className = "review-ko";
+  ko.textContent = sentence.ko;
+
+  const en = document.createElement("p");
+  en.className = "review-en";
+  const parts = sentence.en.split(BLANK);
+  const answer = document.createElement("span");
+  answer.className = "answer";
+  answer.textContent = sentence.accept[0];
+  en.append(document.createTextNode(parts[0]), answer, document.createTextNode(parts[1]));
+
+  const item = document.createElement("li");
+  item.append(ko, en);
+  return item;
+}
+
+function doneSentences(categoryKey, progress) {
+  return SENTENCES.filter((s) => s.category === categoryKey && isDone(progress, s.id));
+}
+
+// 완료 문장 목록을 접었다 폈다 합니다
+function hideDoneList() {
+  el("done-panel").hidden = true;
+  el("btn-done").textContent = "완료 문장 보기";
+  el("btn-done").setAttribute("aria-expanded", "false");
+}
+
+function toggleDoneList() {
+  const panel = el("done-panel");
+  if (!panel.hidden) { hideDoneList(); return; }
+
+  const done = doneSentences(sizeCategory, loadProgress());
+  const list = el("done-list");
+  list.textContent = "";
+  for (const sentence of done) list.appendChild(reviewItem(sentence));
+
+  el("done-empty").hidden = done.length > 0;
+  list.hidden = done.length === 0;
+  panel.hidden = false;
+  el("btn-done").textContent = "완료 문장 숨기기";
+  el("btn-done").setAttribute("aria-expanded", "true");
+  announce("완료한 문장 " + done.length + "개를 폈습니다.");
+}
+
 function renderSizeScreen(categoryKey) {
   session = null;
   sizeCategory = categoryKey;
@@ -1325,6 +1387,7 @@ function renderSizeScreen(categoryKey) {
   }
 
   hideResetConfirm();
+  hideDoneList();
   setActions(null);
   pushScreenState();
   showScreen("size");
@@ -1759,23 +1822,7 @@ function renderDone() {
   const list = el("review-list");
   list.textContent = "";
 
-  for (const sentence of wrongSentences) {
-    const ko = document.createElement("p");
-    ko.className = "review-ko";
-    ko.textContent = sentence.ko;
-
-    const en = document.createElement("p");
-    en.className = "review-en";
-    const parts = sentence.en.split(BLANK);
-    const answer = document.createElement("span");
-    answer.className = "answer";
-    answer.textContent = sentence.accept[0];
-    en.append(document.createTextNode(parts[0]), answer, document.createTextNode(parts[1]));
-
-    const item = document.createElement("li");
-    item.append(ko, en);
-    list.appendChild(item);
-  }
+  for (const sentence of wrongSentences) list.appendChild(reviewItem(sentence));
 
   const categoryKey = session.categoryKey;
   const actions = [];
@@ -1829,6 +1876,8 @@ el("btn-retry-load").addEventListener("click", (event) => {
   event.currentTarget.dataset.loading = "true";
   location.reload();
 });
+
+el("btn-done").addEventListener("click", toggleDoneList);
 
 el("btn-reset").addEventListener("click", () => {
   el("btn-reset").hidden = true;
