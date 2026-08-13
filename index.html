@@ -1452,9 +1452,12 @@ function hintText(sentence) {
 
 // 첫글자 힌트. 정답 후보의 첫글자가 서로 다르면 모두 보여줍니다.
 // 하나만 보여주면 나머지 정답이 틀린 것처럼 읽히기 때문입니다.
+function firstLetters(sentence) {
+  return [...new Set(sentence.accept.map((valid) => valid.trim()[0].toLowerCase()))];
+}
+
 function firstLetterText(sentence) {
-  const letters = [...new Set(sentence.accept.map((valid) => valid.trim()[0].toLowerCase()))];
-  return letters.join(" 또는 ") + "로 시작";
+  return firstLetters(sentence).join(" 또는 ") + "로 시작";
 }
 
 // 정답 후보 중 가장 긴 것을 기준으로 폭을 잡습니다.
@@ -1527,12 +1530,30 @@ function revealFirstLetter() {
   session.revealed.add(current.id);
   saveSession();
   renderHint(current);
-  announce(firstLetterText(current) + ". 이 문장은 완료로 기록되지 않습니다.");
+
+  const input = el("blank-1");
+  const letters = firstLetters(current);
+
+  // 첫글자가 하나뿐일 때만 입력칸에 채워 줍니다.
+  // 후보마다 첫글자가 다르면(check / bill) 무엇을 넣든 한쪽 답으로 몰아가게 됩니다.
+  // 이미 뭔가 적어 두었다면 지우지 않고 힌트만 보여줍니다.
+  const filled = letters.length === 1 && input && !input.value;
+  if (filled) {
+    input.value = letters[0];
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+  }
+
+  announce(firstLetterText(current) +
+    (filled ? ". 빈칸에 넣어 두었습니다" : "") +
+    ". 이 문장은 완료로 기록되지 않습니다.");
 
   setActions([{ id: "btn-grade", label: "채점하기", onClick: grade }]);
-  const input = el("blank-1");
   el("btn-grade").disabled = !input || !input.value.trim();
-  if (input) input.focus({ preventScroll: true });
+  if (input) {
+    input.focus({ preventScroll: true });
+    const end = input.value.length;
+    input.setSelectionRange(end, end);
+  }
 }
 
 function renderQuiz() {

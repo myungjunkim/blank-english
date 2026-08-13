@@ -3,7 +3,7 @@
 // 중요: 파일을 고쳐 다시 배포할 때는 CACHE_NAME의 버전을 반드시 올려야 합니다.
 // 올리지 않으면 이미 설치한 기기가 옛 파일을 계속 씁니다.
 
-const CACHE_NAME = "blank-fill-v27";
+const CACHE_NAME = "blank-fill-v28";
 
 const ASSETS = [
   "./",
