@@ -799,7 +799,7 @@ function syllable(onset, nucleus, coda) {
 const VOWELS = {
   "iː": ["ㅣ"], "i": ["ㅣ"], "ɪ": ["ㅣ"], "ɨ": ["ㅣ"],
   "eɪ": ["ㅔ", "이"], "e": ["ㅔ"], "ɛ": ["ㅔ"], "æ": ["ㅐ"],
-  "ɑː": ["ㅏ"], "ɑ": ["ㅏ"], "ɒ": ["ㅏ"], "a": ["ㅏ"],
+  "ɑː": ["ㅏ"], "ɑ": ["ㅏ"], "ɒ": ["ㅗ"], "a": ["ㅏ"],
   "ʌ": ["ㅓ"], "ə": ["ㅓ"], "ɜː": ["ㅓ"], "ɜ": ["ㅓ"], "ɝ": ["ㅓ"], "ɚ": ["ㅓ"],
   "ɔː": ["ㅗ"], "ɔ": ["ㅗ"], "oʊ": ["ㅗ"], "əʊ": ["ㅗ"], "o": ["ㅗ"], "oː": ["ㅗ"],
   "uː": ["ㅜ"], "u": ["ㅜ"], "ʊ": ["ㅜ"], "ʉː": ["ㅜ"], "ʉ": ["ㅜ"],
@@ -880,6 +880,17 @@ function parse(ipa) {
 // { text, start, end }를 돌려줍니다. start~end는 제1강세를 받는 글자의 자리이고,
 // 강세 기호가 없으면 start가 -1입니다. 받침은 글자를 새로 붙이지 않고 제자리에서
 // 바꾸므로 자리를 기록해 둔 뒤에 받침이 붙어도 범위는 그대로 맞습니다.
+// words.js의 pron에 적어둔 한글 발음을 읽습니다. 대괄호는 강세 자리입니다.
+// 규칙으로는 맞출 수 없는 말에만 씁니다. 자세한 것은 words.js 머리말에 적었습니다.
+function readPron(pron) {
+  const start = pron.indexOf("[");
+  if (start < 0) return { text: pron, start: -1, end: -1 };
+  const end = pron.indexOf("]", start);
+  if (end < 0) return { text: pron.replace(/[[]]/g, ""), start: -1, end: -1 };
+  return { text: pron.slice(0, start) + pron.slice(start + 1, end) + pron.slice(end + 1),
+           start: start, end: end - 1 };
+}
+
 // word를 함께 넘기면 철자에 따라 어말 -əl을 갈라 적습니다.
 // 소리는 같지만 우리말 표기가 다릅니다. little 리틀 / model 모델
 function ipaToHangul(ipa, word) {
@@ -968,6 +979,12 @@ function ipaToHangul(ipa, word) {
       // (p·t·k는 그렇지 않습니다. network → 네트워크)
       const codaBeforeW = next && next.t === "glide" && next.v === "w" &&
         ["m", "n", "ŋ", "l", "ɫ"].includes(u.raw);
+      if (u.raw === "ŋ" && next && next.t === "v") {
+        flushOnset();
+        attachCoda("ㅇ");
+        lastVowel = null; standalone = false; continue;
+      }
+
       if (next && (next.t === "v" || next.t === "glide") && !codaBeforeW) {
         flushOnset();
         // 모음 앞의 l은 앞 글자에 ㄹ 받침을 더해 ㄹㄹ로 적습니다. flight → 플라이트, family → 패멀리
@@ -987,7 +1004,7 @@ function ipaToHangul(ipa, word) {
       }
 
       // 어말 r은 소리를 없애지 않고 앞 모음에 '어'를 더합니다. more → 모어, door → 도어
-      if (["r", "ɹ"].includes(u.raw) && !next && lastVowel && !out.endsWith("어")) {
+      if (["r", "ɹ"].includes(u.raw) && !next && ["ɔː", "oː"].includes(lastVowel)) {
         out += "어";
         lastVowel = null; standalone = false; continue;
       }
@@ -1783,7 +1800,7 @@ function renderPronunciation(sentence) {
     const entry = WORDS[key];
     if (entry && entry.ipa) {
       ipaParts.push(entry.ipa);
-      koParts.push(ipaToHangul(entry.ipa, key));
+      koParts.push(entry.pron ? readPron(entry.pron) : ipaToHangul(entry.ipa, key));
     }
     if (entry && entry.ko && !seen.has(key)) {
       seen.add(key);
