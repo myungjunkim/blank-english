@@ -1573,7 +1573,7 @@ const WORDS = {
   "wish": {ipa:"wɪʃ",ko:"바라다"},
   "wishes": {ipa:"ˈwɪʃɪz",ko:"기원"},
   "with": {ipa:"wɪð"},
-  "within": {ipa:"wɪˈθɪn",ko:"~이내에"},
+  "within": {ipa:"wɪˈðɪn",ko:"~이내에"},
   "woman": {ipa:"ˈwʊmən",ko:"여자",pron:"[우]먼"},
   "women": {ipa:"ˈwɪmɪn",ko:"여자들"},
   "won": {ipa:"wʌn",ko:"이겼다"},
