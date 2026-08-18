@@ -799,7 +799,7 @@ function syllable(onset, nucleus, coda) {
 const VOWELS = {
   "iː": ["ㅣ"], "i": ["ㅣ"], "ɪ": ["ㅣ"], "ɨ": ["ㅣ"],
   "eɪ": ["ㅔ", "이"], "e": ["ㅔ"], "ɛ": ["ㅔ"], "æ": ["ㅐ"],
-  "ɑː": ["ㅏ"], "ɑ": ["ㅏ"], "ɒ": ["ㅗ"], "a": ["ㅏ"],
+  "ɑː": ["ㅏ"], "ɑ": ["ㅏ"], "ɒ": ["ㅏ"], "a": ["ㅏ"],
   "ʌ": ["ㅓ"], "ə": ["ㅓ"], "ɜː": ["ㅓ"], "ɜ": ["ㅓ"], "ɝ": ["ㅓ"], "ɚ": ["ㅓ"],
   "ɔː": ["ㅗ"], "ɔ": ["ㅗ"], "oʊ": ["ㅗ"], "əʊ": ["ㅗ"], "o": ["ㅗ"], "oː": ["ㅗ"],
   "uː": ["ㅜ"], "u": ["ㅜ"], "ʊ": ["ㅜ"], "ʉː": ["ㅜ"], "ʉ": ["ㅜ"],
@@ -845,6 +845,7 @@ function parse(ipa) {
   // 장음 ː(U+02D0)는 모음 길이를 가르고 제1강세 ˈ(U+02C8)는 볼드 위치를 잡는 데
   // 쓰므로 남깁니다. 제2강세 ˌ를 포함한 나머지 보조 기호는 지웁니다.
   const text = ipa
+    .replace(/([ln])̩/g, "ə$1")
     .replace(/[̀-ͯʰ-ˇˉ-ˏˑ-˿]/g, "")
     .replace(/[.\/\[\]()|‿]/g, "")
     .trim();
@@ -879,8 +880,11 @@ function parse(ipa) {
 // { text, start, end }를 돌려줍니다. start~end는 제1강세를 받는 글자의 자리이고,
 // 강세 기호가 없으면 start가 -1입니다. 받침은 글자를 새로 붙이지 않고 제자리에서
 // 바꾸므로 자리를 기록해 둔 뒤에 받침이 붙어도 범위는 그대로 맞습니다.
-function ipaToHangul(ipa) {
+// word를 함께 넘기면 철자에 따라 어말 -əl을 갈라 적습니다.
+// 소리는 같지만 우리말 표기가 다릅니다. little 리틀 / model 모델
+function ipaToHangul(ipa, word) {
   if (!ipa) return { text: "", start: -1, end: -1 };
+  const keepVowel = /(el|al)$/i.test(word || "");
   const units = parse(ipa);
   let out = "";
   let onset = null;         // 다음 모음에 붙일 초성
@@ -903,6 +907,14 @@ function ipaToHangul(ipa) {
     if (code < 0 || code % 28 !== 0) return false;
     out = out.slice(0, -1) + String.fromCharCode(0xAC00 + code + CODA.indexOf(coda));
     return true;
+  };
+
+  // 마지막 글자의 가운뎃소리가 무엇인지 봅니다
+  const lastNucleus = () => {
+    if (!out) return "";
+    const code = out.charCodeAt(out.length - 1) - 0xAC00;
+    if (code < 0 || code % 28 !== 0) return "";
+    return NUCLEUS[Math.floor(code / 28) % 21];
   };
 
   // 마지막 글자의 가운뎃소리만 바꿉니다
@@ -974,10 +986,21 @@ function ipaToHangul(ipa) {
         onset = u.v; standalone = false; continue;
       }
 
+      // 어말 r은 소리를 없애지 않고 앞 모음에 '어'를 더합니다. more → 모어, door → 도어
+      if (["r", "ɹ"].includes(u.raw) && !next && lastVowel && !out.endsWith("어")) {
+        out += "어";
+        lastVowel = null; standalone = false; continue;
+      }
+
       // 뒤에 모음이 없습니다. 받침으로 붙일지 따로 적을지 정합니다.
       flushOnset();
-      // 어말 -əl은 '-을'이 아니라 'ㅡ+ㄹ'로 적습니다. table → 테이블, little → 리틀
-      if (["l", "ɫ"].includes(u.raw) && !next && lastVowel === "ə") changeNucleus("ㅡ");
+      // 어말 -əl과 -ən은 '-얼·-언'이 아니라 'ㅡ'로 적습니다.
+      // table → 테이블, little → 리틀, seven → 세븐, button → 버튼
+      // 다만 -tion처럼 구개음화된 음절(ㅕ)은 그대로 둡니다. station 스테이션
+      if (["l", "ɫ", "n"].includes(u.raw) && !next && lastVowel === "ə" && !keepVowel &&
+          lastNucleus() === "ㅓ") {
+        changeNucleus("ㅡ");
+      }
       const canCoda = u.v[1] && (["m", "n", "ŋ", "l", "ɫ"].includes(u.raw) ||
         (["p", "t", "k"].includes(u.raw) && lastVowel && SHORT.has(lastVowel) &&
           (!next || (next.t === "c" && !LIQUID.has(next.raw)))));
@@ -1760,7 +1783,7 @@ function renderPronunciation(sentence) {
     const entry = WORDS[key];
     if (entry && entry.ipa) {
       ipaParts.push(entry.ipa);
-      koParts.push(ipaToHangul(entry.ipa));
+      koParts.push(ipaToHangul(entry.ipa, key));
     }
     if (entry && entry.ko && !seen.has(key)) {
       seen.add(key);
