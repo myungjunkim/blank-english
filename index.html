@@ -472,6 +472,23 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 .pron-words .sep { padding: 0 var(--sp-1); color: var(--rule-strong); }
 
+/* 문장 듣기. 읽어줄 영어 음성이 없으면 통째로 숨깁니다 */
+.pron-play {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;                       /* 좁은 화면에서는 안내 문구가 아랫줄로 내려갑니다 */
+  gap: var(--sp-1);
+  margin-top: var(--sp-3);
+  margin-left: calc(var(--sp-2) * -1);   /* 버튼 안쪽 여백만큼 당겨 왼쪽을 맞춥니다 */
+}
+.pron-play .btn { font-size: var(--size-13); }
+.pron-play .btn[disabled] { opacity: .5; cursor: default; }
+.pron-play-note {
+  margin-left: var(--sp-2);
+  color: var(--text-muted);
+  font-size: var(--size-13);
+}
+
 /* ═══════════════════════════════════════════════════════════
    하단 고정 바 — 한 손 엄지 범위. 유일하게 그림자를 쓰는 곳
    ═══════════════════════════════════════════════════════════ */
@@ -700,6 +717,11 @@ ul { list-style: none; margin: 0; padding: 0; }
           <p class="pron-ipa" id="pron-ipa"></p>
           <p class="pron-ko" id="pron-ko"></p>
           <p class="pron-words" id="pron-words"></p>
+          <p class="pron-play" id="pron-play" hidden>
+            <button type="button" class="btn btn-plain" id="btn-speak">듣기</button>
+            <button type="button" class="btn btn-plain" id="btn-speak-slow">느리게</button>
+            <span class="pron-play-note" id="speak-note" hidden></span>
+          </p>
         </div>
       </div>
     </form>
@@ -1182,6 +1204,8 @@ function restoreSession() {
 const SCREENS = ["loading", "error", "category", "size", "quiz", "done"];
 
 function showScreen(name) {
+  // 읽던 문장이 다음 화면까지 이어지지 않게 끊습니다
+  stopSpeaking();
   for (const screen of SCREENS) {
     el("screen-" + screen).hidden = screen !== name;
   }
@@ -1783,6 +1807,85 @@ function renderResult(input) {
 /* ── 발음과 단어 뜻 ─────────────────────────────
    words.js에 담긴 발음 기호와 뜻을 씁니다. 사전에 없어 발음을 못 구한 단어는
    그 자리만 비우고 나머지를 보여줍니다. */
+/* ── 문장 듣기 ───────────────────────────────────────
+   브라우저에 들어 있는 음성으로 읽습니다. 녹음 파일을 함께 배포하면
+   문장 1400개에 14MB쯤 되어 앱 전체(0.7MB)보다 훨씬 커집니다.
+
+   기기에 영어 음성이 없으면 버튼을 아예 보여주지 않습니다. 한국어
+   음성으로 영어를 읽히면 알아들을 수 없는 소리가 나기 때문입니다.
+   ─────────────────────────────────────────────────── */
+
+const SPEAK_RATE = 0.9;        // 보통 속도보다 살짝 느리게
+const SPEAK_RATE_SLOW = 0.6;
+let speakVoice = null;         // 고른 영어 음성. 없으면 끝까지 null
+let speakTimer = null;
+
+// 미국식을 먼저, 그다음 영국식. 기기에 깔린 음성(localService)을 앞에 둡니다.
+function pickVoice() {
+  if (!("speechSynthesis" in window)) return null;
+  const all = speechSynthesis.getVoices().filter((v) => /^en[-_]/i.test(v.lang));
+  if (all.length === 0) return null;
+  const rank = (v) =>
+    (/^en[-_]us/i.test(v.lang) ? 0 : /^en[-_]gb/i.test(v.lang) ? 1 : 2) * 2 +
+    (v.localService ? 0 : 1);
+  return all.slice().sort((a, b) => rank(a) - rank(b))[0];
+}
+
+// 음성 목록은 늦게 채워지는 브라우저가 있어 한 번 더 기다립니다.
+function setUpSpeech() {
+  if (!("speechSynthesis" in window)) return;
+  speakVoice = pickVoice();
+  if (!speakVoice) {
+    speechSynthesis.addEventListener("voiceschanged", () => {
+      speakVoice = pickVoice();
+    }, { once: true });
+  }
+}
+
+function stopSpeaking() {
+  if (!("speechSynthesis" in window)) return;
+  clearTimeout(speakTimer);
+  speechSynthesis.cancel();
+  const note = el("speak-note");
+  if (note) note.hidden = true;
+  ["btn-speak", "btn-speak-slow"].forEach((id) => {
+    const b = el(id);
+    if (b) b.disabled = false;
+  });
+}
+
+function speakSentence(text, rate) {
+  if (!speakVoice) return;
+  stopSpeaking();
+
+  const say = new SpeechSynthesisUtterance(text);
+  say.voice = speakVoice;
+  say.lang = speakVoice.lang;
+  say.rate = rate;
+
+  const buttons = ["btn-speak", "btn-speak-slow"].map(el).filter(Boolean);
+  const note = el("speak-note");
+  const done = () => {
+    clearTimeout(speakTimer);
+    buttons.forEach((b) => { b.disabled = false; });
+  };
+  const failed = () => {
+    done();
+    // 아무 일도 안 일어난 채로 두면 고장인지 알 수 없으므로 이유를 적어 둡니다.
+    note.textContent = "지금은 소리를 낼 수 없습니다";
+    note.hidden = false;
+  };
+
+  buttons.forEach((b) => { b.disabled = true; });
+  say.onstart = () => { clearTimeout(speakTimer); };
+  say.onend = done;
+  say.onerror = failed;
+
+  // 오프라인이라 음성을 못 받아오면 아무 이벤트도 오지 않습니다.
+  speakTimer = setTimeout(failed, 3000);
+  speechSynthesis.speak(say);
+}
+
 function renderPronunciation(sentence) {
   const box = el("pron");
   if (typeof WORDS === "undefined") { box.hidden = true; return; }
@@ -1840,6 +1943,15 @@ function renderPronunciation(sentence) {
     list.append(word, document.createTextNode(" " + g.ko + " "));
   });
   list.hidden = glosses.length === 0;
+
+  // 읽어줄 음성이 있을 때만 듣기 버튼을 답니다
+  stopSpeaking();
+  const play = el("pron-play");
+  play.hidden = !speakVoice;
+  if (speakVoice) {
+    el("btn-speak").onclick = () => speakSentence(full, SPEAK_RATE);
+    el("btn-speak-slow").onclick = () => speakSentence(full, SPEAK_RATE_SLOW);
+  }
 
   box.hidden = ipaParts.length === 0 && glosses.length === 0;
 }
@@ -1989,6 +2101,7 @@ function boot() {
 
 boot();
 liftBarAboveKeyboard();
+setUpSpeech();
 
 // 서비스워커 등록. file://로 열면 지원되지 않으므로 조용히 넘어갑니다.
 if ("serviceWorker" in navigator) {
