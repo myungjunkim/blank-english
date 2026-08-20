@@ -477,14 +477,18 @@ ul { list-style: none; margin: 0; padding: 0; }
   display: flex;
   align-items: center;
   flex-wrap: wrap;                       /* 좁은 화면에서는 안내 문구가 아랫줄로 내려갑니다 */
-  gap: var(--sp-1);
-  margin-top: var(--sp-3);
-  margin-left: calc(var(--sp-2) * -1);   /* 버튼 안쪽 여백만큼 당겨 왼쪽을 맞춥니다 */
+  gap: var(--sp-2);
+  margin-top: var(--sp-4);
 }
-.pron-play .btn { font-size: var(--size-13); }
-.pron-play .btn[disabled] { opacity: .5; cursor: default; }
+/* 흐린 글씨로 두었더니 누를 곳으로 보이지 않아 테두리를 넣었습니다.
+   작은 버튼이라 기본 --rule은 너무 옅어 한 단계 진한 --rule-strong을 씁니다. */
+.pron-play .btn {
+  font-size: var(--size-15);
+  padding: 0 var(--sp-5);
+  border-color: var(--rule-strong);
+}
+.pron-play .btn[disabled] { opacity: .45; cursor: default; }
 .pron-play-note {
-  margin-left: var(--sp-2);
   color: var(--text-muted);
   font-size: var(--size-13);
 }
@@ -718,8 +722,8 @@ ul { list-style: none; margin: 0; padding: 0; }
           <p class="pron-ko" id="pron-ko"></p>
           <p class="pron-words" id="pron-words"></p>
           <p class="pron-play" id="pron-play" hidden>
-            <button type="button" class="btn btn-plain" id="btn-speak">듣기</button>
-            <button type="button" class="btn btn-plain" id="btn-speak-slow">느리게</button>
+            <button type="button" class="btn btn-quiet" id="btn-speak">듣기</button>
+            <button type="button" class="btn btn-quiet" id="btn-speak-slow">느리게</button>
             <span class="pron-play-note" id="speak-note" hidden></span>
           </p>
         </div>
