@@ -4,3 +4,5 @@ docs/
 # 개인 환경 설정
 .idea/
 .claude/
+# CMU 발음사전 — 용량이 커서 받아 쓰기만 합니다 (tools/README.md 참고)
+tools/cmudict.dict
