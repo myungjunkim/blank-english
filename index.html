@@ -1097,10 +1097,13 @@ let justResumed = false;
      3단계   2단계를 통과하고 90일 뒤
      통과    3단계까지 맞히면 완전히 끝냅니다
 
-   복습에서 틀리면 진도에서 빼고 1단계부터 다시 쌓습니다. 잊었다는 뜻이라
-   단계를 지켜줄 이유가 없습니다.
+   틀리면 쌓아둔 단계를 버리고 0단계에 둡니다. 0단계는 복습일이 오늘이라
+   다음 세션 맨 앞에 다시 나옵니다. 그냥 진도에서 지워버리면 한 번도 안
+   본 문장과 구별되지 않아, 남은 190여 문장 사이에 섞여 몇 달 뒤에나
+   나올 수 있습니다.
 
    저장 형식
+     progress[id] = { s: 0, d: 오늘 }               틀림, 바로 다시 출제
      progress[id] = { s: 1|2|3, d: "2026-08-27" }   복습 대기
      progress[id] = { s: 4 }                        완전히 끝냄 (복습일 없음)
 
@@ -1145,7 +1148,7 @@ function loadProgress() {
     for (const [id, value] of Object.entries(data)) {
       if (value && typeof value === "object" && value.s > REVIEW_DAYS.length) {
         result[id] = { s: REVIEW_DAYS.length + 1 };          // 완전히 끝냄
-      } else if (value && typeof value === "object" && value.s >= 1 && value.d) {
+      } else if (value && typeof value === "object" && value.s >= 0 && value.d) {
         result[id] = { s: value.s, d: value.d };
       } else if (value === true || (value && value.c >= 1)) {
         // 복습 주기가 없던 시절에 맞힌 문장입니다.
@@ -1206,11 +1209,11 @@ function markDone(id) {
   saveProgress(progress);
 }
 
-// 복습에서 틀렸습니다. 쌓아둔 단계를 버리고 처음부터 다시 시작합니다.
+// 틀렸습니다. 쌓아둔 단계를 버리고 0단계에 둡니다.
+// 복습일을 오늘로 두어 다음 세션 맨 앞에 다시 나오게 합니다.
 function markForgotten(id) {
   const progress = loadProgress();
-  if (progress[id] === undefined) return;
-  delete progress[id];
+  progress[id] = { s: 0, d: today() };
   saveProgress(progress);
 }
 
@@ -1456,7 +1459,7 @@ function renderCategoryScreen(keepSaved) {
     if (category.due > 0) {
       const badge = document.createElement("span");
       badge.className = "category-due";
-      badge.textContent = "복습할 문장 " + category.due + "개";
+      badge.textContent = "다시 풀 문장 " + category.due + "개";
       button.appendChild(badge);
     }
     button.addEventListener("click", () => renderSizeScreen(category.key));
@@ -1546,7 +1549,7 @@ function renderSizeScreen(categoryKey) {
   if (hasRemaining) {
     // 복습이 있으면 몇 개인지 먼저 알려줍니다. 세션에서도 이것부터 나옵니다.
     el("size-intro").textContent = pool.due.length
-      ? "복습할 " + pool.due.length + "문장과 새 문장 " + pool.fresh.length +
+      ? "다시 풀 문장 " + pool.due.length + "개와 새 문장 " + pool.fresh.length +
         "개가 남았습니다. 몇 문장 풀까요?"
       : "남은 문장이 " + total + "개입니다. 몇 문장 풀까요?";
 
