@@ -260,6 +260,15 @@ ul { list-style: none; margin: 0; padding: 0; }
 /* ═══════════════════════════════════════════════════════════
    ① 카테고리
    ═══════════════════════════════════════════════════════════ */
+/* 복습일이 된 문장이 있을 때만 붙는 줄 */
+.category-due {
+  display: block;
+  margin-top: var(--sp-2);
+  color: var(--accent);
+  font-size: var(--size-13);
+  font-weight: var(--weight-medium);
+}
+
 .category-list { display: grid; gap: var(--sp-2); }
 
 .category-btn {
@@ -1079,16 +1088,69 @@ let justResumed = false;
 /* ═══════════════════════════════════════════════════════════
    누적 진도
    ═══════════════════════════════════════════════════════════ */
+/* 복습 주기
+   한 번 맞혔다고 영구히 끝내면 잊어버려도 다시 안 나옵니다. 그래서 맞힌
+   문장은 정해진 날이 지나면 다시 출제하고, 또 맞히면 간격을 늘립니다.
+
+     1단계   맞힌 날부터 7일 뒤
+     2단계   1단계를 통과하고 30일 뒤
+     3단계   2단계를 통과하고 90일 뒤
+     통과    3단계까지 맞히면 완전히 끝냅니다
+
+   복습에서 틀리면 진도에서 빼고 1단계부터 다시 쌓습니다. 잊었다는 뜻이라
+   단계를 지켜줄 이유가 없습니다.
+
+   저장 형식
+     progress[id] = { s: 1|2|3, d: "2026-08-27" }   복습 대기
+     progress[id] = { s: 4 }                        완전히 끝냄 (복습일 없음)
+
+   완전히 끝낸 것을 true로 두면 복습 주기가 없던 시절의 true와 구별할 수
+   없어, 이전 처리에 걸려 1단계로 되돌아갑니다. 그래서 단계로만 나타냅니다.
+   ───────────────────────────────────────────────── */
+
+const REVIEW_DAYS = [7, 30, 90];
+
+// 날짜는 그날 자정을 기준으로 견주므로 지역 시간의 연-월-일만 씁니다.
+function dayKey(date) {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, "0");
+  const d = String(date.getDate()).padStart(2, "0");
+  return y + "-" + m + "-" + d;
+}
+
+function today() {
+  return dayKey(new Date());
+}
+
+function afterDays(days) {
+  const d = new Date();
+  d.setDate(d.getDate() + days);
+  return dayKey(d);
+}
+
+// 예전 진도(true, { c, d })를 복습 주기로 옮깁니다.
+// 한꺼번에 되돌아오면 부담이 크므로 7~30일 사이로 흩어 놓습니다.
+function migrate(id) {
+  let hash = 0;
+  for (let i = 0; i < id.length; i++) hash = (hash * 31 + id.charCodeAt(i)) % 24;
+  return { s: 1, d: afterDays(7 + hash) };
+}
+
 function loadProgress() {
   try {
     const data = JSON.parse(localStorage.getItem(PROGRESS_KEY));
     if (!data || typeof data !== "object" || Array.isArray(data)) return {};
 
-    // 완료까지 두 번 맞춰야 하던 시절의 형식({ c, d })도 함께 읽습니다.
     const result = {};
     for (const [id, value] of Object.entries(data)) {
-      const done = (value && typeof value === "object") ? value.c >= 1 : !!value;
-      if (done) result[id] = true;
+      if (value && typeof value === "object" && value.s > REVIEW_DAYS.length) {
+        result[id] = { s: REVIEW_DAYS.length + 1 };          // 완전히 끝냄
+      } else if (value && typeof value === "object" && value.s >= 1 && value.d) {
+        result[id] = { s: value.s, d: value.d };
+      } else if (value === true || (value && value.c >= 1)) {
+        // 복습 주기가 없던 시절에 맞힌 문장입니다.
+        result[id] = migrate(id);
+      }
     }
     return result;
   } catch (error) {
@@ -1104,17 +1166,51 @@ function saveProgress(progress) {
   }
 }
 
+// 지금 출제되지 않는 문장을 '익힌 것'으로 셉니다.
+// 복습일이 되면 다시 나오므로 그때부터는 익힌 것에서 빠집니다.
 function isDone(progress, id) {
-  return progress[id] === true;
+  const p = progress[id];
+  if (!p) return false;
+  if (p.s > REVIEW_DAYS.length) return true;     // 3단계까지 통과
+  return p.d > today();                          // 아직 복습일이 안 됐음
 }
 
+// 복습일이 된 문장인지
+function isDue(progress, id) {
+  const p = progress[id];
+  return Boolean(p) && p.s <= REVIEW_DAYS.length && p.d <= today();
+}
+
+// 복습할 문장을 앞에, 아직 안 푼 문장을 뒤에 둡니다.
+// 세션 정원 안에서 복습이 먼저 채워지도록 하려는 것입니다.
 function remainingSentences(categoryKey, progress) {
-  return SENTENCES.filter((s) => s.category === categoryKey && !isDone(progress, s.id));
+  const due = [];
+  const fresh = [];
+  for (const s of SENTENCES) {
+    if (s.category !== categoryKey) continue;
+    if (isDone(progress, s.id)) continue;
+    (progress[s.id] ? due : fresh).push(s);
+  }
+  return { due: due, fresh: fresh, all: due.concat(fresh) };
 }
 
+// 첫 시도에 맞혔습니다. 다음 단계로 올리고 복습일을 미룹니다.
 function markDone(id) {
   const progress = loadProgress();
-  progress[id] = true;
+  const p = progress[id];
+  const stage = (p && p.s >= 1) ? p.s + 1 : 1;
+
+  if (stage > REVIEW_DAYS.length) progress[id] = { s: stage };   // 3단계까지 통과
+  else progress[id] = { s: stage, d: afterDays(REVIEW_DAYS[stage - 1]) };
+
+  saveProgress(progress);
+}
+
+// 복습에서 틀렸습니다. 쌓아둔 단계를 버리고 처음부터 다시 시작합니다.
+function markForgotten(id) {
+  const progress = loadProgress();
+  if (progress[id] === undefined) return;
+  delete progress[id];
   saveProgress(progress);
 }
 
@@ -1271,10 +1367,12 @@ window.addEventListener("popstate", () => {
 function listCategories(progress) {
   const counts = new Map();
   const done = new Map();
+  const due = new Map();
 
   for (const s of SENTENCES) {
     counts.set(s.category, (counts.get(s.category) || 0) + 1);
     if (isDone(progress, s.id)) done.set(s.category, (done.get(s.category) || 0) + 1);
+    else if (isDue(progress, s.id)) due.set(s.category, (due.get(s.category) || 0) + 1);
   }
 
   const ordered = Object.keys(CATEGORY_NAMES).filter((key) => counts.has(key));
@@ -1284,7 +1382,8 @@ function listCategories(progress) {
     key: key,
     name: CATEGORY_NAMES[key] || key,
     total: counts.get(key),
-    done: done.get(key) || 0
+    done: done.get(key) || 0,
+    due: due.get(key) || 0
   }));
 }
 
@@ -1352,6 +1451,14 @@ function renderCategoryScreen(keepSaved) {
     name.textContent = category.name;
 
     button.append(name, buildMeter(category.done, category.total, "진도"));
+
+    // 복습일이 된 문장이 있으면 알려줍니다. 없으면 아무것도 붙이지 않습니다.
+    if (category.due > 0) {
+      const badge = document.createElement("span");
+      badge.className = "category-due";
+      badge.textContent = "복습할 문장 " + category.due + "개";
+      button.appendChild(badge);
+    }
     button.addEventListener("click", () => renderSizeScreen(category.key));
 
     const item = document.createElement("li");
@@ -1428,25 +1535,30 @@ function renderSizeScreen(categoryKey) {
   justResumed = false;
   clearSavedSession();
 
-  const remaining = remainingSentences(categoryKey, loadProgress());
+  const pool = remainingSentences(categoryKey, loadProgress());
+  const total = pool.all.length;
   el("size-title").textContent = CATEGORY_NAMES[categoryKey] || categoryKey;
 
-  const hasRemaining = remaining.length > 0;
+  const hasRemaining = total > 0;
   el("size-choose").hidden = !hasRemaining;
   el("size-empty").hidden = hasRemaining;
 
   if (hasRemaining) {
-    el("size-intro").textContent = "남은 문장이 " + remaining.length + "개입니다. 몇 문장 풀까요?";
+    // 복습이 있으면 몇 개인지 먼저 알려줍니다. 세션에서도 이것부터 나옵니다.
+    el("size-intro").textContent = pool.due.length
+      ? "복습할 " + pool.due.length + "문장과 새 문장 " + pool.fresh.length +
+        "개가 남았습니다. 몇 문장 풀까요?"
+      : "남은 문장이 " + total + "개입니다. 몇 문장 풀까요?";
 
     const list = el("size-list");
     list.textContent = "";
 
     // 남은 수보다 큰 선택지는 고를 수 없으므로 띄우지 않습니다.
-    const options = SIZE_OPTIONS.filter((size) => size < remaining.length);
-    options.push(remaining.length);
+    const options = SIZE_OPTIONS.filter((size) => size < total);
+    options.push(total);
 
     for (const size of options) {
-      const isAll = size === remaining.length;
+      const isAll = size === total;
       const button = document.createElement("button");
       button.type = "button";
       button.className = isAll ? "size-btn is-all" : "size-btn";
@@ -1479,7 +1591,15 @@ function shuffle(items) {
 }
 
 function startSession(categoryKey, size, explicitPool) {
-  const pool = explicitPool || shuffle(remainingSentences(categoryKey, loadProgress()));
+  let pool;
+  if (explicitPool) {
+    pool = explicitPool;
+  } else {
+    // 복습과 새 문장을 각각 섞고, 복습을 앞에 둡니다. 세션 정원이 작아도
+    // 복습이 먼저 채워져 밀리지 않습니다.
+    const rest = remainingSentences(categoryKey, loadProgress());
+    pool = shuffle(rest.due).concat(shuffle(rest.fresh));
+  }
   const picked = pool.slice(0, size);
   if (picked.length === 0) return;
 
@@ -1714,6 +1834,8 @@ function grade() {
       session.completed.add(current.id);
       session.firstTryCorrect++;
     } else {
+      // 복습으로 나온 문장을 틀렸으면 잊은 것이므로 단계를 버립니다.
+      markForgotten(current.id);
       session.wrong.add(current.id);
     }
   }
@@ -1819,8 +1941,8 @@ function renderResult(input) {
    음성으로 영어를 읽히면 알아들을 수 없는 소리가 나기 때문입니다.
    ─────────────────────────────────────────────────── */
 
-const SPEAK_RATE = 0.9;        // 보통 속도보다 살짝 느리게
-const SPEAK_RATE_SLOW = 0.6;
+const SPEAK_RATE = 1;          // 원어민이 말하는 속도 그대로
+const SPEAK_RATE_SLOW = 0.75;  // 따라 말할 수 있을 만큼만 늦춥니다
 let speakVoice = null;         // 고른 영어 음성. 없으면 끝까지 null
 let speakTimer = null;
 
