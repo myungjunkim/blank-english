@@ -260,10 +260,17 @@ if (unused.length) {
 
 /* ── ④ 파일 위생 ─────────────────────────────────────── */
 
+// 줄바꿈은 '섞였는지'만 봅니다.
+// 윈도우에서 git이 체크아웃할 때 파일 전체를 CRLF로 바꿔 놓는데, 그건
+// 정상이라 문제 삼을 것이 없습니다. 정작 위험한 것은 한 파일 안에 두 가지가
+// 섞이는 경우입니다. 다른 줄바꿈을 쓰는 내용을 이어 붙일 때 이렇게 됩니다.
 for (const name of ["index.html", "sentences.js", "words.js", "sw.js", "manifest.json"]) {
   const raw = fs.readFileSync(path.join(ROOT, name), "latin1");
   const crlf = (raw.match(/\r\n/g) || []).length;
-  if (crlf) fail(name + "에 CRLF 줄바꿈이 " + crlf + "개 섞였습니다. LF로 맞춰주세요");
+  const lfOnly = (raw.match(/(^|[^\r])\n/g) || []).length;
+  if (crlf > 0 && lfOnly > 0) {
+    fail(name + "에 줄바꿈이 섞였습니다 (LF " + lfOnly + "줄, CRLF " + crlf + "줄). 한 가지로 맞춰주세요");
+  }
 }
 
 // 파일을 고쳤으면 캐시 이름을 올려야 이미 설치한 기기가 새 파일을 받습니다
